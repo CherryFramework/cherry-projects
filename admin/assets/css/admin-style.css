@@ -1,0 +1,19 @@
+#cherry-portfolio-post-format-options .ajax-loader {
+  width: 36px;
+  height: 36px;
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 25px;
+  background: url("../images/ajax-loader.gif") 50% 50% no-repeat;
+}
+#cherry-portfolio-post-format-options .inside {
+  padding-left: 0;
+  padding-right: 0;
+}
+#cherry-portfolio-post-format-options .inside .settings-item .cherry-section {
+  padding: 10px 25px;
+}
+#cherry-portfolio-post-format-options .inside .settings-item .cherry-section:nth-child(2n) {
+  background: #f2f3f4;
+}
