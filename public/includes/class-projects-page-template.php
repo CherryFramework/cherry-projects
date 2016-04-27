@@ -1,8 +1,8 @@
 <?php
 /**
- * Cherry Testimonials
+ * Cherry Projects page template
  *
- * @package   Cherry_Testimonials
+ * @package   Cherry_Projects
  * @author    Cherry Team
  * @license   GPL-2.0+
  * @link      http://www.cherryframework.com/
@@ -14,7 +14,7 @@
  *
  * @since 1.0.0
  */
-class Cherry_Portfolio_Page_Template {
+class Cherry_Projects_Page_Template {
 
 	/**
 	 * A reference to an instance of this class.
@@ -30,7 +30,7 @@ class Cherry_Portfolio_Page_Template {
 	 * @since 1.0.0
 	 * @var   array
 	 */
-	protected $templates;
+	protected $templates = array();
 
 	/**
 	 * Sets up needed actions/filters.
@@ -38,8 +38,6 @@ class Cherry_Portfolio_Page_Template {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-
-		$this->templates = array();
 
 		// Add a filter to the page attributes metabox to inject our template into the page template cache.
 		add_filter( 'page_attributes_dropdown_pages_args', array( $this, 'register_templates' ) );
@@ -55,7 +53,7 @@ class Cherry_Portfolio_Page_Template {
 
 		// Add your templates to this array.
 		$this->templates = array(
-			'template-portfolio.php' => __( 'Portfolio', 'cherry-portfolio' ),
+			'template-projects.php' => __( 'Projects', 'cherry-projects' ),
 		);
 		// Adding support for theme templates to be merged and shown in dropdown.
 		$templates = wp_get_theme()->get_page_templates();
@@ -106,9 +104,9 @@ class Cherry_Portfolio_Page_Template {
 	public function view_template( $template ) {
 		global $post;
 
-		if ( is_post_type_archive( CHERRY_PORTFOLIO_NAME ) || is_tax( array( CHERRY_PORTFOLIO_NAME.'_category', CHERRY_PORTFOLIO_NAME.'_tag' ) ) ) {
+		if ( is_post_type_archive( CHERRY_PROJECTS_NAME ) || is_tax( array( CHERRY_PROJECTS_NAME . '_category', CHERRY_PROJECTS_NAME . '_tag' ) ) ) {
 
-			$file = trailingslashit( CHERRY_PORTFOLIO_DIR ) . 'templates/archive-portfolio.php';
+			$file = trailingslashit( CHERRY_PROJECTS_DIR ) . 'templates/archive-projects.php';
 
 			if ( file_exists( $file ) ) {
 				return $file;
@@ -125,7 +123,7 @@ class Cherry_Portfolio_Page_Template {
 			return $template;
 		}
 
-		$file = trailingslashit( CHERRY_PORTFOLIO_DIR ) . 'templates/' . $page_template_meta;
+		$file = trailingslashit( CHERRY_PROJECTS_DIR ) . 'templates/' . $page_template_meta;
 
 		// Just to be safe, we check if the file exist first.
 		if ( file_exists( $file ) ) {
@@ -143,8 +141,8 @@ class Cherry_Portfolio_Page_Template {
 	public function get_single_template( $template ) {
 		global $post;
 
-		if ( $post->post_type == CHERRY_PORTFOLIO_NAME ) {
-			$template = trailingslashit( CHERRY_PORTFOLIO_DIR ) . 'templates/single-portfolio.php';
+		if ( $post->post_type == CHERRY_PROJECTS_NAME ) {
+			$template = trailingslashit( CHERRY_PROJECTS_DIR ) . 'templates/single-projects.php';
 		}
 
 		return $template;
@@ -166,4 +164,4 @@ class Cherry_Portfolio_Page_Template {
 	}
 }
 
-Cherry_Portfolio_Page_Template::get_instance();
+Cherry_Projects_Page_Template::get_instance();

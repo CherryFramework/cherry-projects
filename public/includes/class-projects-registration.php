@@ -1,8 +1,8 @@
 <?php
 /**
- * Cherry Portfolio
+ * Cherry Projects
  *
- * @package   Cherry_Portfolio
+ * @package   Cherry_Projects
  * @author    Cherry Team
  * @license   GPL-2.0+
  * @link      http://www.cherryframework.com/
@@ -14,7 +14,7 @@
  *
  * @since 1.0.0
  */
-class Cherry_Portfolio_Registration {
+class Cherry_Projects_Registration {
 
 	/**
 	 * A reference to an instance of this class.
@@ -30,7 +30,6 @@ class Cherry_Portfolio_Registration {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-
 		// Adds the testimonials post type.
 		add_action( 'init', array( __CLASS__, 'register' ) );
 		add_action( 'init', array( __CLASS__, 'register_taxonomy' ) );
@@ -56,16 +55,16 @@ class Cherry_Portfolio_Registration {
 	public static function register() {
 
 		$labels = array(
-			'name'               => __( 'Portfolio', 'cherry-portfolio' ),
-			'singular_name'      => __( 'Portfolio list', 'cherry-portfolio' ),
-			'add_new'            => __( 'Add Item', 'cherry-portfolio' ),
-			'add_new_item'       => __( 'Add Portfolio Item', 'cherry-portfolio' ),
-			'edit_item'          => __( 'Edit Portfolio Item', 'cherry-portfolio' ),
-			'new_item'           => __( 'New Portfolio Item', 'cherry-portfolio' ),
-			'view_item'          => __( 'View Portfolio Item', 'cherry-portfolio' ),
-			'search_items'       => __( 'Search Portfolio Items', 'cherry-portfolio' ),
-			'not_found'          => __( 'No Portfolio Items found', 'cherry-portfolio' ),
-			'not_found_in_trash' => __( 'No Portfolio Items found in trash', 'cherry-portfolio' ),
+			'name'               => __( 'Projects', 'cherry-projects' ),
+			'singular_name'      => __( 'Projects list', 'cherry-projects' ),
+			'add_new'            => __( 'Add Project', 'cherry-projects' ),
+			'add_new_item'       => __( 'Add Project Item', 'cherry-projects' ),
+			'edit_item'          => __( 'Edit Project Item', 'cherry-projects' ),
+			'new_item'           => __( 'New Project Item', 'cherry-projects' ),
+			'view_item'          => __( 'View Project Item', 'cherry-projects' ),
+			'search_items'       => __( 'Search Project Items', 'cherry-projects' ),
+			'not_found'          => __( 'No Project Items found', 'cherry-projects' ),
+			'not_found_in_trash' => __( 'No Project Items found in trash', 'cherry-projects' ),
 		);
 
 		$supports = array(
@@ -86,7 +85,7 @@ class Cherry_Portfolio_Registration {
 			'supports'        => $supports,
 			'public'          => true,
 			'capability_type' => 'post',
-			'rewrite'         => array( 'slug' => 'portfolio-archive', ), // Permalinks format
+			'rewrite'         => array( 'slug' => 'projects-archive', ), // Permalinks format
 			'menu_position'   => null,
 			'menu_icon'       => ( version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) ) ? 'dashicons-portfolio' : '',
 			'can_export'      => true,
@@ -95,9 +94,9 @@ class Cherry_Portfolio_Registration {
 		);
 
 
-		$args = apply_filters( 'cherry_portfolio_post_type_args', $args );
+		$args = apply_filters( 'cherry_projects_post_type_args', $args );
 
-		register_post_type( CHERRY_PORTFOLIO_NAME, $args );
+		register_post_type( CHERRY_PROJECTS_NAME, $args );
 	}
 
 	/**
@@ -109,13 +108,13 @@ class Cherry_Portfolio_Registration {
 	public function add_post_formats_support() {
 		global $typenow;
 
-		if ( CHERRY_PORTFOLIO_NAME != $typenow ) {
+		if ( CHERRY_PROJECTS_NAME != $typenow ) {
 			return;
 		}
 
-		$args = apply_filters( 'cherry_portfolio_add_post_formats_support', array( 'image', 'gallery', 'audio', 'video', ) );
+		$args = apply_filters( 'cherry_projects_add_post_formats_support', array( 'image', 'gallery', 'audio', 'video', ) );
 
-		add_post_type_support( CHERRY_PORTFOLIO_NAME, 'post-formats', $args );
+		add_post_type_support( CHERRY_PROJECTS_NAME, 'post-formats', $args );
 		add_theme_support( 'post-formats', $args );
 	}
 
@@ -128,10 +127,10 @@ class Cherry_Portfolio_Registration {
 	public static function register_taxonomy() {
 		//Register the category taxonomy
 		$category_taxonomy_labels = array(
-			'name'          => __( 'Portfolio Categories', 'cherry-portfolio' ),
-			'label'         => __( 'Categories', 'cherry-portfolio' ),
-			'singular_name' => __( 'Category', 'cherry-portfolio' ),
-			'menu_name'     => __( 'Categories', 'cherry-portfolio' ),
+			'name'          => __( 'Projects Categories', 'cherry-projects' ),
+			'label'         => __( 'Categories', 'cherry-projects' ),
+			'singular_name' => __( 'Category', 'cherry-projects' ),
+			'menu_name'     => __( 'Categories', 'cherry-projects' ),
 		);
 		$category_taxonomy_args = array(
 			'labels'		=> $category_taxonomy_labels,
@@ -139,13 +138,13 @@ class Cherry_Portfolio_Registration {
 			'rewrite'		=> true,
 			'query_var'		=> true
 		);
-		register_taxonomy( CHERRY_PORTFOLIO_NAME.'_category', CHERRY_PORTFOLIO_NAME, $category_taxonomy_args );
+		register_taxonomy( CHERRY_PROJECTS_NAME . '_category', CHERRY_PROJECTS_NAME, $category_taxonomy_args );
 		//Register the tag taxonomy
 		$tag_taxonomy_labels = array(
-			'name'          => __( 'Portfolio Tags', 'cherry-portfolio' ),
-			'label'         => __( 'Tags', 'cherry-portfolio' ),
-			'singular_name' => __( 'Tag', 'cherry-portfolio' ),
-			'menu_name'     => __( 'Tags', 'cherry-portfolio' ),
+			'name'          => __( 'Projects Tags', 'cherry-projects' ),
+			'label'         => __( 'Tags', 'cherry-projects' ),
+			'singular_name' => __( 'Tag', 'cherry-projects' ),
+			'menu_name'     => __( 'Tags', 'cherry-projects' ),
 		);
 		$tag_taxonomy_args = array(
 			'labels'		=> $tag_taxonomy_labels,
@@ -153,7 +152,7 @@ class Cherry_Portfolio_Registration {
 			'rewrite'		=> true,
 			'query_var'		=> true
 		);
-		register_taxonomy( CHERRY_PORTFOLIO_NAME.'_tag', CHERRY_PORTFOLIO_NAME, $tag_taxonomy_args );
+		register_taxonomy( CHERRY_PROJECTS_NAME . '_tag', CHERRY_PROJECTS_NAME, $tag_taxonomy_args );
 	}
 
 	/**
@@ -172,4 +171,4 @@ class Cherry_Portfolio_Registration {
 	}
 }
 
-Cherry_Portfolio_Registration::get_instance();
+Cherry_Projects_Registration::get_instance();
