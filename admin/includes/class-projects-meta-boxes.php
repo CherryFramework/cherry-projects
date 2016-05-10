@@ -41,26 +41,22 @@ class Cherry_Projects_Meta_Boxes {
 	 * @since 1.0.0
 	 */
 	public function init() {
+		$prefix = CHERRY_PROJECTS_POSTMETA;
 		cherry_projects()->get_core()->init_module( 'cherry-post-meta', array(
-			'id'            => 'post-layout',
-			'title'         => esc_html__( 'Format Options', '__tm' ),
-			'page'          => array( CHERRY_PROJECTS_NAME ),
-			'context'       => 'normal',
-			'priority'      => 'high',
-			'callback_args' => false,
-			'fields'        => array(
-				'__tm_sidebar_position' => array(
-					'type'        => 'radio',
-					'title'       => esc_html__( 'Layout', '__tm' ),
-					'value'         => 'inherit',
-					'display_input' => false,
-					'options'       => array(
-						'inherit' => array(
-							'label'   => esc_html__( 'Inherit', '__tm' ),
-						),
-						'one-left-sidebar' => array(
-							'label'   => esc_html__( 'Sidebar on left side', '__tm' ),
-						),
+			'id'			=> 'post-layout',
+			'title'			=> esc_html__( 'Format Options', '__tm' ),
+			'page'			=> array( CHERRY_PROJECTS_NAME ),
+			'context'		=> 'normal',
+			'priority'		=> 'high',
+			'callback_args'	=> false,
+			'fields'		=> array(
+				CHERRY_PROJECTS_POSTMETA . '[image][crop_image]' => array(
+					'type'			=> 'switcher',
+					'label'			=> esc_html__( 'Crop image', 'cherry-projects' ),
+					'value'			=> 'true',
+					'toggle'		=> array(
+						'true_toggle'	=> __( 'Yes', 'cherry-projects' ),
+						'false_toggle'	=> __( 'No', 'cherry-projects' )
 					)
 				),
 			),

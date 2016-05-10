@@ -1,0 +1,101 @@
+@import "tm_mixins";
+
+.projects-filters{
+	margin: 30px 0;
+	display: flex;
+	flex-flow: row nowrap;
+	color: $dark_color_1;
+	position: relative;
+	z-index: 9;
+		.projects-filters-list-wrapper{
+			flex: 0 1 70%;
+			ul.projects-filters-list{
+				display: inline-block;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+					li{
+						float: left;
+						margin-right: 20px;
+							&:last-child{
+								margin-right: 0;
+							}
+							&.active{
+								span{
+									color: $blue_color;
+								}
+							}
+							span{
+								margin: 0 10px 0 0;
+								cursor: pointer;
+									&:hover{
+										color: $blue_color;
+									}
+									&:last-child{
+										margin: 0;
+									}
+							}
+					}
+			}
+		}
+		.projects-order-filters-wrapper{
+			flex: 0 1 30%;
+			;
+			ul.order-filters{
+				display: inline-block;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+					>li{
+						float: left;
+						margin: 0 10px;
+						position: relative;
+						cursor: pointer;
+						@include perspective(500px);
+						@include perspective-origin(50% 50%);
+							&:hover{
+								text-decoration: none;
+							}
+							ul{
+								position: absolute;
+								left: 0;
+								background: $blue_color;
+								list-style: none;
+								margin: 0;
+								padding: 10px 20px;
+								min-width: 150px;
+								z-index: 99;
+								@include preserve-3d();
+								@include transform-origin(50% 0%);
+								@include opacity(0);
+								@include multiTranslate(translateZ(-100px) translateY(50px) rotateX(-90deg));
+								@include transition(all 0.2s cubic-bezier(.86,.17,.83,.57));
+									li{
+										white-space: nowrap;
+										margin: 5px;
+										span{
+											color: #fff;
+										}
+										&:hover{
+
+										}
+										&.active{
+											display: none;
+										}
+									}
+							}
+							span.current{
+								margin-left: 10px;
+								color: $blue_color;
+							}
+							&.dropdown-state{
+								ul{
+									@include multiTranslate(translateZ(0) translateY(0) rotateX(0deg));
+									@include opacity(1);
+									@include transition(all 0.4s cubic-bezier(.12,.51,.33,1.14));
+								}
+							}
+					}
+			}
+		}
+}

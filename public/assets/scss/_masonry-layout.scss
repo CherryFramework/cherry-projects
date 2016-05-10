@@ -1,0 +1,12 @@
+.projects-container{
+	&.grid-layout{
+		.projects-list{
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: space-between;
+			.projects-item{
+				flex: 0 1 auto;
+			}
+		}
+	}
+}

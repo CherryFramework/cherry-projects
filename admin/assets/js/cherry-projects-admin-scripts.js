@@ -1,58 +1,118 @@
-jQuery(document).ready(function() {
-	var
-		postFormat
-	,	ajaxRequest = null
-	,	ajaxRequestSuccess = true
-	,	ajaxRequestFunction = null
-	,	settingsContainer = jQuery('#cherry-portfolio-post-format-options')
-	;
+(function($){
+	"use strict";
 
-	settingsContainer.append('<span class="ajax-loader"></span>');
+	CherryJsCore.utilites.namespace('project_admin_theme_script');
+	CherryJsCore.project_admin_theme_script = {
+		ajaxRequest: null,
+		ajaxRequestSuccess: true,
+		init: function () {
+			var self = this;
 
-	jQuery('#formatdiv #post-formats-select input').on('click', function(){
-		var formatClass
-		postFormat = jQuery(this).val();
-		if(postFormat == '0'){ postFormat = 'standart'; }
-
-		if( jQuery('.'+postFormat+'-post-format-settings', settingsContainer).length != 0 ){
-			jQuery('.inside .settings-item', settingsContainer).hide();
-			jQuery('.'+postFormat+'-post-format-settings', settingsContainer).fadeIn();
-		}else{
-			ajaxRequestFunction();
-		}
-
-	})
-
-	ajaxRequestFunction = function(){
-		var
-			data = {
-				action: 'get_new_format_metabox',
-				post_format: postFormat,
-				post_id : jQuery('#post_ID').val()
-			};
-
-			if( ajaxRequest != null && ajaxRequestSuccess){
-				ajaxRequest.abort();
+			if( CherryJsCore.status.is_ready ){
+				self.readyRender( self );
+			}else{
+				CherryJsCore.variable.$document.on( 'ready', self.readyRender( self ) );
 			}
 
-			ajaxRequest = jQuery.ajax({
+		},
+		readyRender: function ( self ) {
+
+			var self = self,
+				$projectsOptionsForm = $('#cherry-projects-options-form'),
+				$saveButton = $('#cherry-projects-save-options', $projectsOptionsForm ),
+				$defineAsDefaultButton = $('#cherry-projects-define-as-default', $projectsOptionsForm ),
+				$restoreButton = $('#cherry-projects-restore-options', $projectsOptionsForm );
+
+				$saveButton.on( 'click', {
+					self: self,
+					optionsForm: $projectsOptionsForm,
+					ajaxRequestType: 'save'
+				}, self.ajaxRequest );
+
+				$defineAsDefaultButton.on( 'click', {
+					self: self,
+					optionsForm: $projectsOptionsForm,
+					ajaxRequestType: 'define_as_default'
+				}, self.ajaxRequest );
+
+				$restoreButton.on( 'click', {
+					self: self,
+					optionsForm: $projectsOptionsForm,
+					ajaxRequestType: 'restore'
+				}, self.ajaxRequest );
+
+		},
+		ajaxRequest: function( event ) {
+
+			var self = event.data.self,
+				$projectsOptionsForm = event.data.optionsForm,
+				$cherrySpinner = $('.cherry-spinner-wordpress', $projectsOptionsForm),
+				ajaxRequestType = event.data.ajaxRequestType,
+				serializeArray = $projectsOptionsForm.serializeObject(),
+				data = {
+					nonce: CherryJsCore.variable.security,
+					action: 'cherry_projects_ajax_request',
+					post_array: serializeArray,
+					type: ajaxRequestType
+				};
+
+			if ( ! self.ajaxRequestSuccess ) {
+				self.ajaxRequest.abort();
+				self.noticeCreate( 'error-notice', cherryProjectsPluginSettings.please_wait_processing );
+			}
+
+			self.ajaxRequest = jQuery.ajax( {
 				type: 'POST',
-				url: portfolio_post_format_ajax.url,
+				url: ajaxurl,
 				data: data,
 				cache: false,
 				beforeSend: function(){
-					ajaxRequestSuccess = false;
-					jQuery('.ajax-loader', settingsContainer).fadeIn();
+					self.ajaxRequestSuccess = false;
+					$cherrySpinner.fadeIn();
 				},
-				success: function(response){
-					ajaxRequestSuccess = true;
-					jQuery('.ajax-loader', settingsContainer).hide();
-					jQuery('.inside .settings-item', settingsContainer).hide();
-					jQuery('.inside', settingsContainer).prepend( response );
-					CHERRY_API.interface_builder.init( jQuery('.inside .settings-item', settingsContainer).eq(0) );
-					//jQuery.cherryInterfaceBuilder.CallInterfaceBuilder( jQuery('.inside .settings-item', settingsContainer).eq(0) );
+				success: function( response ) {
+					self.ajaxRequestSuccess = true;
+					$cherrySpinner.fadeOut();
+					self.noticeCreate( response.type, response.message );
+					if ( 'restore' === ajaxRequestType ) {
+						window.location.href = cherryProjectsPluginSettings.redirect_url;
+					}
 				},
-				dataType: 'html'
-			});
+				dataType: 'json'
+			} );
+
+			return false;
+		},
+		noticeCreate: function( type, message ) {
+			var
+				notice = $('<div class="notice-box ' + type + '"><span class="dashicons"></span><div class="inner">' + message + '</div></div>'),
+				rightDelta = 0,
+				timeoutId;
+
+			$('body').prepend( notice );
+			reposition();
+			rightDelta = -1 * ( notice.outerWidth( true ) + 10 );
+			notice.css( {'right' : rightDelta } );
+
+			timeoutId = setTimeout( function () { notice.css( {'right' : 10 } ).addClass('show-state') }, 100 );
+			timeoutId = setTimeout( function () {
+				rightDelta = -1 * ( notice.outerWidth( true ) + 10 );
+				notice.css( { right: rightDelta } ).removeClass( 'show-state' );
+			}, 4000 );
+			timeoutId = setTimeout( function () {
+				notice.remove(); clearTimeout( timeoutId );
+			}, 4500 );
+
+				function reposition(){
+					var topDelta = 100;
+
+					$( '.notice-box' ).each( function( index ) {
+						$( this ).css( { top: topDelta } );
+						topDelta += $( this ).outerHeight( true );
+					} );
+				}
+		}
 	}
-});
+	CherryJsCore.project_admin_theme_script.init();
+}(jQuery));
+

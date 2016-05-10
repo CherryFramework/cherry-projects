@@ -7,13 +7,21 @@
  * @package Cherry_Projects
  * @since   1.0.0
  */
-?>
-<article <?php if ( function_exists( 'cherry_attr' ) ) cherry_attr( 'post' ); ?>>
-	<h2> archive-projects </h2>
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+get_header( 'cherry_products' );?>
+
+<article>
+	<h2> archive-projectss </h2>
 	<?php
 
-		//$data = new Cherry_Portfolio_Data;
-		//$data->the_portfolio();
+		//$projects_data = new Cherry_Project_Data;
+		//$projects_data->render_projects();
 	?>
 
 </article>
+
+<?php get_footer( 'cherry_products' ); ?>

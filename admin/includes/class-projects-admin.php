@@ -20,23 +20,12 @@ class Cherry_Projects_Admin {
 	private static $instance = null;
 
 	/**
-	 * [$portfolio_meta_boxes description]
-	 * @var null
-	 */
-	public $projects_meta_boxes = null;
-
-	/**
 	 * Sets up needed actions/filters for the admin to initialize.
 	 *
 	 * @since  1.0.0
 	 * @return void
 	 */
 	public function __construct() {
-		// Load post meta boxes on the post editing screen.
-		add_action( 'load-post.php',     array( $this, 'load_post_meta_boxes' ) );
-		add_action( 'load-post-new.php', array( $this, 'load_post_meta_boxes' ) );
-
-		add_action( 'wp_ajax_get_new_format_metabox', array( $this, 'load_post_meta_boxes' ), 10 );
 
 		// Only run our customization on the 'edit.php' page in the admin.
 		add_action( 'load-edit.php', array( $this, 'load_edit' ) );
@@ -48,21 +37,6 @@ class Cherry_Projects_Admin {
 		add_action( 'admin_enqueue_scripts',  array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts',  array( $this, 'enqueue_styles' ) );
 
-		add_action( 'wp_ajax_get_new_format_metabox', array( $this, 'get_new_format_metabox' ), 20 );
-
-	}
-
-	/**
-	 * Loads custom meta boxes
-	 *
-	 * @since 1.0.0
-	 */
-	public function load_post_meta_boxes() {
-
-		if ( ( !empty( $screen->post_type ) && 'projects' === $screen->post_type ) || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-			//require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'admin/includes/class-projects-meta-boxes.php' );
-			//$this->projects_meta_boxes = new Cherry_Projects_Meta_Boxes;
-		}
 	}
 
 	/**
@@ -182,12 +156,7 @@ class Cherry_Projects_Admin {
 	public function enqueue_scripts() {
 		$screen = get_current_screen();
 		if ( ! empty( $screen->post_type ) && 'projects' === $screen->post_type ) {
-			wp_enqueue_script( 'cherry-projects-admin-scripts', trailingslashit( CHERRY_PROJECTS_URI ) . 'admin/assets/js/cherry-projects-admin-scripts.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION );
-			//$option_inteface_builder = new Cherry_Interface_Builder();
-			//$option_inteface_builder->enqueue_builder_scripts();
 
-			//ajax js object portfolio_type_ajax
-			wp_localize_script( 'cherry-projects-admin-scripts', 'projects_post_format_ajax', array( 'url' => admin_url('admin-ajax.php') ) );
 		}
 	}
 
@@ -199,24 +168,7 @@ class Cherry_Projects_Admin {
 		$screen = get_current_screen();
 
 		if ( ! empty( $screen->post_type ) && 'projects' === $screen->post_type ) {
-			//$option_inteface_builder = new Cherry_Interface_Builder();
-			//$option_inteface_builder->enqueue_builder_styles();
-
 			wp_enqueue_style( 'projects-admin-style', trailingslashit( CHERRY_PROJECTS_URI ) . 'admin/assets/css/admin-style.css', array(), CHERRY_PROJECTS_VERSION );
-		}
-	}
-
-	/**
-	 * [get_new_format_metabox description]
-	 * @return [type] [description]
-	 */
-	public function get_new_format_metabox() {
-		if ( !empty( $_POST ) && array_key_exists( 'post_format', $_POST ) && array_key_exists( 'post_id', $_POST ) ) {
-			$post_format = $_POST['post_format'];
-			$post_id = $_POST['post_id'];
-			//$output = $this->projects_meta_boxes->format_metabox_builder( $post_id, $post_format );
-			//echo $output;
-			exit;
 		}
 	}
 
@@ -237,5 +189,14 @@ class Cherry_Projects_Admin {
 	}
 }
 
-Cherry_Projects_Admin::get_instance();
+/**
+ * Returns instanse of main theme configuration class.
+ *
+ * @since  1.0.0
+ * @return object
+ */
+function cherry_projects_admin() {
+	return Cherry_Projects_Admin::get_instance();
+}
 
+cherry_projects_admin();

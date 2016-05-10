@@ -36,12 +36,31 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 		private static $instance = null;
 
 		/**
+		 * Created options fields
+		 * @var array
+		 */
+		public static $option_exist_array = array();
+
+		/**
+		 * Default options
+		 * @var array
+		 */
+		public $default_options = array();
+
+		/**
 		 * A reference to an instance of cherry framework core class.
 		 *
 		 * @since 1.0.0
 		 * @var   object
 		 */
 		private $core = null;
+
+		/**
+		 * [$projects_data description]
+		 *
+		 * @var null
+		 */
+		public $projects_data = null;
 
 		/**
 		 * Sets up needed actions/filters for the plugin to initialize.
@@ -55,7 +74,7 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 			$this->includes();
 
 			// Load the installer core.
-			add_action( 'after_setup_theme', require( trailingslashit( __DIR__ ) . 'cherry-framework/setup.php' ), 0 );
+			add_action( 'after_setup_theme', require( CHERRY_PROJECTS_DIR . 'cherry-framework/setup.php' ), 0 );
 
 			// Load the core functions/classes required by the rest of the theme.
 			add_action( 'after_setup_theme', array( $this, 'get_core' ), 1 );
@@ -78,6 +97,8 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 			// Register activation and deactivation hook.
 			register_activation_hook( __FILE__, array( $this, 'activation'     ) );
 			register_deactivation_hook( __FILE__, array( $this, 'deactivation' ) );
+
+			add_action( 'admin_init', array( $this, 'create_plugin_options' ) );
 		}
 
 		/**
@@ -113,7 +134,7 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 			 *
 			 * @since 1.0.0
 			 */
-			define( 'CHERRY_PROJECTS_POSTMETA', '_cherry_projects' );
+			define( 'CHERRY_PROJECTS_POSTMETA', 'cherry_projects' );
 
 			/**
 			 * Set constant path to the plugin directory.
@@ -128,6 +149,14 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 			 * @since 1.0.0
 			 */
 			define( 'CHERRY_PROJECTS_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );
+
+			/**
+			 * Set constant DB option field.
+			 *
+			 * @since 1.0.0
+			 */
+			define( 'OPTIONS_NAME', 'cherry_projects_options' );
+
 		}
 
 		/**
@@ -139,9 +168,40 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/aq_resizer.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-registration.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-page-template.php' );
-			//require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-options.php' );
-			//require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-data.php' );
+			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-data.php' );
+
 			//require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-shortcode.php' );
+
+		}
+
+		/**
+		 * Loads admin files.
+		 *
+		 * @since 1.0.0
+		 */
+		function admin() {
+			if ( is_admin() ) {
+				require_once( CHERRY_PROJECTS_DIR . 'admin/includes/class-projects-admin.php' );
+				require_once( CHERRY_PROJECTS_DIR . 'admin/includes/class-projects-meta-boxes.php' );
+				require_once( CHERRY_PROJECTS_DIR . 'admin/includes/class-projects-options-page.php' );
+			}
+		}
+
+		/**
+		 * Register and enqueue public-facing style sheet.
+		 *
+		 * @since 1.0.0
+		 */
+		public function enqueue_styles() {
+
+		}
+
+		/**
+		 * Register and enqueue public-facing style sheet.
+		 *
+		 * @since 1.0.0
+		 */
+		public function enqueue_scripts() {
 
 		}
 
@@ -202,8 +262,114 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 		 * @since 1.0.0
 		 */
 		public function init() {
-
+			$this->projects_data = new Cherry_Project_Data();
 		}
+
+		/**
+		 * Create pluginoptions
+		 *
+		 * @since 1.0.0
+		 */
+		public function create_plugin_options() {
+
+			$this->default_options = array(
+				'projects-listing-layout'				=> 'grid-layout',
+				'projects-loading-mode'					=> 'ajax-pagination-mode',
+				'projects-loading-animation'			=> 'loading-animation-move-up',
+				'projects-hover-animation'				=> 'simple-scale',
+				'projects-filter-visible'				=> 'true',
+				'projects-filter-type'					=> 'category',
+				'projects-category-list'				=> array(),
+				'projects-tags-list'					=> array(),
+				'projects-order-filter-visible'			=> 'false',
+				'projects-order-filter-default-value'	=> 'desc',
+				'projects-orderby-filter-default-value'	=> 'date',
+				'projects-posts-format'					=> 'post-format-all',
+				'projects-column-number'				=> 3,
+				'projects-post-per-page'				=> 9,
+				'projects-item-margin'					=> 4,
+				'projects-justified-fixed-height'		=> 300,
+				'projects-is-crop-image'				=> 'false',
+				'projects-crop-image-width'				=> 500,
+				'projects-crop-image-height'			=> 350,
+				'projects-masonry-template'				=> 'masonry-default.tmpl',
+				'projects-grid-template'				=> 'grid-default.tmpl',
+				'projects-justified-template'			=> 'justified-default.tmpl',
+				'projects-list-template'				=> 'list-default.tmpl',
+			);
+
+			if ( ! self::is_db_option_exist( OPTIONS_NAME ) ) {
+				$this->save_options( OPTIONS_NAME, $this->default_options );
+			}
+
+			if ( ! self::is_db_option_exist( OPTIONS_NAME . '_default' ) ) {
+				$this->save_options( OPTIONS_NAME . '_default', $this->default_options );
+			}
+		}
+
+		/**
+		 *
+		 *
+		 * @since 1.0.0
+		 */
+		public static function is_db_option_exist( $option_name ) {
+
+			( false == get_option( $option_name ) ) ? $is_exist = false : $is_exist = true;
+
+			self::$option_exist_array[] = $option_name;
+
+			return $is_exist;
+		}
+
+		/**
+		 *
+		 * Save options to DB
+		 *
+		 * @since 1.0.0
+		 */
+		public function save_options( $option_name, $options ) {
+
+			$options = array_merge( $this->default_options, $options );
+			update_option( $option_name, $options );
+		}
+
+		/**
+		 *
+		 * Get option value
+		 *
+		 * @since 1.0.0
+		 */
+		public function get_option( $option_name, $option_default = false ) {
+
+			$cached = wp_cache_get( $option_name, OPTIONS_NAME );
+
+			if ( $cached ) {
+				return $cached;
+			}
+
+			if ( self::is_db_option_exist( OPTIONS_NAME ) ) {
+				$current_options = get_option( OPTIONS_NAME );
+
+				if ( array_key_exists( $option_name, $current_options ) ) {
+					wp_cache_set( $option_name, $current_options[ $option_name ], OPTIONS_NAME );
+
+					return $current_options[ $option_name ];
+				}
+			} else {
+				$default_options = $this->default_options;
+
+				if ( array_key_exists( $option_name, $default_options ) ) {
+					wp_cache_set( $option_name, $default_options[ $option_name ], OPTIONS_NAME );
+
+					return $default_options[ $option_name ];
+				}
+			}
+
+			wp_cache_set( $option_name, $option_default, OPTIONS_NAME );
+
+			return $option_default;
+		}
+
 		/**
 		 * Loads the translation files.
 		 *
@@ -212,34 +378,6 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 		function lang() {
 			load_plugin_textdomain( 'cherry-projects', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 		}
-
-		/**
-		 * Loads admin files.
-		 *
-		 * @since 1.0.0
-		 */
-		function admin() {
-			if ( is_admin() ) {
-				require_once( CHERRY_PROJECTS_DIR . 'admin/includes/class-projects-admin.php' );
-				require_once( CHERRY_PROJECTS_DIR . 'admin/includes/class-projects-meta-boxes.php' );
-			}
-		}
-
-		/**
-		 * Register and enqueue public-facing style sheet.
-		 *
-		 * @since 1.0.0
-		 */
-		public function enqueue_styles() {
-			wp_enqueue_style( 'cherry-projects', plugins_url( 'public/assets/css/style.css', __FILE__ ), array(), CHERRY_PROJECTS_VERSION );
-		}
-
-		/**
-		 * Register and enqueue public-facing style sheet.
-		 *
-		 * @since 1.0.0
-		 */
-		public function enqueue_scripts() {}
 
 		/**
 		 * On plugin activation.

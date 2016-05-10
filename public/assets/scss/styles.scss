@@ -1,12 +1,43 @@
 @import "tm_mixins";
+@import "variables";
+@import "filters";
+@import "grid-layout";
 
-div.portfolio-wrap{
+div.cherry-projects-wrapper{
 	color: #333333;
-		.portfolio-container{
+		.projects-container{
 			position: relative;
-			&.masonry-layout{
-			}
-			&.grid-layout{
+			z-index: 8;
+			&.masonry-layout{}
+			&.justified-layout{
+				.projects-list{
+					display: flex;
+					flex-direction: row;
+					flex-flow: row wrap;
+					justify-content: space-between;
+					-webkit-align-items: stretch;
+						.justified-layout-item{
+							position: relative;
+							flex: 1 1 auto;
+							column-gap: 2em;
+							align-self: stretch;
+							.inner-wrap{
+								width: 100%;
+								height: 100%;
+								position: relative;
+								background-repeat: no-repeat;
+								background-size: cover;
+								background-position: 50% 50%;
+								overflow: inherit;
+							}
+							.justified-image{
+								position: relative;
+								background-repeat: no-repeat;
+								background-size: cover;
+								background-position: 50% 50%;
+							}
+						}
+				}
 			}
 			&.list-layout{
 				.list-layout-item{
@@ -28,58 +59,12 @@ div.portfolio-wrap{
 					}
 				}
 			}
-			&.justified-layout{
-				.portfolio-list{
-					display: -webkit-flex;
-					display: -moz-flex;
-					display: -ms-flex;
-					display: flex;
-					-webkit-flex-direction: row;
-					-moz-flex-direction: row;
-					-ms-flex-direction: row;
-					flex-direction: row;
-					-webkit-flex-flow: row wrap;
-					-moz-flex-flow: row wrap;
-					-ms-flex-flow: row wrap;
-					flex-flow: row wrap;
-					justify-content: space-between;
-					-webkit-align-items: stretch;
-						.justified-layout-item{
-							position: relative;
-							-webkit-flex: 1 1 auto;
-							-ms-flex: 1 1 auto;
-							flex: 1 1 auto;
-							-webkit-column-gap: 2em;
-							-moz-column-gap: 2em;
-							column-gap: 2em;
-
-							-webkit-align-self: stretch;
-							-ms-flex-item-align: stretch;
-							align-self: stretch;
-							.inner-wrap{
-								width: 100%;
-								height: 100%;
-								position: relative;
-								background-repeat: no-repeat;
-								background-size: cover;
-								background-position: 50% 50%;
-								overflow: inherit;
-							}
-							.justified-image{
-								position: relative;
-								background-repeat: no-repeat;
-								background-size: cover;
-								background-position: 50% 50%;
-							}
-						}
-				}
-			}
 			//---------------------------------------
 			//---------- animation layouts ----------
 			//---------------------------------------
 			&.loading-animation-fade{
-				.portfolio-list{
-					.portfolio-item{
+				.projects-list{
+					.projects-item{
 						.inner-wrap{
 							@include opacity(1);
 							@include transition(all 1s ease);
@@ -99,8 +84,8 @@ div.portfolio-wrap{
 				}
 			}
 			&.loading-animation-scale{
-				.portfolio-list{
-					.portfolio-item{
+				.projects-list{
+					.projects-item{
 						.inner-wrap{
 							@include scale(1);
 							@include transition(all 1s ease);
@@ -120,8 +105,8 @@ div.portfolio-wrap{
 				}
 			}
 			&.loading-animation-move-up{
-				.portfolio-list{
-					.portfolio-item{
+				.projects-list{
+					.projects-item{
 						.inner-wrap{
 							@include opacity(1);
 							@include multiTranslate(translateY(0px));
@@ -143,10 +128,10 @@ div.portfolio-wrap{
 				}
 			}
 			&.loading-animation-flip{
-				.portfolio-list{
+				.projects-list{
 				@include perspective(1000px);
 				@include perspective-origin(50% 50%);
-					.portfolio-item{
+					.projects-item{
 						.inner-wrap{
 							@include preserve-3d();
 							@include transform-origin(50% 0%);
@@ -170,10 +155,10 @@ div.portfolio-wrap{
 				}
 			}
 			&.loading-animation-helix{
-				.portfolio-list{
+				.projects-list{
 				@include perspective(1000px);
 				@include perspective-origin(50% 50%);
-					.portfolio-item{
+					.projects-item{
 						.inner-wrap{
 							@include preserve-3d();
 							@include rotateY(0deg);
@@ -196,10 +181,10 @@ div.portfolio-wrap{
 				}
 			}
 			&.loading-animation-fall-perspective{
-				.portfolio-list{
+				.projects-list{
 				@include perspective(1000px);
 				@include perspective-origin(50% 50%);
-					.portfolio-item{
+					.projects-item{
 						.inner-wrap{
 							@include preserve-3d();
 							@include multiTranslate(translateZ(0px) translateY(0px) rotateX(0deg));
@@ -223,13 +208,11 @@ div.portfolio-wrap{
 				}
 			}
 		}
-		.portfolio-list{
+		.projects-list{
 			position: relative;
 			min-height: 100px;
-			//-webkit-transition: all 0.5s ease-out;
-			//transition: all 0.5s ease-out;
 		}
-		div.portfolio-item{
+		div.projects-item{
 			.inner-wrap{
 				position: relative;
 				overflow: hidden;
@@ -325,97 +308,10 @@ div.portfolio-wrap{
 		}
 }
 
-.portfolio-filter{
-	margin: 30px 0;
-}
-ul.filter{
-	display: inline-block;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	float: left;
-		li{
-			float: left;
-			margin: 0 5px;
-				&.active{
-					a{
-						text-decoration: underline;
-					}
-				}
-				a{
-					color: #333333;
-					margin: 0 10px 0 0;
-						&:hover{
-							text-decoration: underline;
-						}
-						&:last-child{
-							margin: 0;
-						}
-				}
-		}
-}
-ul.order-filter{
-	display: inline-block;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	float: right;
-		>li{
-			float: left;
-			margin: 0 7px;
-			padding-right: 15px;
-			position: relative;
-			cursor: pointer;
-			color: #333333;
-				&:hover{
-					text-decoration: none;
-				}
-				ul{
-					display: none;
-					position: absolute;
-					top: 20px;
-					right: 0;
-					background: #fff;
-					list-style: none;
-					margin: 0;
-					padding: 10px 5px;
-					z-index: 99;
-						li{
-							white-space: nowrap;
-							&:hover{
-								text-decoration: underline;
-							}
-							&.active{
-								display: none;
-							}
-						}
-				}
-				span.current{
-					margin-left: 5px;
-				}
-				span.marker{
-					position: absolute;
-					display: block;
-					top: 6px;
-					right: 0;
-					width: 0;
-					height: 0;
-					border-style: solid;
-					border-width: 5px 5px 0 5px;
-					border-color: #282828 transparent transparent transparent;
-				}
-				&.dropdown-state{
-					span.marker{
-						border-width: 0 5px 5px 5px;
-						border-color: transparent transparent #282828 transparent;
-					}
-					ul{
-						display: block;
-					}
-				}
-		}
-}
-.portfolio-pagination{
+
+
+
+.projects-pagination{
 	margin: 40px 0 0 0;
 		ul.page-link{
 			list-style: none;
@@ -463,7 +359,7 @@ ul.order-filter{
 				}
 		}
 }
-.portfolio-ajax-button{
+.projects-ajax-button{
 	margin: 40px 0 20px 0;
 	text-align: center;
 		.load-more-button{
@@ -481,9 +377,9 @@ ul.order-filter{
 				}
 		}
 }
-body.single-portfolio{
-	article.type-portfolio{
-		.cherry-portfolio-single-post{
+body.single-projects{
+	article.type-projects{
+		.cherry-projects-single-post{
 			color: #a4a4a4;
 			a{
 				color: #a4a4a4;
@@ -544,7 +440,7 @@ body.single-portfolio{
 					height: 500px;
 				}
 			}
-			&.cherry-portfolio-video-post{
+			&.cherry-projects-video-post{
 				.video-player-container{
 					width: 100%;
 						.wp-video{
@@ -554,12 +450,12 @@ body.single-portfolio{
 						}
 				}
 			}
-			&.cherry-portfolio-audio-post{
+			&.cherry-projects-audio-post{
 				.audio-player-container{
 
 				}
 			}
-			&.cherry-portfolio-gallery-post{
+			&.cherry-projects-gallery-post{
 				.swiper-container{
 					margin-bottom: 40px;
 					.swiper-wrapper{
@@ -647,8 +543,8 @@ section.justified-list{
 		}
 }
 
-.cherry-portfolio-ajax-loader{
-	position: absolute;
+.cherry-projects-ajax-loader{
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -656,7 +552,7 @@ section.justified-list{
 	display: none;
 	z-index: 999;
 	pointer-events: none;
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: rgba(0, 0, 0, 0.3);
 		.cherry-spinner{
 			width: 90px;
 			height: 90px;
@@ -676,36 +572,30 @@ section.justified-list{
 	width: 100%;
 	height: 100%;
 	border-radius: 50%;
-	background-color: #282828;
+	background-color: $blue_color;
 	opacity: 0.6;
 	position: absolute;
 	top: 0;
 	left: 0;
-	-webkit-animation: cherry-doubleBounce 2s infinite ease-in-out;
-			animation: cherry-doubleBounce 2s infinite ease-in-out;
+	animation: cherry-doubleBounce 2s infinite ease-in-out;
 }
 .cherry-spinner-double-bounce .cherry-double-bounce2 {
-	-webkit-animation-delay: -1s;
-			animation-delay: -1s;
+	animation-delay: -1s;
 }
 @-webkit-keyframes cherry-doubleBounce {
 	0%, 100% {
-		-webkit-transform: scale(0);
-				transform: scale(0);
+		transform: scale(0);
 	}
 	50% {
-		-webkit-transform: scale(1);
-				transform: scale(1);
+		transform: scale(1);
 	}
 }
 @keyframes cherry-doubleBounce {
 	0%, 100% {
-		-webkit-transform: scale(0);
-				transform: scale(0);
+		transform: scale(0);
 	}
 	50% {
-		-webkit-transform: scale(1);
-				transform: scale(1);
+		transform: scale(1);
 	}
 }
 

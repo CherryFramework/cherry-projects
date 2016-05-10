@@ -8,23 +8,36 @@
  * @since   1.0.0
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+get_header( 'cherry_products' );
+
+do_action( 'cherry_projects_before_main_content' );
+
 if ( have_posts() ) :
 
 	while ( have_posts() ) :
 
 			the_post(); ?>
 
-			<article <?php if ( function_exists( 'cherry_attr' ) ) cherry_attr( 'post' ); ?>>
-				<h2> archive-projects </h2>
+			<section>
+				<h2> Cherry Projects </h2>
 				<?php
 					the_content();
 
-					//$data = new Cherry_Portfolio_Data;
-					//$data->the_portfolio();
+					cherry_projects()->projects_data->render_projects();
 				?>
 
-			</article>
+			</section>
 
 	<?php endwhile;
 
-endif; ?>
+endif;
+
+do_action( 'cherry_projects_after_main_content' );
+
+get_footer( 'cherry_products' );
+
+?>
