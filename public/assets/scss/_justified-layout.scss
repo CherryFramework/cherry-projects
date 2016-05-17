@@ -1,10 +1,14 @@
 .projects-container{
-	&.grid-layout{
+	&.justified-layout{
 		.projects-list{
 			display: flex;
 			flex-flow: row wrap;
+			justify-content: space-between;
+			align-items: stretch;
+			align-content: stretch;
 			.projects-item{
 				flex: 0 1 auto;
+				height: auto;
 			}
 		}
 	}

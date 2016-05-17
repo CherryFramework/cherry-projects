@@ -81,11 +81,11 @@ class Cherry_Projects_Admin {
 		$columns['cb'] = $post_columns['cb'];
 
 		// Add custom columns and overwrite the 'title' column.
-		$columns['title']								= __( 'Title', 'cherry-projects' );
-		$columns[ CHERRY_PROJECTS_NAME . '_category' ]	= __( 'Projects category', 'cherry-projects' );
-		$columns[ CHERRY_PROJECTS_NAME . '_tag' ]		= __( 'Projects tag', 'cherry-projects' );
-		$columns['date']								= __( 'Date', 'cherry-projects' );
-		$columns['preview']								= __( 'Preview', 'cherry-projects' );
+		$columns['title']								= esc_html__( 'Title', 'cherry-projects' );
+		$columns[ CHERRY_PROJECTS_NAME . '_category' ]	= esc_html__( 'Projects category', 'cherry-projects' );
+		$columns[ CHERRY_PROJECTS_NAME . '_tag' ]		= esc_html__( 'Projects tag', 'cherry-projects' );
+		$columns['date']								= esc_html__( 'Date', 'cherry-projects' );
+		$columns['preview']								= esc_html__( 'Preview', 'cherry-projects' );
 
 		// Return the columns.
 		return $columns;
@@ -116,7 +116,7 @@ class Cherry_Projects_Admin {
 						}
 					echo $category_name_list;
 				}else{
-					echo __( 'Project has no categories', 'cherry-projects' );
+					echo esc_html__( 'Project has no categories', 'cherry-projects' );
 				}
 
 			break;
@@ -135,7 +135,7 @@ class Cherry_Projects_Admin {
 						}
 					echo $tags_name_list;
 				}else{
-					echo __( 'Project has no tags', 'cherry-projects' );
+					echo esc_html__( 'Project has no tags', 'cherry-projects' );
 				}
 
 			break;

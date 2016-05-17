@@ -1,0 +1,169 @@
+@import "tm_mixins";
+
+div.cherry-projects-wrapper{
+	.projects-container{
+		//---------------------------------------
+		//---------- animation layouts ----------
+		//---------------------------------------
+		&.loading-animation-fade{
+			.projects-list{
+				.projects-item{
+					.inner-wrapper{
+						@include opacity(1);
+						@include transition(all 1s ease);
+					}
+					&.animate-cycle-show{
+						.inner-wrapper{
+							@include opacity(0);
+						}
+					}
+					&.animate-cycle-hide{
+						.inner-wrapper{
+							@include opacity(0);
+							@include multiTranslate(translateY(-30px));
+							@include transition(all 0.4s ease);
+						}
+					}
+				}
+			}
+		}
+		&.loading-animation-scale{
+			.projects-list{
+				.projects-item{
+					@include perspective(1000px);
+					@include perspective-origin(50% 50%);
+					.inner-wrapper{
+						@include opacity(1);
+						@include preserve-3d();
+						@include transform-origin(50% 0%);
+						@include multiTranslate(translateZ(0px) translateY(0px) rotateX(0deg));
+						@include transition(all 0.7s cubic-bezier(.29,.65,.64,.97));
+					}
+					&.animate-cycle-show{
+						.inner-wrapper{
+							@include opacity(0);
+							@include multiTranslate(translateZ(-1500px) translateY(50px) rotateX(90deg));
+						}
+					}
+					&.animate-cycle-hide{
+						.inner-wrapper{
+							@include opacity(0);
+							@include multiTranslate(translateY(-30px));
+							@include transition(all 0.4s ease);
+						}
+					}
+				}
+			}
+		}
+		&.loading-animation-move-up{
+			.projects-list{
+				.projects-item{
+					@include perspective(500px);
+					@include perspective-origin(50% 50%);
+					.inner-wrapper{
+						@include opacity(1);
+						@include preserve-3d();
+						@include transform-origin(50% 0%);
+						@include multiTranslate(translateY(0px) translateZ(0) rotateX(0deg));
+						@include transition(all 0.8s cubic-bezier(.29,.65,.64,.97));
+					}
+					&.animate-cycle-show{
+						.inner-wrapper{
+							@include opacity(0);
+							@include multiTranslate(translateY(80px) translateZ(-100px) rotateX(5deg));
+						}
+					}
+					&.animate-cycle-hide{
+						.inner-wrapper{
+							@include opacity(0);
+							@include multiTranslate(translateY(-30px));
+							@include transition(all 0.4s ease);
+						}
+					}
+				}
+			}
+		}
+		&.loading-animation-flip{
+			.projects-list{
+				@include perspective(1500px);
+				@include perspective-origin(50% 50%);
+					.projects-item{
+						.inner-wrapper{
+							@include preserve-3d();
+							@include transform-origin(50% 0%);
+							@include opacity(1);
+							@include multiTranslate(translateY(0px) rotateX(0deg));
+							@include transition(all 0.8s cubic-bezier(.31,.78,.39,.93));
+						}
+						&.animate-cycle-show{
+							.inner-wrapper{
+								@include opacity(0);
+								@include multiTranslate(translateY(-50px) rotateX(80deg));
+							}
+						}
+						&.animate-cycle-hide{
+							.inner-wrapper{
+								@include opacity(0);
+								@include multiTranslate(translateY(-30px));
+								@include transition(all 0.4s ease);
+							}
+						}
+					}
+			}
+		}
+		&.loading-animation-helix{
+			.projects-list{
+			@include perspective(1000px);
+			@include perspective-origin(50% 50%);
+				.projects-item{
+					.inner-wrapper{
+						@include preserve-3d();
+						@include multiTranslate(translateZ(0px) translateY(0px) rotateY(0deg));
+						@include opacity(1);
+						@include transition(all 0.8s cubic-bezier(.29,.65,.64,.97));
+					}
+					&.animate-cycle-show{
+						.inner-wrapper{
+							@include multiTranslate(translateZ(-1000px) translateY(-50px) rotateY(-240deg));
+							@include opacity(0);
+						}
+					}
+					&.animate-cycle-hide{
+						.inner-wrapper{
+							@include opacity(0);
+							@include multiTranslate(translateY(-30px));
+							@include transition(all 0.4s ease);
+						}
+					}
+				}
+			}
+		}
+		&.loading-animation-fall-perspective{
+			.projects-list{
+			@include perspective(1000px);
+			@include perspective-origin(50% 50%);
+				.projects-item{
+					.inner-wrapper{
+						@include preserve-3d();
+						@include multiTranslate(translateZ(0px) translateY(0px) rotateX(0deg));
+						@include opacity(1);
+						@include transition(all 0.8s cubic-bezier(.29,.65,.64,.97));
+					}
+					&.animate-cycle-show{
+						.inner-wrapper{
+							@include multiTranslate(translateZ(400px) translateY(300px) rotateX(-65deg));
+							@include opacity(0);
+						}
+					}
+					&.animate-cycle-hide{
+						.inner-wrapper{
+							@include opacity(0);
+							@include multiTranslate(translateY(-30px));
+							@include transition(all 0.4s ease);
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -31,8 +31,8 @@ class Cherry_Projects_Registration {
 	 */
 	public function __construct() {
 		// Adds the testimonials post type.
-		add_action( 'init', array( __CLASS__, 'register' ) );
-		add_action( 'init', array( __CLASS__, 'register_taxonomy' ) );
+		add_action( 'after_setup_theme', array( __CLASS__, 'register' ) );
+		add_action( 'after_setup_theme', array( __CLASS__, 'register_taxonomy' ) );
 
 		add_action( 'post.php',          array( $this, 'add_post_formats_support' ) );
 		add_action( 'load-post.php', array( $this, 'add_post_formats_support' ) );

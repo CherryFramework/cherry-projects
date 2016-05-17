@@ -15,7 +15,7 @@
 	<div class="cherry-projects-options-page-wrapper">
 		<div class="cherry-projects-options-list-wrapper">
 		<?php foreach ( $__data['settings']['ui-settings'] as $key => $settings ) { ?>
-				<div class="option-section">
+				<div class="option-section <?php echo $settings['master']; ?>">
 					<div class="option-info-wrapper">
 						<h3 class="option-title"><?php echo $settings['title']; ?></h3>
 						<span class="option-description"><?php echo $settings['description']; ?></span>

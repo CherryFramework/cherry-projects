@@ -21,7 +21,9 @@
 					$projectsTermsFilters  = $( 'ul.projects-filters-list', $projectsFilters ),
 					$projectsOrderFilters  = $( 'ul.order-filters', $projectsFilters ),
 					projectsSettings       = $projectsContainer.data( 'settings' ),
-					ajaxLoader             = null,
+					$ajaxLoader            = null,
+					$ajaxMoreLoader        = null,
+					$projectsMoreButton    = null,
 					orderSetting           = {
 						order:   $projectsFilters.data( 'order-default' ) || 'DESC',
 						orderby: $projectsFilters.data( 'orderby-default' ) || 'date'
@@ -58,19 +60,21 @@
 					ajaxGetNewRequest = null,
 					ajaxGetMoreRequest = null,
 					ajaxGetNewRequestSuccess = true;
-					ajaxLoader = null,*/
+					$ajaxLoader = null,*/
 
 					console.log(projectsSettings);
 
 				(function () {
 					if ( ! $('.cherry-projects-ajax-loader')[0] ) {
 						$('body').append('<div class="cherry-projects-ajax-loader"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>');
-						ajaxLoader = $('.cherry-projects-ajax-loader');
+						$ajaxLoader = $('.cherry-projects-ajax-loader');
 					}else{
-						ajaxLoader = $('.cherry-projects-ajax-loader');
+						$ajaxLoader = $('.cherry-projects-ajax-loader');
 					}
 
-					ajaxLoader.css( { 'display': 'block'} ).fadeTo( 500, 1 );
+					$ajaxLoader.css( { 'display': 'block'} ).fadeTo( 500, 1 );
+
+					$ajaxMoreLoader = $('.projects-end-line-spinner .cherry-spinner', $this );
 
 					getNewProjectsList( currentTermSlug, currentPage, orderSetting );
 
@@ -81,6 +85,8 @@
 					if ( $projectsFilters[0] && $projectsOrderFilters[0] ) {
 						addOrderFiltersEventsFunction();
 					}
+
+					addEventsFunction();
 				})();
 
 				/*
@@ -97,6 +103,7 @@
 							$( this ).parent().addClass( 'active' );
 
 							currentTermSlug = $(this).data('slug');
+							currentPage = 1;
 
 							getNewProjectsList( currentTermSlug, currentPage, orderSetting );
 						}
@@ -146,28 +153,93 @@
 						orderSetting.orderby = orderby;
 
 						getNewProjectsList( currentTermSlug, currentPage, orderSetting );
-					})
+					});
 
-					/*switch( loadingMode ){
-						case 'ajax-pagination':
-							$('.portfolio-pagination > ul > li a', _this).on('click', function(e){
-								ajaxPaginationLinkClickEventFunction( $(this) );
-							})
-							$('.portfolio-pagination .page-nav .next-page', _this).on('click', function(e){
-								ajaxNavigationClickEvent( $(this), 'next' );
-							})
-							$('.portfolio-pagination .page-nav .prev-page', _this).on('click', function(e){
-								ajaxNavigationClickEvent( $(this), 'prev' );
-							})
-						break
-						case 'more-button':
-							$('.portfolio-ajax-button .load-more-button a', _this).on('click', function(e){
-								ajaxMoreButtonClickEventFunction();
-							})
-						break
+
+					$( '.orderby-list', $projectsOrderFilters ).on( 'mouseleave', function() {
+						$( this ).closest( '.dropdown-state' ).removeClass( 'dropdown-state' );
+					} );
+
+					$( $projectsOrderFilters ).on( 'mouseleave', '.dropdown-state', function() {
+						$( this ).removeClass( 'dropdown-state' );
+					} );
+				}
+
+				/*
+				 * Add events for pagination
+				 */
+				function addPaginationEventsFunction() {
+					var $projectsPagination     = $('.projects-pagination', $projectsContainer),
+						$pageNavigation         = $('.page-navigation', $projectsPagination);
+
+					if ( $projectsPagination[0] ) {
+						$( '.page-link > li span', $projectsPagination ).on( 'click', function() {
+							var $this = $(this);
+
+							if ( ! $this.parent().hasClass( 'active' ) ) {
+								$( '.page-link > li', $projectsPagination ).removeClass( 'active' );
+								$this.parent().addClass( 'active' );
+								currentPage = $this.parent().index() + 1;
+
+								getNewProjectsList( currentTermSlug, currentPage, orderSetting );
+							}
+
+						});
+
+						if ( $pageNavigation[0] ) {
+							$('.next-page', $pageNavigation ).on( 'click', function(){
+								currentPage++;
+								getNewProjectsList( currentTermSlug, currentPage, orderSetting );
+							});
+							$('.prev-page', $pageNavigation ).on( 'click', function(){
+								currentPage--;
+								getNewProjectsList( currentTermSlug, currentPage, orderSetting );
+							});
+						}
 					}
-					// update columnWidth on window resize
-					jQuery(window).on('resize.portfolio_layout_resize', function(){
+				}
+
+				/*
+				 * Waypoint event
+				 */
+				function addWaypointEvent() {
+
+					//$( '.projects-end-line-spinner' ).waypoint( function( direction ) {
+					$projectsContainer.waypoint( function( direction ) {
+
+						if ( 'down' === direction ) {
+
+							if ( currentPage < pagesCount ) {
+								currentPage++;
+								console.log( 'currentPage = ' + currentPage );
+
+								getMoreProjects( currentTermSlug, currentPage, orderSetting );
+							}
+						}
+					}, {
+						offset: 'bottom-in-view'
+					} );
+				}
+
+				/*
+				 * Add events
+				 */
+				function addEventsFunction() {
+					$( $projectsContainer ).on( 'click', '.projects-ajax-button', function() {
+
+						if ( currentPage < pagesCount ) {
+							currentPage++;
+
+							if ( currentPage == pagesCount) {
+								$( '.projects-ajax-button', $projectsContainer ).addClass('disabled').remove();
+							}
+
+							getMoreProjects( currentTermSlug, currentPage, orderSetting );
+						}
+					});
+
+
+					/*jQuery(window).on('resize.portfolio_layout_resize', function(){
 						mainResizer();
 					});*/
 				}
@@ -200,22 +272,103 @@
 						cache: false,
 						beforeSend: function() {
 							ajaxRequestSuccess = false;
-							ajaxLoader.css( { 'display': 'block' } ).fadeTo( 500, 1 );
+							$ajaxLoader.css( { 'display': 'block' } ).fadeTo( 500, 1 );
+
+							hideAnimation( 50 );
 						},
 						success: function( response ){
 							ajaxRequestSuccess = true;
-							ajaxLoader.fadeTo( 500, 0, function() { $( this ).css( { 'display': 'none' } ); } );
 
 							$projectsContainer.html( response );
+
+							pagesCount = Math.ceil( parseInt( $( '.projects-list', $projectsContainer ).data( 'all-posts-count' ) ) / parseInt( projectsSettings['post-per-page'] ) ),
+							console.log( 'pagesCount = ' + pagesCount);
+							addPaginationEventsFunction();
+
+							if ( 'lazy-loading-mode' === projectsSettings['loading-mode'] ) {
+								addWaypointEvent();
+							}
 
 							switch ( projectsSettings['list-layout'] ) {
 								case 'grid-layout':
 									gridLayoutRender();
 								break;
 								case 'masonry-layout':
-
+									masonryLayoutRender();
+								break;
+								case 'justified-layout':
+									justifiedLayoutRender();
 								break;
 							}
+
+							$projectsContainer.imagesLoaded( function() {
+								$ajaxLoader.fadeTo( 500, 0, function() { $( this ).css( { 'display': 'none' } ); } );
+
+								showAnimation( 0, 100 );
+
+								Waypoint.refreshAll();
+							} );
+
+						}
+					});
+				}
+
+				/*
+				 * Get new projects list
+				 */
+				function getMoreProjects( slug, page, order ) {
+					var data = {
+						action: 'get_more_projects',
+						settings: {
+							slug: slug,
+							page: page,
+							list_layout: projectsSettings['list-layout'],
+							loading_mode: projectsSettings['loading-mode'],
+							order_settings: order,
+							template: projectsSettings['template'],
+							posts_format: projectsSettings['posts-format']
+						}
+					}
+
+					if ( ! ajaxRequestSuccess ) {
+						return;
+					}
+
+					ajaxRequestObject = $.ajax( {
+						type: 'POST',
+						url: cherryProjectsObjects.ajax_url,
+						data: data,
+						cache: false,
+						beforeSend: function() {
+							ajaxRequestSuccess = false;
+							$ajaxMoreLoader.css( { 'display': 'block' } ).fadeTo( 500, 1 );
+						},
+						success: function( response ){
+							ajaxRequestSuccess = true;
+
+							var $projectsItemLength = $('.projects-item', $projectsContainer).length;
+
+							$('.projects-list', $projectsContainer).append( response );
+
+							switch ( projectsSettings['list-layout'] ) {
+								case 'grid-layout':
+									gridLayoutRender();
+								break;
+								case 'masonry-layout':
+									masonryLayoutRender();
+								break;
+								case 'justified-layout':
+									justifiedLayoutRender();
+								break;
+							}
+
+							$projectsContainer.imagesLoaded( function() {
+								$ajaxMoreLoader.fadeTo( 500, 0, function() { $( this ).css( { 'display': 'none' } ); } );
+
+								showAnimation( $projectsItemLength, 100 );
+
+								Waypoint.refreshAll();
+							} );
 
 						}
 					});
@@ -224,25 +377,111 @@
 				/*
 				 * Render grid layout
 				 */
-				function gridLayoutRender( response ) {
+				function gridLayoutRender() {
 					var projectsList = $('.projects-item', $projectsContainer );
 
 					projectsList.each( function( index ) {
 
 						var $this     = $( this ),
-							//itemWidth = Math.ceil( $projectsContainer.width() / +projectsSettings['column-number'] ) - Math.ceil( +projectsSettings['item-margin'] / 2 );
-							itemSpace = $projectsContainer.width() - ( ( +projectsSettings['column-number'] -1 ) * +projectsSettings['item-margin'] ),
-							itemWidth = Math.ceil( $projectsContainer.width() / +projectsSettings['column-number'] ) - ( itemSpace / ( +projectsSettings['column-number'] -1 ) );
-							console.log(itemSpace);
+							itemWidth = Math.ceil( 100 / +projectsSettings['column-number'] );
 
 						$this.css( {
 							//'width': itemWidth + 'px',
-							'-webkit-flex-basis': itemWidth + 'px',
-							'flex-basis': itemWidth + 'px',
+							'-webkit-flex-basis': itemWidth + '%',
+							'flex-basis': itemWidth + '%',
 							'margin-bottom': projectsSettings['item-margin'] + 'px'
 						} );
 
+						$('.inner-wrapper', $this ).css( {
+							'margin': Math.ceil( +projectsSettings['item-margin'] / 2 ) + 'px'
+						} );
+
 					});
+				}
+
+				/*
+				 * Masonry grid layout
+				 */
+				function masonryLayoutRender() {
+
+					var projectsListWrap = $('.projects-list', $projectsContainer ),
+						projectsList = $('.projects-item', $projectsContainer );
+
+					projectsListWrap.css( {
+						'-webkit-column-count': +projectsSettings['column-number'],
+						'column-count': +projectsSettings['column-number'],
+						'-webkit-column-gap': +projectsSettings['item-margin'],
+						'column-gap': +projectsSettings['item-margin'],
+					} );
+
+					$( '.inner-wrapper', projectsList ).css( {
+						'margin-bottom': +projectsSettings['item-margin']
+					} );
+				}
+
+				/*
+				 * Justified grid layout
+				 */
+				function justifiedLayoutRender() {
+					var projectsListWrap = $('.projects-list', $projectsContainer ),
+						projectsList = $('.projects-item', $projectsContainer );
+
+						projectsList.each( function() {
+							var $this = $(this),
+								imageWidth = $this.data( 'image-width' ),
+								imageHeight = $this.data( 'image-height' ),
+								imageRatio = +imageWidth / +imageHeight,
+								flexValue = Math.round( imageRatio * 100 ),
+								newWidth = Math.round( +projectsSettings['fixed-height'] * imageRatio ),
+								newHeight = 'auto';
+
+							$this.css( {
+								'flex-grow': flexValue,
+								'flex-basis': newWidth,
+								'max-width': imageWidth
+							} );
+
+							$('.inner-wrapper', $this ).css( {
+								'margin': Math.ceil( +projectsSettings['item-margin'] / 2 ) + 'px'
+							} );
+
+						} );
+				}
+
+				/*
+				 * Show listing animation
+				 */
+				function showAnimation( startIndex, delta ){
+					var counter = 1;
+					$( '.projects-item', $projectsContainer ).each( function() {
+						if ( $( this ).index() >= startIndex ) {
+							showProjectsItem( $( this ), delta * parseInt( counter ) );
+							counter++;
+						}
+					} );
+
+				}
+
+				function showProjectsItem( item, delay ) {
+					var timeOutInterval = setTimeout( function() {
+						item.removeClass( 'animate-cycle-show' );
+					}, delay );
+				}
+
+				/*
+				 * Hide listing animation
+				 */
+				function hideAnimation( delta ) {
+					$( '.projects-item', $projectsContainer ).each( function() {
+						hideProjectsItem( $( this ), delta * parseInt( $( this ).index() + 1 ) );
+					} )
+
+				}
+
+				function hideProjectsItem( item, delay ) {
+					var timeOutInterval = setTimeout( function() {
+						item.addClass( 'animate-cycle-hide' );
+					}, delay );
 				}
 
 			});

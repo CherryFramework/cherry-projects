@@ -72,299 +72,330 @@ class Cherry_Projects_Options_Page {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		//$this->utility = cherry_projects()->get_core()->modules['cherry-utility']->utility;
-		//var_dump($this->utility->satellite->get_terms_array( CHERRY_PROJECTS_NAME . '_category', 'slug' ));
+		$this->utility = cherry_projects()->get_core()->modules['cherry-utility']->utility;
+
 		$this->projects_options = array(
 			'projects-listing-layout' => array(
 				'type'			=> 'radio',
-				'title'			=> __( 'Projects listing layout', 'cherry-projects' ),
-				'description'	=> __( 'Choose projects listing view layout.', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Projects listing layout', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Choose projects listing view layout.', 'cherry-projects' ),
 				'value'			=> 'grid-layout',
 				'class'			=> '',
 				'display_input'	=> false,
 				'options'	=> array(
 					'grid-layout' => array(
-						'label'		=> __( 'Grid', 'cherry-projects' ),
+						'label'		=> esc_html__( 'Grid', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/list-layout-grid.svg',
+						'slave'		=> 'projects-listing-layout-grid-layout',
 					),
 					'masonry-layout' => array(
-						'label'		=> __( 'Masonry', 'cherry-projects' ),
+						'label'		=> esc_html__( 'Masonry', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/list-layout-masonry.svg',
+						'slave'		=> 'projects-listing-layout-masonry-layout',
 					),
 					'justified-layout' => array(
-						'label'		=> __( 'Justified', 'cherry-projects' ),
+						'label'		=> esc_html__( 'Justified', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/list-layout-justified.svg',
+						'slave'		=> 'projects-listing-layout-justified-layout',
 					),
 					'list-layout' => array(
-						'label'		=> __( 'List', 'cherry-projects' ),
+						'label'		=> esc_html__( 'List', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/list-layout-listing.svg',
+						'slave'		=> 'projects-listing-layout-list-layout',
 					),
 				),
 			),
 			'projects-loading-mode' => array(
 				'type'			=> 'radio',
-				'title'			=> __( 'Pagination mode', 'cherry-projects' ),
-				'description'	=> __( 'Choose projects pagination mode', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Pagination mode', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Choose projects pagination mode', 'cherry-projects' ),
 				'value'			=> 'ajax-pagination-mode',
 				'class'			=> '',
 				'display_input'	=> false,
 				'options'	=> array(
 					'ajax-pagination-mode' => array(
-						'label'		=> __( 'Ajax pagination', 'cherry-projects' ),
+						'label'		=> esc_html__( 'Ajax pagination', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/loading-mode-ajax-pagination.svg',
 					),
 					'more-button-mode' => array(
-						'label'		=> __( 'More button', 'cherry-projects' ),
+						'label'		=> esc_html__( 'More button', 'cherry-projects' ),
+						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/loading-mode-ajax-more-button.svg',
+					),
+					'lazy-loading-mode' => array(
+						'label'		=> esc_html__( 'Lazy loading', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/loading-mode-ajax-more-button.svg',
 					),
 				),
 			),
 			'projects-loading-animation' => array(
 				'type'			=> 'radio',
-				'title'			=> __( 'Loading animation', 'cherry-projects' ),
-				'description'	=> __( 'Choose posts loading animation', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Loading animation', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Choose posts loading animation', 'cherry-projects' ),
 				'value'			=> 'loading-animation-move-up',
 				'class'			=> '',
 				'display_input'	=> false,
 				'options'	=> array(
 					'loading-animation-fade' => array(
-						'label'		=> __( 'Fade animation', 'cherry-projects' ),
+						'label'		=> esc_html__( 'Fade animation', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/animation-fade.svg',
 					),
 					'loading-animation-scale' => array(
-						'label'		=> __( 'Scale animation', 'cherry-projects' ),
+						'label'		=> esc_html__( 'Scale animation', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/animation-scale.svg',
 					),
 					'loading-animation-move-up' => array(
-						'label'		=> __( 'Move Up animation', 'cherry-projects' ),
+						'label'		=> esc_html__( 'Move Up animation', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/animation-move-up.svg',
 					),
 					'loading-animation-flip' => array(
-						'label'		=> __( 'Flip animation', 'cherry-projects' ),
+						'label'		=> esc_html__( 'Flip animation', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/animation-flip.svg',
 					),
 					'loading-animation-helix' => array(
-						'label'		=> __( 'Helix animation', 'cherry-projects' ),
+						'label'		=> esc_html__( 'Helix animation', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/animation-helix.svg',
 					),
 					'loading-animation-fall-perspective' => array(
-						'label'		=> __( 'Fall perspective animation', 'cherry-projects' ),
+						'label'		=> esc_html__( 'Fall perspective animation', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/animation-fall-perspective.svg',
 					),
 				),
 			),
 			'projects-hover-animation' => array(
 				'type'			=> 'radio',
-				'title'			=> __( 'projects hover animation', 'cherry-projects' ),
-				'description'	=> __( 'Choose posts images hover animation', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Hover animation', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Choose posts images hover animation', 'cherry-projects' ),
 				'value'			=> 'simple-scale',
 				'class'			=> '',
 				'display_input'	=> false,
 				'options'	=> array(
 					'simple-fade' => array(
-						'label'		=> __( 'Fade', 'cherry-projects' ),
+						'label'		=> esc_html__( 'Fade', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/inherit.svg',
 					),
 					'simple-scale' => array(
-						'label'		=> __( 'Scale', 'cherry-projects' ),
+						'label'		=> esc_html__( 'Scale', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/inherit.svg',
 					),
 					'custom' => array(
-						'label'		=> __( 'Custom', 'cherry-projects' ),
+						'label'		=> esc_html__( 'Custom', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/inherit.svg',
 					),
 				),
 			),
 			'projects-filter-visible' => array(
 				'type'			=> 'switcher',
-				'title'			=> __( 'Filters', 'cherry-projects' ),
-				'description'	=> __( 'Enable/disable listing filters', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Filters', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Enable/disable listing filters', 'cherry-projects' ),
 				'value'			=> 'true',
 			),
 			'projects-filter-type' => array(
 				'type'			=> 'radio',
 				'title'			=> 'Filter type',
-				'description'	=> __( 'Select if you want to filter posts by tag or by category.', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Select if you want to filter posts by tag or by category.', 'cherry-projects' ),
 				'value'			=> 'category',
 				'display-input'	=> true,
 				'options'		=> array(
 					'category' => array(
-						'label' => __( 'Category', 'cherry-projects' ),
+						'label' => esc_html__( 'Category', 'cherry-projects' ),
 						'slave'		=> 'projects-filter-type-category',
 					),
 					'tag' => array(
-						'label' => __( 'Tag', 'cherry-projects' ),
+						'label' => esc_html__( 'Tag', 'cherry-projects' ),
 						'slave'		=> 'projects-filter-type-tag',
 					),
 				),
 			),
 			'projects-category-list' => array(
 				'type'			=> 'select',
-				'title'			=> __( 'Projects filter categories list', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Projects filter categories list', 'cherry-projects' ),
 				'label'			=> '',
 				'description'	=> '',
 				'multiple'		=> true,
 				'value'			=> array(),
 				'class'			=> 'cherry-multi-select',
-				//'options'		=> $this->utility->satellite->get_terms_array( CHERRY_PROJECTS_NAME . '_category', 'slug' ),
+				'options'		=> false,
+				'options_callback'	=> array( $this->utility->satellite, 'get_terms_array', array( CHERRY_PROJECTS_NAME . '_category', 'slug' ) ),
 				'master'		=> 'projects-filter-type-category',
 			),
 			'projects-tags-list' => array(
 				'type'			=> 'select',
-				'title'			=> __( 'Projects filter tags list', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Projects filter tags list', 'cherry-projects' ),
 				'label'			=> '',
 				'description'	=> '',
 				'multiple'		=> true,
 				'value'			=> array(),
 				'class'			=> 'cherry-multi-select',
-				//'options'		=> $this->utility->satellite->get_terms_array( CHERRY_PROJECTS_NAME . '_tag', 'slug' ),
+				'options'		=> false,
+				'options_callback'	=> array( $this->utility->satellite, 'get_terms_array', array( CHERRY_PROJECTS_NAME . '_tag', 'slug' ) ),
 				'master'		=> 'projects-filter-type-tag',
 			),
 			'projects-order-filter-visible' => array(
 				'type'			=> 'switcher',
-				'title'			=> __( 'Order filters', 'cherry-projects' ),
-				'description'	=> __( 'Enable/disable order filters', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Order filters', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Enable/disable order filters', 'cherry-projects' ),
 				'value'			=> 'false',
+				'toggle'		=> array(
+					'true_toggle'	=> 'On',
+					'false_toggle'	=> 'Off',
+					'true_slave'	=> 'projects-order-filter-visible-true',
+					'false_slave'	=> 'projects-order-filter-visible-false',
+				),
 			),
 			'projects-order-filter-default-value' => array(
 				'type'			=> 'radio',
-				'title'			=> __( 'Order filter default value', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Order filter default value', 'cherry-projects' ),
 				'value'			=> 'desc',
 				'display-input'	=> true,
 				'options'		=> array(
 					'desc' => array(
-						'label' => __( 'DESC', 'cherry-projects' ),
+						'label' => esc_html__( 'DESC', 'cherry-projects' ),
 					),
 					'asc' => array(
-						'label' => __( 'ASC', 'cherry-projects' ),
+						'label' => esc_html__( 'ASC', 'cherry-projects' ),
 					),
 				),
+				'master'		=> 'projects-order-filter-visible-true',
 			),
 			'projects-orderby-filter-default-value' => array(
 				'type'			=> 'radio',
-				'title'			=> __( 'Order by filter default value', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Order by filter default value', 'cherry-projects' ),
 				'value'			=> 'date',
 				'display-input'	=> true,
 				'options'		=> array(
 					'date' => array(
-						'label' => __( 'Date', 'cherry-projects' ),
+						'label' => esc_html__( 'Date', 'cherry-projects' ),
 					),
 					'name' => array(
-						'label' => __( 'Name', 'cherry-projects' ),
+						'label' => esc_html__( 'Name', 'cherry-projects' ),
 					),
 					'modified' => array(
-						'label' => __( 'Modified', 'cherry-projects' ),
+						'label' => esc_html__( 'Modified', 'cherry-projects' ),
 					),
 					'comment_count' => array(
-						'label' => __( 'Comments', 'cherry-projects' ),
+						'label' => esc_html__( 'Comments', 'cherry-projects' ),
 					),
 				),
+				'master'		=> 'projects-order-filter-visible-true',
 			),
 			'projects-posts-format' => array(
 				'type'			=> 'radio',
-				'title'			=> __( 'Post Format', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Post Format', 'cherry-projects' ),
 				'value'			=> 'post-format-all',
 				'display-input'	=> true,
 				'options'		=> array(
 					'post-format-all' => array(
-						'label' => __( 'All formats', 'cherry-projects' ),
+						'label' => esc_html__( 'All formats', 'cherry-projects' ),
 					),
 					'post-format-standard' => array(
-						'label' => __( 'Standard', 'cherry-projects' ),
+						'label' => esc_html__( 'Standard', 'cherry-projects' ),
 					),
 					'post-format-image' => array(
-						'label' => __( 'Image', 'cherry-projects' ),
+						'label' => esc_html__( 'Image', 'cherry-projects' ),
 					),
 					'post-format-gallery' => array(
-						'label' => __( 'Gallery', 'cherry-projects' ),
+						'label' => esc_html__( 'Gallery', 'cherry-projects' ),
 					),
 					'post-format-audio' => array(
-						'label' => __( 'Audio', 'cherry-projects' ),
+						'label' => esc_html__( 'Audio', 'cherry-projects' ),
 					),
 					'post-format-video' => array(
-						'label' => __( 'Video', 'cherry-projects' ),
+						'label' => esc_html__( 'Video', 'cherry-projects' ),
 					),
 				),
 			),
 			'projects-column-number' => array(
 				'type'			=> 'slider',
-				'title'			=> __( 'Column number', 'cherry-projects' ),
-				'description'	=> __( 'Select number of columns for masonry and grid projects layouts. (Min 2, max 20)', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Column number', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Select number of columns for masonry and grid projects layouts. (Min 2, max 20)', 'cherry-projects' ),
 				'max_value'		=> 10,
 				'min_value'		=> 2,
 				'value'			=> 3,
 			),
 			'projects-post-per-page' => array(
 				'type'			=> 'slider',
-				'title'			=> __( 'Posts per page', 'cherry-projects' ),
-				'description'	=> __( 'Select how many posts per page do you want to display', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Posts per page', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Select how many posts per page do you want to display', 'cherry-projects' ),
 				'max_value'		=> 50,
 				'min_value'		=> -1,
 				'value'			=> 9,
 			),
 			'projects-item-margin' => array(
 				'type'			=> 'slider',
-				'title'			=> __( 'Item margin', 'cherry-projects' ),
-				'description'	=> __( 'Select projects item margin (outer indent) value.', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Item margin', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Select projects item margin (outer indent) value.', 'cherry-projects' ),
 				'max_value'		=> 100,
 				'min_value'		=> 0,
 				'value'			=> 4,
 			),
 			'projects-justified-fixed-height' => array(
 				'type'			=> 'slider',
-				'title'			=> __( 'Justified fixed height', 'cherry-projects' ),
-				'description'	=> __( 'Select projects item justified height value.', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Justified fixed height', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Select projects item justified height value.', 'cherry-projects' ),
 				'max_value'		=> 1000,
 				'min_value'		=> 50,
 				'value'			=> 300,
+				'master'		=> 'projects-listing-layout-justified-layout',
 			),
 			'projects-is-crop-image' => array(
 				'type'			=> 'switcher',
-				'title'			=> __( 'Crop image', 'cherry-projects' ),
-				'description'	=> __( 'Choose if you want to activate images crop.', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Crop image', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Choose if you want to activate images crop.', 'cherry-projects' ),
 				'value'			=> 'false',
+				'toggle'		=> array(
+					'true_toggle'	=> 'On',
+					'false_toggle'	=> 'Off',
+					'true_slave'	=> 'projects-is-crop-image-true',
+					'false_slave'	=> 'projects-is-crop-image-false',
+				),
 			),
 			'projects-crop-image-width' => array(
 				'type'			=> 'stepper',
-				'title'			=> __( 'Cropped image width', 'cherry-projects' ),
-				'description'	=> __( 'Set width of the cropped image.', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Cropped image width', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Set width of the cropped image.', 'cherry-projects' ),
 				'value'			=> '500',
 				'value_step'	=> '1',
 				'max_value'		=> '9999',
 				'min_value'		=> '10',
+				'master'		=> 'projects-is-crop-image-true',
 			),
 			'projects-crop-image-height' => array(
 				'type'			=> 'stepper',
-				'title'			=> __( 'Cropped image height', 'cherry-projects' ),
-				'description'	=> __( 'Set height of the cropped image.', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Cropped image height', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Set height of the cropped image.', 'cherry-projects' ),
 				'value'			=> '350',
 				'value_step'	=> '1',
 				'max_value'		=> '9999',
 				'min_value'		=> '10',
-			),
-			'projects-masonry-template' => array(
-				'type'			=> 'text',
-				'title'			=> __( 'Masonry template', 'cherry-projects' ),
-				'description'	=> __( 'Masonry content template', 'cherry-projects' ),
-				'value'			=> 'masonry-default.tmpl',
+				'master'		=> 'projects-is-crop-image-true',
 			),
 			'projects-grid-template' => array(
 				'type'			=> 'text',
-				'title'			=> __( 'Grid template', 'cherry-projects' ),
-				'description'	=> __( 'Grid content template', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Grid template', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Grid content template', 'cherry-projects' ),
 				'value'			=> 'grid-default.tmpl',
+				'master'		=> 'projects-listing-layout-grid-layout',
+			),
+			'projects-masonry-template' => array(
+				'type'			=> 'text',
+				'title'			=> esc_html__( 'Masonry template', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Masonry content template', 'cherry-projects' ),
+				'value'			=> 'masonry-default.tmpl',
+				'master'		=> 'projects-listing-layout-masonry-layout',
 			),
 			'projects-justified-template' => array(
 				'type'			=> 'text',
-				'title'			=> __( 'Justified template', 'cherry-projects' ),
-				'description'	=> __( 'Justified content template', 'cherry-projects' ),
+				'title'			=> esc_html__( 'Justified template', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Justified content template', 'cherry-projects' ),
 				'value'			=> 'justified-default.tmpl',
+				'master'		=> 'projects-listing-layout-justified-layout',
 			),
 			'projects-list-template' => array(
 				'type'			=> 'text',
-				'title'			=> __( 'List template', 'cherry-projects' ),
-				'description'	=> __( 'List content template', 'cherry-projects' ),
+				'title'			=> esc_html__( 'List template', 'cherry-projects' ),
+				'description'	=> esc_html__( 'List content template', 'cherry-projects' ),
 				'value'			=> 'list-default.tmpl',
+				'master'		=> 'projects-listing-layout-list-layout',
 			),
 		);
 
@@ -419,8 +450,8 @@ class Cherry_Projects_Options_Page {
 	 */
 	public function render_page() {
 		add_menu_page(
-			__( 'Projects Options', 'cherry-projects' ),
-			__( 'Projects Options', 'cherry-projects' ),
+			esc_html__( 'Projects Options', 'cherry-projects' ),
+			esc_html__( 'Projects Options', 'cherry-projects' ),
 			'edit_theme_options',
 			'cherry-projects-options',
 			array( $this, 'projects_options_page' ),
@@ -461,9 +492,9 @@ class Cherry_Projects_Options_Page {
 		$elements = array(
 			'ui-settings' => array(),
 			'labels'		=> array(
-				'save-button-text' => __( 'Save', 'cherry-projects' ),
-				'define-as-button-text' => __( 'Define as default', 'cherry-projects' ),
-				'restore-button-text' => __( 'Restore', 'cherry-projects' ),
+				'save-button-text' => esc_html__( 'Save', 'cherry-projects' ),
+				'define-as-button-text' => esc_html__( 'Define as default', 'cherry-projects' ),
+				'restore-button-text' => esc_html__( 'Restore', 'cherry-projects' ),
 			),
 		);
 
@@ -473,7 +504,9 @@ class Cherry_Projects_Options_Page {
 			$value = ( false !== $value ) ? $value : Cherry_Toolkit::get_arg( $field, 'value', '' );
 
 			if ( isset( $field['options_callback'] ) ) {
-				$options = call_user_func( $field['options_callback'] );
+
+				$callback = $this->get_callback_data( $field['options_callback'] );
+				$options  = call_user_func_array( $callback['callback'], $callback['args'] );
 			} else {
 				$options = Cherry_Toolkit::get_arg( $field, 'options', array() );
 			}
@@ -507,18 +540,47 @@ class Cherry_Projects_Options_Page {
 					'false_slave'  => '',
 				) ),
 				'required'           => Cherry_Toolkit::get_arg( $field, 'required', false ),
+				'master'             => Cherry_Toolkit::get_arg( $field, 'master', '' ),
 			);
 
 			$current_element = $this->ui_builder->get_ui_element_instance( $args['type'], $args );
 			$elements['ui-settings'][] = array(
 				'title'			=> Cherry_Toolkit::get_arg( $field, 'title', '' ),
 				'description'	=> Cherry_Toolkit::get_arg( $field, 'description', '' ),
+				'master'		=> Cherry_Toolkit::get_arg( $field, 'master', '' ),
 				'ui-html'		=> $current_element->render(),
 			);
 
 		}
 
 		return $elements;
+	}
+
+	/**
+	 * Parse callback data.
+	 *
+	 * @since  1.0.0
+	 * @param  array $options_callback Callback data.
+	 * @return array
+	 */
+	public function get_callback_data( $options_callback ) {
+
+		if ( 2 === count( $options_callback ) ) {
+
+			$callback = array(
+				'callback' => $options_callback,
+				'args'     => array(),
+			);
+
+			return $callback;
+		}
+
+		$callback = array(
+			'callback' => array_slice( $options_callback, 0, 2 ),
+			'args'     => $options_callback[2],
+		);
+
+		return $callback;
 	}
 
 	/**
@@ -541,7 +603,7 @@ class Cherry_Projects_Options_Page {
 					case 'save':
 						cherry_projects()->save_options( OPTIONS_NAME, $post_array );
 						$response = array(
-							'message'	=> __( 'Options have been saved', 'cherry-projects' ),
+							'message'	=> esc_html__( 'Options have been saved', 'cherry-projects' ),
 							'type'		=> 'success-notice'
 						);
 
@@ -549,7 +611,7 @@ class Cherry_Projects_Options_Page {
 					case 'define_as_default':
 						cherry_projects()->save_options( OPTIONS_NAME . '_default', $post_array );
 						$response = array(
-							'message'	=> __( 'Settings have been define as default', 'cherry-projects' ),
+							'message'	=> esc_html__( 'Settings have been define as default', 'cherry-projects' ),
 							'type'		=> 'success-notice'
 						);
 
@@ -559,7 +621,7 @@ class Cherry_Projects_Options_Page {
 						cherry_projects()->save_options( OPTIONS_NAME, $default_options );
 
 						$response = array(
-							'message'	=> __( 'Settings have been restored', 'cherry-projects' ),
+							'message'	=> esc_html__( 'Settings have been restored', 'cherry-projects' ),
 							'type'		=> 'success-notice'
 						);
 
@@ -596,7 +658,7 @@ class Cherry_Projects_Options_Page {
 			wp_enqueue_script( 'cherry-projects-admin-scripts', trailingslashit( CHERRY_PROJECTS_URI ) . 'admin/assets/js/cherry-projects-admin-scripts.js', array( 'jquery', 'cherry-js-core' ), CHERRY_PROJECTS_VERSION, true );
 
 			$options_page_settings = array(
-				'please_wait_processing'	=> __( 'Please wait, processing the previous request', 'cherry-projects' ),
+				'please_wait_processing'	=> esc_html__( 'Please wait, processing the previous request', 'cherry-projects' ),
 				'redirect_url'				=> menu_page_url( 'cherry-projects-options', false ),
 			);
 

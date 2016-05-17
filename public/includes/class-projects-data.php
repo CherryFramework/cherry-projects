@@ -38,6 +38,13 @@ class Cherry_Project_Data {
 	private $posts_query = null;
 
 	/**
+	 * Cherry utility init
+	 *
+	 * @var null
+	 */
+	public $cherry_utility = null;
+
+	/**
 	 * Sets up our actions/filters.
 	 *
 	 * @since 1.0.0
@@ -46,6 +53,9 @@ class Cherry_Project_Data {
 
 		add_action( 'wp_ajax_get_new_projects', array( $this, 'get_new_projects' ) );
 		add_action( 'wp_ajax_nopriv_get_new_projects', array( $this, 'get_new_projects' ) );
+
+		add_action( 'wp_ajax_get_more_projects', array( $this, 'get_more_projects' ) );
+		add_action( 'wp_ajax_nopriv_get_more_projects', array( $this, 'get_more_projects' ) );
 
 		$this->default_options = array(
 			'projects-listing-layout'				=> cherry_projects()->get_option( 'projects-listing-layout', 'masonry-layout' ),
@@ -81,6 +91,8 @@ class Cherry_Project_Data {
 		 * @param array The 'the_portfolio_items' function argument.
 		 */
 		$this->default_options = apply_filters( 'cherry_projects_default_options', $this->default_options );
+
+		$this->cherry_utility = cherry_projects()->get_core()->modules['cherry-utility']->utility;
 	}
 
 	/**
@@ -134,12 +146,12 @@ class Cherry_Project_Data {
 					$html .= $this->render_ajax_filter( array() );
 				}
 
-				$container_class = 'projects-container ' . $this->options['projects-listing-layout'] . ' ' . $this->options['projects-loading-mode'];
+				$container_class = 'projects-container ' . $this->options['projects-listing-layout'] . ' ' . $this->options['projects-loading-mode'] . ' ' . $this->options['projects-loading-animation'];
 
 				$html .= sprintf( '<div class="%1$s" data-settings=\'%2$s\'>', $container_class, $settings );
 					$html .= '<div class="projects-list" data-all-posts-count="' . $this->posts_query->found_posts . '"></div>';
 				$html .= '</div>';
-
+				$html .= '<div class="projects-end-line-spinner"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>';
 			// Close wrapper.
 			$html .= '</div>';
 
@@ -173,6 +185,60 @@ class Cherry_Project_Data {
 			$html = '<div class="projects-list" data-all-posts-count="' . $posts_query->found_posts . '">';
 				$html .= $this->render_projects_items( $posts_query, $settings );
 			$html .= '</div>';
+
+			$page_count = intval( ceil( $this->posts_query->found_posts / intval( $this->default_options['projects-post-per-page'] ) ) );
+
+			switch ( $settings['loading_mode'] ) {
+				case 'ajax-pagination-mode':
+						$html .= $this->render_ajax_pagination( $posts_query->query_vars['paged'], $page_count );
+					break;
+				case 'more-button-mode':
+					/**
+					 * Filter more button text
+					 *
+					 * @since 1.0.0
+					 */
+					$button_text = apply_filters( 'cherry-projects-more-buttom-text', esc_html__( 'Load more', 'cherry-projects' ) );
+
+					if ( $page_count > 1 ) {
+						$html .= '<div class="projects-ajax-button-wrapper">';
+							$html .= '<div class="projects-ajax-button"><span>' . $button_text . '</span></div>';
+						$html .= '</div>';
+					}
+
+					break;
+			}
+
+			echo $html;
+
+			exit();
+		}
+	}
+
+	/**
+	 * Ajax new projects list hook
+	 *
+	 * @return void
+	 */
+	public function get_more_projects() {
+
+		if ( ! empty( $_POST ) && array_key_exists( 'settings', $_POST ) ) {
+
+			$settings = $_POST['settings'];
+
+			$term_type = ( 'category' == $this->default_options['projects-filter-type'] ) ? CHERRY_PROJECTS_NAME . '_category' : CHERRY_PROJECTS_NAME . '_tag';
+			$query_args = array(
+				$term_type       => $settings['slug'],
+				'posts_per_page' => $this->default_options['projects-post-per-page'],
+				'order'          => $settings['order_settings']['order'],
+				'orderby'        => $settings['order_settings']['orderby'],
+				'paged'          => intval( $settings['page'] ),
+			);
+
+			// The Query.
+			$posts_query = $this->get_query_projects_items( $query_args );
+
+			$html = $this->render_projects_items( $posts_query, $settings );
 
 			echo $html;
 
@@ -226,38 +292,52 @@ class Cherry_Project_Data {
 	 * @return string
 	 */
 	public function render_projects_items( $posts_query, $settings = array() ) {
-		$count = 1;
-		$html = '';
-
-		$utility = cherry_projects()->get_core()->modules['cherry-utility']->utility;
 
 		if ( $posts_query->have_posts() ) {
+			$count = 1;
+			$html = '';
+
+			// Item template.
+			$template = $this->get_template_by_name( $settings['template'], 'projects' );
+
+			$macros    = '/%%([a-zA-Z]+[^%]{2})(=[\'\"]([a-zA-Z0-9-_\s]+)[\'\"])?%%/';
+			$callbacks = $this->setup_template_data( $settings );
 
 			while ( $posts_query->have_posts() ) : $posts_query->the_post();
-				$post_id      = $posts_query->post->ID;
-				$title        = get_the_title( $post_id );
+				$post_id  = $posts_query->post->ID;
+				$thumb_id = get_post_thumbnail_id();
 
-				$image = $utility->media->get_image( array(
-					'size'	=> 'large',
-				) );
+				$template_content = preg_replace_callback( $macros, array( $this, 'replace_callback' ), $template );
 
-				$html .= sprintf( '<div %1$s class="%2$s %3$s %4$s %5$s %6$s">',
+				$justified_attrs = '';
+				if ( 'justified-layout' === $settings['list_layout'] ) {
+					if ( has_post_thumbnail( $post_id ) ) {
+						$attachment_image_src = wp_get_attachment_image_src( $thumb_id, 'large' );
+						$justified_attrs = sprintf('data-image-width="%1$s" data-image-height="%2$s"', $attachment_image_src[1], $attachment_image_src[2] );
+					}
+				}
+
+				$html .= sprintf( '<div %1$s class="%2$s %3$s %4$s %5$s %6$s %7$s" %8$s>',
 					'id="quote-' . $post_id .'"',
 					'projects-item',
 					'item-' . $count,
 					( ( $count++ % 2 ) ? 'odd' : 'even' ),
 					'animate-cycle-show',
 					$this->default_options['projects-listing-layout'] . '-item',
-					$this->default_options['projects-hover-animation'] . '-hover'
+					$this->default_options['projects-hover-animation'] . '-hover',
+					$justified_attrs
 				);
 					$html .= '<div class="inner-wrapper">';
-						$html .= $image;
+
+						$html .= $template_content;
+
 					$html .= '</div>';
 				$html .= '</div>';
 
+				$callbacks->clear_data();
 			endwhile;
 		} else {
-			echo '<h4>' . __( 'Posts not found', 'cherry-projects' ) . '</h4>';
+			echo '<h4>' . esc_html__( 'Posts not found', 'cherry-projects' ) . '</h4>';
 		}
 
 		// Reset the query.
@@ -285,14 +365,14 @@ class Cherry_Project_Data {
 			'pad_counts'	=> false,
 		);
 		$order_array = array(
-			'desc'			=> __( 'Desc', 'cherry-projects' ),
-			'asc'			=> __( 'Asc', 'cherry-projects' ),
+			'desc'			=> esc_html__( 'Desc', 'cherry-projects' ),
+			'asc'			=> esc_html__( 'Asc', 'cherry-projects' ),
 		);
 		$order_by_array = array(
-			'date'			=> __( 'Date', 'cherry-projects' ),
-			'name'			=> __( 'Name', 'cherry-projects' ),
-			'modified'		=> __( 'Modified', 'cherry-projects' ),
-			'comment_count'	=> __( 'Comments', 'cherry-projects' ),
+			'date'			=> esc_html__( 'Date', 'cherry-projects' ),
+			'name'			=> esc_html__( 'Name', 'cherry-projects' ),
+			'modified'		=> esc_html__( 'Modified', 'cherry-projects' ),
+			'comment_count'	=> esc_html__( 'Comments', 'cherry-projects' ),
 		);
 
 		$terms = get_categories( $args );
@@ -311,7 +391,7 @@ class Cherry_Project_Data {
 				$html .= '<ul class="projects-filters-list filter-' . $this->options['projects-filter-type'] . '">';
 
 				if ( $terms ) {
-					$show_all_text = apply_filters( 'cherry_projects_show_all_text', __( 'Show all', 'cherry-projects' ) );
+					$show_all_text = apply_filters( 'cherry_projects_show_all_text', esc_html__( 'Show all', 'cherry-projects' ) );
 					$html .= '<li class="active"><span data-cat-id="" data-slug="">'. $show_all_text .'</span></li>';
 
 					foreach ( $terms as $term ) {
@@ -334,24 +414,16 @@ class Cherry_Project_Data {
 			if ( 'true' == $this->options['projects-order-filter-visible'] ) {
 				$html .= '<div class="projects-order-filters-wrapper">';
 					$html .= '<ul class="order-filters">';
-						$html .= '<li data-filter-type="order" data-desc-label="' . __( 'Desc', 'cherry-projects' ) . '" data-asc-label="' . __( 'Asc', 'cherry-projects' ) . '">';
+						$html .= '<li data-filter-type="order" data-desc-label="' . esc_html__( 'Desc', 'cherry-projects' ) . '" data-asc-label="' . esc_html__( 'Asc', 'cherry-projects' ) . '">';
 
 							/**
 							 * Filter order label text
 							 *
 							 * @since 1.0.0
 							 */
-							$html .= apply_filters( 'cherry-projects-order-filter-label', __( 'Order:', 'cherry-projects' ) );
+							$html .= apply_filters( 'cherry-projects-order-filter-label', esc_html__( 'Order:', 'cherry-projects' ) );
 
 							$html .= '<span class="current">' . $order_array[ $this->options['projects-order-filter-default-value'] ] . '</span>';
-							/*$html .= '<ul class="order-list">';
-
-								foreach ( $order_array as $key => $value ) {
-									$class = ( $key == $this->options['projects-order-filter-default-value'] ) ? 'class="active"' : '';
-									$html .= '<li data-orderby="' . $key . '" ' . $class . '><span>' . $value . '</span></li>';
-								}
-
-							$html .= '</ul>';*/
 
 						$html .= '</li>';
 						$html .= '<li data-filter-type="orderby">';
@@ -361,7 +433,7 @@ class Cherry_Project_Data {
 							 *
 							 * @since 1.0.0
 							 */
-							$html .= apply_filters( 'cherry-projects-orderby-filter-label', __( 'Order by:', 'cherry-projects' ) );
+							$html .= apply_filters( 'cherry-projects-orderby-filter-label', esc_html__( 'Order by:', 'cherry-projects' ) );
 
 							$html .= '<span class="current">' . $order_by_array[ $this->options['projects-orderby-filter-default-value'] ] . '</span>';
 								$html .= '<ul class="orderby-list">';
@@ -382,6 +454,212 @@ class Cherry_Project_Data {
 	}
 
 
+	/**
+	 * Get ajax pagination fot list items.
+	 *
+	 * @since  1.0.0
+	 * @param  int $current_page_index Current page index.
+	 * @param  int $post_per_page      Post per page value.
+	 * @return string HTML-formatted.
+	 */
+	public function render_ajax_pagination( $current_page_index = 1, $page_count = -1 ) {
+
+		if ( -1 == $page_count || 1 == $page_count ) {
+			return '';
+		}
+
+		$html = '<div class="projects-pagination with-ajax">';
+			$html .= '<ul class="page-link">';
+				for ( $i = 0; $i < $page_count; $i++ ) {
+					$counter = $i + 1;
+
+					/**
+					 * Filters HTML-formatted before pagination item text.
+					 *
+					 * @since 1.0.5
+					 * @var string
+					 */
+					$before_pagination_item = apply_filters( 'cherry-projects-before-pagination-item', '', $counter );
+
+					/**
+					 * Filters HTML-formatted after pagination item text.
+					 *
+					 * @since 1.0.5
+					 * @var string
+					 */
+					$after_pagination_item = apply_filters( 'cherry-projects-after-pagination-item', '', $counter );
+
+					$class = ( $i == $current_page_index - 1 ) ? ' class="active"' : '' ;
+
+					$html .= sprintf( '<li%4$s>%1$s<span>%2$s</span>%3$s</li>', $before_pagination_item, $counter, $after_pagination_item, $class );
+				}
+			$html .= '</ul>';
+			$html .= '<div class="page-navigation">';
+
+				/**
+				 * Filters HTML-formatted prev-button text.
+				 *
+				 * @since 1.0.0
+				 * @var string
+				 */
+				$prev_button_text = apply_filters( 'cherry-projects-prev-button-text', esc_html__( 'Prev', 'cherry-projects' ) );
+
+				/**
+				 * Filters HTML-formatted next-button text.
+				 *
+				 * @since 1.0.0
+				 * @var string
+				 */
+				$next_button_text = apply_filters( 'cherry-projects-next-button-text', esc_html__( 'Next', 'cherry-projects' ) );
+
+				if ( 1 !== $current_page_index ) {
+					$html .= '<span class="prev-page">' . $prev_button_text . '</span>';
+				}
+
+				if ( $current_page_index < $page_count ) {
+					$html .= '<span class="next-page">' . $next_button_text . '</span>';
+				}
+			$html .= '</div>';
+		$html .= '</div>';
+
+
+		return $html;
+	}
+
+	/**
+	 * Prepare template data to replace.
+	 *
+	 * @since 1.0.2
+	 * @param array $atts Output attributes.
+	 */
+	function setup_template_data( $atts ) {
+		require_once( CHERRY_PROJECTS_DIR . 'public/includes/class-cherry-projects-template-callbacks.php' );
+
+		$callbacks = new Cherry_Projects_Template_Callbacks( $atts );
+
+		$data = array(
+			'title'    => array( $callbacks, 'get_title' ),
+			'image'    => array( $callbacks, 'get_image' ),
+			'content'  => array( $callbacks, 'get_content' ),
+		);
+
+		/**
+		 * Filters item data.
+		 *
+		 * @since 1.0.2
+		 * @param array $data Item data.
+		 * @param array $atts Attributes.
+		 */
+		$this->post_data = apply_filters( 'cherry_projects_data_callbacks', $data, $atts );
+
+		return $callbacks;
+	}
+
+	/**
+	 * Read template (static).
+	 *
+	 * @since  1.0.0
+	 * @return bool|WP_Error|string - false on failure, stored text on success.
+	 */
+	public static function get_contents( $template ) {
+
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			include_once( ABSPATH . '/wp-admin/includes/file.php' );
+		}
+
+		WP_Filesystem();
+		global $wp_filesystem;
+
+		// Check for existence.
+		if ( ! $wp_filesystem->exists( $template ) ) {
+			return false;
+		}
+
+		// Read the file.
+		$content = $wp_filesystem->get_contents( $template );
+
+		if ( ! $content ) {
+			// Return error object.
+			return new WP_Error( 'reading_error', 'Error when reading file' );
+		}
+
+		return $content;
+	}
+
+	/**
+	 * Retrieve a *.tmpl file content.
+	 *
+	 * @since  1.0.0
+	 * @param  string $template  File name.
+	 * @param  string $shortcode Shortcode name.
+	 * @return string
+	 */
+	public function get_template_by_name( $template, $shortcode ) {
+		$file       = '';
+		$default    = CHERRY_PROJECTS_DIR . 'templates/shortcodes/' . $shortcode . '/default.tmpl';
+		$upload_dir = wp_upload_dir();
+		$upload_dir = trailingslashit( $upload_dir['basedir'] );
+		$subdir     = 'templates/shortcodes/' . $shortcode . '/' . $template;
+
+		/**
+		 * Filters a default fallback-template.
+		 *
+		 * @since 1.0.0
+		 * @param string $content.
+		 */
+		$content = apply_filters( 'cherry_projects_fallback_template', '<div class="inner-wrapper">%%title%%%%image%%%%content%%</div>' );
+
+		if ( file_exists( $upload_dir . $subdir ) ) {
+			$file = $upload_dir . $subdir;
+		} elseif ( file_exists( CHERRY_PROJECTS_DIR . $subdir ) ) {
+			$file = CHERRY_PROJECTS_DIR . $subdir;
+		} else {
+			$file = $default;
+		}
+
+		if ( ! empty( $file ) ) {
+			$content = self::get_contents( $file );
+		}
+
+		return $content;
+	}
+
+	/**
+	 * Callback to replace macros with data.
+	 *
+	 * @since 1.0.0
+	 * @param array $matches Founded macros.
+	 */
+	public function replace_callback( $matches ) {
+
+		if ( ! is_array( $matches ) ) {
+			return;
+		}
+
+		if ( empty( $matches ) ) {
+			return;
+		}
+
+		$key = strtolower( $matches[1] );
+
+		// If key not found in data - return nothing.
+		if ( ! isset( $this->post_data[ $key ] ) ) {
+			return;
+		}
+
+		$callback = $this->post_data[ $key ];
+
+		if ( ! is_callable( $callback ) ) {
+			return;
+		}
+
+		// If found parameters and has correct callback - process it.
+		if ( isset( $matches[3] ) ) {
+			return call_user_func( $callback, $matches[3] );
+		}
+
+		return call_user_func( $callback );
+	}
 
 	/**
 	 * Register and enqueue public-facing style sheet.
@@ -409,6 +687,8 @@ class Cherry_Project_Data {
 
 		*/
 
+		wp_enqueue_script( 'waypoints', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.waypoints.min.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
+		wp_enqueue_script( 'imagesloaded', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 		wp_enqueue_script( 'cherry-projects-plugin', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-plugin.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 		wp_enqueue_script( 'cherry-projects-scripts', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-scripts.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 
