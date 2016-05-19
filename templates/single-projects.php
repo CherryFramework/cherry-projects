@@ -1,30 +1,43 @@
 <?php
 /**
- * The Template for displaying single CPT Projects.
+ * Template Name: Projects
  *
+ * The template for displaying CPT Projects.
+ *
+ * @package Cherry_Projects
+ * @since   1.0.0
  */
 
-while ( have_posts() ) :
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
-		the_post(); ?>
+get_header( 'cherry_products' );
 
-		<article <?php if ( function_exists( 'cherry_attr' ) ) cherry_attr( 'post' ); ?>>
-			<h2> archive-projects </h2>
-		<?php
+do_action( 'cherry_projects_before_main_content' );
 
-			//do_action( 'cherry_entry_before' );
+if ( have_posts() ) :
 
-			//$data = new Cherry_Portfolio_Data;
-			//$data->portfolio_single_data();
+	while ( have_posts() ) :
 
-			?>
+			the_post(); ?>
 
-		</article>
+			<section>
+				<h2> Cherry Projects </h2>
+				<?php
+					the_content();
 
-		<?php
+					//cherry_projects()->projects_data->render_projects();
+				?>
 
-		//do_action( 'cherry_entry_after' );
+			</section>
 
-		?>
+	<?php endwhile;
 
-<?php endwhile; ?>
+endif;
+
+do_action( 'cherry_projects_after_main_content' );
+
+get_footer( 'cherry_products' );
+
+?>

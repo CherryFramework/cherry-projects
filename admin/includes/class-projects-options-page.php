@@ -98,6 +98,11 @@ class Cherry_Projects_Options_Page {
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/list-layout-justified.svg',
 						'slave'		=> 'projects-listing-layout-justified-layout',
 					),
+					'cascading-grid-layout' => array(
+						'label'		=> esc_html__( 'Cascading grid', 'cherry-projects' ),
+						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/list-layout-listing.svg',
+						'slave'		=> 'projects-listing-layout-cascading-grid-layout',
+					),
 					'list-layout' => array(
 						'label'		=> esc_html__( 'List', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/list-layout-listing.svg',
@@ -358,6 +363,13 @@ class Cherry_Projects_Options_Page {
 				'value'			=> 'justified-default.tmpl',
 				'master'		=> 'projects-listing-layout-justified-layout',
 			),
+			'projects-cascading-grid-template' => array(
+				'type'			=> 'text',
+				'title'			=> esc_html__( 'Cascading grid template', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Cascading grid template', 'cherry-projects' ),
+				'value'			=> 'cascading-grid-default.tmpl',
+				'master'		=> 'projects-listing-layout-cascading-grid-layout',
+			),
 			'projects-list-template' => array(
 				'type'			=> 'text',
 				'title'			=> esc_html__( 'List template', 'cherry-projects' ),
@@ -370,6 +382,11 @@ class Cherry_Projects_Options_Page {
 		add_filter( 'cherry_core_js_ui_init_settings', array( $this, 'init_ui_js' ), 10 );
 
 		array_walk( $this->projects_options, array( $this, 'set_field_types' ) );
+
+		if ( in_array( 'slider', $this->field_types ) ) {
+			$this->field_types[] = 'stepper';
+		}
+
 
 		$this->ui_builder = cherry_projects()->get_core()->init_module( 'cherry-ui-elements', array( 'ui_elements' => $this->field_types ) );
 

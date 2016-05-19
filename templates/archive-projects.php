@@ -12,16 +12,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-get_header( 'cherry_products' );?>
+get_header( 'cherry_products' );
 
-<article>
-	<h2> archive-projectss </h2>
-	<?php
+do_action( 'cherry_projects_before_main_content' );
 
-		//$projects_data = new Cherry_Project_Data;
-		//$projects_data->render_projects();
-	?>
+if ( have_posts() ) :
 
-</article>
+	while ( have_posts() ) :
 
-<?php get_footer( 'cherry_products' ); ?>
+			the_post(); ?>
+
+			<section>
+				<h2> Cherry Projects </h2>
+				<?php
+					the_content();
+
+					//cherry_projects()->projects_data->render_projects();
+				?>
+
+			</section>
+
+	<?php endwhile;
+
+endif;
+
+do_action( 'cherry_projects_after_main_content' );
+
+get_footer( 'cherry_products' );
+
+?>

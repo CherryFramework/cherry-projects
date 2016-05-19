@@ -260,7 +260,7 @@ class Cherry_Projects_Template_Callbacks {
 		$settings = array(
 			'visible'	=> 'true',
 			'icon'		=> '',
-			'prefix'	=> '',
+			'prefix'	=> esc_html__( 'Posted by ', 'cherry-projects' ),
 			'html'		=> '%1$s<a href="%2$s" %3$s %4$s rel="author">%5$s%6$s</a>',
 			'title'		=> '',
 			'class'		=> 'post-author',

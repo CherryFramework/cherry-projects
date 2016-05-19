@@ -77,6 +77,7 @@ class Cherry_Project_Data {
 			'projects-masonry-template'				=> cherry_projects()->get_option( 'projects-masonry-template', 'masonry-default.tmpl' ),
 			'projects-grid-template'				=> cherry_projects()->get_option( 'projects-grid-template', 'grid-default.tmpl' ),
 			'projects-justified-template'			=> cherry_projects()->get_option( 'projects-justified-template', 'justified-default.tmpl' ),
+			'projects-cascading-grid-template'		=> cherry_projects()->get_option( 'projects-cascading-grid-template', 'cascading-grid-default.tmpl' ),
 			'projects-list-template'				=> cherry_projects()->get_option( 'projects-list-template', 'list-default.tmpl' ),
 		);
 
@@ -108,7 +109,6 @@ class Cherry_Project_Data {
 		$posts_query = $this->get_query_projects_items( array() );
 
 		if ( ! is_wp_error( $posts_query ) ) {
-
 			switch ( $this->options['projects-listing-layout'] ) {
 				case 'masonry-layout':
 					$template = $this->options['projects-masonry-template'];
@@ -118,6 +118,9 @@ class Cherry_Project_Data {
 					break;
 				case 'justified-layout':
 					$template = $this->options['projects-justified-template'];
+					break;
+				case 'cascading-grid-layout':
+					$template = $this->options['projects-cascading-grid-template'];
 					break;
 				case 'list-layout':
 					$template = $this->options['projects-list-template'];
@@ -297,7 +300,6 @@ class Cherry_Project_Data {
 			// Item template.
 			$template = $this->get_template_by_name( $settings['template'], 'projects' );
 
-			//$macros    = '/%%([a-zA-Z]+[^%]{2})(=[\'\"]([a-zA-Z0-9-_\s]+)[\'\"])?%%/';
 			$macros    = '/%%.+?%%/';
 			$callbacks = $this->setup_template_data( $settings );
 
@@ -307,11 +309,11 @@ class Cherry_Project_Data {
 
 				$template_content = preg_replace_callback( $macros, array( $this, 'replace_callback' ), $template );
 
-				$justified_attrs = '';
-				if ( 'justified-layout' === $settings['list_layout'] ) {
+				$data_attrs = '';
+				if ( 'justified-layout' === $settings['list_layout'] || 'cascading-grid-layout' === $settings['list_layout']  ) {
 					if ( has_post_thumbnail( $post_id ) ) {
 						$attachment_image_src = wp_get_attachment_image_src( $thumb_id, 'large' );
-						$justified_attrs = sprintf('data-image-width="%1$s" data-image-height="%2$s"', $attachment_image_src[1], $attachment_image_src[2] );
+						$data_attrs = sprintf('data-image-width="%1$s" data-image-height="%2$s"', $attachment_image_src[1], $attachment_image_src[2] );
 					}
 				}
 
@@ -323,7 +325,7 @@ class Cherry_Project_Data {
 					'animate-cycle-show',
 					$this->default_options['projects-listing-layout'] . '-item',
 					$this->default_options['projects-hover-animation'] . '-hover',
-					$justified_attrs
+					$data_attrs
 				);
 					$html .= '<div class="inner-wrapper">';
 

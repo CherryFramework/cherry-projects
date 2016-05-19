@@ -2,7 +2,21 @@
 	&.list-layout{
 		.projects-list{
 			.projects-item{
+				margin-bottom: 20px
 			}
+		}
+		.inner-wrapper{
+			display: flex;
+			flex-flow: row nowrap;
+		}
+		.project-media{
+			flex: 0 1 auto;
+			min-width: 30%;
+			margin-right: 20px;
+		}
+		.project-content{
+			flex: 0 1 auto;
+			min-width: 70%;
 		}
 	}
 }

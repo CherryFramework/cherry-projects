@@ -297,6 +297,9 @@
 								case 'justified-layout':
 									justifiedLayoutRender();
 								break;
+								case 'cascading-grid-layout':
+									cascadingGridLayoutRender();
+								break;
 							}
 
 							$projectsContainer.imagesLoaded( function() {
@@ -357,6 +360,9 @@
 								break;
 								case 'justified-layout':
 									justifiedLayoutRender();
+								break;
+								case 'cascading-grid-layout':
+									cascadingGridLayoutRender();
 								break;
 							}
 
@@ -436,7 +442,7 @@
 							$this.css( {
 								'flex-grow': flexValue,
 								'flex-basis': newWidth,
-								'max-width': imageWidth
+								'max-width': +imageWidth
 							} );
 
 							$('.inner-wrapper', $this ).css( {
@@ -444,6 +450,59 @@
 							} );
 
 						} );
+				}
+
+				/*
+				 * Cascading grid layout
+				 */
+				function cascadingGridLayoutRender() {
+					var projectsListWrap = $('.projects-list', $projectsContainer ),
+						projectsList = $('.projects-item', $projectsContainer );
+
+						projectsList.each( function( index ) {
+							var $this = $(this),
+								imageWidth = $this.data( 'image-width' ),
+								imageHeight = $this.data( 'image-height' ),
+								newWidth = ( 100 / getCascadingIndex( index ) ).toFixed(2),
+								margin = Math.ceil( +projectsSettings['item-margin'] / 2 );
+
+								//console.log(index);
+								console.log(  );
+							$this.css( {
+								'width': +newWidth + '%',
+								'max-width': +newWidth + '%'
+							} );
+
+							$('.inner-wrapper', $this ).css( {
+								'margin': margin + 'px'
+							} );
+
+							projectsListWrap.css( {
+								'margin-left': -margin + 'px',
+								'margin-right': -margin + 'px',
+							} );
+
+
+						} );
+				}
+
+				function getCascadingIndex( index ) {
+					var index = index || 0,
+						map = [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ],
+						counter = 0,
+						mapIndex = 0;
+
+						for ( var i = 0; i < index; i++ ) {
+							counter++;
+
+							if ( counter === map.length ) {
+								counter = 0;
+							}
+
+							mapIndex = counter;
+						};
+
+						return map[ mapIndex ];
 				}
 
 				/*

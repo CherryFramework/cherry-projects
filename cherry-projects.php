@@ -169,8 +169,7 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-registration.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-page-template.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-data.php' );
-
-			//require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-shortcode.php' );
+			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-shortcode.php' );
 
 		}
 
@@ -292,6 +291,7 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 				'projects-masonry-template'				=> 'masonry-default.tmpl',
 				'projects-grid-template'				=> 'grid-default.tmpl',
 				'projects-justified-template'			=> 'justified-default.tmpl',
+				'projects-cascading-grid-template'		=> 'cascading-grid-default.tmpl',
 				'projects-list-template'				=> 'list-default.tmpl',
 			);
 
