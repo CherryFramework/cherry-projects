@@ -74,9 +74,6 @@ class Cherry_Project_Data {
 			'projects-post-per-page'				=> cherry_projects()->get_option( 'projects-post-per-page', 9 ),
 			'projects-item-margin'					=> cherry_projects()->get_option( 'projects-item-margin', 4 ),
 			'projects-justified-fixed-height'		=> cherry_projects()->get_option( 'projects-justified-fixed-height', 300 ),
-			'projects-is-crop-image'				=> cherry_projects()->get_option( 'projects-is-crop-image', 'false' ),
-			'projects-crop-image-width'				=> cherry_projects()->get_option( 'projects-crop-image-width', 500 ),
-			'projects-crop-image-height'			=> cherry_projects()->get_option( 'projects-crop-image-height', 350 ),
 			'projects-masonry-template'				=> cherry_projects()->get_option( 'projects-masonry-template', 'masonry-default.tmpl' ),
 			'projects-grid-template'				=> cherry_projects()->get_option( 'projects-grid-template', 'grid-default.tmpl' ),
 			'projects-justified-template'			=> cherry_projects()->get_option( 'projects-justified-template', 'justified-default.tmpl' ),
@@ -128,14 +125,14 @@ class Cherry_Project_Data {
 			}
 
 			$settings = array(
-				'list-layout'	=> $this->options['projects-listing-layout'],
-				'loading-mode'	=> $this->options['projects-loading-mode'],
-				'post-per-page'	=> $this->options['projects-post-per-page'],
-				'column-number'	=> $this->options['projects-column-number'],
-				'item-margin'	=> $this->options['projects-item-margin'],
-				'fixed-height'	=> $this->options['projects-justified-fixed-height'],
-				'posts-format'	=> $this->options['projects-posts-format'],
-				'template'		=> $template,
+				'list-layout'       => $this->options['projects-listing-layout'],
+				'loading-mode'      => $this->options['projects-loading-mode'],
+				'post-per-page'     => $this->options['projects-post-per-page'],
+				'column-number'     => $this->options['projects-column-number'],
+				'item-margin'       => $this->options['projects-item-margin'],
+				'fixed-height'      => $this->options['projects-justified-fixed-height'],
+				'posts-format'      => $this->options['projects-posts-format'],
+				'template'          => $template,
 			);
 
 			$settings = json_encode( $settings );
@@ -300,7 +297,8 @@ class Cherry_Project_Data {
 			// Item template.
 			$template = $this->get_template_by_name( $settings['template'], 'projects' );
 
-			$macros    = '/%%([a-zA-Z]+[^%]{2})(=[\'\"]([a-zA-Z0-9-_\s]+)[\'\"])?%%/';
+			//$macros    = '/%%([a-zA-Z]+[^%]{2})(=[\'\"]([a-zA-Z0-9-_\s]+)[\'\"])?%%/';
+			$macros    = '/%%.+?%%/';
 			$callbacks = $this->setup_template_data( $settings );
 
 			while ( $posts_query->have_posts() ) : $posts_query->the_post();
@@ -538,9 +536,14 @@ class Cherry_Project_Data {
 		$callbacks = new Cherry_Projects_Template_Callbacks( $atts );
 
 		$data = array(
-			'title'    => array( $callbacks, 'get_title' ),
-			'image'    => array( $callbacks, 'get_image' ),
-			'content'  => array( $callbacks, 'get_content' ),
+			'title'          => array( $callbacks, 'get_title' ),
+			'featuredimage'  => array( $callbacks, 'get_featured_image' ),
+			'content'        => array( $callbacks, 'get_content' ),
+			'button'         => array( $callbacks, 'get_button' ),
+			'date'           => array( $callbacks, 'get_date' ),
+			'author'         => array( $callbacks, 'get_author' ),
+			'comments'       => array( $callbacks, 'get_comments' ),
+			'termslist'      => array( $callbacks, 'get_terms_list' ),
 		);
 
 		/**
@@ -640,22 +643,21 @@ class Cherry_Project_Data {
 			return;
 		}
 
-		$key = strtolower( $matches[1] );
+		$item   = trim( $matches[0], '%%' );
+		$arr    = explode( ' ', $item, 2 );
+		$macros = strtolower( $arr[0] );
+		$attr   = isset( $arr[1] ) ? shortcode_parse_atts( $arr[1] ) : array();
 
-		// If key not found in data - return nothing.
-		if ( ! isset( $this->post_data[ $key ] ) ) {
+		$callback = $this->post_data[ $macros ];
+
+		if ( ! is_callable( $callback ) || ! isset( $this->post_data[ $macros ] ) ) {
 			return;
 		}
 
-		$callback = $this->post_data[ $key ];
+		if ( ! empty( $attr ) ) {
 
-		if ( ! is_callable( $callback ) ) {
-			return;
-		}
-
-		// If found parameters and has correct callback - process it.
-		if ( isset( $matches[3] ) ) {
-			return call_user_func( $callback, $matches[3] );
+			// Call a WordPress function.
+			return call_user_func( $callback, $attr );
 		}
 
 		return call_user_func( $callback );
@@ -668,8 +670,6 @@ class Cherry_Project_Data {
 	 */
 	public function enqueue_styles() {
 		wp_enqueue_style( 'cherry-projects-styles', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/styles.css', array(), CHERRY_PROJECTS_VERSION );
-		//wp_enqueue_style( 'magnific-popup', trailingslashit( CHERRY_PORTFOLIO_URI ) . 'public/assets/css/magnific-popup.css', array(), CHERRY_PORTFOLIO_VERSION );
-		//wp_enqueue_style( 'swiper', trailingslashit( CHERRY_PORTFOLIO_URI ) . 'public/assets/css/swiper.css', array(), CHERRY_PORTFOLIO_VERSION );
 	}
 
 	/**
@@ -678,15 +678,6 @@ class Cherry_Project_Data {
 	 * @since 1.0.0
 	 */
 	public function enqueue_scripts() {
-		/*wp_enqueue_script( 'magnific-popup', trailingslashit( CHERRY_PORTFOLIO_URI ) . 'public/assets/js/min/jquery.magnific-popup.min.js', array( 'jquery' ), '1.0.0', true );
-		wp_enqueue_script( 'imagesloaded', trailingslashit( CHERRY_PORTFOLIO_URI ) . 'public/assets/js/min/imagesloaded.pkgd.min.js', array( 'jquery' ), CHERRY_PORTFOLIO_VERSION, true );
-		wp_enqueue_script( 'isotope', trailingslashit( CHERRY_PORTFOLIO_URI ) . 'public/assets/js/min/isotope.pkgd.min.js', array( 'jquery' ), CHERRY_PORTFOLIO_VERSION, true );
-		wp_enqueue_script( 'cherry-portfolio-layout-plugin', trailingslashit( CHERRY_PORTFOLIO_URI ) . 'public/assets/js/min/cherry-portfolio-layout-plugin.min.js', array( 'jquery' ), CHERRY_PORTFOLIO_VERSION, true );
-		wp_enqueue_script( 'swiper', trailingslashit( CHERRY_PORTFOLIO_URI ) . 'public/assets/js/min/swiper.min.js', array( 'jquery' ), CHERRY_PORTFOLIO_VERSION, true );
-		wp_enqueue_script( 'cherry-portfolio-script', trailingslashit( CHERRY_PORTFOLIO_URI ) . 'public/assets/js/min/cherry-portfolio-scripts.min.js', array( 'jquery' ), CHERRY_PORTFOLIO_VERSION, true );
-
-		*/
-
 		wp_enqueue_script( 'waypoints', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.waypoints.min.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 		wp_enqueue_script( 'imagesloaded', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 		wp_enqueue_script( 'cherry-projects-plugin', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-plugin.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );

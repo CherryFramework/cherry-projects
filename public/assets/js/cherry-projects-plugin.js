@@ -204,14 +204,12 @@
 				 */
 				function addWaypointEvent() {
 
-					//$( '.projects-end-line-spinner' ).waypoint( function( direction ) {
 					$projectsContainer.waypoint( function( direction ) {
 
 						if ( 'down' === direction ) {
 
 							if ( currentPage < pagesCount ) {
 								currentPage++;
-								console.log( 'currentPage = ' + currentPage );
 
 								getMoreProjects( currentTermSlug, currentPage, orderSetting );
 							}
@@ -282,7 +280,7 @@
 							$projectsContainer.html( response );
 
 							pagesCount = Math.ceil( parseInt( $( '.projects-list', $projectsContainer ).data( 'all-posts-count' ) ) / parseInt( projectsSettings['post-per-page'] ) ),
-							console.log( 'pagesCount = ' + pagesCount);
+
 							addPaginationEventsFunction();
 
 							if ( 'lazy-loading-mode' === projectsSettings['loading-mode'] ) {

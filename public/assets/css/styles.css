@@ -179,8 +179,8 @@
 div.cherry-projects-wrapper .projects-container.loading-animation-fade .projects-list .projects-item .inner-wrapper {
   opacity: 1;
   filter: alpha(opacity=100);
-  -webkit-transition: all 1s ease;
-  transition: all 1s ease; }
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease; }
 div.cherry-projects-wrapper .projects-container.loading-animation-fade .projects-list .projects-item.animate-cycle-show .inner-wrapper {
   opacity: 0;
   filter: alpha(opacity=0); }
@@ -367,7 +367,7 @@ div.cherry-projects-wrapper {
     position: relative;
     min-height: 100px; }
 
-div.projects-item {
+div.cherry-projects__item {
   /*&.simple-fade-hover{
   	.rollover-content{
   		opacity: 0;
@@ -398,7 +398,7 @@ div.projects-item {
   		}
   	}
   }*/ }
-  div.projects-item .inner-wrapper {
+  div.cherry-projects__item .inner-wrapper {
     position: relative
     /*.media-content{
     	position: relative;

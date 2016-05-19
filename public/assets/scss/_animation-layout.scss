@@ -10,7 +10,7 @@ div.cherry-projects-wrapper{
 				.projects-item{
 					.inner-wrapper{
 						@include opacity(1);
-						@include transition(all 1s ease);
+						@include transition(all 0.8s ease);
 					}
 					&.animate-cycle-show{
 						.inner-wrapper{
