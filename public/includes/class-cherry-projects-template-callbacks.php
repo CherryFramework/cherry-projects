@@ -53,8 +53,7 @@ class Cherry_Projects_Template_Callbacks {
 	public function get_meta() {
 		if ( null === $this->post_meta ) {
 			global $post;
-
-			$this->post_meta = get_post_meta( $post->ID, CHERRY_PROJECTS_POSTMETA, true );
+			$this->post_meta = get_post_meta( $post->ID, '', true );
 		}
 
 		return $this->post_meta;
@@ -123,17 +122,17 @@ class Cherry_Projects_Template_Callbacks {
 		}
 
 		$settings = array(
-			'visible'					=> true,
-			'size'						=> $attr['size'],
-			'mobile_size'				=> apply_filters( 'cherry_mobile_image_size', 'post-thumbnail' ),
-			'html'						=> $image_html,
-			'class'						=> 'wp-image',
-			'placeholder'				=> true,
-			'placeholder_background'	=> '000',
-			'placeholder_foreground'	=> 'fff',
-			'placeholder_title'			=> '',
-			'html_tag_suze'				=> true,
-			'echo'						=> false,
+			'visible'                => true,
+			'size'                   => $attr['size'],
+			'mobile_size'            => apply_filters( 'cherry_mobile_image_size', 'post-thumbnail' ),
+			'html'                   => $image_html,
+			'class'                  => 'wp-image',
+			'placeholder'            => true,
+			'placeholder_background' => '000',
+			'placeholder_foreground' => 'fff',
+			'placeholder_title'      => '',
+			'html_tag_suze'          => true,
+			'echo'                   => false,
 		);
 
 		/**
@@ -156,7 +155,7 @@ class Cherry_Projects_Template_Callbacks {
 	 */
 	public function get_content( $attr = array() ) {
 
-		$default_attr = array( 'number_of_words' => 15, 'ending' => '&hellip;' );
+		$default_attr = array( 'number_of_words' => -1, 'ending' => '&hellip;' );
 
 		$attr = wp_parse_args( $attr, $default_attr );
 
@@ -345,6 +344,49 @@ class Cherry_Projects_Template_Callbacks {
 		$termslist = cherry_projects()->projects_data->cherry_utility->meta_data->get_terms( $settings );
 
 		return $termslist;
+	}
+
+	/**
+	 * Get post details list.
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_details_list( $attr = array() ) {
+		$default_attr = array( 'delimiter' => ': ' );
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
+		$post_meta = $this->get_meta();
+		$details_list = maybe_unserialize( $post_meta['cherry_projects_details'][0] );
+
+		$html = '<div class="cherry-projects-single-details-list">';
+			/**
+			 * Filter post terms list settings.
+			 *
+			 * @since 1.0.0
+			 * @var array
+			 */
+			$details_list_text = apply_filters( 'cherry-projects-details-list-text', esc_html__( 'Project details', 'cherry-projects' ) );
+
+			if ( ! empty( $details_list_text ) ) {
+				$html .= '<h4 class="cherry-projects-details-list-title">' . $details_list_text . '</h4>';
+			}
+			$html .= '<ul>';
+				foreach ( $details_list as $item => $item_info ) {
+					if ( ! empty( $details_list[ $item ]['detail_label'] ) ) {
+						$html .= sprintf( '<li class="%1$s"><span>%2$s%3$s</span>%4$s</li>',
+							$item,
+							$details_list[ $item ]['detail_label'],
+							$attr['delimiter'],
+							$details_list[ $item ]['detail_info']
+						);
+					}
+				}
+			$html .= '</ul>';
+		$html .= '</div>';
+
+		return $html;
+		var_dump( $details_list );
 	}
 
 	/**

@@ -57,28 +57,44 @@ class Cherry_Project_Data {
 		add_action( 'wp_ajax_get_more_projects', array( $this, 'get_more_projects' ) );
 		add_action( 'wp_ajax_nopriv_get_more_projects', array( $this, 'get_more_projects' ) );
 
+		$this->set_default_options();
+
+		$this->set_cherry_utility();
+	}
+
+	/**
+	 * Get defaults data options
+	 *
+	 * @return void
+	 */
+	public function set_default_options() {
 		$this->default_options = array(
-			'projects-listing-layout'				=> cherry_projects()->get_option( 'projects-listing-layout', 'masonry-layout' ),
-			'projects-loading-mode'					=> cherry_projects()->get_option( 'projects-loading-mode', 'ajax-pagination-mode' ),
-			'projects-loading-animation'			=> cherry_projects()->get_option( 'projects-loading-animation', 'loading-animation-fade' ),
-			'projects-hover-animation'				=> cherry_projects()->get_option( 'projects-hover-animation', 'simple-fade' ),
-			'projects-filter-visible'				=> cherry_projects()->get_option( 'projects-filter-visible', 'true' ),
-			'projects-filter-type'					=> cherry_projects()->get_option( 'projects-filter-type', 'category' ),
-			'projects-category-list'				=> cherry_projects()->get_option( 'projects-category-list', array() ),
-			'projects-tags-list'					=> cherry_projects()->get_option( 'projects-tags-list', array() ),
-			'projects-order-filter-visible'			=> cherry_projects()->get_option( 'projects-order-filter-visible', 'false' ),
-			'projects-order-filter-default-value'	=> cherry_projects()->get_option( 'projects-order-filter-default-value', 'desc' ),
-			'projects-orderby-filter-default-value'	=> cherry_projects()->get_option( 'projects-orderby-filter-default-value', 'date' ),
-			'projects-posts-format'					=> cherry_projects()->get_option( 'projects-posts-format', 'post-format-all' ),
-			'projects-column-number'				=> cherry_projects()->get_option( 'projects-column-number', 3 ),
-			'projects-post-per-page'				=> cherry_projects()->get_option( 'projects-post-per-page', 9 ),
-			'projects-item-margin'					=> cherry_projects()->get_option( 'projects-item-margin', 4 ),
-			'projects-justified-fixed-height'		=> cherry_projects()->get_option( 'projects-justified-fixed-height', 300 ),
-			'projects-masonry-template'				=> cherry_projects()->get_option( 'projects-masonry-template', 'masonry-default.tmpl' ),
-			'projects-grid-template'				=> cherry_projects()->get_option( 'projects-grid-template', 'grid-default.tmpl' ),
-			'projects-justified-template'			=> cherry_projects()->get_option( 'projects-justified-template', 'justified-default.tmpl' ),
-			'projects-cascading-grid-template'		=> cherry_projects()->get_option( 'projects-cascading-grid-template', 'cascading-grid-default.tmpl' ),
-			'projects-list-template'				=> cherry_projects()->get_option( 'projects-list-template', 'list-default.tmpl' ),
+			'listing-layout'               => cherry_projects()->get_option( 'listing-layout', 'masonry-layout' ),
+			'loading-mode'                 => cherry_projects()->get_option( 'loading-mode', 'ajax-pagination-mode' ),
+			'loading-animation'            => cherry_projects()->get_option( 'loading-animation', 'loading-animation-fade' ),
+			'hover-animation'              => cherry_projects()->get_option( 'hover-animation', 'simple-fade' ),
+			'filter-visible'               => cherry_projects()->get_option( 'filter-visible', 'true' ),
+			'filter-type'                  => cherry_projects()->get_option( 'filter-type', 'category' ),
+			'category-list'                => cherry_projects()->get_option( 'category-list', array() ),
+			'tags-list'                    => cherry_projects()->get_option( 'tags-list', array() ),
+			'order-filter-visible'         => cherry_projects()->get_option( 'order-filter-visible', 'false' ),
+			'order-filter-default-value'   => cherry_projects()->get_option( 'order-filter-default-value', 'desc' ),
+			'orderby-filter-default-value' => cherry_projects()->get_option( 'orderby-filter-default-value', 'date' ),
+			'posts-format'                 => cherry_projects()->get_option( 'posts-format', 'post-format-all' ),
+			'column-number'                => cherry_projects()->get_option( 'column-number', 3 ),
+			'post-per-page'                => cherry_projects()->get_option( 'post-per-page', 9 ),
+			'item-margin'                  => cherry_projects()->get_option( 'item-margin', 4 ),
+			'justified-fixed-height'       => cherry_projects()->get_option( 'justified-fixed-height', 300 ),
+			'masonry-template'             => cherry_projects()->get_option( 'masonry-template', 'masonry-default.tmpl' ),
+			'grid-template'                => cherry_projects()->get_option( 'grid-template', 'grid-default.tmpl' ),
+			'justified-template'           => cherry_projects()->get_option( 'justified-template', 'justified-default.tmpl' ),
+			'cascading-grid-template'      => cherry_projects()->get_option( 'cascading-grid-template', 'cascading-grid-default.tmpl' ),
+			'list-template'                => cherry_projects()->get_option( 'list-template', 'list-default.tmpl' ),
+			'standard-post-template'       => cherry_projects()->get_option( 'standard-post-template', 'standard-post-template.tmpl' ),
+			'image-post-template'          => cherry_projects()->get_option( 'image-post-template', 'image-post-template.tmpl' ),
+			'gallery-post-template'        => cherry_projects()->get_option( 'gallery-post-template', 'gallery-post-template.tmpl' ),
+			'audio-post-template'          => cherry_projects()->get_option( 'audio-post-template', 'audio-post-template.tmpl' ),
+			'video-post-template'          => cherry_projects()->get_option( 'video-post-template', 'video-post-template.tmpl' ),
 		);
 
 		/**
@@ -89,14 +105,21 @@ class Cherry_Project_Data {
 		 * @param array The 'the_portfolio_items' function argument.
 		 */
 		$this->default_options = apply_filters( 'cherry_projects_default_options', $this->default_options );
+	}
 
+	/**
+	 * Set cherry utility object
+	 *
+	 * @return void
+	 */
+	public function set_cherry_utility() {
 		$this->cherry_utility = cherry_projects()->get_core()->modules['cherry-utility']->utility;
 	}
 
 	/**
-	 * [render_projects description]
+	 * Render project
 	 *
-	 * @return [type] [description]
+	 * @return string html string
 	 */
 	public function render_projects( $options = array() ) {
 
@@ -109,32 +132,32 @@ class Cherry_Project_Data {
 		$posts_query = $this->get_query_projects_items( array() );
 
 		if ( ! is_wp_error( $posts_query ) ) {
-			switch ( $this->options['projects-listing-layout'] ) {
+			switch ( $this->options['listing-layout'] ) {
 				case 'masonry-layout':
-					$template = $this->options['projects-masonry-template'];
+					$template = $this->options['masonry-template'];
 					break;
 				case 'grid-layout':
-					$template = $this->options['projects-grid-template'];
+					$template = $this->options['grid-template'];
 					break;
 				case 'justified-layout':
-					$template = $this->options['projects-justified-template'];
+					$template = $this->options['justified-template'];
 					break;
 				case 'cascading-grid-layout':
-					$template = $this->options['projects-cascading-grid-template'];
+					$template = $this->options['cascading-grid-template'];
 					break;
 				case 'list-layout':
-					$template = $this->options['projects-list-template'];
+					$template = $this->options['list-template'];
 					break;
 			}
 
 			$settings = array(
-				'list-layout'       => $this->options['projects-listing-layout'],
-				'loading-mode'      => $this->options['projects-loading-mode'],
-				'post-per-page'     => $this->options['projects-post-per-page'],
-				'column-number'     => $this->options['projects-column-number'],
-				'item-margin'       => $this->options['projects-item-margin'],
-				'fixed-height'      => $this->options['projects-justified-fixed-height'],
-				'posts-format'      => $this->options['projects-posts-format'],
+				'list-layout'       => $this->options['listing-layout'],
+				'loading-mode'      => $this->options['loading-mode'],
+				'post-per-page'     => $this->options['post-per-page'],
+				'column-number'     => $this->options['column-number'],
+				'item-margin'       => $this->options['item-margin'],
+				'fixed-height'      => $this->options['justified-fixed-height'],
+				'posts-format'      => $this->options['posts-format'],
 				'template'          => $template,
 			);
 
@@ -142,11 +165,11 @@ class Cherry_Project_Data {
 
 			$html = '<div class="cherry-projects-wrapper">';
 
-				if ( 'true' == $this->options['projects-filter-visible'] && $posts_query->have_posts() ) {
+				if ( 'true' == $this->options['filter-visible'] && $posts_query->have_posts() ) {
 					$html .= $this->render_ajax_filter( array() );
 				}
 
-				$container_class = 'projects-container ' . $this->options['projects-listing-layout'] . ' ' . $this->options['projects-loading-mode'] . ' ' . $this->options['projects-loading-animation'];
+				$container_class = 'projects-container ' . $this->options['listing-layout'] . ' ' . $this->options['loading-mode'] . ' ' . $this->options['loading-animation'];
 
 				$html .= sprintf( '<div class="%1$s" data-settings=\'%2$s\'>', $container_class, $settings );
 					$html .= '<div class="projects-list" data-all-posts-count="' . $this->posts_query->found_posts . '"></div>';
@@ -170,14 +193,33 @@ class Cherry_Project_Data {
 
 			$settings = $_POST['settings'];
 
-			$term_type = ( 'category' == $this->default_options['projects-filter-type'] ) ? CHERRY_PROJECTS_NAME . '_category' : CHERRY_PROJECTS_NAME . '_tag';
+			$term_type = ( 'category' == $this->default_options['filter-type'] ) ? CHERRY_PROJECTS_NAME . '_category' : CHERRY_PROJECTS_NAME . '_tag';
 			$query_args = array(
 				$term_type       => $settings['slug'],
-				'posts_per_page' => $this->default_options['projects-post-per-page'],
+				'posts_per_page' => $this->default_options['post-per-page'],
 				'order'          => $settings['order_settings']['order'],
 				'orderby'        => $settings['order_settings']['orderby'],
 				'paged'          => intval( $settings['page'] ),
 			);
+
+			if ( 'post-format-all' !== $settings['posts_format'] ) {
+				$terms = array( $settings['posts_format'] );
+				$operator = 'IN';
+
+				if ( 'post-format-standard' == $settings['posts_format'] ) {
+					$terms = array( 'post-format-gallery', 'post-format-image', 'post-format-audio', 'post-format-video' );
+					$operator = 'NOT IN';
+				}
+
+				$query_args['tax_query'] = array(
+					array(
+						'taxonomy'	=> 'post_format',
+						'field'		=> 'slug',
+						'terms'		=> $terms,
+						'operator'	=> $operator,
+					),
+				);
+			}
 
 			// The Query.
 			$posts_query = $this->get_query_projects_items( $query_args );
@@ -186,7 +228,7 @@ class Cherry_Project_Data {
 				$html .= $this->render_projects_items( $posts_query, $settings );
 			$html .= '</div>';
 
-			$page_count = intval( ceil( $this->posts_query->found_posts / intval( $this->default_options['projects-post-per-page'] ) ) );
+			$page_count = intval( ceil( $this->posts_query->found_posts / intval( $this->default_options['post-per-page'] ) ) );
 
 			switch ( $settings['loading_mode'] ) {
 				case 'ajax-pagination-mode':
@@ -226,14 +268,33 @@ class Cherry_Project_Data {
 
 			$settings = $_POST['settings'];
 
-			$term_type = ( 'category' == $this->default_options['projects-filter-type'] ) ? CHERRY_PROJECTS_NAME . '_category' : CHERRY_PROJECTS_NAME . '_tag';
+			$term_type = ( 'category' == $this->default_options['filter-type'] ) ? CHERRY_PROJECTS_NAME . '_category' : CHERRY_PROJECTS_NAME . '_tag';
 			$query_args = array(
 				$term_type       => $settings['slug'],
-				'posts_per_page' => $this->default_options['projects-post-per-page'],
+				'posts_per_page' => $this->default_options['post-per-page'],
 				'order'          => $settings['order_settings']['order'],
 				'orderby'        => $settings['order_settings']['orderby'],
 				'paged'          => intval( $settings['page'] ),
 			);
+
+			if ( 'post-format-all' !== $settings['posts_format'] ) {
+				$terms = array( $settings['posts_format'] );
+				$operator = 'IN';
+
+				if ( 'post-format-standard' == $settings['posts_format'] ) {
+					$terms = array( 'post-format-gallery', 'post-format-image', 'post-format-audio', 'post-format-video' );
+					$operator = 'NOT IN';
+				}
+
+				$query_args['tax_query'] = array(
+					array(
+						'taxonomy'	=> 'post_format',
+						'field'		=> 'slug',
+						'terms'		=> $terms,
+						'operator'	=> $operator,
+					),
+				);
+			}
 
 			// The Query.
 			$posts_query = $this->get_query_projects_items( $query_args );
@@ -292,10 +353,10 @@ class Cherry_Project_Data {
 	 * @return string
 	 */
 	public function render_projects_items( $posts_query, $settings = array() ) {
+		$count = 1;
+		$html = '';
 
 		if ( $posts_query->have_posts() ) {
-			$count = 1;
-			$html = '';
 
 			// Item template.
 			$template = $this->get_template_by_name( $settings['template'], 'projects' );
@@ -323,8 +384,8 @@ class Cherry_Project_Data {
 					'item-' . $count,
 					( ( $count++ % 2 ) ? 'odd' : 'even' ),
 					'animate-cycle-show',
-					$this->default_options['projects-listing-layout'] . '-item',
-					$this->default_options['projects-hover-animation'] . '-hover',
+					$this->default_options['listing-layout'] . '-item',
+					$this->default_options['hover-animation'] . '-hover',
 					$data_attrs
 				);
 					$html .= '<div class="inner-wrapper">';
@@ -355,13 +416,13 @@ class Cherry_Project_Data {
 	 */
 	public function render_ajax_filter( $options = array() ) {
 
-		$tax_list = ( 'category' === $this->options['projects-filter-type'] ) ? $this->options['projects-category-list'] : $this->options['projects-tags-list'] ;
+		$tax_list = ( 'category' === $this->options['filter-type'] ) ? $this->options['category-list'] : $this->options['tags-list'] ;
 
 		$args = array(
 			'type'			=> CHERRY_PROJECTS_NAME,
 			'orderby'		=> 'name',
 			'order'			=> 'ASC',
-			'taxonomy'		=> CHERRY_PROJECTS_NAME . '_' . $this->options['projects-filter-type'],
+			'taxonomy'		=> CHERRY_PROJECTS_NAME . '_' . $this->options['filter-type'],
 			'pad_counts'	=> false,
 		);
 		$order_array = array(
@@ -377,7 +438,7 @@ class Cherry_Project_Data {
 
 		$terms = get_categories( $args );
 
-		$html = '<div class="projects-filters with-ajax" data-order-default="' . $this->options['projects-order-filter-default-value'] . '" data-orderby-default="' . $this->options['projects-orderby-filter-default-value'] . '">';
+		$html = '<div class="projects-filters with-ajax" data-order-default="' . $this->options['order-filter-default-value'] . '" data-orderby-default="' . $this->options['orderby-filter-default-value'] . '">';
 
 			/**
 			 * Filtered before terms list render
@@ -388,7 +449,7 @@ class Cherry_Project_Data {
 
 			$html .= '<div class="projects-filters-list-wrapper">';
 
-				$html .= '<ul class="projects-filters-list filter-' . $this->options['projects-filter-type'] . '">';
+				$html .= '<ul class="projects-filters-list filter-' . $this->options['filter-type'] . '">';
 
 				if ( $terms ) {
 					$show_all_text = apply_filters( 'cherry_projects_show_all_text', esc_html__( 'Show all', 'cherry-projects' ) );
@@ -411,7 +472,7 @@ class Cherry_Project_Data {
 			 */
 			$html .= apply_filters( 'cherry-projects-after-filters-html', '' );
 
-			if ( 'true' == $this->options['projects-order-filter-visible'] ) {
+			if ( 'true' == $this->options['order-filter-visible'] ) {
 				$html .= '<div class="projects-order-filters-wrapper">';
 					$html .= '<ul class="order-filters">';
 						$html .= '<li data-filter-type="order" data-desc-label="' . esc_html__( 'Desc', 'cherry-projects' ) . '" data-asc-label="' . esc_html__( 'Asc', 'cherry-projects' ) . '">';
@@ -423,7 +484,7 @@ class Cherry_Project_Data {
 							 */
 							$html .= apply_filters( 'cherry-projects-order-filter-label', esc_html__( 'Order:', 'cherry-projects' ) );
 
-							$html .= '<span class="current">' . $order_array[ $this->options['projects-order-filter-default-value'] ] . '</span>';
+							$html .= '<span class="current">' . $order_array[ $this->options['order-filter-default-value'] ] . '</span>';
 
 						$html .= '</li>';
 						$html .= '<li data-filter-type="orderby">';
@@ -435,11 +496,11 @@ class Cherry_Project_Data {
 							 */
 							$html .= apply_filters( 'cherry-projects-orderby-filter-label', esc_html__( 'Order by:', 'cherry-projects' ) );
 
-							$html .= '<span class="current">' . $order_by_array[ $this->options['projects-orderby-filter-default-value'] ] . '</span>';
+							$html .= '<span class="current">' . $order_by_array[ $this->options['orderby-filter-default-value'] ] . '</span>';
 								$html .= '<ul class="orderby-list">';
 
 									foreach ( $order_by_array as $key => $value ) {
-										$class = ( $key == $this->options['projects-orderby-filter-default-value'] ) ? 'class="active"' : '';
+										$class = ( $key == $this->options['orderby-filter-default-value'] ) ? 'class="active"' : '';
 										$html .= '<li data-orderby="' . $key . '" ' . $class . '><span>' . $value . '</span></li>';
 									}
 
@@ -546,6 +607,7 @@ class Cherry_Project_Data {
 			'author'         => array( $callbacks, 'get_author' ),
 			'comments'       => array( $callbacks, 'get_comments' ),
 			'termslist'      => array( $callbacks, 'get_terms_list' ),
+			'detailslist'    => array( $callbacks, 'get_details_list' ),
 		);
 
 		/**

@@ -224,3 +224,18 @@
 		transform: scale(1.0);
 	}
 }
+
+.cherry-ui-repeater-container{
+	.cheryr-ui-repeater-content-box{
+		display: flex;
+		flex-flow: row nowrap;
+		.detail_label-wrap{
+			flex: 0 1 50%;
+			margin-right: 5px;
+		}
+		.detail_info-wrap{
+			flex: 0 1 50%;
+			margin-left: 5px;
+		}
+	}
+}

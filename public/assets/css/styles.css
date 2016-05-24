@@ -407,6 +407,55 @@ div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspecti
     -webkit-transition: all 0.4s ease;
     transition: all 0.4s ease; }
 
+/* 3d mixins */
+/* end 3d mixins */
+.cherry-projects-single {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap; }
+  .cherry-projects-single__media {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 50%;
+        -ms-flex: 0 1 50%;
+            flex: 0 1 50%; }
+  .cherry-projects-single__content {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 50%;
+        -ms-flex: 0 1 50%;
+            flex: 0 1 50%; }
+
+.cherry-projects-single-post {
+  color: #23282d; }
+  .cherry-projects-single-post .featured-image {
+    margin-right: 20px; }
+    .cherry-projects-single-post .featured-image img {
+      width: 100%;
+      height: auto; }
+  .cherry-projects-single-post .post-terms {
+    margin: 10px 0; }
+  .cherry-projects-single-post .cherry-projects-meta {
+    margin: 10px 0; }
+  .cherry-projects-single-post .cherry-projects-single-details-list {
+    margin-bottom: 20px; }
+    .cherry-projects-single-post .cherry-projects-single-details-list .cherry-projects-details-list-title {
+      margin-bottom: 10px; }
+    .cherry-projects-single-post .cherry-projects-single-details-list ul {
+      list-style: none;
+      margin: 0;
+      padding: 0; }
+      .cherry-projects-single-post .cherry-projects-single-details-list ul li {
+        color: #96989a;
+        margin-bottom: 5px; }
+        .cherry-projects-single-post .cherry-projects-single-details-list ul li span {
+          margin-right: 5px;
+          color: #23282d; }
+        .cherry-projects-single-post .cherry-projects-single-details-list ul li:last-child {
+          margin-bottom: 0; }
+
 .cherry-projects-wrapper {
   color: #23282d;
   border-bottom: 1px solid #000; }
@@ -455,6 +504,8 @@ div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspecti
     .projects-item .featured-image img {
       width: 100%;
       height: auto; }
+  .projects-item .project-meta {
+    margin: 15px 0; }
 
 .projects-end-line-spinner {
   width: 100%; }

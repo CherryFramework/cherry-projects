@@ -42,6 +42,40 @@ class Cherry_Projects_Meta_Boxes {
 	 */
 	public function init() {
 		$prefix = CHERRY_PROJECTS_POSTMETA;
+
+		cherry_projects()->get_core()->init_module( 'cherry-post-meta', array(
+			'id'			=> 'projects-settings',
+			'title'			=> esc_html__( 'Projects settings', '__tm' ),
+			'page'			=> array( CHERRY_PROJECTS_NAME ),
+			'context'		=> 'normal',
+			'priority'		=> 'high',
+			'callback_args'	=> false,
+			'fields'		=> array(
+				$prefix . '_details' => array(
+					'type'        => 'repeater',
+					'label'       => esc_html__( 'Projects Details', 'cherry-projects' ),
+					'add_label'   => esc_html__( 'Add Projects Details', 'cherry-projects' ),
+					'title_field' => 'detail_label',
+					'fields'      => array(
+						'detail_label'       => array(
+							'type'        => 'text',
+							'id'          => 'detail_label',
+							'name'        => 'detail_label',
+							'placeholder' => esc_html__( 'Enter label', 'cherry-projects' ),
+							'label'       => esc_html__( 'Detail Label', 'cherry-projects' ),
+						),
+						'detail_info'         => array(
+							'type'        => 'text',
+							'id'          => 'detail_info',
+							'name'        => 'detail_info',
+							'placeholder' => esc_html__( 'Enter info', 'cherry-projects' ),
+							'label'       => esc_html__( 'Detail Info', 'cherry-projects' ),
+						),
+					),
+				),
+			),
+		) );
+
 		cherry_projects()->get_core()->init_module( 'cherry-post-meta', array(
 			'id'			=> 'post-layout',
 			'title'			=> esc_html__( 'Format Options', '__tm' ),
@@ -50,7 +84,7 @@ class Cherry_Projects_Meta_Boxes {
 			'priority'		=> 'high',
 			'callback_args'	=> false,
 			'fields'		=> array(
-				CHERRY_PROJECTS_POSTMETA . '[image][crop_image]' => array(
+				$prefix . 'image-crop_image' => array(
 					'type'			=> 'switcher',
 					'label'			=> esc_html__( 'Crop image', 'cherry-projects' ),
 					'value'			=> 'true',

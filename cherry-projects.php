@@ -63,6 +63,13 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 		public $projects_data = null;
 
 		/**
+		 * [$projects_data description]
+		 *
+		 * @var null
+		 */
+		public $projects_single_data = null;
+
+		/**
 		 * Sets up needed actions/filters for the plugin to initialize.
 		 *
 		 * @since 1.0.0
@@ -169,6 +176,7 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-registration.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-page-template.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-data.php' );
+			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-single-data.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-shortcode.php' );
 
 		}
@@ -262,6 +270,7 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 		 */
 		public function init() {
 			$this->projects_data = new Cherry_Project_Data();
+			$this->projects_single_data = new Cherry_Project_Single_Data();
 		}
 
 		/**
@@ -272,27 +281,32 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 		public function create_plugin_options() {
 
 			$this->default_options = array(
-				'projects-listing-layout'				=> 'grid-layout',
-				'projects-loading-mode'					=> 'ajax-pagination-mode',
-				'projects-loading-animation'			=> 'loading-animation-move-up',
-				'projects-hover-animation'				=> 'simple-scale',
-				'projects-filter-visible'				=> 'true',
-				'projects-filter-type'					=> 'category',
-				'projects-category-list'				=> array(),
-				'projects-tags-list'					=> array(),
-				'projects-order-filter-visible'			=> 'false',
-				'projects-order-filter-default-value'	=> 'desc',
-				'projects-orderby-filter-default-value'	=> 'date',
-				'projects-posts-format'					=> 'post-format-all',
-				'projects-column-number'				=> 3,
-				'projects-post-per-page'				=> 9,
-				'projects-item-margin'					=> 4,
-				'projects-justified-fixed-height'		=> 300,
-				'projects-masonry-template'				=> 'masonry-default.tmpl',
-				'projects-grid-template'				=> 'grid-default.tmpl',
-				'projects-justified-template'			=> 'justified-default.tmpl',
-				'projects-cascading-grid-template'		=> 'cascading-grid-default.tmpl',
-				'projects-list-template'				=> 'list-default.tmpl',
+				'listing-layout'               => 'grid-layout',
+				'loading-mode'                 => 'ajax-pagination-mode',
+				'loading-animation'            => 'loading-animation-move-up',
+				'hover-animation'              => 'simple-scale',
+				'filter-visible'               => 'true',
+				'filter-type'                  => 'category',
+				'category-list'                => array(),
+				'tags-list'                    => array(),
+				'order-filter-visible'         => 'false',
+				'order-filter-default-value'   => 'desc',
+				'orderby-filter-default-value' => 'date',
+				'posts-format'                 => 'post-format-all',
+				'column-number'                => 3,
+				'post-per-page'                => 9,
+				'item-margin'                  => 4,
+				'justified-fixed-height'       => 300,
+				'masonry-template'             => 'masonry-default.tmpl',
+				'grid-template'                => 'grid-default.tmpl',
+				'justified-template'           => 'justified-default.tmpl',
+				'cascading-grid-template'      => 'cascading-grid-default.tmpl',
+				'list-template'                => 'list-default.tmpl',
+				'standard-post-template'       => 'standard-post-template.tmpl',
+				'image-post-template'          => 'image-post-template.tmpl',
+				'gallery-post-template'        => 'gallery-post-template.tmpl',
+				'audio-post-template'          => 'audio-post-template.tmpl',
+				'video-post-template'          => 'video-post-template.tmpl',
 			);
 
 			if ( ! self::is_db_option_exist( OPTIONS_NAME ) ) {

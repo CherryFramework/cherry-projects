@@ -23,13 +23,9 @@ if ( have_posts() ) :
 			the_post(); ?>
 
 			<section>
-				<h2> Cherry Projects </h2>
 				<?php
-					the_content();
-
-					//cherry_projects()->projects_data->render_projects();
+					cherry_projects()->projects_single_data->render_projects_single();
 				?>
-
 			</section>
 
 	<?php endwhile;

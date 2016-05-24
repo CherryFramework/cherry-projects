@@ -8,6 +8,7 @@
 @import "cascading-grid-layout";
 @import "list-layout";
 @import "animation-layout";
+@import "single-post";
 
 .cherry-projects-wrapper{
 	color: $dark_color_1;
@@ -37,7 +38,7 @@
 
 	}
 	.project-meta{
-
+		margin: 15px 0;
 	}
 	.project-content{
 
