@@ -1,0 +1,105 @@
+<?php
+/**
+ * Cherry Project Single
+ *
+ * @package   Cherry_Project
+ * @author    Cherry Team
+ * @license   GPL-2.0+
+ * @link      http://www.cherryframework.com/
+ * @copyright 2014 Cherry Team
+ */
+
+/**
+ * Class for Portfolio Single data.
+ *
+ * @since 1.0.0
+ */
+class Cherry_Project_Single_Data extends Cherry_Project_Data {
+
+
+	/**
+	 * Post query object.
+	 *
+	 * @var null
+	 */
+	private $posts_query = null;
+
+	/**
+	 * Sets up our actions/filters.
+	 *
+	 * @since 1.0.0
+	 */
+	public function __construct() {
+		$this->set_default_options();
+		$this->set_cherry_utility();
+
+		$this->enqueue_styles();
+		$this->enqueue_scripts();
+	}
+
+	/**
+	 * [render_projects description]
+	 *
+	 * @return [type] [description]
+	 */
+	public function render_projects_single() {
+
+		$post_id = get_the_ID();
+		$format = get_post_format( $post_id );
+		$format = ( empty( $format ) ) ? 'post-format-standard' : 'post-format-' . $format;
+
+
+		switch ( $format ) {
+			case 'post-format-standard':
+				$template = $this->get_template_by_name( $this->default_options['standard-post-template'], 'projects' );
+				break;
+
+			case 'post-format-image':
+				$template = $this->get_template_by_name( $this->default_options['image-post-template'], 'projects' );
+				break;
+
+			case 'post-format-gallery':
+				$template = $this->get_template_by_name( $this->default_options['gallery-post-template'], 'projects' );
+				break;
+
+			case 'post-format-audio':
+				$template = $this->get_template_by_name( $this->default_options['audio-post-template'], 'projects' );
+				break;
+
+			case 'post-format-video':
+				$template = $this->get_template_by_name( $this->default_options['video-post-template'], 'projects' );
+				break;
+		}
+
+
+		$macros    = '/%%.+?%%/';
+		$callbacks = $this->setup_template_data( $this->default_options );
+		$template_content = preg_replace_callback( $macros, array( $this, 'replace_callback' ), $template );
+
+		$html = sprintf( '<div class="cherry-projects-single cherry-projects-single-post %1$s">', $format );
+			$html .= $template_content;
+		$html .= '</div>';
+
+		echo $html;
+
+	}
+
+	/**
+	 * Register and enqueue public-facing style sheet.
+	 *
+	 * @since 1.0.0
+	 */
+	public function enqueue_styles() {
+		wp_enqueue_style( 'cherry-projects-styles', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/styles.css', array(), CHERRY_PROJECTS_VERSION );
+	}
+
+	/**
+	 * Register and enqueue public-facing style sheet.
+	 *
+	 * @since 1.0.0
+	 */
+	public function enqueue_scripts() {
+
+	}
+
+}
