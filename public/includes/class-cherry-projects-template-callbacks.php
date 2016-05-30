@@ -386,7 +386,38 @@ class Cherry_Projects_Template_Callbacks {
 		$html .= '</div>';
 
 		return $html;
-		var_dump( $details_list );
+	}
+
+	/**
+	 * Get post skills list.
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_skills_list( $attr = array() ) {
+		$default_attr = array( 'delimiter' => ': ' );
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
+		$post_meta = $this->get_meta();
+		$details_list = maybe_unserialize( $post_meta['cherry_projects_skills'][0] );
+
+		$html = '<div class="cherry-projects-single-details-list">';
+
+/*			$html .= '<ul>';
+				foreach ( $details_list as $item => $item_info ) {
+					if ( ! empty( $details_list[ $item ]['detail_label'] ) ) {
+						$html .= sprintf( '<li class="%1$s"><span>%2$s%3$s</span>%4$s</li>',
+							$item,
+							$details_list[ $item ]['detail_label'],
+							$attr['delimiter'],
+							$details_list[ $item ]['detail_info']
+						);
+					}
+				}
+			$html .= '</ul>';*/
+		$html .= '</div>';
+
+		return $html;
 	}
 
 	/**

@@ -608,6 +608,7 @@ class Cherry_Project_Data {
 			'comments'       => array( $callbacks, 'get_comments' ),
 			'termslist'      => array( $callbacks, 'get_terms_list' ),
 			'detailslist'    => array( $callbacks, 'get_details_list' ),
+			'skillslist'     => array( $callbacks, 'get_skills_list' ),
 		);
 
 		/**

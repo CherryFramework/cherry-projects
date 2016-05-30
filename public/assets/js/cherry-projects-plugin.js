@@ -34,34 +34,6 @@
 					ajaxRequestSuccess     = true,
 					ajaxRequestObject      = null;
 
-
-					/*column = portfolioContainer.data('column'),
-					postPerPage = portfolioContainer.data('post-per-page'),
-					itemMargin = parseInt( portfolioContainer.data('item-margin') ),
-					loadingMode = portfolioContainer.data('loading-mode'),
-					fixedHeight = portfolioContainer.data('fixed-height'),
-					listLayout = portfolioContainer.data('list-layout'),
-					template = portfolioContainer.data('template'),
-					postsFormat = portfolioContainer.data('posts-format'),*/
-					/*isotopeOptions = {
-						itemSelector : '.portfolio-item',
-						resizable: false,
-						masonry: { columnWidth: Math.floor( $('.portfolio-list', portfolioContainer).width() / column ) }
-					},
-					currentSlug = '',
-					currentPaginationPage = 1,
-					allPageLenght = 0,
-					allPageLenght_temp = 0,
-					ajaxMoreClicked = false,
-					orderSetting = {
-						order: 'DESC',
-						orderby: 'date'
-					},
-					ajaxGetNewRequest = null,
-					ajaxGetMoreRequest = null,
-					ajaxGetNewRequestSuccess = true;
-					$ajaxLoader = null,*/
-
 					console.log(projectsSettings);
 
 				(function () {
@@ -466,8 +438,6 @@
 								newWidth = ( 100 / getCascadingIndex( index ) ).toFixed(2),
 								margin = Math.ceil( +projectsSettings['item-margin'] / 2 );
 
-								//console.log(index);
-								console.log(  );
 							$this.css( {
 								'width': +newWidth + '%',
 								'max-width': +newWidth + '%'

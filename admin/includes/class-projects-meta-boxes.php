@@ -84,14 +84,26 @@ class Cherry_Projects_Meta_Boxes {
 			'priority'		=> 'high',
 			'callback_args'	=> false,
 			'fields'		=> array(
-				$prefix . 'image-crop_image' => array(
-					'type'			=> 'switcher',
-					'label'			=> esc_html__( 'Crop image', 'cherry-projects' ),
-					'value'			=> 'true',
-					'toggle'		=> array(
-						'true_toggle'	=> __( 'Yes', 'cherry-projects' ),
-						'false_toggle'	=> __( 'No', 'cherry-projects' )
-					)
+				$prefix . '_skills' => array(
+					'type'        => 'repeater',
+					'label'       => esc_html__( 'Projects skills', 'cherry-projects' ),
+					'add_label'   => esc_html__( 'Add Skill', 'cherry-projects' ),
+					'title_field' => 'detail_label',
+					'fields'      => array(
+						'skill_label'     => array(
+							'type'        => 'text',
+							'id'          => 'skill_label',
+							'name'        => 'skill_label',
+							'placeholder' => esc_html__( 'Skill label', 'cherry-projects' ),
+							'label'       => esc_html__( 'Skill Label', 'cherry-projects' ),
+						),
+						'detail_info'         => array(
+							'type'        => 'slider',
+							'id'          => 'skill_label',
+							'name'        => 'skill_label',
+							'label'       => esc_html__( 'Skill Value', 'cherry-projects' ),
+						),
+					),
 				),
 			),
 		) );

@@ -75,6 +75,15 @@ class Cherry_Projects_Options_Page {
 		$this->utility = cherry_projects()->get_core()->modules['cherry-utility']->utility;
 
 		$this->projects_options = array(
+			'test'	=> array(
+				'type'=> 'colorpicker',
+				'id'				=> 'cherry-ui-colorpicker-id',
+			'name'				=> 'cherry-ui-colorpicker-name',
+			'value'				=> '',
+			'label'				=> '',
+			'class'				=> '',
+			'master'			=> '',
+			),
 			'listing-layout' => array(
 				'type'			=> 'radio',
 				'title'			=> esc_html__( 'Projects listing layout', 'cherry-projects' ),
