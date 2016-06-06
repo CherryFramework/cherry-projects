@@ -1,19 +1,22 @@
 @import "tm_mixins";
 
 .cherry-projects-single{
-	display: flex;
-	flex-flow: row nowrap;
+	&__container{
+		display: flex;
+		flex-flow: row nowrap;
+	}
 	&__media{
-		flex: 0 1 50%;
+		flex: 0 1 60%;
+		margin-right: 20px;
 	}
 	&__content{
-		flex: 0 1 50%;
+		flex: 0 1 40%;
 	}
 }
 .cherry-projects-single-post{
+
 	color: $dark_color_1;
 	.featured-image{
-		margin-right: 20px;
 		img{
 			width: 100%;
 			height: auto;
@@ -25,26 +28,112 @@
 	.cherry-projects-meta{
 		margin: 10px 0;
 	}
-	.cherry-projects-single-details-list{
-		margin-bottom: 20px;
-		.cherry-projects-details-list-title{
-			margin-bottom: 10px;
-		}
-		ul{
-			list-style: none;
-			margin: 0;
-			padding: 0;
-				li{
-					color: $grey_color_1;
-					margin-bottom: 5px;
-					span{
-						margin-right: 5px;
-						color: $dark_color_1;
-					}
-					&:last-child{
-						margin-bottom: 0;
-					}
+	.featured-image, .additional-image{
+		a{
+			display: block;
+			position: relative;
+			img{
+				width: 100%;
+			}
+			.cover{
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				display: block;
+				background-color: rgba(41, 143, 252, 0.5);
+				opacity: 0;
+				transition: all 0.3s ease-in-out;
+			}
+			&:hover{
+				.cover{
+					opacity: 1;
 				}
+			}
+		}
+	}
+}
+
+.cherry-projects-single-post-format-standard{
+
+}
+
+.cherry-projects-single-post-format-image{
+
+}
+.cherry-projects-additional-image-list{
+	.additional-image-list{
+		list-style: none;
+		margin: 0;
+		padding: 0;
+			.image-item{}
+			&.grid-layout{
+				display: flex;
+				flex-flow: row wrap;
+					.image-item{
+						flex: 0 1 auto;
+					}
+			}
+			&.masonry-layout{
+				.image-item{
+					display: inline-block;
+				}
+			}
+	}
+}
+
+.cherry-projects-single-details-list{
+	margin-bottom: 20px;
+	.cherry-projects-details-list-title{
+		margin-bottom: 10px;
+	}
+	ul{
+		list-style: none;
+		margin: 0;
+		padding: 0;
+			li{
+				color: $grey_color_1;
+				margin-bottom: 5px;
+				span{
+					margin-right: 5px;
+					color: $dark_color_1;
+				}
+				&:last-child{
+					margin-bottom: 0;
+				}
+			}
+	}
+}
+
+.cherry-projects-single-skills-list{
+	margin-bottom: 20px;
+	ul{
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.cherry-skill-item{
+		margin-bottom: 10px;
+		.skill-label{
+			margin-bottom: 5px;
+		}
+		.skill-bar{
+			width: 100%;
+			height: 20px;
+			background-color: $grey_color_3;
+				span{
+					height: 20px;
+					display: inline-block;
+					background-color: $green_color;
+					position: relative;
+						em{
+							font-size: 12px;
+							line-height: 20px;
+							float: right;
+						}
+				}
+		}
+		&:last-child{
+			margin-bottom: 10px;
 		}
 	}
 }

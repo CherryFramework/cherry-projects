@@ -75,15 +75,6 @@ class Cherry_Projects_Options_Page {
 		$this->utility = cherry_projects()->get_core()->modules['cherry-utility']->utility;
 
 		$this->projects_options = array(
-			'test'	=> array(
-				'type'=> 'colorpicker',
-				'id'				=> 'cherry-ui-colorpicker-id',
-			'name'				=> 'cherry-ui-colorpicker-name',
-			'value'				=> '',
-			'label'				=> '',
-			'class'				=> '',
-			'master'			=> '',
-			),
 			'listing-layout' => array(
 				'type'			=> 'radio',
 				'title'			=> esc_html__( 'Projects listing layout', 'cherry-projects' ),
@@ -565,6 +556,7 @@ class Cherry_Projects_Options_Page {
 				) ),
 				'required'           => Cherry_Toolkit::get_arg( $field, 'required', false ),
 				'master'             => Cherry_Toolkit::get_arg( $field, 'master', '' ),
+				'icon_data'          => Cherry_Toolkit::get_arg( $field, 'icon_data', array() ),
 			);
 
 			$current_element = $this->ui_builder->get_ui_element_instance( $args['type'], $args );

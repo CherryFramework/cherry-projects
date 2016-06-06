@@ -609,6 +609,8 @@ class Cherry_Project_Data {
 			'termslist'      => array( $callbacks, 'get_terms_list' ),
 			'detailslist'    => array( $callbacks, 'get_details_list' ),
 			'skillslist'     => array( $callbacks, 'get_skills_list' ),
+			'imagelist'      => array( $callbacks, 'get_image_list' ),
+			'slider'         => array( $callbacks, 'get_slider' ),
 		);
 
 		/**
@@ -734,6 +736,7 @@ class Cherry_Project_Data {
 	 * @since 1.0.0
 	 */
 	public function enqueue_styles() {
+		wp_enqueue_style( 'magnific-popup', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/magnific-popup.css', array(), '1.1.0' );
 		wp_enqueue_style( 'cherry-projects-styles', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/styles.css', array(), CHERRY_PROJECTS_VERSION );
 	}
 
@@ -745,6 +748,7 @@ class Cherry_Project_Data {
 	public function enqueue_scripts() {
 		wp_enqueue_script( 'waypoints', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.waypoints.min.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 		wp_enqueue_script( 'imagesloaded', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
+		wp_enqueue_script( 'magnific-popup', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), '1.1.0', true );
 		wp_enqueue_script( 'cherry-projects-plugin', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-plugin.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 		wp_enqueue_script( 'cherry-projects-scripts', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-scripts.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 

@@ -33,8 +33,9 @@ class Cherry_Project_Single_Data extends Cherry_Project_Data {
 		$this->set_default_options();
 		$this->set_cherry_utility();
 
-		$this->enqueue_styles();
-		$this->enqueue_scripts();
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_single_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_single_scripts' ) );
+
 	}
 
 	/**
@@ -71,13 +72,14 @@ class Cherry_Project_Single_Data extends Cherry_Project_Data {
 				break;
 		}
 
-
 		$macros    = '/%%.+?%%/';
 		$callbacks = $this->setup_template_data( $this->default_options );
 		$template_content = preg_replace_callback( $macros, array( $this, 'replace_callback' ), $template );
 
-		$html = sprintf( '<div class="cherry-projects-single cherry-projects-single-post %1$s">', $format );
-			$html .= $template_content;
+		$html = sprintf( '<div class="cherry-projects-single cherry-projects-single-%1$s">', $format );
+			$html .= '<div class="cherry-projects-single-post">';
+				$html .= $template_content;
+			$html .= '</div>';
 		$html .= '</div>';
 
 		echo $html;
@@ -89,7 +91,9 @@ class Cherry_Project_Single_Data extends Cherry_Project_Data {
 	 *
 	 * @since 1.0.0
 	 */
-	public function enqueue_styles() {
+	public function enqueue_single_styles() {
+		wp_enqueue_style( 'magnific-popup', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/magnific-popup.css', array(), '1.1.0' );
+		wp_enqueue_style( 'slider-pro', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/slider-pro.min.css', array(), '1.2.4' );
 		wp_enqueue_style( 'cherry-projects-styles', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/styles.css', array(), CHERRY_PROJECTS_VERSION );
 	}
 
@@ -98,8 +102,10 @@ class Cherry_Project_Single_Data extends Cherry_Project_Data {
 	 *
 	 * @since 1.0.0
 	 */
-	public function enqueue_scripts() {
-
+	public function enqueue_single_scripts() {
+		wp_enqueue_script( 'magnific-popup', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), '1.1.0', true );
+		wp_enqueue_script( 'slider-pro', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.sliderPro.min.js', array( 'jquery' ), '1.2.4', true );
+		wp_enqueue_script( 'cherry-projects-single-scripts', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-single-scripts.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 	}
 
 }

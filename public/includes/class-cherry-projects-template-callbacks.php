@@ -107,18 +107,23 @@ class Cherry_Projects_Template_Callbacks {
 	 * @since 1.0.0
 	 */
 	public function get_featured_image( $attr = array() ) {
+		global $post;
 
 		$default_attr = array( 'size' => 'large', 'crop' => 'false', 'crop_width' => '500', 'crop_height' => '350' );
 
 		$attr = wp_parse_args( $attr, $default_attr );
 
-		$image_html = '<figure class="featured-image"><a href="%1$s" %2$s ><img src="%3$s" alt="%4$s" %5$s ></a></figure>';
+		$attachment_id = get_post_thumbnail_id();
+		$image_src = $this->get_image_src_by_id( $attachment_id, $attr['size'] );
+		$image_html = '<figure class="featured-image"><a href="' . $image_src . '" %2$s ><span class="cover"></span><img src="%3$s" alt="%4$s" %5$s ></a></figure>';
 
 		if ( filter_var( $attr['crop'], FILTER_VALIDATE_BOOLEAN ) ) {
 			$image_width = (int)$attr['crop_width'];
 			$image_height = (int)$attr['crop_height'];
-			$image_tag = $this->get_cropped_image_url( $image_width, $image_height );
-			$image_html = '<figure class="featured-image"><a href="%1$s" %2$s >' . $image_tag . '</a></figure>';
+
+			$image_tag = $this->get_cropped_image_url( $attachment_id, 'full', $image_width, $image_height );
+
+			$image_html = '<figure class="featured-image"><a href="' . $image_src . '" %2$s ><span class="cover"></span>' . $image_tag . '</a></figure>';
 		}
 
 		$settings = array(
@@ -356,8 +361,7 @@ class Cherry_Projects_Template_Callbacks {
 
 		$attr = wp_parse_args( $attr, $default_attr );
 
-		$post_meta = $this->get_meta();
-		$details_list = maybe_unserialize( $post_meta['cherry_projects_details'][0] );
+		$details_list = get_post_meta( get_the_ID(), 'cherry_projects_details', true );
 
 		$html = '<div class="cherry-projects-single-details-list">';
 			/**
@@ -368,21 +372,23 @@ class Cherry_Projects_Template_Callbacks {
 			 */
 			$details_list_text = apply_filters( 'cherry-projects-details-list-text', esc_html__( 'Project details', 'cherry-projects' ) );
 
-			if ( ! empty( $details_list_text ) ) {
-				$html .= '<h4 class="cherry-projects-details-list-title">' . $details_list_text . '</h4>';
-			}
-			$html .= '<ul>';
-				foreach ( $details_list as $item => $item_info ) {
-					if ( ! empty( $details_list[ $item ]['detail_label'] ) ) {
-						$html .= sprintf( '<li class="%1$s"><span>%2$s%3$s</span>%4$s</li>',
-							$item,
-							$details_list[ $item ]['detail_label'],
-							$attr['delimiter'],
-							$details_list[ $item ]['detail_info']
-						);
-					}
+			if ( is_array( $details_list ) && !empty( $details_list ) ) {
+				if ( ! empty( $details_list_text ) ) {
+					$html .= '<h4 class="cherry-projects-details-list-title">' . $details_list_text . '</h4>';
 				}
-			$html .= '</ul>';
+				$html .= '<ul>';
+					foreach ( $details_list as $item => $item_info ) {
+						if ( ! empty( $details_list[ $item ]['detail_label'] ) ) {
+							$html .= sprintf( '<li class="%1$s"><span>%2$s%3$s</span>%4$s</li>',
+								$item,
+								$details_list[ $item ]['detail_label'],
+								$attr['delimiter'],
+								$details_list[ $item ]['detail_info']
+							);
+						}
+					}
+				$html .= '</ul>';
+			}
 		$html .= '</div>';
 
 		return $html;
@@ -394,30 +400,200 @@ class Cherry_Projects_Template_Callbacks {
 	 * @since 1.0.0
 	 */
 	public function get_skills_list( $attr = array() ) {
-		$default_attr = array( 'delimiter' => ': ' );
+		$default_attr = array( 'unit' => '%' );
 
 		$attr = wp_parse_args( $attr, $default_attr );
 
-		$post_meta = $this->get_meta();
-		$details_list = maybe_unserialize( $post_meta['cherry_projects_skills'][0] );
+		$skills_list = get_post_meta( get_the_ID(), 'cherry_projects_skills', true );
 
-		$html = '<div class="cherry-projects-single-details-list">';
-
-/*			$html .= '<ul>';
-				foreach ( $details_list as $item => $item_info ) {
-					if ( ! empty( $details_list[ $item ]['detail_label'] ) ) {
-						$html .= sprintf( '<li class="%1$s"><span>%2$s%3$s</span>%4$s</li>',
-							$item,
-							$details_list[ $item ]['detail_label'],
-							$attr['delimiter'],
-							$details_list[ $item ]['detail_info']
-						);
+		$html = '<div class="cherry-projects-single-skills-list">';
+			if ( is_array( $skills_list ) && !empty( $skills_list ) ) {
+				$html .= '<ul>';
+					foreach ( $skills_list as $item => $item_info ) {
+						if ( ! empty( $skills_list[ $item ]['skill_label'] ) ) {
+							$html .= sprintf( '<li class="cherry-skill-item %1$s"><div class="skill-label">%2$s</div><div class="skill-bar" data-skill-value="%3$s"><span><em>%4$s</em></span></div></li>',
+								$item,
+								$skills_list[ $item ]['skill_label'],
+								$skills_list[ $item ]['skill_value'],
+								$skills_list[ $item ]['skill_value'] . $attr['unit']
+							);
+						}
 					}
-				}
-			$html .= '</ul>';*/
+				$html .= '</ul>';
+			}
 		$html .= '</div>';
 
 		return $html;
+	}
+
+	/**
+	 * Get post image list.
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_image_list( $attr = array() ) {
+		$default_attr = array(
+			'size'        => 'large',
+			'crop'        => 'false',
+			'crop_width'  => '500',
+			'crop_height' => '350'
+		);
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
+		$attachments_list = explode( ',', get_post_meta( get_the_ID(), 'cherry_projects_image_attachments_ids', true ) );
+		$listing_layout = get_post_meta( get_the_ID(), 'cherry_projects_listing_layout', true );
+		$column_number = get_post_meta( get_the_ID(), 'cherry_projects_column_number', true );
+		$image_margin = get_post_meta( get_the_ID(), 'cherry_projects_image_margin', true );
+
+		$html = '<div class="cherry-projects-additional-image-list">';
+			if ( is_array( $attachments_list) && ! empty( $attachments_list ) ) {
+				$html .= sprintf( '<ul class="additional-image-list %1$s" data-listing-layout="%1$s" data-column-number="%2$s" data-image-margin="%3$s">',
+					isset( $listing_layout ) ? $listing_layout : 'grid-layout',
+					isset( $column_number ) ? $column_number : 3,
+					isset( $image_margin ) ? $image_margin : 4
+				);
+					foreach ( $attachments_list as $attachment_id ) {
+						$image_html = '<figure class="additional-image"><a href="%1$s" %2$s ><span class="cover"></span><img src="%3$s" alt="%4$s" %5$s ></a></figure>';
+
+						if ( filter_var( $attr['crop'], FILTER_VALIDATE_BOOLEAN ) ) {
+							$image_width = (int)$attr['crop_width'];
+							$image_height = (int)$attr['crop_height'];
+							$image_tag = $this->get_cropped_image_url( $attachment_id, 'full', $image_width, $image_height );
+							$image_html = '<figure class="additional-image"><a href="%1$s" %2$s ><span class="cover"></span>' . $image_tag . '</a></figure>';
+						}
+						$settings = array(
+							'visible'                => true,
+							'size'                   => $attr['size'],
+							'html'                   => $image_html,
+							'class'                  => 'wp-image',
+							'placeholder'            => true,
+							'placeholder_background' => '000',
+							'placeholder_foreground' => 'fff',
+							'placeholder_title'      => '',
+							'html_tag_suze'          => true,
+							'echo'                   => false,
+						);
+
+						$html .= '<li class="image-item"><div class="inner-wrapper">' . cherry_projects()->projects_data->cherry_utility->media->get_image( $settings, 'attachment', $attachment_id ) . '</div></li>';
+					}
+				$html .= '<ul>';
+			}
+		$html .= '</div>';
+
+		return $html;
+	}
+
+	/**
+	 * Get post image list.
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_slider( $attr = array() ) {
+		$default_attr = array(
+			'size'   => 'large',
+			'width'  => '100%',
+			'height' => '800',
+		);
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
+		$attachments_list           = explode( ',', get_post_meta( get_the_ID(), 'cherry_projects_slider_attachments_ids', true ) );
+		$uniq_id = 'slider-pro-' . uniqid();
+		$slider_height              = get_post_meta( get_the_ID(), 'cherry_projects_slider_height', true );
+		$slider_navigation          = get_post_meta( get_the_ID(), 'cherry_projects_slider_navigation', true );
+		$slider_loop                = get_post_meta( get_the_ID(), 'cherry_projects_slider_loop', true );
+		$slider_thumbnails_position = get_post_meta( get_the_ID(), 'cherry_projects_slider_thumbnails_position', true );
+
+		if ( is_array( $attachments_list) && ! empty( $attachments_list ) ) {
+			$html = sprintf( '<div class="projects-slider__instance" data-id="%1$s" data-width="%2$s" data-height="%3$s" data-navigation="%4$s" data-loop="%5$s" data-thumbnails-position="%6$s">',
+				$uniq_id,
+				$attr['width'],
+				$attr['height'],
+				isset( $slider_navigation ) ? $slider_navigation : 'true',
+				isset( $slider_loop ) ? $slider_loop : 'true',
+				isset( $slider_thumbnails_position ) ? $slider_thumbnails_position : 'bottom'
+			);
+				$html .= '<div id="' . $uniq_id . '" class="slider-pro">';
+					$html .= '<div class="projects-slider__items sp-slides">';
+						foreach ( $attachments_list as $attachment_id ) {
+							$html .= '<div class="projects-slider__item sp-slide">';
+								$settings = array(
+									'visible'                => true,
+									'size'                   => $attr['size'],
+									'html'                   => '<img class="%2$s" src="%3$s" alt="%4$s" %5$s >',
+									'class'                  => 'sp-image',
+									'placeholder'            => true,
+									'placeholder_background' => '000',
+									'placeholder_foreground' => 'fff',
+									'placeholder_title'      => '',
+									'html_tag_suze'          => true,
+									'echo'                   => false,
+								);
+								$html .=  cherry_projects()->projects_data->cherry_utility->media->get_image( $settings, 'attachment', $attachment_id );
+							$html .= '</div>';
+						}
+					$html .= '</div>';
+
+					$html .= '<div class="projects-slider__thumbnails sp-thumbnails">';
+
+						foreach ( $attachments_list as $attachment_id ) {
+							$html .= '<div class="sp-thumbnail">';
+								$settings = array(
+									'visible'                => true,
+									'size'                   => 'medium',
+									'html'                   => '<img src="%3$s" alt="%4$s" %5$s >',
+									'placeholder'            => true,
+									'placeholder_background' => '000',
+									'placeholder_foreground' => 'fff',
+									'placeholder_title'      => '',
+									'html_tag_suze'          => true,
+									'echo'                   => false,
+								);
+
+								$html .=  cherry_projects()->projects_data->cherry_utility->media->get_image( $settings, 'attachment', $attachment_id );
+							$html .= '</div>';
+						}
+
+					$html .= '</div>';
+
+				$html .= '</div>';
+			$html .= '</div>';
+		}
+
+		return $html;
+	}
+
+	/**
+	 * Get image tag by attachment id
+	 *
+	 * @param  int $attachment_id Attachment id value
+	 * @param  string $size       Image size
+	 * @return string
+	 */
+	public function get_image_by_id( $attachment_id, $size = 'large', $class = '' ) {
+
+		$image_data = wp_get_attachment_image_src( $attachment_id, $size );
+
+		$img_tag = sprintf( '<img class="" src="%1$s" alt="" width="%2$s" height="%3$s">', $image_data[0], $image_data[1], $image_data[2], $class );
+
+		return $img_tag;
+	}
+
+	/**
+	 * Get image src by id
+	 *
+	 * @param  int $attachment_id Attachment id value
+	 * @param  string $size       Image size
+	 * @return string
+	 */
+	public function get_image_src_by_id( $attachment_id, $size = 'large' ) {
+
+		$image_data = wp_get_attachment_image_src( $attachment_id, $size );
+
+		$img_src = $image_data[0];
+
+		return $img_src;
 	}
 
 	/**
@@ -427,19 +603,16 @@ class Cherry_Projects_Template_Callbacks {
 	 * @param  integer $height        Cropped height value.
 	 * @return string
 	 */
-	public function get_cropped_image_url( $width = 500, $height = 300 ) {
-		global $post;
-
-		$attachment_id = get_post_thumbnail_id();
-
-		$title = get_the_title( $post->ID );
+	public function get_cropped_image_url( $attachment_id, $size = 'full', $width = 500, $height = 300 ) {
 
 		// Check if $attachment_id exist.
 		if ( null == $attachment_id ) {
 			return false;
 		}
 
-		$img_url = wp_get_attachment_url( $attachment_id ,'full' );
+		$title = get_the_title( $attachment_id );
+
+		$img_url = wp_get_attachment_url( $attachment_id , $size );
 
 		// Resize & crop image.
 		$croped_image_url = aq_resize( $img_url, $width, $height, true );
