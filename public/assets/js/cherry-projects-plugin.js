@@ -359,10 +359,9 @@
 					projectsList.each( function( index ) {
 
 						var $this     = $( this ),
-							itemWidth = Math.ceil( 100 / +projectsSettings['column-number'] );
+							itemWidth = ( 100 / +projectsSettings['column-number'] ).toFixed(2);
 
 						$this.css( {
-							//'width': itemWidth + 'px',
 							'-webkit-flex-basis': itemWidth + '%',
 							'flex-basis': itemWidth + '%',
 							'margin-bottom': projectsSettings['item-margin'] + 'px'

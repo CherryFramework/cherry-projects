@@ -491,29 +491,48 @@ class Cherry_Projects_Template_Callbacks {
 	 */
 	public function get_slider( $attr = array() ) {
 		$default_attr = array(
-			'size'   => 'large',
-			'width'  => '100%',
-			'height' => '800',
+			'size'              => 'large',
+			'width'             => '100%',
+			'height'            => '800',
+			'distance'          => '10',
+			'duration'          => '500',
+			'autoplay'          => false,
+			'thumbnails-width'  => '100',
+			'thumbnails-height' => '100',
+			'scale-mode'        => 'contain',
+			'force-size'        => 'none',
+			'visible-size'      => '100%',
 		);
 
 		$attr = wp_parse_args( $attr, $default_attr );
 
 		$attachments_list           = explode( ',', get_post_meta( get_the_ID(), 'cherry_projects_slider_attachments_ids', true ) );
 		$uniq_id = 'slider-pro-' . uniqid();
-		$slider_height              = get_post_meta( get_the_ID(), 'cherry_projects_slider_height', true );
 		$slider_navigation          = get_post_meta( get_the_ID(), 'cherry_projects_slider_navigation', true );
 		$slider_loop                = get_post_meta( get_the_ID(), 'cherry_projects_slider_loop', true );
 		$slider_thumbnails_position = get_post_meta( get_the_ID(), 'cherry_projects_slider_thumbnails_position', true );
 
+		$settings = array(
+			'id'                  => $uniq_id,
+			'width'               => $attr['width'],
+			'height'              => $attr['height'],
+			'navigation'          => filter_var( $slider_navigation, FILTER_VALIDATE_BOOLEAN ),
+			'loop'                => filter_var( $slider_loop, FILTER_VALIDATE_BOOLEAN ),
+			'thumbnails-position' => isset( $slider_thumbnails_position ) ? $slider_thumbnails_position : 'bottom',
+			'thumbnails-width'    => $attr['thumbnails-width'],
+			'thumbnails-height'   => $attr['thumbnails-height'],
+			'distance'            => $attr['distance'],
+			'duration'            => $attr['duration'],
+			'autoplay'            => $attr['autoplay'],
+			'scale-mode'          => $attr['scale-mode'],
+			'force-size'          => $attr['force-size'],
+			'visible-size'        => $attr['visible-size'],
+		);
+
+		$settings = json_encode( $settings );
+
 		if ( is_array( $attachments_list) && ! empty( $attachments_list ) ) {
-			$html = sprintf( '<div class="projects-slider__instance" data-id="%1$s" data-width="%2$s" data-height="%3$s" data-navigation="%4$s" data-loop="%5$s" data-thumbnails-position="%6$s">',
-				$uniq_id,
-				$attr['width'],
-				$attr['height'],
-				isset( $slider_navigation ) ? $slider_navigation : 'true',
-				isset( $slider_loop ) ? $slider_loop : 'true',
-				isset( $slider_thumbnails_position ) ? $slider_thumbnails_position : 'bottom'
-			);
+			$html = sprintf( '<div class="cherry-projects-slider__instance" data-settings=\'%1$s\'>', $settings );
 				$html .= '<div id="' . $uniq_id . '" class="slider-pro">';
 					$html .= '<div class="projects-slider__items sp-slides">';
 						foreach ( $attachments_list as $attachment_id ) {
@@ -521,7 +540,7 @@ class Cherry_Projects_Template_Callbacks {
 								$settings = array(
 									'visible'                => true,
 									'size'                   => $attr['size'],
-									'html'                   => '<img class="%2$s" src="%3$s" alt="%4$s" %5$s >',
+									'html'                   => '<img %2$s src="%3$s" alt="%4$s" %5$s >',
 									'class'                  => 'sp-image',
 									'placeholder'            => true,
 									'placeholder_background' => '000',
@@ -538,11 +557,15 @@ class Cherry_Projects_Template_Callbacks {
 					$html .= '<div class="projects-slider__thumbnails sp-thumbnails">';
 
 						foreach ( $attachments_list as $attachment_id ) {
+							$image_width = (int)$attr['thumbnails-width'];
+							$image_height = (int)$attr['thumbnails-height'];
+							$image_html = $this->get_cropped_image_url( $attachment_id, 'full', $image_width, $image_height );
+
 							$html .= '<div class="sp-thumbnail">';
 								$settings = array(
 									'visible'                => true,
-									'size'                   => 'medium',
-									'html'                   => '<img src="%3$s" alt="%4$s" %5$s >',
+									'size'                   => 'post-thumbnail',
+									'html'                   => $image_html,
 									'placeholder'            => true,
 									'placeholder_background' => '000',
 									'placeholder_foreground' => 'fff',

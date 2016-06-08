@@ -12,9 +12,13 @@
 	&__content{
 		flex: 0 1 40%;
 	}
+	&-meta{
+		margin: 10px 0;
+		border-top: 1px solid $grey_color_2;
+		border-bottom: 1px solid $grey_color_2;
+	}
 }
 .cherry-projects-single-post{
-
 	color: $dark_color_1;
 	.featured-image{
 		img{
@@ -60,7 +64,9 @@
 .cherry-projects-single-post-format-image{
 
 }
+
 .cherry-projects-additional-image-list{
+	margin-bottom: 20px;
 	.additional-image-list{
 		list-style: none;
 		margin: 0;
@@ -134,6 +140,48 @@
 		}
 		&:last-child{
 			margin-bottom: 10px;
+		}
+	}
+}
+
+.cherry-projects-slider__instance{
+	margin-bottom: 20px;
+	.slider-pro{
+		background-color: $dark_color_1;
+		.sp-arrows{
+			.sp-arrow{
+				&:before{
+					background-color: $blue_color;
+				}
+				&:after{
+					background-color: $blue_color;
+				}
+			}
+		}
+		.sp-full-screen-button{
+			&:before{
+				color: $blue_color;
+			}
+		}
+		.sp-thumbnails-container{
+			background-color: rgba(73, 81, 89, 0.5);
+			.sp-thumbnail-container{
+				.sp-thumbnail{
+					&:hover{
+						border: 3px solid rgba(255,255,252,1);
+					}
+				}
+			}
+			.sp-selected-thumbnail{
+				.sp-thumbnail{
+					border: 3px solid rgba(41,143,252,1);
+				}
+			}
+			&.sp-bottom-thumbnails{
+				position: absolute;
+				bottom: 0;
+				padding: 5px 0;
+			}
 		}
 	}
 }

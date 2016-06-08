@@ -111,45 +111,44 @@
 			} );
 		},
 		sliderInit: function( self ) {
-			$( '.projects-slider__instance' ).each( function() {
+			$( '.cherry-projects-slider__instance' ).each( function() {
 				var slider = $(this),
-					sliderId = slider.data('id'),
-					sliderWidth = slider.data('width'),
-					sliderHeight = slider.data('height'),
-					sliderNavigation = slider.data('navigation'),
-					sliderLoop = slider.data('loop'),
-					sliderThumbnailsArrows = slider.data('thumbnails-arrows'),
-					sliderThumbnailsPosition = slider.data('thumbnails-position');
+					settings = slider.data('settings'),
+					sliderId = settings['id'];
 
 				if ( $( '.projects-slider__item', '#' + sliderId ).length > 0 ) {
 					$( '#' + sliderId ).sliderPro( {
-						width: sliderWidth,
-						height: sliderHeight,
+						width: settings['width'],
+						height: settings['height'],
 						orientation: 'horizontal',
-						slideDistance: 0,
-						slideAnimationDuration: 300,
+						imageScaleMode: settings['scale-mode'],
+						forceSize: settings['force-size'],
+						aspectRatio: -1,
+						visibleSize: settings['visible-size'],
+						slideDistance: +settings['distance'],
+						slideAnimationDuration: +settings['duration'],
 						fade: false,
-						arrows: sliderNavigation,
-						fadeArrows: false,
+						arrows: settings['navigation'],
+						fadeArrows: true,
 						buttons: false,
-						autoplay: false,
+						autoplay: settings['autoplay'],
 						fullScreen: true,
 						shuffle: false,
-						loop: sliderLoop,
+						loop: settings['loop'],
 						waitForLayers: false,
 						thumbnailArrows: false,
-						thumbnailsPosition: sliderThumbnailsPosition,
-						thumbnailWidth: 100,
-						thumbnailHeight: 100,
+						thumbnailsPosition: settings['thumbnails-position'],
+						thumbnailWidth: settings['thumbnails-width'],
+						thumbnailHeight: settings['thumbnails-height'],
 						init: function() {
 							$( this ).resize();
 						},
 						breakpoints: {
 							992: {
-								height: parseFloat( sliderHeight ) * 0.75,
+								height: +settings['height'] * 0.75,
 							},
 							768: {
-								height: parseFloat( sliderHeight ) * 0.5
+								height: +settings['height'] * 0.5
 							}
 						}
 					} );
