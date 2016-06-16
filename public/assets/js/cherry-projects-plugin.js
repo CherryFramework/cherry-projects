@@ -280,6 +280,8 @@
 								showAnimation( 0, 100 );
 
 								Waypoint.refreshAll();
+
+								CherryJsCore.cherryProjectsFrontScripts.magnificIconInit();
 							} );
 
 						}
@@ -344,6 +346,8 @@
 								showAnimation( $projectsItemLength, 100 );
 
 								Waypoint.refreshAll();
+
+								CherryJsCore.cherryProjectsFrontScripts.magnificIconInit();
 							} );
 
 						}

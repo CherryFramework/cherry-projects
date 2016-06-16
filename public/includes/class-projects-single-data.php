@@ -92,6 +92,7 @@ class Cherry_Project_Single_Data extends Cherry_Project_Data {
 	 * @since 1.0.0
 	 */
 	public function enqueue_single_styles() {
+		wp_enqueue_style( 'dashicons' );
 		wp_enqueue_style( 'magnific-popup', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/magnific-popup.css', array(), '1.1.0' );
 		wp_enqueue_style( 'slider-pro', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/slider-pro.min.css', array(), '1.2.4' );
 		wp_enqueue_style( 'cherry-projects-styles', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/styles.css', array(), CHERRY_PROJECTS_VERSION );

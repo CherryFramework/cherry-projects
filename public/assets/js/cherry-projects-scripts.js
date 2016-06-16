@@ -6,20 +6,29 @@
 		init: function () {
 			var self = this;
 
-			if( CherryJsCore.status.is_ready ){
+			if ( CherryJsCore.status.is_ready ) {
 				self.readyRender( self );
-			}else{
+			} else {
 				CherryJsCore.variable.$document.on( 'ready', self.readyRender( self ) );
 			}
 
 		},
 		readyRender: function ( self ) {
-
-			if( $('.cherry-projects-wrapper')[0] ){
-				$('.cherry-projects-wrapper').cherryProjectsPlugin({});
+			self.projectsPluginInit( self );
+			self.magnificInit( self );
+		},
+		projectsPluginInit: function( self ) {
+			if ( $( '.cherry-projects-wrapper' )[0] ) {
+				$( '.cherry-projects-wrapper' ).cherryProjectsPlugin( {} );
 			}
-
-			$('.cherry-projects-wrapper').magnificPopup({
+		},
+		magnificIconInit: function() {
+			if ( $( '.zoom-link' )[0] ){
+				$( '.zoom-link' ).magnificPopup({type: 'image'});
+			}
+		},
+		magnificInit: function( self ) {
+			$( '.cherry-projects-wrapper' ).magnificPopup({
 				delegate: '.featured-image a',
 				type: 'image',
 				gallery: {
@@ -31,11 +40,12 @@
 					duration: 300,
 					easing: 'ease-in-out',
 					opener: function(openerElement) {
+						console.log(openerElement);
 						return openerElement.is('img') ? openerElement : openerElement.find('img');
 					}
 				}
 			});
-		},
+		}
 	}
 	CherryJsCore.cherryProjectsFrontScripts.init();
 }(jQuery));

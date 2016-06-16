@@ -15,7 +15,6 @@
 		},
 		readyRender: function( self ) {
 
-
 			self.skillsListInit( self );
 			self.imagesListingInit( self );
 			self.sliderInit( self );

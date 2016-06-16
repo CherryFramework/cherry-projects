@@ -51,6 +51,30 @@ class Cherry_Projects_Meta_Boxes {
 			'priority'		=> 'high',
 			'callback_args'	=> false,
 			'fields'		=> array(
+				$prefix . '_external_link' => array(
+					'type'        => 'text',
+					'label'       => esc_html__( 'External link', 'cherry-projects' ),
+					'value'       => '#',
+				),
+				$prefix . '_external_link_text' => array(
+					'type'        => 'text',
+					'label'       => esc_html__( 'External link text', 'cherry-projects' ),
+					'value'       => '',
+				),
+				$prefix . '_external_link_target' => array(
+					'type'			=> 'radio',
+					'label'			=> esc_html__( 'External link target', 'cherry-projects' ),
+					'value'			=> 'blank',
+					'display-input'	=> true,
+					'options'		=> array(
+						'blank' => array(
+							'label' => esc_html__( 'Blank', 'cherry-projects' ),
+						),
+						'self' => array(
+							'label' => esc_html__( 'Self', 'cherry-projects' ),
+						),
+					),
+				),
 				$prefix . '_details' => array(
 					'type'        => 'repeater',
 					'label'       => esc_html__( 'Projects Details', 'cherry-projects' ),
@@ -194,6 +218,72 @@ class Cherry_Projects_Meta_Boxes {
 						),
 						'left' => array(
 							'label' => esc_html__( 'Left', 'cherry-projects' ),
+						),
+					),
+				),
+			),
+		) );
+
+		cherry_projects()->get_core()->init_module( 'cherry-post-meta', array(
+			'id'            => 'audio-format-settings',
+			'title'         => esc_html__( 'Audio Format Options', '__tm' ),
+			'page'          => array( CHERRY_PROJECTS_NAME ),
+			'context'       => 'normal',
+			'priority'      => 'high',
+			'callback_args' => false,
+			'fields'        => array(
+				$prefix . '_audio_attachments_ids' => array(
+					'type'               => 'media',
+					'label'              => esc_html__( 'Audio source', 'cherry-projects' ),
+					'description'        => esc_html__( 'Select audio source( mp3, m4a, ogg, wav, wma )', 'cherry-projects' ),
+					'display_image'      => true,
+					'multi_upload'       => true,
+					'upload_button_text' => __( 'Add sound', 'cherry-projects' ),
+					'library_type'       => 'audio',
+				),
+			),
+		) );
+
+		cherry_projects()->get_core()->init_module( 'cherry-post-meta', array(
+			'id'            => 'video-format-settings',
+			'title'         => esc_html__( 'Video Format Options', '__tm' ),
+			'page'          => array( CHERRY_PROJECTS_NAME ),
+			'context'       => 'normal',
+			'priority'      => 'high',
+			'callback_args' => false,
+			'fields'        => array(
+				$prefix . '_video_list' => array(
+					'type'        => 'repeater',
+					'label'       => esc_html__( 'Video list', 'cherry-projects' ),
+					'add_label'   => esc_html__( 'Add New Video', 'cherry-projects' ),
+					'title_field' => 'detail_label',
+					'fields'      => array(
+						'video_embed'     => array(
+							'type'        => 'text',
+							'id'          => 'video_embed',
+							'name'        => 'video_embed',
+							'placeholder' => esc_html__( 'Select url', 'cherry-projects' ),
+							'label'       => esc_html__( 'Video url', 'cherry-projects' ),
+						),
+						'video_src' => array(
+							'type'               => 'media',
+							'id'                 => 'video_src',
+							'name'               => 'video_src',
+							'label'              => esc_html__( 'Video source', 'cherry-projects' ),
+							'display_image'      => true,
+							'multi_upload'       => false,
+							'upload_button_text' => esc_html__( 'Add Video', 'cherry-projects' ),
+							'library_type'       => 'video',
+						),
+						'poster_src' => array(
+							'type'               => 'media',
+							'id'                 => 'poster_src',
+							'name'               => 'poster_src',
+							'label'              => esc_html__( 'Poster source', 'cherry-projects' ),
+							'display_image'      => true,
+							'multi_upload'       => false,
+							'upload_button_text' => esc_html__( 'Add Poster', 'cherry-projects' ),
+							'library_type'       => 'image',
 						),
 					),
 				),

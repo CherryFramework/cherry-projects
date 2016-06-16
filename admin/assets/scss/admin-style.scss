@@ -245,5 +245,18 @@
 			flex: 0 1 50%;
 			margin-left: 5px;
 		}
+		.video_embed-wrap{
+			flex: 0 1 80%;
+			margin-right: 5px;
+		}
+		.video_src-wrap{
+			flex: 0 1 10%;
+			margin-right: 5px;
+			margin-left: 5px;
+		}
+		.poster_src-wrap{
+			flex: 0 1 10%;
+			margin-left: 5px;
+		}
 	}
 }

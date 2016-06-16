@@ -44,6 +44,27 @@
 		position: relative;
 	}
 
+	.simple-icon{
+		display: inline-block;
+		width: 30px;
+		height: 30px;
+		background-color: $blue_color;
+		color: $grey_color_3;
+		margin: 5px;
+		border-radius: 30px;
+			span{
+				margin: 5px;
+			}
+			&:hover{
+				background-color: $blue_color_h;
+			}
+	}
+	.simple-button{
+		display: inline-block;
+		padding: 10px;
+		background-color: $blue_color;
+		color: $grey_color_3;
+	}
 	.hover-content{
 		display: flex;
 		flex-flow: column nowrap;
@@ -59,6 +80,9 @@
 		padding: 15px;
 		background-color: rgba( 35, 40, 45, 0.6 );
 		@include transition(all 0.4s ease-out);
+		&.row-format{
+			flex-flow: row nowrap;
+		}
 		> *{
 			flex: 0 1 auto;
 			align-self: center;
@@ -70,14 +94,20 @@
 			opacity: 0;
 			@include transition(all 0.4s ease-out);
 			>*{
+				opacity: 0;
 				@include multiTranslate(translateY(100%));
-				@include transition(all 0.4s ease-out);
 			}
 			&:hover{
 				opacity: 1;
 				>*{
+					opacity: 1;
 					@include multiTranslate(translateY(0%));
-					transform: scale(1);
+					@include transition(all 0.3s ease-out);
+					@for $i from 1 through 20 {
+						&:nth-child(#{$i}) {
+							transition-delay: (0.1s * $i);
+						}
+					}
 				}
 			}
 		}
@@ -94,8 +124,13 @@
 			&:hover{
 				opacity: 1;
 				>*{
-					@include multiTranslate(translateY(0%));
 					transform: scale(1);
+					@include transition(all 0.3s ease-out);
+					@for $i from 1 through 20 {
+						&:nth-child(#{$i}) {
+							transition-delay: (0.1s * $i);
+						}
+					}
 				}
 			}
 		}

@@ -599,18 +599,23 @@ class Cherry_Project_Data {
 		$callbacks = new Cherry_Projects_Template_Callbacks( $atts );
 
 		$data = array(
-			'title'          => array( $callbacks, 'get_title' ),
-			'featuredimage'  => array( $callbacks, 'get_featured_image' ),
-			'content'        => array( $callbacks, 'get_content' ),
-			'button'         => array( $callbacks, 'get_button' ),
-			'date'           => array( $callbacks, 'get_date' ),
-			'author'         => array( $callbacks, 'get_author' ),
-			'comments'       => array( $callbacks, 'get_comments' ),
-			'termslist'      => array( $callbacks, 'get_terms_list' ),
-			'detailslist'    => array( $callbacks, 'get_details_list' ),
-			'skillslist'     => array( $callbacks, 'get_skills_list' ),
-			'imagelist'      => array( $callbacks, 'get_image_list' ),
-			'slider'         => array( $callbacks, 'get_slider' ),
+			'title'         => array( $callbacks, 'get_title' ),
+			'featuredimage' => array( $callbacks, 'get_featured_image' ),
+			'content'       => array( $callbacks, 'get_content' ),
+			'button'        => array( $callbacks, 'get_button' ),
+			'date'          => array( $callbacks, 'get_date' ),
+			'author'        => array( $callbacks, 'get_author' ),
+			'comments'      => array( $callbacks, 'get_comments' ),
+			'termslist'     => array( $callbacks, 'get_terms_list' ),
+			'detailslist'   => array( $callbacks, 'get_details_list' ),
+			'skillslist'    => array( $callbacks, 'get_skills_list' ),
+			'imagelist'     => array( $callbacks, 'get_image_list' ),
+			'slider'        => array( $callbacks, 'get_slider' ),
+			'zoomlink'      => array( $callbacks, 'get_zoom_link' ),
+			'externallink'  => array( $callbacks, 'get_external_link' ),
+			'permalink'     => array( $callbacks, 'get_permalink' ),
+			'videolist'     => array( $callbacks, 'get_video_list' ),
+			'audiolist'     => array( $callbacks, 'get_audio_list' ),
 		);
 
 		/**
@@ -736,6 +741,7 @@ class Cherry_Project_Data {
 	 * @since 1.0.0
 	 */
 	public function enqueue_styles() {
+		wp_enqueue_style( 'dashicons' );
 		wp_enqueue_style( 'magnific-popup', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/magnific-popup.css', array(), '1.1.0' );
 		wp_enqueue_style( 'cherry-projects-styles', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/styles.css', array(), CHERRY_PROJECTS_VERSION );
 	}

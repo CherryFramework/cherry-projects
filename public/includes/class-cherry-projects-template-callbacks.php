@@ -77,9 +77,13 @@ class Cherry_Projects_Template_Callbacks {
 	 */
 	public function get_title( $attr = array() ) {
 
+		$default_attr = array( 'number_of_words' => 10 );
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
 		$settings = array(
 			'visible'		=> true,
-			'length'		=> 0,
+			'length'		=> $attr['number_of_words'],
 			'trimmed_type'	=> 'word',
 			'ending'		=> '&hellip;',
 			'html'			=> '<h3 %1$s><a href="%2$s" %3$s rel="bookmark">%4$s</a></h3>',
@@ -313,6 +317,98 @@ class Cherry_Projects_Template_Callbacks {
 		$comment_count = cherry_projects()->projects_data->cherry_utility->meta_data->get_comment_count( $settings );
 
 		return $comment_count;
+	}
+
+	/**
+	 * Get post zoom link button.
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_zoom_link( $attr = array() ) {
+		$default_attr = array( 'text_visible' => false );
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
+		/**
+		 * Filter zoom link text.
+		 *
+		 * @since 1.0.0
+		 * @var array
+		 */
+		$zoom_link_text = apply_filters( 'cherry-projects-zoom-link-text', esc_html__( 'Zoom', 'cherry-projects' ) );
+
+		$icon_content = ( filter_var( $attr['text_visible'], FILTER_VALIDATE_BOOLEAN ) ) ? '<span>' . $zoom_link_text . '</span>' : '<span class="dashicons dashicons-search"></span>';
+
+		$thumbnail_id = get_post_thumbnail_id( get_the_ID() );
+		$image_src = $this->get_image_src_by_id( $thumbnail_id, 'large' );
+
+		$html = sprintf( '<a class="zoom-link %3$s" href="%1$s">%2$s</a>',
+			$image_src,
+			$icon_content,
+			( filter_var( $attr['text_visible'], FILTER_VALIDATE_BOOLEAN ) ) ? 'simple-button' :'simple-icon' );
+
+		return $html;
+	}
+
+	/**
+	 * Get post external link button.
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_external_link( $attr = array() ) {
+		$default_attr = array( 'text_visible' => false );
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
+		$external_link_text = get_post_meta( get_the_ID(), 'cherry_projects_external_link_text', true );
+		$external_link = get_post_meta( get_the_ID(), 'cherry_projects_external_link', true );
+		$external_target = get_post_meta( get_the_ID(), 'cherry_projects_external_link_target', true );
+
+		$html = '';
+
+		if ( ! empty( $external_link ) ) {
+			$icon_content = ( filter_var( $attr['text_visible'], FILTER_VALIDATE_BOOLEAN ) ) ? '<span>' . $external_link_text . '</span>' : '<span class="dashicons dashicons-admin-site"></span>';
+
+			$html = sprintf( '<a class="external-link %3$s" href="%1$s" target="%4$s">%2$s</a>',
+				! empty( $external_link ) ? $external_link : '#',
+				$icon_content,
+				( filter_var( $attr['text_visible'], FILTER_VALIDATE_BOOLEAN ) ) ? 'simple-button' :'simple-icon',
+				! empty( $external_target ) ? '_' . $external_target : '_blank'
+			);
+		}
+
+		return $html;
+	}
+
+	/**
+	 * Get post permalink button.
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_permalink( $attr = array() ) {
+		$default_attr = array( 'text_visible' => false );
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
+		/**
+		 * Filter permalink text.
+		 *
+		 * @since 1.0.0
+		 * @var array
+		 */
+		$zoom_link_text = apply_filters( 'cherry-projects-permalink-text', esc_html__( 'Permalink', 'cherry-projects' ) );
+
+		$icon_content = ( filter_var( $attr['text_visible'], FILTER_VALIDATE_BOOLEAN ) ) ? '<span>' . $zoom_link_text . '</span>' : '<span class="dashicons dashicons-admin-links"></span>';
+
+		$thumbnail_id = get_post_thumbnail_id( get_the_ID() );
+		$permalink = cherry_projects()->projects_data->cherry_utility->satellite->get_post_permalink();
+
+		$html = sprintf( '<a class="permalink %3$s" href="%1$s">%2$s</a>',
+			$permalink,
+			$icon_content,
+			( filter_var( $attr['text_visible'], FILTER_VALIDATE_BOOLEAN ) ) ? 'simple-button' :'simple-icon' );
+
+		return $html;
 	}
 
 	/**
@@ -583,6 +679,82 @@ class Cherry_Projects_Template_Callbacks {
 				$html .= '</div>';
 			$html .= '</div>';
 		}
+
+		return $html;
+	}
+
+	/**
+	 * Get videolist.
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_video_list( $attr = array() ) {
+		$default_attr = array(
+			'width'  => 800,
+			'height' => 600,
+		);
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
+		$video_list_data = get_post_meta( get_the_ID(), 'cherry_projects_video_list', true );
+
+		$html = '<div class="cherry-projects-video-list">';
+			if ( ! empty( $video_list_data ) ) {
+				foreach ( $video_list_data as $item => $video_settings ) {
+
+					if ( ! empty( $video_settings['video_embed'] ) ) {
+						$html .= wp_oembed_get(
+							$video_settings['video_embed'],
+							array(
+								'width'  => $attr['width'],
+								'height' => $attr['height'],
+							)
+						);
+					} else {
+
+						$shortcode_attr = array(
+							'width'  => $attr['width'],
+							'height' => $attr['height'],
+							'src'    => wp_get_attachment_url( $video_settings['video_src'] ),
+							'poster' => wp_get_attachment_image_url( $video_settings['poster_src'], 'large' ),
+						);
+
+						$html .= '<div class="video-item">';
+							$html .= wp_video_shortcode( $shortcode_attr );
+						$html .= '</div>';
+					}
+				}
+			}
+		$html .= '</div>';
+
+		return $html;
+	}
+
+	/**
+	 * Get audio list.
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_audio_list( $attr = array() ) {
+		$default_attr = array(
+			'width'  => 800,
+			'height' => 600,
+		);
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
+		$audio_list_data = get_post_meta( get_the_ID(), 'cherry_projects_audio_attachments_ids', true );
+
+		$html = '<div class="cherry-projects-audio-list">';
+
+			$attr = array(
+				'type'  => 'audio',
+				'ids'   => $audio_list_data,
+			);
+
+			$html .=  wp_playlist_shortcode( $attr );
+
+		$html .= '</div>';
 
 		return $html;
 	}
