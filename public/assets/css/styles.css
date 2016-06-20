@@ -108,12 +108,21 @@ ul.order-filters {
 /* 3d mixins */
 /* end 3d mixins */
 .projects-pagination {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
   margin: 20px 0; }
   .projects-pagination ul.page-link {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 auto;
+        -ms-flex: 0 1 auto;
+            flex: 0 1 auto;
     list-style: none;
-    margin: 0;
-    display: inline-block;
-    float: left; }
+    margin: 0; }
     .projects-pagination ul.page-link li {
       float: left;
       margin: 0 2px; }
@@ -128,7 +137,10 @@ ul.order-filters {
         .projects-pagination ul.page-link li span:hover {
           color: #298ffc; }
   .projects-pagination .page-navigation {
-    float: right; }
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 auto;
+        -ms-flex: 0 1 auto;
+            flex: 0 1 auto; }
     .projects-pagination .page-navigation span {
       line-height: 30px;
       color: #23282d;

@@ -10,11 +10,11 @@
 			}
 
 			return this.each( function() {
-				if ( options ){
+				if ( options ) {
 					$.extend( settings, options );
 				}
 
-				var $this                  = $(this),
+				var $this                  = $( this ),
 					$projectsContainer     = $( '.projects-container', $this ),
 					$projectsList          = $( '.projects-list', $projectsContainer ),
 					$projectsFilters       = $( '.projects-filters', $this ),
@@ -34,13 +34,11 @@
 					ajaxRequestSuccess     = true,
 					ajaxRequestObject      = null;
 
-					console.log(projectsSettings);
-
-				(function () {
+				( function () {
 					if ( ! $('.cherry-projects-ajax-loader')[0] ) {
 						$('body').append('<div class="cherry-projects-ajax-loader"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>');
 						$ajaxLoader = $('.cherry-projects-ajax-loader');
-					}else{
+					} else {
 						$ajaxLoader = $('.cherry-projects-ajax-loader');
 					}
 
@@ -59,7 +57,7 @@
 					}
 
 					addEventsFunction();
-				})();
+				} )();
 
 				/*
 				 * Add events for terms filters
@@ -67,14 +65,14 @@
 				function addTermsFiltersEventsFunction() {
 
 					$( 'li span', $projectsTermsFilters ).on( 'click', function() {
-						var $parent = $(this).parent()
+						var $parent = $(this).parent(),
 							slug = '';
 
 						if ( ! $( this ).parent().hasClass( 'active' ) ) {
 							$( 'li' , $projectsTermsFilters ).removeClass( 'active' );
 							$( this ).parent().addClass( 'active' );
 
-							currentTermSlug = $(this).data('slug');
+							currentTermSlug = $(this).data( 'slug' );
 							currentPage = 1;
 
 							getNewProjectsList( currentTermSlug, currentPage, orderSetting );
@@ -89,11 +87,11 @@
 					$projectsOrderFilters.on( 'click', '[data-filter-type="orderby"]', function() {
 						var $this = $(this);
 
-						$this.toggleClass('dropdown-state');
+						$this.toggleClass( 'dropdown-state' );
 					})
 
 					$projectsOrderFilters.on( 'click', '[data-filter-type="order"]', function() {
-						var $this         = $( this ) ,
+						var $this         = $( this ),
 							$descLabel    = $this.data('desc-label'),
 							$ascLabel     = $this.data('asc-label'),
 							order         = '';
@@ -141,8 +139,8 @@
 				 * Add events for pagination
 				 */
 				function addPaginationEventsFunction() {
-					var $projectsPagination     = $('.projects-pagination', $projectsContainer),
-						$pageNavigation         = $('.page-navigation', $projectsPagination);
+					var $projectsPagination     = $( '.projects-pagination', $projectsContainer ),
+						$pageNavigation         = $( '.page-navigation', $projectsPagination );
 
 					if ( $projectsPagination[0] ) {
 						$( '.page-link > li span', $projectsPagination ).on( 'click', function() {
@@ -159,11 +157,11 @@
 						});
 
 						if ( $pageNavigation[0] ) {
-							$('.next-page', $pageNavigation ).on( 'click', function(){
+							$( '.next-page', $pageNavigation ).on( 'click', function() {
 								currentPage++;
 								getNewProjectsList( currentTermSlug, currentPage, orderSetting );
 							});
-							$('.prev-page', $pageNavigation ).on( 'click', function(){
+							$( '.prev-page', $pageNavigation ).on( 'click', function() {
 								currentPage--;
 								getNewProjectsList( currentTermSlug, currentPage, orderSetting );
 							});
@@ -201,7 +199,7 @@
 							currentPage++;
 
 							if ( currentPage == pagesCount) {
-								$( '.projects-ajax-button', $projectsContainer ).addClass('disabled').remove();
+								$( '.projects-ajax-button', $projectsContainer ).addClass( 'disabled' ).remove();
 							}
 
 							getMoreProjects( currentTermSlug, currentPage, orderSetting );

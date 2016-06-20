@@ -86,6 +86,8 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 			// Load the core functions/classes required by the rest of the theme.
 			add_action( 'after_setup_theme', array( $this, 'get_core' ), 1 );
 
+			add_action( 'after_setup_theme', array( 'Cherry_Core', 'load_all_modules' ), 2 );
+
 			// Initialization of modules.
 			add_action( 'after_setup_theme', array( $this, 'init' ), 10 );
 
@@ -236,11 +238,13 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 				$core_paths = array_values( $chery_core_version );
 
 				require_once( $core_paths[0] );
-			}else{
+			} else {
 				die('Class Cherry_Core not found');
 			}
 
 			$this->core = new Cherry_Core( array(
+				'base_dir' => CHERRY_PROJECTS_DIR . 'cherry-framework',
+				'base_url' => CHERRY_PROJECTS_DIR . 'cherry-framework',
 				'modules'  => array(
 					'cherry-js-core' => array(
 						'autoload' => true,

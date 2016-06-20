@@ -70,38 +70,23 @@ class Cherry_Projects_Shortcode {
 	 * @return string
 	 */
 	public function do_shortcode( $atts, $content = null, $shortcode = '' ) {
+		$modify_atts = array();
+
+		if ( ! empty( $atts ) ) {
+			foreach ( $atts as $key => $value ) {
+				$modify_atts[ str_replace( '_', '-', $key ) ] = $value;
+			}
+		}
+
 		// Set up the default arguments.
-		$defaults = array(
-			'listing-layout'               => 'grid-layout',
-			'loading-mode'                 => 'ajax-pagination-mode',
-			'loading-animation'            => 'loading-animation-move-up',
-			'hover-animation'              => 'simple-scale',
-			'filter-visible'               => 'true',
-			'filter-type'                  => 'category',
-			'category-list'                => array(),
-			'tags-list'                    => array(),
-			'order-filter-visible'         => 'false',
-			'order-filter-default-value'   => 'desc',
-			'orderby-filter-default-value' => 'date',
-			'posts-format'                 => 'post-format-all',
-			'column-number'                => 3,
-			'post-per-page'                => 9,
-			'item-margin'                  => 4,
-			'justified-fixed-height'       => 300,
-			'masonry-template'             => 'masonry-default.tmpl',
-			'grid-template'                => 'grid-default.tmpl',
-			'justified-template'           => 'justified-default.tmpl',
-			'cascading-grid-template'      => 'cascading-grid-default.tmpl',
-			'list-template'                => 'list-default.tmpl',
-		);
+		$defaults = cherry_projects()->projects_data->default_options;
 
 		/**
 		 * Parse the arguments.
 		 *
 		 * @link http://codex.wordpress.org/Function_Reference/shortcode_atts
 		 */
-
-		$atts = shortcode_atts( $defaults, $atts, $shortcode );
+		$atts = shortcode_atts( $defaults, $modify_atts, $shortcode );
 
 		return cherry_projects()->projects_data->render_projects( $atts );
 	}

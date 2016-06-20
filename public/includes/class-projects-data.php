@@ -113,6 +113,7 @@ class Cherry_Project_Data {
 	 * @return void
 	 */
 	public function set_cherry_utility() {
+		cherry_projects()->get_core()->init_module( 'cherry-utility' );
 		$this->cherry_utility = cherry_projects()->get_core()->modules['cherry-utility']->utility;
 	}
 

@@ -1,12 +1,13 @@
 @import "tm_mixins";
 
 .projects-pagination{
+	display: flex;
+	flex-flow: row wrap;
 	margin: 20px 0;
 		ul.page-link{
+			flex: 0 1 auto;
 			list-style: none;
 			margin: 0;
-			display: inline-block;
-			float: left;
 				li{
 					float: left;
 					margin: 0 2px;
@@ -28,7 +29,7 @@
 				}
 		}
 		.page-navigation{
-			float: right;
+			flex: 0 1 auto;
 				span{
 					line-height: 30px;
 					color: $dark_color_1;

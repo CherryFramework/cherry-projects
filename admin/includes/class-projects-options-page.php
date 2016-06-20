@@ -519,7 +519,6 @@ class Cherry_Projects_Options_Page {
 			$value = ( false !== $value ) ? $value : Cherry_Toolkit::get_arg( $field, 'value', '' );
 
 			if ( isset( $field['options_callback'] ) ) {
-
 				$callback = $this->get_callback_data( $field['options_callback'] );
 				$options  = call_user_func_array( $callback['callback'], $callback['args'] );
 			} else {
