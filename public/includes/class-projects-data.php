@@ -123,7 +123,6 @@ class Cherry_Project_Data {
 	 * @return string html string
 	 */
 	public function render_projects( $options = array() ) {
-
 		$this->enqueue_styles();
 		$this->enqueue_scripts();
 
@@ -689,6 +688,8 @@ class Cherry_Project_Data {
 
 		if ( file_exists( $upload_dir . $subdir ) ) {
 			$file = $upload_dir . $subdir;
+		} elseif ( $theme_template = locate_template( array( 'cherry-projects/' . $template ) ) ) {
+			$file = $theme_template;
 		} elseif ( file_exists( CHERRY_PROJECTS_DIR . $subdir ) ) {
 			$file = CHERRY_PROJECTS_DIR . $subdir;
 		} else {
