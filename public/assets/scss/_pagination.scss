@@ -3,6 +3,7 @@
 .projects-pagination{
 	display: flex;
 	flex-flow: row wrap;
+	justify-content: space-between;
 	margin: 20px 0;
 		ul.page-link{
 			flex: 0 1 auto;

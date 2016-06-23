@@ -100,7 +100,7 @@ class Cherry_Projects_Options_Page {
 					),
 					'cascading-grid-layout' => array(
 						'label'		=> esc_html__( 'Cascading grid', 'cherry-projects' ),
-						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/list-layout-listing.svg',
+						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/list-layout-cascading-grid.svg',
 						'slave'		=> 'projects-listing-layout-cascading-grid-layout',
 					),
 					'list-layout' => array(
@@ -128,7 +128,7 @@ class Cherry_Projects_Options_Page {
 					),
 					'lazy-loading-mode' => array(
 						'label'		=> esc_html__( 'Lazy loading', 'cherry-projects' ),
-						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/loading-mode-ajax-more-button.svg',
+						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/loading-mode-lazy-loading.svg',
 					),
 				),
 			),
@@ -176,11 +176,11 @@ class Cherry_Projects_Options_Page {
 				'options'	=> array(
 					'simple-fade' => array(
 						'label'		=> esc_html__( 'Fade', 'cherry-projects' ),
-						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/inherit.svg',
+						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/hover-fade.svg',
 					),
 					'simple-scale' => array(
 						'label'		=> esc_html__( 'Scale', 'cherry-projects' ),
-						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/inherit.svg',
+						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/hover-scale.svg',
 					),
 					'custom' => array(
 						'label'		=> esc_html__( 'Custom', 'cherry-projects' ),
@@ -196,7 +196,7 @@ class Cherry_Projects_Options_Page {
 			),
 			'filter-type' => array(
 				'type'			=> 'radio',
-				'title'			=> 'Filter type',
+				'title'			=> esc_html__( 'Filter type', 'cherry-projects' ),
 				'description'	=> esc_html__( 'Select if you want to filter posts by tag or by category.', 'cherry-projects' ),
 				'value'			=> 'category',
 				'display-input'	=> true,
@@ -464,9 +464,20 @@ class Cherry_Projects_Options_Page {
 	 * @return [type] [description]
 	 */
 	public function render_page() {
-		add_menu_page(
+		/*add_menu_page(
 			esc_html__( 'Projects Options', 'cherry-projects' ),
 			esc_html__( 'Projects Options', 'cherry-projects' ),
+			'edit_theme_options',
+			'cherry-projects-options',
+			array( $this, 'projects_options_page' ),
+			'',
+			63
+		);*/
+
+		add_submenu_page(
+			'edit.php?post_type=projects',
+			esc_html__( 'Projects Options', 'cherry-team' ),
+			esc_html__( 'Settings', 'cherry-team' ),
 			'edit_theme_options',
 			'cherry-projects-options',
 			array( $this, 'projects_options_page' ),
@@ -656,7 +667,7 @@ class Cherry_Projects_Options_Page {
 	 * @return void
 	 */
 	public function enqueue_styles( $hook_suffix ) {
-		if ( 'toplevel_page_cherry-projects-options' == $hook_suffix ) {
+		if ( 'projects_page_cherry-projects-options' == $hook_suffix ) {
 			wp_enqueue_style( 'projects-admin-style', trailingslashit( CHERRY_PROJECTS_URI ) . 'admin/assets/css/admin-style.css', array(), CHERRY_PROJECTS_VERSION );
 		}
 	}
@@ -667,7 +678,7 @@ class Cherry_Projects_Options_Page {
 	 * @return void
 	 */
 	public function enqueue_scripts( $hook_suffix ) {
-		if ( 'toplevel_page_cherry-projects-options' == $hook_suffix ) {
+		if ( 'projects_page_cherry-projects-options' == $hook_suffix ) {
 			wp_enqueue_script( 'serialize-object', trailingslashit( CHERRY_PROJECTS_URI ) . 'admin/assets/js/serialize-object.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 			wp_enqueue_script( 'cherry-projects-admin-scripts', trailingslashit( CHERRY_PROJECTS_URI ) . 'admin/assets/js/cherry-projects-admin-scripts.js', array( 'jquery', 'cherry-js-core' ), CHERRY_PROJECTS_VERSION, true );
 

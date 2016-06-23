@@ -77,7 +77,7 @@ class Cherry_Project_Data {
 			'filter-type'                  => cherry_projects()->get_option( 'filter-type', 'category' ),
 			'category-list'                => cherry_projects()->get_option( 'category-list', array() ),
 			'tags-list'                    => cherry_projects()->get_option( 'tags-list', array() ),
-			'order-filter-visible'         => cherry_projects()->get_option( 'order-filter-visible', 'false' ),
+			'order-filter-visible'         => cherry_projects()->get_option( 'order-filter-visible', 'true' ),
 			'order-filter-default-value'   => cherry_projects()->get_option( 'order-filter-default-value', 'desc' ),
 			'orderby-filter-default-value' => cherry_projects()->get_option( 'orderby-filter-default-value', 'date' ),
 			'posts-format'                 => cherry_projects()->get_option( 'posts-format', 'post-format-all' ),
@@ -159,6 +159,7 @@ class Cherry_Project_Data {
 				'item-margin'       => $this->options['item-margin'],
 				'fixed-height'      => $this->options['justified-fixed-height'],
 				'posts-format'      => $this->options['posts-format'],
+				'filter-type'       => $this->options['filter-type'],
 				'template'          => $template,
 			);
 
@@ -194,7 +195,8 @@ class Cherry_Project_Data {
 
 			$settings = $_POST['settings'];
 
-			$term_type = ( 'category' == $this->default_options['filter-type'] ) ? CHERRY_PROJECTS_NAME . '_category' : CHERRY_PROJECTS_NAME . '_tag';
+			$term_type = ( 'category' == $settings['filter_type'] ) ? CHERRY_PROJECTS_NAME . '_category' : CHERRY_PROJECTS_NAME . '_tag';
+
 			$query_args = array(
 				$term_type       => $settings['slug'],
 				'posts_per_page' => $this->default_options['post-per-page'],

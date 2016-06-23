@@ -225,7 +225,8 @@
 							loading_mode: projectsSettings['loading-mode'],
 							order_settings: order,
 							template: projectsSettings['template'],
-							posts_format: projectsSettings['posts-format']
+							posts_format: projectsSettings['posts-format'],
+							filter_type: projectsSettings['filter-type']
 						}
 					}
 
@@ -299,7 +300,8 @@
 							loading_mode: projectsSettings['loading-mode'],
 							order_settings: order,
 							template: projectsSettings['template'],
-							posts_format: projectsSettings['posts-format']
+							posts_format: projectsSettings['posts-format'],
+							filter_type: projectsSettings['filter-type']
 						}
 					}
 
