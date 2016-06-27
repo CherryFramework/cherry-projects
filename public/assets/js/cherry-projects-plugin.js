@@ -29,7 +29,7 @@
 						orderby: $projectsFilters.data( 'orderby-default' ) || 'date'
 					},
 					pagesCount             = Math.ceil( parseInt( $projectsList.data( 'all-posts-count' ) ) / parseInt( projectsSettings['post-per-page'] ) ),
-					currentTermSlug        = '',
+					currentTermSlug        = projectsSettings['single-term'],
 					currentPage            = 1
 					ajaxRequestSuccess     = true,
 					ajaxRequestObject      = null;
@@ -206,10 +206,16 @@
 						}
 					});
 
-
-					/*jQuery(window).on('resize.portfolio_layout_resize', function(){
-						mainResizer();
-					});*/
+					jQuery( window ).on( 'resize.projects_layout_resize', function() {
+						switch ( projectsSettings['list-layout'] ) {
+							case 'grid-layout':
+								gridLayoutRender( getResponsiveColumn() );
+							break;
+							case 'masonry-layout':
+								masonryLayoutRender( getResponsiveColumn() );
+							break;
+						}
+					} );
 				}
 
 				/*
@@ -260,10 +266,10 @@
 
 							switch ( projectsSettings['list-layout'] ) {
 								case 'grid-layout':
-									gridLayoutRender();
+									gridLayoutRender( getResponsiveColumn() );
 								break;
 								case 'masonry-layout':
-									masonryLayoutRender();
+									masonryLayoutRender( getResponsiveColumn() );
 								break;
 								case 'justified-layout':
 									justifiedLayoutRender();
@@ -327,10 +333,10 @@
 
 							switch ( projectsSettings['list-layout'] ) {
 								case 'grid-layout':
-									gridLayoutRender();
+									gridLayoutRender( getResponsiveColumn() );
 								break;
 								case 'masonry-layout':
-									masonryLayoutRender();
+									masonryLayoutRender( getResponsiveColumn() );
 								break;
 								case 'justified-layout':
 									justifiedLayoutRender();
@@ -357,13 +363,13 @@
 				/*
 				 * Render grid layout
 				 */
-				function gridLayoutRender() {
+				function gridLayoutRender( columnNumber ) {
 					var projectsList = $('.projects-item', $projectsContainer );
 
 					projectsList.each( function( index ) {
 
 						var $this     = $( this ),
-							itemWidth = ( 100 / +projectsSettings['column-number'] ).toFixed(2);
+							itemWidth = ( 100 / columnNumber ).toFixed(3);
 
 						$this.css( {
 							'-webkit-flex-basis': itemWidth + '%',
@@ -381,14 +387,13 @@
 				/*
 				 * Masonry grid layout
 				 */
-				function masonryLayoutRender() {
-
+				function masonryLayoutRender( columnNumber ) {
 					var projectsListWrap = $('.projects-list', $projectsContainer ),
 						projectsList = $('.projects-item', $projectsContainer );
 
 					projectsListWrap.css( {
-						'-webkit-column-count': +projectsSettings['column-number'],
-						'column-count': +projectsSettings['column-number'],
+						'-webkit-column-count': columnNumber,
+						'column-count': columnNumber,
 						'-webkit-column-gap': +projectsSettings['item-margin'],
 						'column-gap': +projectsSettings['item-margin'],
 					} );
@@ -512,6 +517,53 @@
 					var timeOutInterval = setTimeout( function() {
 						item.addClass( 'animate-cycle-hide' );
 					}, delay );
+				}
+
+				function getResponsiveColumn() {
+					var columnPerView = +projectsSettings['column-number'],
+						widthLayout   = getResponsiveLayout();
+
+					switch ( widthLayout ) {
+						case 'xl':
+							columnPerView = +projectsSettings['column-number'];
+							break
+						case 'lg':
+							columnPerView = Math.ceil( +projectsSettings['column-number'] / 2 );
+							break
+						case 'md':
+							columnPerView = Math.ceil( +projectsSettings['column-number'] / 3 );
+							break
+						case 'sm':
+							columnPerView = Math.ceil( +projectsSettings['column-number'] / 4 );
+							break
+						case 'xs':
+							columnPerView = 1;
+							break
+					}
+					return columnPerView;
+				}
+
+				function getResponsiveLayout() {
+					var windowWidth   = $( window ).width(),
+						widthLayout   = 'xs';
+
+					if ( windowWidth >= 544 ) {
+						widthLayout = 'sm';
+					}
+
+					if ( windowWidth >= 768 ) {
+						widthLayout = 'md';
+					}
+
+					if ( windowWidth >= 992 ) {
+						widthLayout = 'lg';
+					}
+
+					if ( windowWidth >= 1200 ) {
+						widthLayout = 'xl';
+					}
+
+					return widthLayout;
 				}
 
 			});

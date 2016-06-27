@@ -81,6 +81,7 @@ class Cherry_Project_Data {
 			'order-filter-default-value'   => cherry_projects()->get_option( 'order-filter-default-value', 'desc' ),
 			'orderby-filter-default-value' => cherry_projects()->get_option( 'orderby-filter-default-value', 'date' ),
 			'posts-format'                 => cherry_projects()->get_option( 'posts-format', 'post-format-all' ),
+			'single-term'                  => cherry_projects()->get_option( 'single-term', '' ),
 			'column-number'                => cherry_projects()->get_option( 'column-number', 3 ),
 			'post-per-page'                => cherry_projects()->get_option( 'post-per-page', 9 ),
 			'item-margin'                  => cherry_projects()->get_option( 'item-margin', 4 ),
@@ -151,15 +152,16 @@ class Cherry_Project_Data {
 			}
 
 			$settings = array(
-				'list-layout'       => $this->options['listing-layout'],
-				'loading-mode'      => $this->options['loading-mode'],
-				'post-per-page'     => $this->options['post-per-page'],
-				'column-number'     => $this->options['column-number'],
-				'item-margin'       => $this->options['item-margin'],
-				'fixed-height'      => $this->options['justified-fixed-height'],
-				'posts-format'      => $this->options['posts-format'],
-				'filter-type'       => $this->options['filter-type'],
-				'template'          => $template,
+				'list-layout'   => $this->options['listing-layout'],
+				'loading-mode'  => $this->options['loading-mode'],
+				'post-per-page' => $this->options['post-per-page'],
+				'column-number' => $this->options['column-number'],
+				'item-margin'   => $this->options['item-margin'],
+				'fixed-height'  => $this->options['justified-fixed-height'],
+				'posts-format'  => $this->options['posts-format'],
+				'single-term'   => $this->options['single-term'],
+				'filter-type'   => $this->options['filter-type'],
+				'template'      => $template,
 			);
 
 			$settings = json_encode( $settings );
@@ -418,7 +420,7 @@ class Cherry_Project_Data {
 	 */
 	public function render_ajax_filter( $options = array() ) {
 
-		$tax_list = ( 'category' === $this->options['filter-type'] ) ? $this->options['category-list'] : $this->options['tags-list'] ;
+		$tax_list = ( 'category' === $this->options['filter-type'] ) ? $this->options['category-list'] : $this->options['tags-list'];
 
 		$args = array(
 			'type'			=> CHERRY_PROJECTS_NAME,

@@ -430,6 +430,7 @@ class Cherry_Projects_Template_Callbacks {
 
 		$attr = wp_parse_args( $attr, $default_attr );
 
+		$type = ( 'category' === cherry_projects()->projects_data->default_options['filter-type'] ) ? CHERRY_PROJECTS_NAME .'_category' : CHERRY_PROJECTS_NAME .'_tag';
 		$settings = array(
 			'visible'	=> true,
 			'type'		=> $attr['type'],

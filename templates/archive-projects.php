@@ -16,23 +16,24 @@ get_header( 'cherry_products' );
 
 do_action( 'cherry_projects_before_main_content' );
 
-if ( have_posts() ) :
+if ( have_posts() ) : ?>
 
-	while ( have_posts() ) :
+	<section>
+		<h2> Cherry Projects </h2>
+		<?php
+			global $wp_query;
 
-			the_post(); ?>
+			the_content();
 
-			<section>
-				<h2> Cherry Projects </h2>
-				<?php
-					the_content();
+			$attr = array(
+				'filter-visible' => false,
+				'single-term'    => ! empty( $wp_query->query_vars['term'] ) ? $wp_query->query_vars['term'] : '',
+			);
 
-					//cherry_projects()->projects_data->render_projects();
-				?>
+			cherry_projects()->projects_data->render_projects( $attr );
+		?>
 
-			</section>
-
-	<?php endwhile;
+	</section> <?php
 
 endif;
 
