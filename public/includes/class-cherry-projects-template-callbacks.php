@@ -265,10 +265,14 @@ class Cherry_Projects_Template_Callbacks {
 	 */
 	public function get_author( $attr = array() ) {
 
+		$default_attr = array( 'prefix' => esc_html__( 'Posted by ', 'cherry-projects' ) );
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
 		$settings = array(
 			'visible'	=> 'true',
 			'icon'		=> '',
-			'prefix'	=> esc_html__( 'Posted by ', 'cherry-projects' ),
+			'prefix'	=> $attr['prefix'],
 			'html'		=> '%1$s<a href="%2$s" %3$s %4$s rel="author">%5$s%6$s</a>',
 			'title'		=> '',
 			'class'		=> 'post-author',
@@ -295,10 +299,14 @@ class Cherry_Projects_Template_Callbacks {
 	 */
 	public function get_comments( $attr = array() ) {
 
+		$default_attr = array( 'prefix' => esc_html__( 'Posted by ', 'cherry-projects' ) );
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
 		$settings = array(
 			'visible'		=> true,
 			'icon'			=> '',
-			'prefix'		=> '',
+			'prefix'		=> $attr['prefix'],
 			'sufix'			=> _n_noop( '%s comment', '%s comments', 'cherry-projects' ),
 			'html'			=> '%1$s<a href="%2$s" %3$s %4$s>%5$s%6$s</a>',
 			'title'			=> '',
@@ -418,13 +426,13 @@ class Cherry_Projects_Template_Callbacks {
 	 */
 	public function get_terms_list( $attr = array() ) {
 
-		$default_attr = array( 'delimiter' => ', ' );
+		$default_attr = array( 'delimiter' => ', ', 'type' => CHERRY_PROJECTS_NAME .'_category' );
 
 		$attr = wp_parse_args( $attr, $default_attr );
 
 		$settings = array(
 			'visible'	=> true,
-			'type'		=> CHERRY_PROJECTS_NAME .'_category',
+			'type'		=> $attr['type'],
 			'icon'		=> '',
 			'prefix'	=> '',
 			'delimiter'	=> $attr['delimiter'],
