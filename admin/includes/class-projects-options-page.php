@@ -433,7 +433,7 @@ class Cherry_Projects_Options_Page {
 	public function init_ui_js() {
 
 		$settings['auto_init'] = true;
-		$settings['targets'] = array( 'body' );
+		$settings['targets'] = array( '#cherry-projects-options-form' );
 
 		return $settings;
 	}

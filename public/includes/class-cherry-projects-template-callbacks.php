@@ -558,30 +558,31 @@ class Cherry_Projects_Template_Callbacks {
 					isset( $column_number ) ? $column_number : 3,
 					isset( $image_margin ) ? $image_margin : 4
 				);
-					foreach ( $attachments_list as $attachment_id ) {
-						$image_html = '<figure class="additional-image"><a href="%1$s" %2$s ><span class="cover"></span><img src="%3$s" alt="%4$s" %5$s ></a></figure>';
 
-						if ( filter_var( $attr['crop'], FILTER_VALIDATE_BOOLEAN ) ) {
-							$image_width = (int)$attr['crop_width'];
-							$image_height = (int)$attr['crop_height'];
-							$image_tag = $this->get_cropped_image_url( $attachment_id, 'full', $image_width, $image_height );
-							$image_html = '<figure class="additional-image"><a href="%1$s" %2$s ><span class="cover"></span>' . $image_tag . '</a></figure>';
-						}
-						$settings = array(
-							'visible'                => true,
-							'size'                   => $attr['size'],
-							'html'                   => $image_html,
-							'class'                  => 'wp-image',
-							'placeholder'            => true,
-							'placeholder_background' => '000',
-							'placeholder_foreground' => 'fff',
-							'placeholder_title'      => '',
-							'html_tag_suze'          => true,
-							'echo'                   => false,
-						);
+				foreach ( $attachments_list as $attachment_id ) {
+					$image_html = '<figure class="additional-image"><a href="%1$s" %2$s ><span class="cover"></span><img src="%3$s" alt="%4$s" %5$s ></a></figure>';
 
-						$html .= '<li class="image-item"><div class="inner-wrapper">' . cherry_projects()->projects_data->cherry_utility->media->get_image( $settings, 'attachment', $attachment_id ) . '</div></li>';
+					if ( filter_var( $attr['crop'], FILTER_VALIDATE_BOOLEAN ) && 'grid-layout' === $listing_layout ) {
+						$image_width = (int)$attr['crop_width'];
+						$image_height = (int)$attr['crop_height'];
+						$image_tag = $this->get_cropped_image_url( $attachment_id, 'full', $image_width, $image_height );
+						$image_html = '<figure class="additional-image"><a href="%1$s" %2$s ><span class="cover"></span>' . $image_tag . '</a></figure>';
 					}
+					$settings = array(
+						'visible'                => true,
+						'size'                   => $attr['size'],
+						'html'                   => $image_html,
+						'class'                  => 'wp-image',
+						'placeholder'            => true,
+						'placeholder_background' => '000',
+						'placeholder_foreground' => 'fff',
+						'placeholder_title'      => '',
+						'html_tag_suze'          => true,
+						'echo'                   => false,
+					);
+
+					$html .= '<li class="image-item"><div class="inner-wrapper">' . cherry_projects()->projects_data->cherry_utility->media->get_image( $settings, 'attachment', $attachment_id ) . '</div></li>';
+				}
 				$html .= '<ul>';
 			}
 		$html .= '</div>';

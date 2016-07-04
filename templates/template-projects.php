@@ -14,27 +14,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header( 'cherry_products' );
 
-do_action( 'cherry_projects_before_main_content' );
+do_action( 'cherry_projects_before_main_content' ); ?>
 
-if ( have_posts() ) :
+	<section>
+		<h2> Cherry Projects </h2>
+		<?php
+			the_content();
 
-	while ( have_posts() ) :
+			cherry_projects()->projects_data->render_projects();
+		?>
 
-			the_post(); ?>
-
-			<section>
-				<h2> Cherry Projects </h2>
-				<?php
-					the_content();
-
-					cherry_projects()->projects_data->render_projects();
-				?>
-
-			</section>
-
-	<?php endwhile;
-
-endif;
+	</section> <?php
 
 do_action( 'cherry_projects_after_main_content' );
 
