@@ -386,6 +386,15 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 		}
 
 		/**
+		 * Get the template path.
+		 *
+		 * @return string
+		 */
+		public function template_path() {
+			return apply_filters( 'cherry_projects_template_path', 'cherry-projects/' );
+		}
+
+		/**
 		 * Loads the translation files.
 		 *
 		 * @since 1.0.0

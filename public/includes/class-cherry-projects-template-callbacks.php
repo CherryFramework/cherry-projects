@@ -81,12 +81,18 @@ class Cherry_Projects_Template_Callbacks {
 
 		$attr = wp_parse_args( $attr, $default_attr );
 
+		$html = '<h3 %1$s><a href="%2$s" %3$s rel="bookmark">%4$s</a></h3>';
+
+		if ( is_single() ) {
+			$html = '<h3 %1$s>%4$s</h3>';
+		}
+
 		$settings = array(
 			'visible'		=> true,
 			'length'		=> $attr['number_of_words'],
 			'trimmed_type'	=> 'word',
 			'ending'		=> '&hellip;',
-			'html'			=> '<h3 %1$s><a href="%2$s" %3$s rel="bookmark">%4$s</a></h3>',
+			'html'			=> $html,
 			'class'			=> '',
 			'title'			=> '',
 			'echo'			=> false,
@@ -187,7 +193,11 @@ class Cherry_Projects_Template_Callbacks {
 		 */
 		$settings = apply_filters( 'cherry-projects-content-settings', $settings );
 
-		$content = cherry_projects()->projects_data->cherry_utility->attributes->get_content( $settings );
+		if ( ! is_single() ) {
+			$content = cherry_projects()->projects_data->cherry_utility->attributes->get_content( $settings );
+		} else {
+			$content = get_the_content();
+		}
 
 		return $content;
 	}

@@ -13,7 +13,6 @@
 			}else{
 				CherryJsCore.variable.$document.on( 'ready', self.readyRender( self ) );
 			}
-
 		},
 		readyRender: function ( self ) {
 
@@ -27,23 +26,22 @@
 					self: self,
 					optionsForm: $projectsOptionsForm,
 					ajaxRequestType: 'save'
-				}, self.ajaxRequest );
+				}, self.ajaxRequestFunction );
 
 				$defineAsDefaultButton.on( 'click', {
 					self: self,
 					optionsForm: $projectsOptionsForm,
 					ajaxRequestType: 'define_as_default'
-				}, self.ajaxRequest );
+				}, self.ajaxRequestFunction );
 
 				$restoreButton.on( 'click', {
 					self: self,
 					optionsForm: $projectsOptionsForm,
 					ajaxRequestType: 'restore'
-				}, self.ajaxRequest );
+				}, self.ajaxRequestFunction );
 
 		},
-		ajaxRequest: function( event ) {
-
+		ajaxRequestFunction: function( event ) {
 			var self = event.data.self,
 				$projectsOptionsForm = event.data.optionsForm,
 				$cherrySpinner = $('.cherry-spinner-wordpress', $projectsOptionsForm),
@@ -84,17 +82,16 @@
 			return false;
 		},
 		noticeCreate: function( type, message ) {
-			var
-				notice = $('<div class="notice-box ' + type + '"><span class="dashicons"></span><div class="inner">' + message + '</div></div>'),
+			var notice = $( '<div class="notice-box ' + type + '"><span class="dashicons"></span><div class="inner">' + message + '</div></div>' ),
 				rightDelta = 0,
 				timeoutId;
 
-			$('body').prepend( notice );
+			$( 'body' ).prepend( notice );
 			reposition();
 			rightDelta = -1 * ( notice.outerWidth( true ) + 10 );
 			notice.css( {'right' : rightDelta } );
 
-			timeoutId = setTimeout( function () { notice.css( {'right' : 10 } ).addClass('show-state') }, 100 );
+			timeoutId = setTimeout( function () { notice.css( { 'right' : 10 } ).addClass( 'show-state' ) }, 100 );
 			timeoutId = setTimeout( function () {
 				rightDelta = -1 * ( notice.outerWidth( true ) + 10 );
 				notice.css( { right: rightDelta } ).removeClass( 'show-state' );

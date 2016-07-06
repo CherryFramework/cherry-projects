@@ -23,10 +23,10 @@ if ( have_posts() ) : ?>
 		<?php
 			global $wp_query;
 
-			the_content();
+			$filter_visible = ( is_tax() ) ? false : true;
 
 			$attr = array(
-				'filter-visible' => false,
+				'filter-visible' => $filter_visible,
 				'single-term'    => ! empty( $wp_query->query_vars['term'] ) ? $wp_query->query_vars['term'] : '',
 			);
 

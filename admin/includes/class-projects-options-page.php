@@ -312,7 +312,7 @@ class Cherry_Projects_Options_Page {
 			'column-number' => array(
 				'type'			=> 'slider',
 				'title'			=> esc_html__( 'Column number', 'cherry-projects' ),
-				'description'	=> esc_html__( 'Select number of columns for masonry and grid projects layouts. (Min 2, max 20)', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Select number of columns for masonry and grid projects layouts. (Min 2, max 10)', 'cherry-projects' ),
 				'max_value'		=> 10,
 				'min_value'		=> 2,
 				'value'			=> 3,

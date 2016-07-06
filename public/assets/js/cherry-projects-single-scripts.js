@@ -78,7 +78,7 @@
 
 					switch ( listingLayout ) {
 						case 'grid-layout':
-							var  itemWidth = Math.floor( 100 / +columnNumber );
+							var itemWidth = ( 100 / +columnNumber ).toFixed(3);
 							$listItems.css( {
 								'-webkit-flex-basis': itemWidth + '%',
 								'flex-basis': itemWidth + '%',

@@ -48,9 +48,6 @@ class Cherry_Projects_Page_Template {
 		// Add a filter to the template include in order to determine if the page has our template assigned and return it's path.
 		add_filter( 'template_include', array( $this, 'view_template' ) );
 
-		// Add a filter to load a custom template for a given post.
-		add_filter( 'single_template', array( $this, 'get_single_template' ) );
-
 		// Add your templates to this array.
 		$this->templates = array(
 			'template-projects.php' => __( 'Projects', 'cherry-projects' ),
@@ -99,52 +96,44 @@ class Cherry_Projects_Page_Template {
 	/**
 	 * Checks if the template is assigned to the page.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
+	 * @param  string $template current template name.
+	 * @return string
 	 */
 	public function view_template( $template ) {
 		global $post;
 
-		if ( is_post_type_archive( CHERRY_PROJECTS_NAME ) || is_tax( array( CHERRY_PROJECTS_NAME . '_category', CHERRY_PROJECTS_NAME . '_tag' ) ) ) {
+		$find = array();
 
-			$file = trailingslashit( CHERRY_PROJECTS_DIR ) . 'templates/archive-projects.php';
-
-			if ( file_exists( $file ) ) {
-				return $file;
-			}
-		}
-
-		if ( ! is_page( $post ) ) {
-			return $template;
-		}
+		$file = '';
 
 		$page_template_meta = get_post_meta( $post->ID, '_wp_page_template', true );
 
-		if ( !isset( $this->templates[ $page_template_meta ] ) ) {
-			return $template;
+		if ( is_single() && CHERRY_PROJECTS_NAME === get_post_type() ) {
+
+			$file   = 'single-projects.php';
+			$find[] = $file;
+			$find[] = cherry_projects()->template_path() . $file;
+
+		} elseif ( is_post_type_archive( CHERRY_PROJECTS_NAME ) || is_tax( array( CHERRY_PROJECTS_NAME . '_category', CHERRY_PROJECTS_NAME . '_tag' ) ) ) {
+			$file 	= 'archive-projects.php';
+			$find[] = $file;
+			$find[] = cherry_projects()->template_path() . $file;
+
+		} elseif ( 'template-projects.php' === $page_template_meta ) {
+			$file 	= 'template-projects.php';
+			$find[] = $file;
+			$find[] = cherry_projects()->template_path() . $file;
+
 		}
 
-		$file = trailingslashit( CHERRY_PROJECTS_DIR ) . 'templates/' . $page_template_meta;
+		if ( $file ) {
+			$template = locate_template( array_unique( $find ) );
 
-		// Just to be safe, we check if the file exist first.
-		if ( file_exists( $file ) ) {
-			return $file;
+			if ( ! $template ) {
+				$template = trailingslashit( CHERRY_PROJECTS_DIR ) . 'templates/' . $file;;
+			}
 		}
-
-		return $template;
-	}
-
-	/**
-	 * Adds a custom single template for a 'Portfolio' post.
-	 *
-	 * @since 1.0.0
-	 */
-	public function get_single_template( $template ) {
-		global $post;
-
-		if ( $post->post_type == CHERRY_PROJECTS_NAME ) {
-			$template = trailingslashit( CHERRY_PROJECTS_DIR ) . 'templates/single-projects.php';
-		}
-
 		return $template;
 	}
 
