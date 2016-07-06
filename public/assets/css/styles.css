@@ -584,7 +584,8 @@ div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspecti
 .projects-item .inner-wrapper {
   position: relative; }
 .projects-item .featured-image {
-  width: 100%; }
+  width: 100%;
+  line-height: 0; }
   .projects-item .featured-image img {
     width: 100%;
     height: auto; }

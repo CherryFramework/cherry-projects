@@ -2,7 +2,7 @@
 /**
  * Template Name: Projects
  *
- * The template for displaying CPT Projects.
+ * The archive index page for CPT Projects.
  *
  * @package Cherry_Projects
  * @since   1.0.0
@@ -12,22 +12,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-get_header( 'cherry_products' );
+if ( ! did_action( 'get_header' ) ) {
+	get_header();
 
-do_action( 'cherry_projects_before_main_content' ); ?>
+	do_action( 'cherry_projects_before_main_content' ); ?>
 
-	<section>
-		<h2> Cherry Projects </h2>
-		<?php
-			the_content();
+		<div id="primary" class="content-area">
+			<main id="main" class="site-main" role="main">
+				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<?php }
 
-			cherry_projects()->projects_data->render_projects();
-		?>
+	while ( have_posts() ) : the_post();
+		cherry_projects()->projects_data->render_projects();
 
-	</section> <?php
+		the_content();
+	endwhile;
 
-do_action( 'cherry_projects_after_main_content' );
+	 do_action( 'cherry_projects_after_main_content' );
 
-get_footer( 'cherry_products' );
+	if ( did_action( 'cherry_projects_before_main_content' ) ) { ?>
+				</article><!-- #post-## -->
+			</main><!-- .site-main -->
+		</div><!-- .content-area -->
 
-?>
+	<?php do_action( 'cherry_projects_content_after' );
+
+	get_sidebar();
+
+	get_footer();
+} ?>
+

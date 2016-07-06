@@ -125,7 +125,7 @@ class Cherry_Projects_Template_Callbacks {
 
 		$attachment_id = get_post_thumbnail_id();
 		$image_src = $this->get_image_src_by_id( $attachment_id, $attr['size'] );
-		$image_html = '<figure class="featured-image"><a href="' . $image_src . '" %2$s ><span class="cover"></span><img src="%3$s" alt="%4$s" %5$s ></a></figure>';
+		$image_html = '<figure class="featured-image"><a href="' . $image_src . '" %2$s><span class="cover"></span><img src="%3$s" alt="%4$s" %5$s></a></figure>';
 
 		if ( filter_var( $attr['crop'], FILTER_VALIDATE_BOOLEAN ) ) {
 			$image_width = (int)$attr['crop_width'];
@@ -133,7 +133,7 @@ class Cherry_Projects_Template_Callbacks {
 
 			$image_tag = $this->get_cropped_image_url( $attachment_id, 'full', $image_width, $image_height );
 
-			$image_html = '<figure class="featured-image"><a href="' . $image_src . '" %2$s ><span class="cover"></span>' . $image_tag . '</a></figure>';
+			$image_html = '<figure class="featured-image"><a href="' . $image_src . '" %2$s><span class="cover"></span>' . $image_tag . '</a></figure>';
 		}
 
 		$settings = array(
