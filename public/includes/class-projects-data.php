@@ -374,12 +374,18 @@ class Cherry_Project_Data {
 
 				$template_content = preg_replace_callback( $macros, array( $this, 'replace_callback' ), $template );
 
+				$size_array	= cherry_projects()->projects_data->cherry_utility->satellite->get_thumbnail_size_array( 'large' );
 				$data_attrs = '';
 				if ( 'justified-layout' === $settings['list_layout'] || 'cascading-grid-layout' === $settings['list_layout']  ) {
 					if ( has_post_thumbnail( $post_id ) ) {
 						$attachment_image_src = wp_get_attachment_image_src( $thumb_id, 'large' );
-						$data_attrs = sprintf('data-image-width="%1$s" data-image-height="%2$s"', $attachment_image_src[1], $attachment_image_src[2] );
+
 					}
+					$data_attrs = sprintf(
+						'data-image-width="%1$s" data-image-height="%2$s"',
+						isset( $attachment_image_src[1] ) ? $attachment_image_src[1] : $size_array['width'],
+						isset( $attachment_image_src[2] ) ? $attachment_image_src[2] : $size_array['height']
+					);
 				}
 
 				$html .= sprintf( '<div %1$s class="%2$s %3$s %4$s %5$s %6$s %7$s" %8$s>',

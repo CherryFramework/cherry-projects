@@ -369,16 +369,17 @@
 					projectsList.each( function( index ) {
 
 						var $this     = $( this ),
-							itemWidth = ( 100 / columnNumber ).toFixed(3);
+							itemWidth = ( 100 / columnNumber ).toFixed(5);
 
 						$this.css( {
 							'-webkit-flex-basis': itemWidth + '%',
 							'flex-basis': itemWidth + '%',
+							'width': itemWidth + '%',
 							'margin-bottom': projectsSettings['item-margin'] + 'px'
 						} );
 
 						$('.inner-wrapper', $this ).css( {
-							'margin': Math.ceil( +projectsSettings['item-margin'] / 2 ) + 'px'
+							'margin': ( +projectsSettings['item-margin'] / 2 ).toFixed(2) + 'px'
 						} );
 
 					});

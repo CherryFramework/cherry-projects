@@ -634,7 +634,7 @@ class Cherry_Projects_Template_Callbacks {
 			'height'              => $attr['height'],
 			'navigation'          => filter_var( $slider_navigation, FILTER_VALIDATE_BOOLEAN ),
 			'loop'                => filter_var( $slider_loop, FILTER_VALIDATE_BOOLEAN ),
-			'thumbnails-position' => isset( $slider_thumbnails_position ) ? $slider_thumbnails_position : 'bottom',
+			'thumbnails-position' => !empty( $slider_thumbnails_position ) ? $slider_thumbnails_position : 'bottom',
 			'thumbnails-width'    => $attr['thumbnails-width'],
 			'thumbnails-height'   => $attr['thumbnails-height'],
 			'distance'            => $attr['distance'],
