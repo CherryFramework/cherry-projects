@@ -180,7 +180,6 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-data.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-single-data.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-shortcode.php' );
-
 		}
 
 		/**
