@@ -24,7 +24,15 @@ if ( ! did_action( 'get_header' ) ) {
 
 	global $wp_query;
 
-	$filter_visible = ( is_tax() ) ? false : true;
+	$default_options = cherry_projects()->projects_data->default_options;
+
+	if ( is_tax() ) {
+		$filter_visible = false;
+	} elseif ( filter_var( $default_options['filter-visible'], FILTER_VALIDATE_BOOLEAN ) ) {
+		$filter_visible = true;
+	} else {
+		$filter_visible = false;
+	}
 
 	$attr = array(
 		'filter-visible' => $filter_visible,
