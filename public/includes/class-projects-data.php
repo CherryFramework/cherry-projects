@@ -96,6 +96,7 @@ class Cherry_Project_Data {
 			'gallery-post-template'        => cherry_projects()->get_option( 'gallery-post-template', 'gallery-post-template.tmpl' ),
 			'audio-post-template'          => cherry_projects()->get_option( 'audio-post-template', 'audio-post-template.tmpl' ),
 			'video-post-template'          => cherry_projects()->get_option( 'video-post-template', 'video-post-template.tmpl' ),
+			'echo'                         => true,
 		);
 
 		/**
@@ -180,6 +181,10 @@ class Cherry_Project_Data {
 				$html .= '<div class="projects-end-line-spinner"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>';
 			// Close wrapper.
 			$html .= '</div>';
+
+			if ( ! filter_var( $this->options['echo'], FILTER_VALIDATE_BOOLEAN ) ) {
+				return $html;
+			}
 
 			echo $html;
 		}

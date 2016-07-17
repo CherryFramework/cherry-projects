@@ -88,6 +88,9 @@ class Cherry_Projects_Shortcode {
 		 */
 		$atts = shortcode_atts( $defaults, $modify_atts, $shortcode );
 
+		// Make sure we return and don't echo.
+		$atts['echo'] = false;
+
 		return cherry_projects()->projects_data->render_projects( $atts );
 	}
 
