@@ -228,7 +228,7 @@
 .cherry-ui-repeater-container{
 	.cheryr-ui-repeater-content-box{
 		display: flex;
-		flex-flow: row nowrap;
+		flex-flow: row wrap;
 		.detail_label-wrap{
 			flex: 0 1 50%;
 			margin-right: 5px;
@@ -245,14 +245,17 @@
 			flex: 0 1 50%;
 			margin-left: 5px;
 		}
+		.video_type-wrap{
+			flex: 0 1 100%;
+			margin-bottom: 20px;
+		}
 		.video_embed-wrap{
-			flex: 0 1 80%;
-			margin-right: 5px;
+			flex: 0 1 100%;
+			margin-bottom: 20px;
 		}
 		.video_src-wrap{
 			flex: 0 1 10%;
 			margin-right: 5px;
-			margin-left: 5px;
 		}
 		.poster_src-wrap{
 			flex: 0 1 10%;

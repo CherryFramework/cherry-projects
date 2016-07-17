@@ -258,18 +258,33 @@ class Cherry_Projects_Meta_Boxes {
 					'add_label'   => esc_html__( 'Add New Video', 'cherry-projects' ),
 					'title_field' => 'detail_label',
 					'fields'      => array(
+						'video_type' => array(
+							'type'			=> 'radio',
+							'label'			=> esc_html__( 'Video source type', 'cherry-projects' ),
+							'id'			=> 'video_type',
+							'name'			=> 'video_type',
+							'display-input'	=> true,
+							'options'		=> array(
+								'embed' => array(
+									'label' => esc_html__( 'Embed video type', 'cherry-projects' ),
+								),
+								'html5' => array(
+									'label' => esc_html__( 'HTML5 video type', 'cherry-projects' ),
+								),
+							),
+						),
 						'video_embed'     => array(
 							'type'        => 'text',
 							'id'          => 'video_embed',
 							'name'        => 'video_embed',
-							'placeholder' => esc_html__( 'Select url', 'cherry-projects' ),
-							'label'       => esc_html__( 'Video url', 'cherry-projects' ),
+							'placeholder' => esc_html__( 'Select embed url', 'cherry-projects' ),
+							'label'       => esc_html__( 'Video embed url', 'cherry-projects' ),
 						),
 						'video_src' => array(
 							'type'               => 'media',
 							'id'                 => 'video_src',
 							'name'               => 'video_src',
-							'label'              => esc_html__( 'Video source', 'cherry-projects' ),
+							'label'              => esc_html__( 'HTML5 Video source', 'cherry-projects' ),
 							'display_image'      => true,
 							'multi_upload'       => false,
 							'upload_button_text' => esc_html__( 'Add Video', 'cherry-projects' ),
@@ -279,7 +294,7 @@ class Cherry_Projects_Meta_Boxes {
 							'type'               => 'media',
 							'id'                 => 'poster_src',
 							'name'               => 'poster_src',
-							'label'              => esc_html__( 'Poster source', 'cherry-projects' ),
+							'label'              => esc_html__( 'HTML5 video poster', 'cherry-projects' ),
 							'display_image'      => true,
 							'multi_upload'       => false,
 							'upload_button_text' => esc_html__( 'Add Poster', 'cherry-projects' ),

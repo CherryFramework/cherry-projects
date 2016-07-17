@@ -722,7 +722,7 @@ class Cherry_Projects_Template_Callbacks {
 			if ( ! empty( $video_list_data ) ) {
 				foreach ( $video_list_data as $item => $video_settings ) {
 
-					if ( ! empty( $video_settings['video_embed'] ) ) {
+					if ( empty( $video_settings['video_type'] ) || 'embed' === $video_settings['video_type'] ) {
 						$html .= wp_oembed_get(
 							$video_settings['video_embed'],
 							array(
@@ -731,7 +731,6 @@ class Cherry_Projects_Template_Callbacks {
 							)
 						);
 					} else {
-
 						$shortcode_attr = array(
 							'width'  => $attr['width'],
 							'height' => $attr['height'],

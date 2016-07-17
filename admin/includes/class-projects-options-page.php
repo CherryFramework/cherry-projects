@@ -320,7 +320,7 @@ class Cherry_Projects_Options_Page {
 			'post-per-page' => array(
 				'type'			=> 'slider',
 				'title'			=> esc_html__( 'Posts per page', 'cherry-projects' ),
-				'description'	=> esc_html__( 'Select how many posts per page do you want to display', 'cherry-projects' ),
+				'description'	=> esc_html__( 'Select how many posts per page do you want to display(-1 means that will show all projects)', 'cherry-projects' ),
 				'max_value'		=> 50,
 				'min_value'		=> -1,
 				'value'			=> 9,
