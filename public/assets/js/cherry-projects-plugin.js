@@ -1,6 +1,4 @@
 // cherryPortfolioPlugin plugin
-
-
 (function($){
 	var methods = {
 		init : function( options ) {
@@ -569,8 +567,8 @@
 
 			});
 		},
-		destroy: function( ) { },
-		update: function( content ) { }
+		destroy: function() {},
+		update: function( content ) {}
 	};
 
 	$.fn.cherryProjectsPlugin = function( method ) {
