@@ -169,6 +169,7 @@ class Cherry_Projects_Template_Callbacks {
 	 * @since 1.0.0
 	 */
 	public function get_content( $attr = array() ) {
+		global $post;
 
 		$default_attr = array( 'number_of_words' => -1, 'ending' => '&hellip;' );
 
@@ -196,7 +197,10 @@ class Cherry_Projects_Template_Callbacks {
 		if ( ! is_single() ) {
 			$content = cherry_projects()->projects_data->cherry_utility->attributes->get_content( $settings );
 		} else {
-			$content = get_the_content();
+			ob_start();
+			the_content( '' );
+			$content = ob_get_contents();
+			ob_end_clean();
 		}
 
 		return $content;
