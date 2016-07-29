@@ -617,6 +617,7 @@ class Cherry_Projects_Template_Callbacks {
 			'distance'          => '10',
 			'duration'          => '500',
 			'autoplay'          => false,
+			'thumbnails'        => true,
 			'thumbnails-width'  => '100',
 			'thumbnails-height' => '100',
 			'scale-mode'        => 'contain',
@@ -674,32 +675,33 @@ class Cherry_Projects_Template_Callbacks {
 						}
 					$html .= '</div>';
 
-					$html .= '<div class="projects-slider__thumbnails sp-thumbnails">';
+					if ( filter_var( $attr['thumbnails'], FILTER_VALIDATE_BOOLEAN ) ) {
+						$html .= '<div class="projects-slider__thumbnails sp-thumbnails">';
 
-						foreach ( $attachments_list as $attachment_id ) {
-							$image_width = (int)$attr['thumbnails-width'];
-							$image_height = (int)$attr['thumbnails-height'];
-							$image_html = $this->get_cropped_image_url( $attachment_id, 'full', $image_width, $image_height );
+							foreach ( $attachments_list as $attachment_id ) {
+								$image_width = (int)$attr['thumbnails-width'];
+								$image_height = (int)$attr['thumbnails-height'];
+								$image_html = $this->get_cropped_image_url( $attachment_id, 'full', $image_width, $image_height );
 
-							$html .= '<div class="sp-thumbnail">';
-								$settings = array(
-									'visible'                => true,
-									'size'                   => 'post-thumbnail',
-									'html'                   => $image_html,
-									'placeholder'            => true,
-									'placeholder_background' => '000',
-									'placeholder_foreground' => 'fff',
-									'placeholder_title'      => '',
-									'html_tag_suze'          => true,
-									'echo'                   => false,
-								);
+								$html .= '<div class="sp-thumbnail">';
+									$settings = array(
+										'visible'                => true,
+										'size'                   => 'post-thumbnail',
+										'html'                   => $image_html,
+										'placeholder'            => true,
+										'placeholder_background' => '000',
+										'placeholder_foreground' => 'fff',
+										'placeholder_title'      => '',
+										'html_tag_suze'          => true,
+										'echo'                   => false,
+									);
 
-								$html .=  cherry_projects()->projects_data->cherry_utility->media->get_image( $settings, 'attachment', $attachment_id );
-							$html .= '</div>';
-						}
+									$html .=  cherry_projects()->projects_data->cherry_utility->media->get_image( $settings, 'attachment', $attachment_id );
+								$html .= '</div>';
+							}
 
-					$html .= '</div>';
-
+						$html .= '</div>';
+					}
 				$html .= '</div>';
 			$html .= '</div>';
 		}

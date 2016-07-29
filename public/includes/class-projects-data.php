@@ -258,6 +258,9 @@ class Cherry_Project_Data {
 					}
 
 					break;
+				case 'none-mode':
+					$html .= '<!-- Loading mode: none -->';
+				break;
 			}
 
 			echo $html;

@@ -130,6 +130,10 @@ class Cherry_Projects_Options_Page {
 						'label'		=> esc_html__( 'Lazy loading', 'cherry-projects' ),
 						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/loading-mode-lazy-loading.svg',
 					),
+					'none-mode' => array(
+						'label'		=> esc_html__( 'None', 'cherry-projects' ),
+						'img_src'	=> CHERRY_PROJECTS_URI . 'public/assets/images/svg/loading-mode-none.svg',
+					),
 				),
 			),
 			'loading-animation' => array(
@@ -409,8 +413,6 @@ class Cherry_Projects_Options_Page {
 			),
 		);
 
-		add_filter( 'cherry_core_js_ui_init_settings', array( $this, 'init_ui_js' ), 10 );
-
 		array_walk( $this->projects_options, array( $this, 'set_field_types' ) );
 
 		if ( in_array( 'slider', $this->field_types ) ) {
@@ -421,21 +423,6 @@ class Cherry_Projects_Options_Page {
 		$this->ui_builder = cherry_projects()->get_core()->init_module( 'cherry-ui-elements', array( 'ui_elements' => $this->field_types ) );
 
 		return true;
-	}
-
-	/**
-	 * Init UI elements JS
-	 *
-	 * @since  1.0.0
-	 *
-	 * @return array
-	 */
-	public function init_ui_js( $settings ) {
-
-		$settings['auto_init'] = true;
-		$settings['targets'][] = '#cherry-projects-options-form';
-
-		return $settings;
 	}
 
 	/**
