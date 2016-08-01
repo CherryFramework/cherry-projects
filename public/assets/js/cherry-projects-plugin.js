@@ -230,7 +230,8 @@
 							order_settings: order,
 							template: projectsSettings['template'],
 							posts_format: projectsSettings['posts-format'],
-							filter_type: projectsSettings['filter-type']
+							filter_type: projectsSettings['filter-type'],
+							post_per_page: projectsSettings['post-per-page']
 						}
 					}
 
@@ -305,7 +306,8 @@
 							order_settings: order,
 							template: projectsSettings['template'],
 							posts_format: projectsSettings['posts-format'],
-							filter_type: projectsSettings['filter-type']
+							filter_type: projectsSettings['filter-type'],
+							post_per_page: projectsSettings['post-per-page']
 						}
 					}
 

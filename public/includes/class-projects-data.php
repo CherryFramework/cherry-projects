@@ -129,7 +129,6 @@ class Cherry_Project_Data {
 		$this->enqueue_scripts();
 
 		$this->options = wp_parse_args( $options, $this->default_options );
-
 		// The Query.
 		$posts_query = $this->get_query_projects_items( array() );
 
@@ -205,7 +204,7 @@ class Cherry_Project_Data {
 
 			$query_args = array(
 				$term_type       => $settings['slug'],
-				'posts_per_page' => $this->default_options['post-per-page'],
+				'posts_per_page' => $settings['post_per_page'],
 				'order'          => $settings['order_settings']['order'],
 				'orderby'        => $settings['order_settings']['orderby'],
 				'paged'          => intval( $settings['page'] ),
@@ -283,7 +282,7 @@ class Cherry_Project_Data {
 			$term_type = ( 'category' == $this->default_options['filter-type'] ) ? CHERRY_PROJECTS_NAME . '_category' : CHERRY_PROJECTS_NAME . '_tag';
 			$query_args = array(
 				$term_type       => $settings['slug'],
-				'posts_per_page' => $this->default_options['post-per-page'],
+				'posts_per_page' => $settings['post_per_page'],
 				'order'          => $settings['order_settings']['order'],
 				'orderby'        => $settings['order_settings']['orderby'],
 				'paged'          => intval( $settings['page'] ),
