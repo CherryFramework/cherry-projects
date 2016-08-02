@@ -107,7 +107,12 @@ class Cherry_Projects_Page_Template {
 
 		$file = '';
 
-		$page_template_meta = get_post_meta( $post->ID, '_wp_page_template', true );
+
+		if ( $post ) {
+			$page_template_meta = get_post_meta( $post->ID, '_wp_page_template', true );
+		} else {
+			$page_template_meta = 'default';
+		}
 
 		if ( is_single() && CHERRY_PROJECTS_NAME === get_post_type() ) {
 
