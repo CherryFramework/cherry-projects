@@ -447,24 +447,15 @@ class Cherry_Projects_Options_Page {
 	}
 
 	/**
-	 * [render_page description]
-	 * @return [type] [description]
+	 * Register setting sub page
+	 *
+	 * @return void
 	 */
 	public function render_page() {
-		/*add_menu_page(
-			esc_html__( 'Projects Options', 'cherry-projects' ),
-			esc_html__( 'Projects Options', 'cherry-projects' ),
-			'edit_theme_options',
-			'cherry-projects-options',
-			array( $this, 'projects_options_page' ),
-			'',
-			63
-		);*/
-
 		add_submenu_page(
 			'edit.php?post_type=projects',
-			esc_html__( 'Projects Options', 'cherry-team' ),
-			esc_html__( 'Settings', 'cherry-team' ),
+			esc_html__( 'Projects Options', 'cherry-projects' ),
+			esc_html__( 'Settings', 'cherry-projects' ),
 			'edit_theme_options',
 			'cherry-projects-options',
 			array( $this, 'projects_options_page' ),
@@ -474,7 +465,9 @@ class Cherry_Projects_Options_Page {
 	}
 
 	/**
+	 * Option page callback
 	 *
+	 * @return void
 	 */
 	public function projects_options_page() {
 		$html = '';
