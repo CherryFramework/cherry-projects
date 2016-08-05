@@ -817,11 +817,25 @@ class Cherry_Projects_Template_Callbacks {
 	 * @since 1.0.0
 	 */
 	public function get_term_image( $attr = array() ) {
-		$default_attr = array();
+		$default_attr = array( 'size' => 'large', 'crop' => 'false', 'crop_width' => '500', 'crop_height' => '350' );
 
 		$attr = wp_parse_args( $attr, $default_attr );
 
+		$attachment_id = get_term_meta( $this->term_data->term_id, 'cherry_terms_thumbnails' , true );
+		$image_src = $this->get_image_src_by_id( $attachment_id, $attr['size'] );
+		$image_html = '<figure class="featured-image"><a href="' . $image_src . '" %2$s><span class="cover"></span><img src="%3$s" alt="%4$s" %5$s></a></figure>';
+
+		if ( filter_var( $attr['crop'], FILTER_VALIDATE_BOOLEAN ) ) {
+			$image_width = (int)$attr['crop_width'];
+			$image_height = (int)$attr['crop_height'];
+
+			$image_tag = $this->get_cropped_image_url( $attachment_id, 'full', $image_width, $image_height );
+
+			$image_html = '<figure class="featured-image"><a href="' . $image_src . '" %2$s><span class="cover"></span>' . $image_tag . '</a></figure>';
+		}
+
 		$html = cherry_projects()->projects_data->cherry_utility->media->get_image( array(
+				'html'			=> $image_html,
 				'class'			=> 'term-img',
 				'size'			=> 'large',
 			),
@@ -830,6 +844,7 @@ class Cherry_Projects_Template_Callbacks {
 		);
 
 		return $html;
+
 	}
 
 	/**
@@ -891,13 +906,14 @@ class Cherry_Projects_Template_Callbacks {
 	 * @since 1.0.0
 	 */
 	public function get_term_description( $attr = array() ) {
-		$default_attr = array();
+		$default_attr = array( 'number_of_words' => '' );
 
 		$attr = wp_parse_args( $attr, $default_attr );
 
 		$html = cherry_projects()->projects_data->cherry_utility->attributes->get_content(
 			array(
 				'content_type'	=> 'term',
+				'length'		=> $attr['number_of_words'],
 			),
 			'term',
 			$this->term_data->term_id

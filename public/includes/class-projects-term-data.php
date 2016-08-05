@@ -203,60 +203,6 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 			echo '<h4>' . esc_html__( 'Terms not found', 'cherry-projects' ) . '</h4>';
 		}
 
-/*		if ( $posts_query->have_posts() ) {
-
-			// Item template.
-			$template = $this->get_template_by_name( $settings['template'], 'projects' );
-
-			$macros    = '/%%.+?%%/';
-			$callbacks = $this->setup_template_data( $settings );
-
-			while ( $posts_query->have_posts() ) : $posts_query->the_post();
-				$post_id  = $posts_query->post->ID;
-				$thumb_id = get_post_thumbnail_id();
-
-				$template_content = preg_replace_callback( $macros, array( $this, 'replace_callback' ), $template );
-
-				$size_array	= cherry_projects()->projects_data->cherry_utility->satellite->get_thumbnail_size_array( 'large' );
-				$data_attrs = '';
-				if ( 'justified-layout' === $settings['list_layout'] || 'cascading-grid-layout' === $settings['list_layout']  ) {
-					if ( has_post_thumbnail( $post_id ) ) {
-						$attachment_image_src = wp_get_attachment_image_src( $thumb_id, 'large' );
-
-					}
-					$data_attrs = sprintf(
-						'data-image-width="%1$s" data-image-height="%2$s"',
-						isset( $attachment_image_src[1] ) ? $attachment_image_src[1] : $size_array['width'],
-						isset( $attachment_image_src[2] ) ? $attachment_image_src[2] : $size_array['height']
-					);
-				}
-
-				$html .= sprintf( '<div %1$s class="%2$s %3$s %4$s %5$s %6$s %7$s" %8$s>',
-					'id="quote-' . $post_id .'"',
-					'projects-item',
-					'item-' . $count,
-					( ( $count++ % 2 ) ? 'odd' : 'even' ),
-					'animate-cycle-show',
-					$this->default_options['listing-layout'] . '-item',
-					$this->default_options['hover-animation'] . '-hover',
-					$data_attrs
-				);
-					$html .= '<div class="inner-wrapper">';
-
-						$html .= $template_content;
-
-					$html .= '</div>';
-				$html .= '</div>';
-
-				$callbacks->clear_data();
-			endwhile;
-		} else {
-			echo '<h4>' . esc_html__( 'Posts not found', 'cherry-projects' ) . '</h4>';
-		}*/
-
-		// Reset the query.
-		//wp_reset_postdata();
-
 		return $html;
 	}
 
