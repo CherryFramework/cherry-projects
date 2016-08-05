@@ -1,0 +1,22 @@
+@import "tm_mixins";
+
+.cherry-projects-terms-wrapper{
+	color: $dark_color_1;
+}
+
+.projects-terms-container{
+	position: relative;
+		&.grid-layout{
+			.projects-terms-list{
+				display: flex;
+				flex-flow: row wrap;
+				.projects-term-item{
+					flex: 0 1 auto;
+				}
+			}
+	}
+}
+
+.projects-terms-list{
+	position: relative;
+}

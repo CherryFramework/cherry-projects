@@ -56,18 +56,25 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 		private $core = null;
 
 		/**
-		 * [$projects_data description]
+		 * Cherry_Project_Data instance
 		 *
 		 * @var null
 		 */
 		public $projects_data = null;
 
 		/**
-		 * [$projects_data description]
+		 * Cherry_Project_Single instance
 		 *
 		 * @var null
 		 */
 		public $projects_single_data = null;
+
+		/**
+		 * Cherry_Project_Term_Data instance
+		 *
+		 * @var null
+		 */
+		public $projects_term_data = null;
 
 		/**
 		 * Sets up needed actions/filters for the plugin to initialize.
@@ -178,8 +185,10 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-registration.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-page-template.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-data.php' );
+			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-term-data.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-single-data.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-shortcode.php' );
+			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-term-shortcode.php' );
 		}
 
 		/**
@@ -252,7 +261,7 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 						'autoload' => false,
 					),
 					'cherry-utility' => array(
-						'autoload' => true,
+						'autoload' => false,
 					),
 					'cherry-term-meta' => array(
 						'autoload' => false,
@@ -272,8 +281,30 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 		 * @since 1.0.0
 		 */
 		public function init() {
+			$this->get_core()->init_module( 'cherry-utility', array(
+				'meta_key' => array(
+					'term_thumb' => 'cherry_terms_thumbnails',
+				),
+			) );
+
+			$this->get_core()->init_module( 'cherry-term-meta', array(
+				'tax'      => CHERRY_PROJECTS_NAME . '_category',
+				'priority' => 10,
+				'fields'   => array(
+					'cherry_terms_thumbnails' => array(
+						'type'               => 'media',
+						'value'              => '',
+						'multi_upload'       => false,
+						'library_type'       => 'image',
+						'upload_button_text' => esc_html__( 'Set thumbnail', 'cherry_projects' ),
+						'label'              => esc_html__( 'Category thumbnail', 'cherry_projects' ),
+					),
+				),
+			) );
+
 			$this->projects_data = new Cherry_Project_Data();
 			$this->projects_single_data = new Cherry_Project_Single_Data();
+			$this->projects_term_data = new Cherry_Project_Term_Data();
 		}
 
 		/**

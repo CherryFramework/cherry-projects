@@ -575,9 +575,32 @@ div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspecti
 .cherry-projects-video-list {
   width: 100%; }
 
+/* 3d mixins */
+/* end 3d mixins */
+.cherry-projects-terms-wrapper {
+  color: #23282d; }
+
+.projects-terms-container {
+  position: relative; }
+  .projects-terms-container.grid-layout .projects-terms-list {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap; }
+    .projects-terms-container.grid-layout .projects-terms-list .projects-term-item {
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 1 auto;
+          -ms-flex: 0 1 auto;
+              flex: 0 1 auto; }
+
+.projects-terms-list {
+  position: relative; }
+
 .cherry-projects-wrapper {
-  color: #23282d;
-  border-bottom: 1px solid #000; }
+  color: #23282d; }
   .cherry-projects-wrapper .projects-container {
     position: relative;
     z-index: 8; }

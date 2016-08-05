@@ -358,7 +358,7 @@ class Cherry_Project_Data {
 	/**
 	 * Render projects items.
 	 *
-	 * @param  [type] $posts_query    Query posts object.
+	 * @param  object $posts_query    Query posts object.
 	 * @param  string $listing_layout Listing layout type.
 	 * @param  string $template       Template name.
 	 * @return string
@@ -616,23 +616,27 @@ class Cherry_Project_Data {
 		$callbacks = new Cherry_Projects_Template_Callbacks( $atts );
 
 		$data = array(
-			'title'         => array( $callbacks, 'get_title' ),
-			'featuredimage' => array( $callbacks, 'get_featured_image' ),
-			'content'       => array( $callbacks, 'get_content' ),
-			'button'        => array( $callbacks, 'get_button' ),
-			'date'          => array( $callbacks, 'get_date' ),
-			'author'        => array( $callbacks, 'get_author' ),
-			'comments'      => array( $callbacks, 'get_comments' ),
-			'termslist'     => array( $callbacks, 'get_terms_list' ),
-			'detailslist'   => array( $callbacks, 'get_details_list' ),
-			'skillslist'    => array( $callbacks, 'get_skills_list' ),
-			'imagelist'     => array( $callbacks, 'get_image_list' ),
-			'slider'        => array( $callbacks, 'get_slider' ),
-			'zoomlink'      => array( $callbacks, 'get_zoom_link' ),
-			'externallink'  => array( $callbacks, 'get_external_link' ),
-			'permalink'     => array( $callbacks, 'get_permalink' ),
-			'videolist'     => array( $callbacks, 'get_video_list' ),
-			'audiolist'     => array( $callbacks, 'get_audio_list' ),
+			'title'           => array( $callbacks, 'get_title' ),
+			'featuredimage'   => array( $callbacks, 'get_featured_image' ),
+			'content'         => array( $callbacks, 'get_content' ),
+			'button'          => array( $callbacks, 'get_button' ),
+			'date'            => array( $callbacks, 'get_date' ),
+			'author'          => array( $callbacks, 'get_author' ),
+			'comments'        => array( $callbacks, 'get_comments' ),
+			'termslist'       => array( $callbacks, 'get_terms_list' ),
+			'detailslist'     => array( $callbacks, 'get_details_list' ),
+			'skillslist'      => array( $callbacks, 'get_skills_list' ),
+			'imagelist'       => array( $callbacks, 'get_image_list' ),
+			'slider'          => array( $callbacks, 'get_slider' ),
+			'zoomlink'        => array( $callbacks, 'get_zoom_link' ),
+			'externallink'    => array( $callbacks, 'get_external_link' ),
+			'permalink'       => array( $callbacks, 'get_permalink' ),
+			'videolist'       => array( $callbacks, 'get_video_list' ),
+			'audiolist'       => array( $callbacks, 'get_audio_list' ),
+			'termimage'       => array( $callbacks, 'get_term_image' ),
+			'termname'        => array( $callbacks, 'get_term_name' ),
+			'termdescription' => array( $callbacks, 'get_term_description' ),
+			'termpermalink'   => array( $callbacks, 'get_term_permalink' ),
 		);
 
 		/**
@@ -692,7 +696,6 @@ class Cherry_Project_Data {
 		$upload_dir = wp_upload_dir();
 		$upload_dir = trailingslashit( $upload_dir['basedir'] );
 		$subdir     = 'templates/shortcodes/' . $shortcode . '/' . $template;
-
 		/**
 		 * Filters a default fallback-template.
 		 *

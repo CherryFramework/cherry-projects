@@ -1,6 +1,6 @@
 <?php
 /**
- * Cherry Projects Shortcode.
+ * Cherry Projects Term Shortcode.
  *
  * @package   Cherry_Team
  * @author    Cherry Team
@@ -10,11 +10,11 @@
  */
 
 /**
- * Class for Projects shortcode.
+ * Class for Projects term shortcode.
  *
  * @since 1.0.0
  */
-class Cherry_Projects_Shortcode {
+class Cherry_Projects_Term_Shortcode {
 
 	/**
 	 * Shortcode name.
@@ -22,7 +22,7 @@ class Cherry_Projects_Shortcode {
 	 * @since 1.0.0
 	 * @var   string
 	 */
-	public static $name = 'projects';
+	public static $name = 'projects_term';
 
 	/**
 	 * A reference to an instance of this class.
@@ -79,7 +79,7 @@ class Cherry_Projects_Shortcode {
 		}
 
 		// Set up the default arguments.
-		$defaults = cherry_projects()->projects_data->default_options;
+		$defaults = array();
 
 		/**
 		 * Parse the arguments.
@@ -91,7 +91,7 @@ class Cherry_Projects_Shortcode {
 		// Make sure we return and don't echo.
 		$atts['echo'] = false;
 
-		return cherry_projects()->projects_data->render_projects( $atts );
+		return cherry_projects()->projects_term_data->render_projects_term( $atts );
 	}
 
 	/**
@@ -111,4 +111,4 @@ class Cherry_Projects_Shortcode {
 
 }
 
-Cherry_Projects_Shortcode::get_instance();
+Cherry_Projects_Term_Shortcode::get_instance();

@@ -13,20 +13,25 @@
 			}
 
 		},
+
 		readyRender: function ( self ) {
 			self.projectsPluginInit( self );
 			self.magnificInit( self );
+			self.projectsTermsInit( self );
 		},
+
 		projectsPluginInit: function( self ) {
 			if ( $( '.cherry-projects-wrapper' )[0] ) {
 				$( '.cherry-projects-wrapper' ).cherryProjectsPlugin( {} );
 			}
 		},
+
 		magnificIconInit: function() {
 			if ( $( '.zoom-link' )[0] ){
 				$( '.zoom-link' ).magnificPopup({type: 'image'});
 			}
 		},
+
 		magnificInit: function( self ) {
 			$( '.cherry-projects-wrapper' ).magnificPopup({
 				delegate: '.featured-image a',
@@ -44,6 +49,16 @@
 						return openerElement.is('img') ? openerElement : openerElement.find('img');
 					}
 				}
+			});
+		},
+
+		projectsTermsInit: function( self ) {
+			var $projectsTermInstance = $('.projects-terms-container' );
+
+			projectsTermInstance.each( function( index ) {
+				var $instance        = $( this ),
+					instanceSettings = $instance.data( 'settings' );
+
 			});
 		}
 	}

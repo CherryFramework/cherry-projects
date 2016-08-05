@@ -9,10 +9,10 @@
 @import "list-layout";
 @import "animation-layout";
 @import "single-post";
+@import "projects-terms";
 
 .cherry-projects-wrapper{
 	color: $dark_color_1;
-	border-bottom: 1px solid #000;
 		.projects-container{
 			position: relative;
 			z-index: 8;

@@ -23,6 +23,7 @@ class Cherry_Projects_Template_Callbacks {
 
 	/**
 	 * Shortcode attributes array.
+	 *
 	 * @var array
 	 */
 	public $atts = array();
@@ -34,6 +35,14 @@ class Cherry_Projects_Template_Callbacks {
 	 * @var   array
 	 */
 	public $post_meta = null;
+
+	/**
+	 * Term data meta.
+	 *
+	 * @since 1.0.0
+	 * @var   array
+	 */
+	public $term_data = null;
 
 	/**
 	 * Class constructor.
@@ -68,6 +77,24 @@ class Cherry_Projects_Template_Callbacks {
 	 */
 	public function clear_data() {
 		$this->post_meta = null;
+	}
+
+	/**
+	 * Set current term data.
+	 *
+	 * @since  1.0.0
+	 */
+	public function set_term_data( $term_data = null ) {
+		$this->term_data = $term_data;
+	}
+
+	/**
+	 * Clear current term data.
+	 *
+	 * @since  1.0.0
+	 */
+	public function clear_term_data() {
+		$this->term_data = null;
 	}
 
 	/**
@@ -780,6 +807,101 @@ class Cherry_Projects_Template_Callbacks {
 			$html .=  wp_playlist_shortcode( $attr );
 
 		$html .= '</div>';
+
+		return $html;
+	}
+
+	/**
+	 * Get term image
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_term_image( $attr = array() ) {
+		$default_attr = array();
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
+		$html = cherry_projects()->projects_data->cherry_utility->media->get_image( array(
+				'class'			=> 'term-img',
+				'size'			=> 'large',
+			),
+			'term',
+			$this->term_data->term_id
+		);
+
+		return $html;
+	}
+
+	/**
+	 * Get term name
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_term_name( $attr = array() ) {
+		$default_attr = array();
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
+		$html = cherry_projects()->projects_data->cherry_utility->attributes->get_title(
+			array(
+				'html' => '<h5 %1$s><a href="%2$s" %3$s>%4$s</a></h5>',
+			),
+			'term',
+			$this->term_data->term_id
+		);
+
+		return $html;
+	}
+
+	/**
+	 * Get term permalink
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_term_permalink( $attr = array() ) {
+		$default_attr = array(
+			'text_visible' => false
+		);
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
+		$permalink = cherry_projects()->projects_data->cherry_utility->attributes->get_term_permalink( $this->term_data->term_id );
+
+		/**
+		 * Filter permalink text.
+		 *
+		 * @since 1.0.0
+		 * @var array
+		 */
+		$permalink_text = apply_filters( 'cherry-projects-terms-permalink-text', esc_html__( 'More', 'cherry-projects' ) );
+
+		$icon_content = ( filter_var( $attr['text_visible'], FILTER_VALIDATE_BOOLEAN ) ) ? '<span>' . $permalink_text . '</span>' : '<span class="dashicons dashicons-admin-links"></span>';
+
+		$html = sprintf( '<a class="term-permalink" href="%1$s">%2$s</a>',
+			$permalink,
+			$icon_content
+		);
+
+		return $html;
+	}
+
+	/**
+	 * Get term description
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_term_description( $attr = array() ) {
+		$default_attr = array();
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
+		$html = cherry_projects()->projects_data->cherry_utility->attributes->get_content(
+			array(
+				'content_type'	=> 'term',
+			),
+			'term',
+			$this->term_data->term_id
+		);
 
 		return $html;
 	}
