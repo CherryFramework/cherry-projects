@@ -33,12 +33,7 @@
 					ajaxRequestObject      = null;
 
 				( function () {
-					if ( ! $('.cherry-projects-ajax-loader')[0] ) {
-						$('body').append('<div class="cherry-projects-ajax-loader"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>');
-						$ajaxLoader = $('.cherry-projects-ajax-loader');
-					} else {
-						$ajaxLoader = $('.cherry-projects-ajax-loader');
-					}
+					$ajaxLoader = $( '.cherry-projects-ajax-loader' , $this );
 
 					$ajaxLoader.css( { 'display': 'block'} ).fadeTo( 500, 1 );
 

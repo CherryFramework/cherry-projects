@@ -253,15 +253,15 @@ ul.order-filters {
 
 /* 3d mixins */
 /* end 3d mixins */
-div.cherry-projects-wrapper .projects-container.loading-animation-fade .projects-list .projects-item .inner-wrapper {
+.cherry-animation-container.loading-animation-fade .cherry-animation-list .cherry-animation-item .inner-wrapper {
   opacity: 1;
   filter: alpha(opacity=100);
   -webkit-transition: all 0.8s ease;
   transition: all 0.8s ease; }
-div.cherry-projects-wrapper .projects-container.loading-animation-fade .projects-list .projects-item.animate-cycle-show .inner-wrapper {
+.cherry-animation-container.loading-animation-fade .cherry-animation-list .cherry-animation-item.animate-cycle-show .inner-wrapper {
   opacity: 0;
   filter: alpha(opacity=0); }
-div.cherry-projects-wrapper .projects-container.loading-animation-fade .projects-list .projects-item.animate-cycle-hide .inner-wrapper {
+.cherry-animation-container.loading-animation-fade .cherry-animation-list .cherry-animation-item.animate-cycle-hide .inner-wrapper {
   opacity: 0;
   filter: alpha(opacity=0);
   -webkit-transform: translateY(-30px);
@@ -269,12 +269,12 @@ div.cherry-projects-wrapper .projects-container.loading-animation-fade .projects
   transform: translateY(-30px);
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease; }
-div.cherry-projects-wrapper .projects-container.loading-animation-scale .projects-list .projects-item {
+.cherry-animation-container.loading-animation-scale .cherry-animation-list .cherry-animation-item {
   -webkit-perspective: 1000px;
   perspective: 1000px;
   -webkit-perspective-origin: 50% 50%;
   perspective-origin: 50% 50%; }
-  div.cherry-projects-wrapper .projects-container.loading-animation-scale .projects-list .projects-item .inner-wrapper {
+  .cherry-animation-container.loading-animation-scale .cherry-animation-list .cherry-animation-item .inner-wrapper {
     opacity: 1;
     filter: alpha(opacity=100);
     transform-style: preserve-3d;
@@ -289,13 +289,13 @@ div.cherry-projects-wrapper .projects-container.loading-animation-scale .project
     transform: translateZ(0px) translateY(0px) rotateX(0deg);
     -webkit-transition: all 0.7s cubic-bezier(0.29, 0.65, 0.64, 0.97);
     transition: all 0.7s cubic-bezier(0.29, 0.65, 0.64, 0.97); }
-  div.cherry-projects-wrapper .projects-container.loading-animation-scale .projects-list .projects-item.animate-cycle-show .inner-wrapper {
+  .cherry-animation-container.loading-animation-scale .cherry-animation-list .cherry-animation-item.animate-cycle-show .inner-wrapper {
     opacity: 0;
     filter: alpha(opacity=0);
     -webkit-transform: translateZ(-1500px) translateY(50px) rotateX(90deg);
     -ms-transform: translateZ(-1500px) translateY(50px) rotateX(90deg);
     transform: translateZ(-1500px) translateY(50px) rotateX(90deg); }
-  div.cherry-projects-wrapper .projects-container.loading-animation-scale .projects-list .projects-item.animate-cycle-hide .inner-wrapper {
+  .cherry-animation-container.loading-animation-scale .cherry-animation-list .cherry-animation-item.animate-cycle-hide .inner-wrapper {
     opacity: 0;
     filter: alpha(opacity=0);
     -webkit-transform: translateY(-30px);
@@ -303,12 +303,12 @@ div.cherry-projects-wrapper .projects-container.loading-animation-scale .project
     transform: translateY(-30px);
     -webkit-transition: all 0.4s ease;
     transition: all 0.4s ease; }
-div.cherry-projects-wrapper .projects-container.loading-animation-move-up .projects-list .projects-item {
+.cherry-animation-container.loading-animation-move-up .cherry-animation-list .cherry-animation-item {
   -webkit-perspective: 500px;
   perspective: 500px;
   -webkit-perspective-origin: 50% 50%;
   perspective-origin: 50% 50%; }
-  div.cherry-projects-wrapper .projects-container.loading-animation-move-up .projects-list .projects-item .inner-wrapper {
+  .cherry-animation-container.loading-animation-move-up .cherry-animation-list .cherry-animation-item .inner-wrapper {
     opacity: 1;
     filter: alpha(opacity=100);
     transform-style: preserve-3d;
@@ -323,13 +323,13 @@ div.cherry-projects-wrapper .projects-container.loading-animation-move-up .proje
     transform: translateY(0px) translateZ(0) rotateX(0deg);
     -webkit-transition: all 0.8s cubic-bezier(0.29, 0.65, 0.64, 0.97);
     transition: all 0.8s cubic-bezier(0.29, 0.65, 0.64, 0.97); }
-  div.cherry-projects-wrapper .projects-container.loading-animation-move-up .projects-list .projects-item.animate-cycle-show .inner-wrapper {
+  .cherry-animation-container.loading-animation-move-up .cherry-animation-list .cherry-animation-item.animate-cycle-show .inner-wrapper {
     opacity: 0;
     filter: alpha(opacity=0);
     -webkit-transform: translateY(80px) translateZ(-100px) rotateX(5deg);
     -ms-transform: translateY(80px) translateZ(-100px) rotateX(5deg);
     transform: translateY(80px) translateZ(-100px) rotateX(5deg); }
-  div.cherry-projects-wrapper .projects-container.loading-animation-move-up .projects-list .projects-item.animate-cycle-hide .inner-wrapper {
+  .cherry-animation-container.loading-animation-move-up .cherry-animation-list .cherry-animation-item.animate-cycle-hide .inner-wrapper {
     opacity: 0;
     filter: alpha(opacity=0);
     -webkit-transform: translateY(-30px);
@@ -337,12 +337,12 @@ div.cherry-projects-wrapper .projects-container.loading-animation-move-up .proje
     transform: translateY(-30px);
     -webkit-transition: all 0.4s ease;
     transition: all 0.4s ease; }
-div.cherry-projects-wrapper .projects-container.loading-animation-flip .projects-list {
+.cherry-animation-container.loading-animation-flip .cherry-animation-list {
   -webkit-perspective: 1500px;
   perspective: 1500px;
   -webkit-perspective-origin: 50% 50%;
   perspective-origin: 50% 50%; }
-  div.cherry-projects-wrapper .projects-container.loading-animation-flip .projects-list .projects-item .inner-wrapper {
+  .cherry-animation-container.loading-animation-flip .cherry-animation-list .cherry-animation-item .inner-wrapper {
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
@@ -357,13 +357,13 @@ div.cherry-projects-wrapper .projects-container.loading-animation-flip .projects
     transform: translateY(0px) rotateX(0deg);
     -webkit-transition: all 0.8s cubic-bezier(0.31, 0.78, 0.39, 0.93);
     transition: all 0.8s cubic-bezier(0.31, 0.78, 0.39, 0.93); }
-  div.cherry-projects-wrapper .projects-container.loading-animation-flip .projects-list .projects-item.animate-cycle-show .inner-wrapper {
+  .cherry-animation-container.loading-animation-flip .cherry-animation-list .cherry-animation-item.animate-cycle-show .inner-wrapper {
     opacity: 0;
     filter: alpha(opacity=0);
     -webkit-transform: translateY(-50px) rotateX(80deg);
     -ms-transform: translateY(-50px) rotateX(80deg);
     transform: translateY(-50px) rotateX(80deg); }
-  div.cherry-projects-wrapper .projects-container.loading-animation-flip .projects-list .projects-item.animate-cycle-hide .inner-wrapper {
+  .cherry-animation-container.loading-animation-flip .cherry-animation-list .cherry-animation-item.animate-cycle-hide .inner-wrapper {
     opacity: 0;
     filter: alpha(opacity=0);
     -webkit-transform: translateY(-30px);
@@ -371,12 +371,12 @@ div.cherry-projects-wrapper .projects-container.loading-animation-flip .projects
     transform: translateY(-30px);
     -webkit-transition: all 0.4s ease;
     transition: all 0.4s ease; }
-div.cherry-projects-wrapper .projects-container.loading-animation-helix .projects-list {
+.cherry-animation-container.loading-animation-helix .cherry-animation-list {
   -webkit-perspective: 1000px;
   perspective: 1000px;
   -webkit-perspective-origin: 50% 50%;
   perspective-origin: 50% 50%; }
-  div.cherry-projects-wrapper .projects-container.loading-animation-helix .projects-list .projects-item .inner-wrapper {
+  .cherry-animation-container.loading-animation-helix .cherry-animation-list .cherry-animation-item .inner-wrapper {
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
@@ -388,13 +388,13 @@ div.cherry-projects-wrapper .projects-container.loading-animation-helix .project
     filter: alpha(opacity=100);
     -webkit-transition: all 0.8s cubic-bezier(0.29, 0.65, 0.64, 0.97);
     transition: all 0.8s cubic-bezier(0.29, 0.65, 0.64, 0.97); }
-  div.cherry-projects-wrapper .projects-container.loading-animation-helix .projects-list .projects-item.animate-cycle-show .inner-wrapper {
+  .cherry-animation-container.loading-animation-helix .cherry-animation-list .cherry-animation-item.animate-cycle-show .inner-wrapper {
     -webkit-transform: translateZ(-1000px) translateY(-50px) rotateY(-240deg);
     -ms-transform: translateZ(-1000px) translateY(-50px) rotateY(-240deg);
     transform: translateZ(-1000px) translateY(-50px) rotateY(-240deg);
     opacity: 0;
     filter: alpha(opacity=0); }
-  div.cherry-projects-wrapper .projects-container.loading-animation-helix .projects-list .projects-item.animate-cycle-hide .inner-wrapper {
+  .cherry-animation-container.loading-animation-helix .cherry-animation-list .cherry-animation-item.animate-cycle-hide .inner-wrapper {
     opacity: 0;
     filter: alpha(opacity=0);
     -webkit-transform: translateY(-30px);
@@ -402,12 +402,12 @@ div.cherry-projects-wrapper .projects-container.loading-animation-helix .project
     transform: translateY(-30px);
     -webkit-transition: all 0.4s ease;
     transition: all 0.4s ease; }
-div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspective .projects-list {
+.cherry-animation-container.loading-animation-fall-perspective .cherry-animation-list {
   -webkit-perspective: 1000px;
   perspective: 1000px;
   -webkit-perspective-origin: 50% 50%;
   perspective-origin: 50% 50%; }
-  div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspective .projects-list .projects-item .inner-wrapper {
+  .cherry-animation-container.loading-animation-fall-perspective .cherry-animation-list .cherry-animation-item .inner-wrapper {
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
@@ -419,13 +419,13 @@ div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspecti
     filter: alpha(opacity=100);
     -webkit-transition: all 0.8s cubic-bezier(0.29, 0.65, 0.64, 0.97);
     transition: all 0.8s cubic-bezier(0.29, 0.65, 0.64, 0.97); }
-  div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspective .projects-list .projects-item.animate-cycle-show .inner-wrapper {
+  .cherry-animation-container.loading-animation-fall-perspective .cherry-animation-list .cherry-animation-item.animate-cycle-show .inner-wrapper {
     -webkit-transform: translateZ(400px) translateY(300px) rotateX(-65deg);
     -ms-transform: translateZ(400px) translateY(300px) rotateX(-65deg);
     transform: translateZ(400px) translateY(300px) rotateX(-65deg);
     opacity: 0;
     filter: alpha(opacity=0); }
-  div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspective .projects-list .projects-item.animate-cycle-hide .inner-wrapper {
+  .cherry-animation-container.loading-animation-fall-perspective .cherry-animation-list .cherry-animation-item.animate-cycle-hide .inner-wrapper {
     opacity: 0;
     filter: alpha(opacity=0);
     -webkit-transform: translateY(-30px);
@@ -578,7 +578,8 @@ div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspecti
 /* 3d mixins */
 /* end 3d mixins */
 .cherry-projects-terms-wrapper {
-  color: #23282d; }
+  color: #23282d;
+  position: relative; }
 
 .projects-terms-container {
   position: relative; }
@@ -590,17 +591,49 @@ div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspecti
     -webkit-flex-flow: row wrap;
         -ms-flex-flow: row wrap;
             flex-flow: row wrap; }
-    .projects-terms-container.grid-layout .projects-terms-list .projects-term-item {
+    .projects-terms-container.grid-layout .projects-terms-list .projects-terms-item {
       -webkit-box-flex: 0;
       -webkit-flex: 0 1 auto;
           -ms-flex: 0 1 auto;
               flex: 0 1 auto; }
+  .projects-terms-container.masonry-layout .projects-terms-list .projects-terms-item {
+    display: inline-block; }
+  .projects-terms-container.list-layout .projects-terms-list .projects-terms-item {
+    margin-bottom: 20px; }
+  .projects-terms-container.list-layout .inner-wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+            align-items: flex-start; }
+  .projects-terms-container.list-layout .project-terms-media {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 auto;
+        -ms-flex: 0 1 auto;
+            flex: 0 1 auto;
+    min-width: 30%;
+    margin-right: 20px; }
+  .projects-terms-container.list-layout .project-terms-content {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 auto;
+        -ms-flex: 0 1 auto;
+            flex: 0 1 auto;
+    min-width: 70%; }
+  .projects-terms-container .term-permalink span:before {
+    content: "\f103"; }
 
 .projects-terms-list {
   position: relative; }
 
 .cherry-projects-wrapper {
-  color: #23282d; }
+  color: #23282d;
+  position: relative; }
   .cherry-projects-wrapper .projects-container {
     position: relative;
     z-index: 8; }
@@ -608,21 +641,21 @@ div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspecti
     position: relative;
     min-height: 100px; }
 
-.projects-item .inner-wrapper {
+.projects-item-instance .inner-wrapper {
   position: relative; }
-.projects-item .featured-image {
+.projects-item-instance .featured-image {
   width: 100%;
   line-height: 0; }
-  .projects-item .featured-image img {
+  .projects-item-instance .featured-image img {
     width: 100%;
     height: auto; }
-.projects-item .project-media {
+.projects-item-instance .project-media, .projects-item-instance .project-terms-media {
   position: relative; }
-.projects-item .project-meta {
+.projects-item-instance .project-meta {
   margin: 15px 0; }
-.projects-item .project-content {
+.projects-item-instance .project-content, .projects-item-instance .project-terms-media {
   position: relative; }
-.projects-item .simple-icon {
+.projects-item-instance .simple-icon {
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -630,16 +663,16 @@ div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspecti
   color: #f1f1f1;
   margin: 5px;
   border-radius: 30px; }
-  .projects-item .simple-icon span {
+  .projects-item-instance .simple-icon span {
     margin: 5px; }
-  .projects-item .simple-icon:hover {
+  .projects-item-instance .simple-icon:hover {
     background-color: #206ff4; }
-.projects-item .simple-button {
+.projects-item-instance .simple-button {
   display: inline-block;
   padding: 10px;
   background-color: #298ffc;
   color: #f1f1f1; }
-.projects-item .hover-content {
+.projects-item-instance .hover-content {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -668,11 +701,11 @@ div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspecti
   background-color: rgba(35, 40, 45, 0.6);
   -webkit-transition: all 0.4s ease-out;
   transition: all 0.4s ease-out; }
-  .projects-item .hover-content.row-format {
+  .projects-item-instance .hover-content.row-format {
     -webkit-flex-flow: row nowrap;
         -ms-flex-flow: row nowrap;
             flex-flow: row nowrap; }
-  .projects-item .hover-content > * {
+  .projects-item-instance .hover-content > * {
     -webkit-box-flex: 0;
     -webkit-flex: 0 1 auto;
         -ms-flex: 0 1 auto;
@@ -680,160 +713,160 @@ div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspecti
     -webkit-align-self: center;
         -ms-flex-item-align: center;
             align-self: center; }
-.projects-item.simple-fade-hover .hover-content {
+.projects-item-instance.simple-fade-hover .hover-content {
   opacity: 0;
   -webkit-transition: all 0.4s ease-out;
   transition: all 0.4s ease-out; }
-  .projects-item.simple-fade-hover .hover-content > * {
+  .projects-item-instance.simple-fade-hover .hover-content > * {
     opacity: 0;
     -webkit-transform: translateY(100%);
     -ms-transform: translateY(100%);
     transform: translateY(100%); }
-  .projects-item.simple-fade-hover .hover-content:hover {
+  .projects-item-instance.simple-fade-hover .hover-content:hover {
     opacity: 1; }
-    .projects-item.simple-fade-hover .hover-content:hover > * {
+    .projects-item-instance.simple-fade-hover .hover-content:hover > * {
       opacity: 1;
       -webkit-transform: translateY(0%);
       -ms-transform: translateY(0%);
       transform: translateY(0%);
       -webkit-transition: all 0.3s ease-out;
       transition: all 0.3s ease-out; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(1) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(1) {
         -webkit-transition-delay: 0.1s;
                 transition-delay: 0.1s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(2) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(2) {
         -webkit-transition-delay: 0.2s;
                 transition-delay: 0.2s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(3) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(3) {
         -webkit-transition-delay: 0.3s;
                 transition-delay: 0.3s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(4) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(4) {
         -webkit-transition-delay: 0.4s;
                 transition-delay: 0.4s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(5) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(5) {
         -webkit-transition-delay: 0.5s;
                 transition-delay: 0.5s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(6) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(6) {
         -webkit-transition-delay: 0.6s;
                 transition-delay: 0.6s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(7) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(7) {
         -webkit-transition-delay: 0.7s;
                 transition-delay: 0.7s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(8) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(8) {
         -webkit-transition-delay: 0.8s;
                 transition-delay: 0.8s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(9) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(9) {
         -webkit-transition-delay: 0.9s;
                 transition-delay: 0.9s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(10) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(10) {
         -webkit-transition-delay: 1s;
                 transition-delay: 1s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(11) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(11) {
         -webkit-transition-delay: 1.1s;
                 transition-delay: 1.1s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(12) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(12) {
         -webkit-transition-delay: 1.2s;
                 transition-delay: 1.2s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(13) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(13) {
         -webkit-transition-delay: 1.3s;
                 transition-delay: 1.3s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(14) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(14) {
         -webkit-transition-delay: 1.4s;
                 transition-delay: 1.4s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(15) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(15) {
         -webkit-transition-delay: 1.5s;
                 transition-delay: 1.5s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(16) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(16) {
         -webkit-transition-delay: 1.6s;
                 transition-delay: 1.6s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(17) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(17) {
         -webkit-transition-delay: 1.7s;
                 transition-delay: 1.7s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(18) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(18) {
         -webkit-transition-delay: 1.8s;
                 transition-delay: 1.8s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(19) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(19) {
         -webkit-transition-delay: 1.9s;
                 transition-delay: 1.9s; }
-      .projects-item.simple-fade-hover .hover-content:hover > *:nth-child(20) {
+      .projects-item-instance.simple-fade-hover .hover-content:hover > *:nth-child(20) {
         -webkit-transition-delay: 2s;
                 transition-delay: 2s; }
-.projects-item.simple-scale-hover .hover-content {
+.projects-item-instance.simple-scale-hover .hover-content {
   opacity: 0;
   -webkit-transition: all 0.4s ease-out;
   transition: all 0.4s ease-out; }
-  .projects-item.simple-scale-hover .hover-content > * {
+  .projects-item-instance.simple-scale-hover .hover-content > * {
     -webkit-transform: scale(0);
     -ms-transform: scale(0);
     transform: scale(0);
     -webkit-transition: all 0.4s ease-out;
     transition: all 0.4s ease-out; }
-  .projects-item.simple-scale-hover .hover-content:hover {
+  .projects-item-instance.simple-scale-hover .hover-content:hover {
     opacity: 1; }
-    .projects-item.simple-scale-hover .hover-content:hover > * {
+    .projects-item-instance.simple-scale-hover .hover-content:hover > * {
       -webkit-transform: scale(1);
           -ms-transform: scale(1);
               transform: scale(1);
       -webkit-transition: all 0.3s ease-out;
       transition: all 0.3s ease-out; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(1) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(1) {
         -webkit-transition-delay: 0.1s;
                 transition-delay: 0.1s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(2) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(2) {
         -webkit-transition-delay: 0.2s;
                 transition-delay: 0.2s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(3) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(3) {
         -webkit-transition-delay: 0.3s;
                 transition-delay: 0.3s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(4) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(4) {
         -webkit-transition-delay: 0.4s;
                 transition-delay: 0.4s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(5) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(5) {
         -webkit-transition-delay: 0.5s;
                 transition-delay: 0.5s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(6) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(6) {
         -webkit-transition-delay: 0.6s;
                 transition-delay: 0.6s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(7) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(7) {
         -webkit-transition-delay: 0.7s;
                 transition-delay: 0.7s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(8) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(8) {
         -webkit-transition-delay: 0.8s;
                 transition-delay: 0.8s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(9) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(9) {
         -webkit-transition-delay: 0.9s;
                 transition-delay: 0.9s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(10) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(10) {
         -webkit-transition-delay: 1s;
                 transition-delay: 1s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(11) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(11) {
         -webkit-transition-delay: 1.1s;
                 transition-delay: 1.1s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(12) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(12) {
         -webkit-transition-delay: 1.2s;
                 transition-delay: 1.2s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(13) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(13) {
         -webkit-transition-delay: 1.3s;
                 transition-delay: 1.3s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(14) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(14) {
         -webkit-transition-delay: 1.4s;
                 transition-delay: 1.4s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(15) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(15) {
         -webkit-transition-delay: 1.5s;
                 transition-delay: 1.5s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(16) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(16) {
         -webkit-transition-delay: 1.6s;
                 transition-delay: 1.6s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(17) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(17) {
         -webkit-transition-delay: 1.7s;
                 transition-delay: 1.7s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(18) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(18) {
         -webkit-transition-delay: 1.8s;
                 transition-delay: 1.8s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(19) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(19) {
         -webkit-transition-delay: 1.9s;
                 transition-delay: 1.9s; }
-      .projects-item.simple-scale-hover .hover-content:hover > *:nth-child(20) {
+      .projects-item-instance.simple-scale-hover .hover-content:hover > *:nth-child(20) {
         -webkit-transition-delay: 2s;
                 transition-delay: 2s; }
 
@@ -866,7 +899,7 @@ div.cherry-projects-wrapper .projects-container.loading-animation-fall-perspecti
         background: #495159; }
 
 .cherry-projects-ajax-loader {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;

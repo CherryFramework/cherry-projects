@@ -34,9 +34,16 @@ if ( ! did_action( 'get_header' ) ) {
 		$filter_visible = false;
 	}
 
+	if ( 'projects_category' === $wp_query->query_vars['taxonomy'] ) {
+		$filter_type = 'category';
+	} elseif ( 'projects_tag' === $wp_query->query_vars['taxonomy'] ) {
+		$filter_type = 'tag';
+	}
+
 	$attr = array(
 		'filter-visible' => $filter_visible,
 		'single-term'    => ! empty( $wp_query->query_vars['term'] ) ? $wp_query->query_vars['term'] : '',
+		'filter-type'    => $filter_type,
 	);
 
 	cherry_projects()->projects_data->render_projects( $attr );

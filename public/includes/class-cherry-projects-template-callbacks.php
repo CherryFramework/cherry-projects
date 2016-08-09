@@ -853,13 +853,14 @@ class Cherry_Projects_Template_Callbacks {
 	 * @since 1.0.0
 	 */
 	public function get_term_name( $attr = array() ) {
-		$default_attr = array();
+		$default_attr = array( 'number_of_words' => 10 );
 
 		$attr = wp_parse_args( $attr, $default_attr );
 
 		$html = cherry_projects()->projects_data->cherry_utility->attributes->get_title(
 			array(
-				'html' => '<h5 %1$s><a href="%2$s" %3$s>%4$s</a></h5>',
+				'html'   => '<h5 %1$s><a href="%2$s" %3$s>%4$s</a></h5>',
+				'length' => $attr['number_of_words'],
 			),
 			'term',
 			$this->term_data->term_id
@@ -890,9 +891,9 @@ class Cherry_Projects_Template_Callbacks {
 		 */
 		$permalink_text = apply_filters( 'cherry-projects-terms-permalink-text', esc_html__( 'More', 'cherry-projects' ) );
 
-		$icon_content = ( filter_var( $attr['text_visible'], FILTER_VALIDATE_BOOLEAN ) ) ? '<span>' . $permalink_text . '</span>' : '<span class="dashicons dashicons-admin-links"></span>';
+		$icon_content = ( filter_var( $attr['text_visible'], FILTER_VALIDATE_BOOLEAN ) ) ? '<span>' . $permalink_text . '</span>' : '<span class="dashicons"></span>';
 
-		$html = sprintf( '<a class="term-permalink" href="%1$s">%2$s</a>',
+		$html = sprintf( '<a class="term-permalink simple-icon" href="%1$s">%2$s</a>',
 			$permalink,
 			$icon_content
 		);
@@ -906,14 +907,18 @@ class Cherry_Projects_Template_Callbacks {
 	 * @since 1.0.0
 	 */
 	public function get_term_description( $attr = array() ) {
-		$default_attr = array( 'number_of_words' => '' );
+		$default_attr = array(
+			'number_of_words' => '',
+			'ending'          => '&hellip;'
+		);
 
 		$attr = wp_parse_args( $attr, $default_attr );
 
 		$html = cherry_projects()->projects_data->cherry_utility->attributes->get_content(
 			array(
 				'content_type'	=> 'term',
-				'length'		=> $attr['number_of_words'],
+				'length'		=> (int)$attr['number_of_words'],
+				'ending'		=> $attr['ending'],
 			),
 			'term',
 			$this->term_data->term_id

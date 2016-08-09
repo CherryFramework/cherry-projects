@@ -92,9 +92,12 @@ class Cherry_Project_Single_Data extends Cherry_Project_Data {
 	 * @since 1.0.0
 	 */
 	public function enqueue_single_styles() {
+		if ( is_single() ) {
+			wp_enqueue_style( 'slider-pro', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/slider-pro.min.css', array(), '1.2.4' );
+		}
+
 		wp_enqueue_style( 'dashicons' );
 		wp_enqueue_style( 'magnific-popup', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/magnific-popup.css', array(), '1.1.0' );
-		wp_enqueue_style( 'slider-pro', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/slider-pro.min.css', array(), '1.2.4' );
 		wp_enqueue_style( 'cherry-projects-styles', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/styles.css', array(), CHERRY_PROJECTS_VERSION );
 	}
 
@@ -104,8 +107,11 @@ class Cherry_Project_Single_Data extends Cherry_Project_Data {
 	 * @since 1.0.0
 	 */
 	public function enqueue_single_scripts() {
+		if ( is_single() ) {
+			wp_enqueue_script( 'slider-pro', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.sliderPro.min.js', array( 'jquery' ), '1.2.4', true );
+		}
+
 		wp_enqueue_script( 'magnific-popup', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), '1.1.0', true );
-		wp_enqueue_script( 'slider-pro', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.sliderPro.min.js', array( 'jquery' ), '1.2.4', true );
 		wp_enqueue_script( 'cherry-projects-single-scripts', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-single-scripts.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 	}
 

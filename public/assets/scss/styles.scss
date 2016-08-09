@@ -13,6 +13,7 @@
 
 .cherry-projects-wrapper{
 	color: $dark_color_1;
+	position: relative;
 		.projects-container{
 			position: relative;
 			z-index: 8;
@@ -23,7 +24,7 @@
 		}
 }
 
-.projects-item{
+.projects-item-instance{
 	.inner-wrapper{
 		position: relative;
 	}
@@ -35,13 +36,13 @@
 			height: auto;
 		}
 	}
-	.project-media{
+	.project-media, .project-terms-media{
 		position: relative;
 	}
 	.project-meta{
 		margin: 15px 0;
 	}
-	.project-content{
+	.project-content, .project-terms-media{
 		position: relative;
 	}
 
@@ -89,7 +90,6 @@
 			align-self: center;
 		}
 	}
-
 	&.simple-fade-hover{
 		.hover-content{
 			opacity: 0;
@@ -176,7 +176,7 @@
 }
 
 .cherry-projects-ajax-loader{
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;

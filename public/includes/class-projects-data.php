@@ -130,7 +130,14 @@ class Cherry_Project_Data {
 
 		$this->options = wp_parse_args( $options, $this->default_options );
 		// The Query.
-		$posts_query = $this->get_query_projects_items( array() );
+		$posts_query = $this->get_query_projects_items(
+			array(
+				CHERRY_PROJECTS_NAME . '_' . $this->options['filter-type'] => '',
+				'posts_per_page'                                           => $this->options['post-per-page'],
+				'order'                                                    => $this->options['order-filter-default-value'],
+				'orderby'                                                  => $this->options['orderby-filter-default-value'],
+			)
+		);
 
 		if ( ! is_wp_error( $posts_query ) ) {
 			switch ( $this->options['listing-layout'] ) {
@@ -172,12 +179,13 @@ class Cherry_Project_Data {
 					$html .= $this->render_ajax_filter( array() );
 				}
 
-				$container_class = 'projects-container ' . $this->options['listing-layout'] . ' ' . $this->options['loading-mode'] . ' ' . $this->options['loading-animation'];
+				$container_class = 'projects-container cherry-animation-container ' . $this->options['listing-layout'] . ' ' . $this->options['loading-mode'] . ' ' . $this->options['loading-animation'];
 
 				$html .= sprintf( '<div class="%1$s" data-settings=\'%2$s\'>', $container_class, $settings );
-					$html .= '<div class="projects-list" data-all-posts-count="' . $this->posts_query->found_posts . '"></div>';
+					$html .= '<div class="projects-list cherry-animation-list" data-all-posts-count="' . $this->posts_query->found_posts . '"></div>';
 				$html .= '</div>';
 				$html .= '<div class="projects-end-line-spinner"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>';
+				$html .= '<div class="cherry-projects-ajax-loader"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>';
 			// Close wrapper.
 			$html .= '</div>';
 
@@ -232,11 +240,11 @@ class Cherry_Project_Data {
 			// The Query.
 			$posts_query = $this->get_query_projects_items( $query_args );
 
-			$html = '<div class="projects-list" data-all-posts-count="' . $posts_query->found_posts . '">';
+			$html = '<div class="projects-list cherry-animation-list" data-all-posts-count="' . $posts_query->found_posts . '">';
 				$html .= $this->render_projects_items( $posts_query, $settings );
 			$html .= '</div>';
 
-			$page_count = intval( ceil( $this->posts_query->found_posts / intval( $this->default_options['post-per-page'] ) ) );
+			$page_count = intval( ceil( $this->posts_query->found_posts / intval( $settings['post_per_page'] ) ) );
 
 			switch ( $settings['loading_mode'] ) {
 				case 'ajax-pagination-mode':
@@ -332,7 +340,6 @@ class Cherry_Project_Data {
 		$defaults_query_args = apply_filters( 'cherry_projects_default_query_args',
 			array(
 				'post_type'							=> CHERRY_PROJECTS_NAME,
-				CHERRY_PROJECTS_NAME . '_category'	=> '',
 				'order'								=> 'DESC',
 				'orderby'							=> 'date',
 				'posts_per_page'					=> 9,
@@ -342,7 +349,6 @@ class Cherry_Project_Data {
 		);
 
 		$query_args = wp_parse_args( $query_args, $defaults_query_args );
-
 		// The Query.
 		$posts_query = new WP_Query( $query_args );
 
@@ -397,7 +403,7 @@ class Cherry_Project_Data {
 
 				$html .= sprintf( '<div %1$s class="%2$s %3$s %4$s %5$s %6$s %7$s" %8$s>',
 					'id="quote-' . $post_id .'"',
-					'projects-item',
+					'projects-item projects-item-instance cherry-animation-item',
 					'item-' . $count,
 					( ( $count++ % 2 ) ? 'odd' : 'even' ),
 					'animate-cycle-show',
@@ -406,9 +412,7 @@ class Cherry_Project_Data {
 					$data_attrs
 				);
 					$html .= '<div class="inner-wrapper">';
-
 						$html .= $template_content;
-
 					$html .= '</div>';
 				$html .= '</div>';
 

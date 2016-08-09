@@ -53,15 +53,16 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 	 */
 	public function set_default_options() {
 		$this->default_options = array(
-			'term_type'        => 'category',
-			'listing-layout'   => 'grid-layout',
-			'column-number'    => 3,
-			'post-per-page'    => 9,
-			'item-margin'      => 10,
-			'grid-template'    => 'terms-grid-default.tmpl',
-			'masonry-template' => 'terms-masonry-default.tmpl',
-			'list-template'    => 'terms-list-default.tmpl',
-			'echo'             => true,
+			'term-type'         => 'category',
+			'listing-layout'    => 'grid-layout',
+			'loading-animation' => 'loading-animation-fade',
+			'column-number'     => 3,
+			'post-per-page'     => 6,
+			'item-margin'       => 10,
+			'grid-template'     => 'terms-grid-default.tmpl',
+			'masonry-template'  => 'terms-masonry-default.tmpl',
+			'list-template'     => 'terms-list-default.tmpl',
+			'echo'              => true,
 		);
 
 		/**
@@ -80,8 +81,8 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 	 * @return string html string
 	 */
 	public function render_projects_term( $options = array() ) {
-		//$this->enqueue_styles();
-		//$this->enqueue_scripts();
+		$this->enqueue_styles();
+		$this->enqueue_scripts();
 
 		$this->options = wp_parse_args( $options, $this->default_options );
 
@@ -108,20 +109,21 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 
 		$terms = $this->get_projects_terms(
 			array(
-				'taxonomy' => CHERRY_PROJECTS_NAME . '_' . $this->options['term_type']
+				'taxonomy' => CHERRY_PROJECTS_NAME . '_' . $this->options['term-type'],
+				'number'   => $this->options['post-per-page'],
 			)
 		);
 
 		$html = '<div class="cherry-projects-terms-wrapper">';
 
-			$container_class = 'projects-terms-container ' . $this->options['listing-layout'];
+			$container_class = 'projects-terms-container cherry-animation-container ' . $this->options['listing-layout'] . ' ' . $this->options['loading-animation'];
 
 			$html .= sprintf( '<div class="%1$s" data-settings=\'%2$s\'>', $container_class, $settings );
-				$html .= '<div class="projects-terms-list">';
+				$html .= '<div class="projects-terms-list cherry-animation-list">';
 					$html .= $this->render_projects_term_items( $terms );
 				$html .= '</div>';
 			$html .= '</div>';
-
+			$html .= '<div class="cherry-projects-ajax-loader"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>';
 		// Close wrapper.
 		$html .= '</div>';
 
@@ -187,7 +189,7 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 
 				$html .= sprintf( '<div %1$s class="%2$s %3$s %4$s">',
 					'id="projects-term-' . $term_key .'"',
-					'projects-terms-item',
+					'projects-terms-item projects-item-instance cherry-animation-item simple-fade-hover animate-cycle-show',
 					'item-' . $count,
 					( ( $count++ % 2 ) ? 'odd' : 'even' )
 				);
@@ -204,6 +206,28 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 		}
 
 		return $html;
+	}
+
+	/**
+	 * Register and enqueue public-facing style sheet.
+	 *
+	 * @since 1.0.0
+	 */
+	public function enqueue_styles() {
+		wp_enqueue_style( 'dashicons' );
+		wp_enqueue_style( 'magnific-popup', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/magnific-popup.css', array(), '1.1.0' );
+		wp_enqueue_style( 'cherry-projects-styles', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/css/styles.css', array(), CHERRY_PROJECTS_VERSION );
+	}
+
+	/**
+	 * Register and enqueue public-facing style sheet.
+	 *
+	 * @since 1.0.0
+	 */
+	public function enqueue_scripts() {
+		wp_enqueue_script( 'imagesloaded', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
+		wp_enqueue_script( 'magnific-popup', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), '1.1.0', true );
+		wp_enqueue_script( 'cherry-projects-scripts', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-scripts.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 	}
 
 }

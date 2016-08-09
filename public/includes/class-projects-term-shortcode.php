@@ -22,7 +22,7 @@ class Cherry_Projects_Term_Shortcode {
 	 * @since 1.0.0
 	 * @var   string
 	 */
-	public static $name = 'projects_term';
+	public static $name = 'projects_terms';
 
 	/**
 	 * A reference to an instance of this class.
@@ -79,7 +79,7 @@ class Cherry_Projects_Term_Shortcode {
 		}
 
 		// Set up the default arguments.
-		$defaults = array();
+		$defaults = cherry_projects()->projects_term_data->default_options;
 
 		/**
 		 * Parse the arguments.

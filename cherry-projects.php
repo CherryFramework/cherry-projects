@@ -302,6 +302,21 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 				),
 			) );
 
+			$this->get_core()->init_module( 'cherry-term-meta', array(
+				'tax'      => CHERRY_PROJECTS_NAME . '_tag',
+				'priority' => 10,
+				'fields'   => array(
+					'cherry_terms_thumbnails' => array(
+						'type'               => 'media',
+						'value'              => '',
+						'multi_upload'       => false,
+						'library_type'       => 'image',
+						'upload_button_text' => esc_html__( 'Set thumbnail', 'cherry_projects' ),
+						'label'              => esc_html__( 'Category thumbnail', 'cherry_projects' ),
+					),
+				),
+			) );
+
 			$this->projects_data = new Cherry_Project_Data();
 			$this->projects_single_data = new Cherry_Project_Single_Data();
 			$this->projects_term_data = new Cherry_Project_Term_Data();

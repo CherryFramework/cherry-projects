@@ -2,6 +2,7 @@
 
 .cherry-projects-terms-wrapper{
 	color: $dark_color_1;
+	position: relative;
 }
 
 .projects-terms-container{
@@ -10,11 +11,46 @@
 			.projects-terms-list{
 				display: flex;
 				flex-flow: row wrap;
-				.projects-term-item{
+				.projects-terms-item{
 					flex: 0 1 auto;
 				}
 			}
-	}
+		}
+		&.masonry-layout{
+			.projects-terms-list{
+				.projects-terms-item{
+					display: inline-block;
+				}
+			}
+		}
+		&.list-layout{
+			.projects-terms-list{
+				.projects-terms-item{
+					margin-bottom: 20px
+				}
+			}
+			.inner-wrapper{
+				display: flex;
+				flex-flow: row nowrap;
+				align-items: flex-start;
+			}
+			.project-terms-media{
+				flex: 0 1 auto;
+				min-width: 30%;
+				margin-right: 20px;
+			}
+			.project-terms-content{
+				flex: 0 1 auto;
+				min-width: 70%;
+			}
+		}
+		.term-permalink{
+			span{
+				&:before{
+					content: "\f103";
+				}
+			}
+		}
 }
 
 .projects-terms-list{
