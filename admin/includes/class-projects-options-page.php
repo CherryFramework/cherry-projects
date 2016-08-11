@@ -602,6 +602,15 @@ class Cherry_Projects_Options_Page {
 			$nonce		= $_POST['nonce'];
 			$type		= $_POST['type'];
 
+			if ( ! current_user_can( 'manage_options' ) ) {
+				$response = array(
+					'message'	=> esc_html__( 'No right to preserve options', 'cherry-projects' ),
+					'type'		=> 'error-notice'
+				);
+
+				wp_send_json( $response );
+			}
+
 			if ( wp_verify_nonce( $nonce, 'cherry_ajax_nonce' ) ) {
 
 				switch ( $type ) {
