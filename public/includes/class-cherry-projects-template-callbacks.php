@@ -837,7 +837,7 @@ class Cherry_Projects_Template_Callbacks {
 		$html = cherry_projects()->projects_data->cherry_utility->media->get_image( array(
 				'html'			=> $image_html,
 				'class'			=> 'term-img',
-				'size'			=> 'large',
+				'size'			=> $attr['size'],
 			),
 			'term',
 			$this->term_data->term_id
