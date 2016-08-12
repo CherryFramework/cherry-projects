@@ -45,16 +45,17 @@
 		},
 
 		projectsTermsInit: function() {
-			var self = this,
-				$projectsTermWrapper = $( '.cherry-projects-terms-wrapper' ),
+			var self                  = this,
+				$projectsTermWrapper  = $( '.cherry-projects-terms-wrapper' ),
 				$projectsTermInstance = $( '.projects-terms-container', $projectsTermWrapper ),
-				$loader = $( '.cherry-projects-ajax-loader' , $projectsTermWrapper );
+				$loader               = $( '.cherry-projects-ajax-loader' , $projectsTermWrapper );
 
 			$loader.css( { 'display': 'block' } ).fadeTo( 500, 1 );
 
 			$projectsTermInstance.each( function( index ) {
 				var $instance        = $( this ),
-					instanceSettings = $instance.data( 'settings' );
+					instanceSettings = $instance.data( 'settings' ),
+					columnNumber     = self.getResponsiveColumn( +instanceSettings['column-number'] );
 
 					$instance.imagesLoaded( function() {
 						$loader.fadeTo( 500, 0, function() { $( this ).css( { 'display': 'none' } ); } );
@@ -63,15 +64,26 @@
 
 					switch ( instanceSettings['list-layout'] ) {
 						case 'grid-layout':
-							self.gridLayoutRender( $instance, instanceSettings['column-number'], instanceSettings['item-margin'] );
+							self.gridLayoutRender( $instance, columnNumber, instanceSettings['item-margin'] );
 						break;
 						case 'masonry-layout':
-							self.masonryLayoutRender( $instance, instanceSettings['column-number'], instanceSettings['item-margin'] );
+							self.masonryLayoutRender( $instance, columnNumber, instanceSettings['item-margin'] );
 						break;
 					}
 
-			});
+					jQuery( window ).on( 'resize.projects_layout_resize', function() {
+						var columnNumber     = self.getResponsiveColumn( +instanceSettings['column-number'] );
 
+						switch ( instanceSettings['list-layout'] ) {
+							case 'grid-layout':
+								self.gridLayoutRender( $instance, columnNumber, instanceSettings['item-margin'] );
+							break;
+							case 'masonry-layout':
+								self.gridLayoutRender( $instance, columnNumber, instanceSettings['item-margin'] );
+							break;
+						}
+					} );
+			} );
 		},
 
 		gridLayoutRender: function( instance, columnNumber, margin ) {
@@ -124,7 +136,55 @@
 				counter++;
 			} );
 
-		}
+		},
+
+		getResponsiveColumn: function( columns ) {
+			var columnPerView = +columns,
+				widthLayout   = this.getResponsiveLayout();
+
+			switch ( widthLayout ) {
+				case 'xl':
+					columnPerView = +columns;
+					break
+				case 'lg':
+					columnPerView = Math.ceil( columnPerView / 2 );
+					break
+				case 'md':
+					columnPerView = Math.ceil( columnPerView / 3 );
+					break
+				case 'sm':
+					columnPerView = Math.ceil( columnPerView / 4 );
+					break
+				case 'xs':
+					columnPerView = 1;
+					break
+			}
+			return columnPerView;
+		},
+
+		getResponsiveLayout: function() {
+			var windowWidth   = $( window ).width(),
+				widthLayout   = 'xs';
+
+			if ( windowWidth >= 544 ) {
+				widthLayout = 'sm';
+			}
+
+			if ( windowWidth >= 768 ) {
+				widthLayout = 'md';
+			}
+
+			if ( windowWidth >= 992 ) {
+				widthLayout = 'lg';
+			}
+
+			if ( windowWidth >= 1200 ) {
+				widthLayout = 'xl';
+			}
+
+			return widthLayout;
+		},
+
 
 	}
 	CherryJsCore.cherryProjectsFrontScripts.init();
