@@ -100,17 +100,17 @@ class Cherry_Projects_Admin {
 	 */
 	public function manage_projects_columns( $column, $post_id ) {
 
+		$post_terms = get_the_terms( $post_id, $column );
+
 		switch( $column ) {
 
 			case CHERRY_PROJECTS_NAME . '_category' :
-
-				$post_categories = is_wp_error( get_the_terms( $post_id, CHERRY_PROJECTS_NAME . '_category' ) ) ? '' : get_the_terms( $post_id, CHERRY_PROJECTS_NAME . '_category' );
-				if ( $post_categories ) {
+				if ( ! is_wp_error( $post_terms ) && $post_terms ) {
 					$category_name_list = '';
 					$count = 1;
-						foreach ( $post_categories as $category => $category_value ) {
+						foreach ( $post_terms as $category => $category_value ) {
 							$category_name_list .= $category_value->name;
-							( $count < count( $post_categories ) ) ? $category_name_list .= ', ':'';
+							( $count < count( $post_terms ) ) ? $category_name_list .= ', ':'';
 							$count++;
 
 						}
@@ -123,13 +123,12 @@ class Cherry_Projects_Admin {
 
 			case CHERRY_PROJECTS_NAME . '_tag' :
 
-				$post_tags = is_wp_error( get_the_terms( $post_id, CHERRY_PROJECTS_NAME . '_tag' ) ) ? '' : get_the_terms( $post_id, CHERRY_PROJECTS_NAME . '_tag' );
-				if ( $post_tags ) {
+				if ( ! is_wp_error( $post_terms ) && $post_terms ) {
 					$tags_name_list = '';
 					$count = 1;
-						foreach ( $post_tags as $tag => $tag_value ) {
+						foreach ( $post_terms as $tag => $tag_value ) {
 							$tags_name_list .= $tag_value->name;
-							( $count < count( $post_tags ) ) ? $tags_name_list .= ', ' : '';
+							( $count < count( $post_terms ) ) ? $tags_name_list .= ', ' : '';
 							$count++;
 
 						}
