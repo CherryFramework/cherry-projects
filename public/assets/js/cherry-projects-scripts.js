@@ -79,7 +79,7 @@
 								self.gridLayoutRender( $instance, columnNumber, instanceSettings['item-margin'] );
 							break;
 							case 'masonry-layout':
-								self.gridLayoutRender( $instance, columnNumber, instanceSettings['item-margin'] );
+								self.masonryLayoutRender( $instance, columnNumber, instanceSettings['item-margin'] );
 							break;
 						}
 					} );

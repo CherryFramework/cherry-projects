@@ -77,18 +77,15 @@ class Cherry_Projects_Admin {
 	 */
 	public function edit_projects_columns( $post_columns ) {
 
-		// Adds the checkbox column.
-		$columns['cb'] = $post_columns['cb'];
-
 		// Add custom columns and overwrite the 'title' column.
-		$columns['title']								= esc_html__( 'Title', 'cherry-projects' );
-		$columns[ CHERRY_PROJECTS_NAME . '_category' ]	= esc_html__( 'Projects category', 'cherry-projects' );
-		$columns[ CHERRY_PROJECTS_NAME . '_tag' ]		= esc_html__( 'Projects tag', 'cherry-projects' );
-		$columns['date']								= esc_html__( 'Date', 'cherry-projects' );
-		$columns['preview']								= esc_html__( 'Preview', 'cherry-projects' );
+		$post_columns['title']                              = esc_html__( 'Title', 'cherry-projects' );
+		$post_columns[ CHERRY_PROJECTS_NAME . '_category' ] = esc_html__( 'Projects category', 'cherry-projects' );
+		$post_columns[ CHERRY_PROJECTS_NAME . '_tag' ]      = esc_html__( 'Projects tag', 'cherry-projects' );
+		$post_columns['date']                               = esc_html__( 'Date', 'cherry-projects' );
+		$post_columns['preview']                            = esc_html__( 'Preview', 'cherry-projects' );
 
 		// Return the columns.
-		return $columns;
+		return $post_columns;
 	}
 
 	/**
