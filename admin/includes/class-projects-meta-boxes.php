@@ -31,8 +31,9 @@ class Cherry_Projects_Meta_Boxes {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		// Initialization of modules.
-		add_action( 'after_setup_theme', array( $this, 'init' ), 10 );
+		// Metaboxes rendering.
+		add_action( 'load-post.php',     array( $this, 'init' ), 10 );
+		add_action( 'load-post-new.php', array( $this, 'init' ), 10 );
 	}
 
 	/**
