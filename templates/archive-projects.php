@@ -34,9 +34,13 @@ if ( ! did_action( 'get_header' ) ) {
 		$filter_visible = false;
 	}
 
-	if ( 'projects_category' === $wp_query->query_vars['taxonomy'] ) {
+	$filter_type = $default_options['filter-type'];
+
+	if ( isset( $wp_query->query_vars['taxonomy'] ) && 'projects_category' === $wp_query->query_vars['taxonomy'] ) {
 		$filter_type = 'category';
-	} elseif ( 'projects_tag' === $wp_query->query_vars['taxonomy'] ) {
+	}
+
+	if ( isset( $wp_query->query_vars['taxonomy'] ) && 'projects_tag' === $wp_query->query_vars['taxonomy'] ) {
 		$filter_type = 'tag';
 	}
 
