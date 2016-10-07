@@ -184,8 +184,24 @@ class Cherry_Project_Data {
 				$html .= sprintf( '<div class="%1$s" data-settings=\'%2$s\'>', $container_class, $settings );
 					$html .= '<div class="projects-list cherry-animation-list" data-all-posts-count="' . $this->posts_query->found_posts . '"></div>';
 				$html .= '</div>';
-				$html .= '<div class="projects-end-line-spinner"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>';
-				$html .= '<div class="cherry-projects-ajax-loader"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>';
+
+				/**
+				 * End line spinner html filter
+				 *
+				 * @since 1.1.0
+				 */
+				$line_spinner_html = apply_filters( 'cherry-projects-end-line-spinner-html', '<div class="projects-end-line-spinner"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>' );
+
+				$html .= $line_spinner_html;
+
+				/**
+				 * Ajax loader html filter
+				 *
+				 * @since 1.1.0
+				 */
+				$ajax_loader_html = apply_filters( 'cherry-projects-ajax-loader-html', '<div class="cherry-projects-ajax-loader"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>' );
+
+				$html .= $ajax_loader_html;
 			// Close wrapper.
 			$html .= '</div>';
 
