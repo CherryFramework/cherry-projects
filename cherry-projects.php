@@ -3,7 +3,7 @@
  * Plugin Name: Cherry Projects
  * Plugin URI:  http://www.cherryframework.com/
  * Description: A projects plugin for WordPress.
- * Version:     1.0.0
+ * Version:     1.1.0
  * Author:      Cherry Team
  * Author URI:  http://www.cherryframework.com/
  * Text Domain: cherry-projects
@@ -18,7 +18,7 @@ if ( !defined( 'WPINC' ) ) {
 }
 
 // If class 'Cherry_Projects' not exists.
-if ( !class_exists( 'Cherry_Projects' ) ) {
+if ( ! class_exists( 'Cherry_Projects' ) ) {
 
 	/**
 	 * Sets up and initializes the Cherry Projects plugin.
@@ -267,6 +267,9 @@ if ( !class_exists( 'Cherry_Projects' ) ) {
 						'autoload' => false,
 					),
 					'cherry-post-meta' => array(
+						'autoload' => false,
+					),
+					'cherry-interface-builder' => array(
 						'autoload' => false,
 					),
 				),
