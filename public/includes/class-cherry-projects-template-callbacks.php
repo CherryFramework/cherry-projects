@@ -472,6 +472,7 @@ class Cherry_Projects_Template_Callbacks {
 		$attr = wp_parse_args( $attr, $default_attr );
 
 		$type = ( 'category' === cherry_projects()->projects_data->default_options['filter-type'] ) ? CHERRY_PROJECTS_NAME .'_category' : CHERRY_PROJECTS_NAME .'_tag';
+
 		$settings = array(
 			'visible'	=> true,
 			'type'		=> $attr['type'],
@@ -834,10 +835,11 @@ class Cherry_Projects_Template_Callbacks {
 			$image_html = '<figure class="featured-image"><a href="' . $image_src . '" %2$s><span class="cover"></span>' . $image_tag . '</a></figure>';
 		}
 
-		$html = cherry_projects()->projects_data->cherry_utility->media->get_image( array(
-				'html'			=> $image_html,
-				'class'			=> 'term-img',
-				'size'			=> $attr['size'],
+		$html = cherry_projects()->projects_data->cherry_utility->media->get_image(
+			array(
+				'html'  => $image_html,
+				'class' => 'term-img',
+				'size'  => $attr['size'],
 			),
 			'term',
 			$this->term_data->term_id
@@ -921,6 +923,33 @@ class Cherry_Projects_Template_Callbacks {
 				'ending'		=> $attr['ending'],
 			),
 			'term',
+			$this->term_data->term_id
+		);
+
+		return $html;
+	}
+
+	/**
+	 * Get term attachments
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_term_attachments( $attr = array() ) {
+		$default_attr = array( 'prefix' => esc_html__( 'Posted by ', 'cherry-projects' ) );
+
+		$attr = wp_parse_args( $attr, $default_attr );
+
+		$html = cherry_projects()->projects_data->cherry_utility->meta_data->get_post_count_in_term(
+			array(
+				'icon'      => apply_filters( 'cherry_projects_term_attachments_icon', '' ),
+				'sufix'     => array(
+					'singular' => '%s project',
+					'plural'   => '%s projects',
+					'domain'   => 'cherry-projects',
+					'context'  => false,
+				),
+				'echo'      => false,
+			),
 			$this->term_data->term_id
 		);
 

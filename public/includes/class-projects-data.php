@@ -130,12 +130,13 @@ class Cherry_Project_Data {
 
 		$this->options = wp_parse_args( $options, $this->default_options );
 		// The Query.
+		$filter_type = CHERRY_PROJECTS_NAME . '_' . $this->options['filter-type'];
 		$posts_query = $this->get_query_projects_items(
 			array(
-				CHERRY_PROJECTS_NAME . '_' . $this->options['filter-type'] => '',
-				'posts_per_page'                                           => $this->options['post-per-page'],
-				'order'                                                    => $this->options['order-filter-default-value'],
-				'orderby'                                                  => $this->options['orderby-filter-default-value'],
+				$filter_type     => '',
+				'posts_per_page' => $this->options['post-per-page'],
+				'order'          => $this->options['order-filter-default-value'],
+				'orderby'        => $this->options['orderby-filter-default-value'],
 			)
 		);
 
@@ -245,10 +246,10 @@ class Cherry_Project_Data {
 
 				$query_args['tax_query'] = array(
 					array(
-						'taxonomy'	=> 'post_format',
-						'field'		=> 'slug',
-						'terms'		=> $terms,
-						'operator'	=> $operator,
+						'taxonomy' => 'post_format',
+						'field'    => 'slug',
+						'terms'    => $terms,
+						'operator' => $operator,
 					),
 				);
 			}
@@ -355,12 +356,12 @@ class Cherry_Project_Data {
 
 		$defaults_query_args = apply_filters( 'cherry_projects_default_query_args',
 			array(
-				'post_type'							=> CHERRY_PROJECTS_NAME,
-				'order'								=> 'DESC',
-				'orderby'							=> 'date',
-				'posts_per_page'					=> 9,
-				'paged'								=> $paged,
-				'post_status'						=> 'publish',
+				'post_type'      => CHERRY_PROJECTS_NAME,
+				'order'          => 'DESC',
+				'orderby'        => 'date',
+				'posts_per_page' => 9,
+				'paged'          => $paged,
+				'post_status'    => 'publish',
 			)
 		);
 
@@ -657,6 +658,7 @@ class Cherry_Project_Data {
 			'termname'        => array( $callbacks, 'get_term_name' ),
 			'termdescription' => array( $callbacks, 'get_term_description' ),
 			'termpermalink'   => array( $callbacks, 'get_term_permalink' ),
+			'termattachments' => array( $callbacks, 'get_term_attachments' ),
 		);
 
 		/**
