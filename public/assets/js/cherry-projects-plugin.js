@@ -481,7 +481,7 @@
 				 */
 				function getCascadingIndex( index ) {
 					var index = index || 0,
-						map = [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ],
+						map = cherryProjectsObjects.cascadingListMap || [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ],
 						counter = 0,
 						mapIndex = 0;
 

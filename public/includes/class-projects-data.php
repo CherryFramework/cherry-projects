@@ -802,8 +802,15 @@ class Cherry_Project_Data {
 		wp_enqueue_script( 'cherry-projects-plugin', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-plugin.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 		wp_enqueue_script( 'cherry-projects-scripts', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-scripts.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 
+		$cascading_list_map = apply_filters( 'cherry_projects_cascading_list_map', array( 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ) );
+
 		// Ajax js object portfolio_type_ajax.
-		wp_localize_script( 'cherry-projects-scripts', 'cherryProjectsObjects', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+		wp_localize_script( 'cherry-projects-scripts', 'cherryProjectsObjects',
+			array(
+				'ajax_url'         => admin_url( 'admin-ajax.php' ),
+				'cascadingListMap' => $cascading_list_map,
+			)
+		);
 	}
 
 }
