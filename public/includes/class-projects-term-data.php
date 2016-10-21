@@ -53,16 +53,17 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 	 */
 	public function set_default_options() {
 		$this->default_options = array(
-			'term-type'         => 'category',
-			'listing-layout'    => 'grid-layout',
-			'loading-animation' => 'loading-animation-fade',
-			'column-number'     => 3,
-			'post-per-page'     => 6,
-			'item-margin'       => 10,
-			'grid-template'     => 'terms-grid-default.tmpl',
-			'masonry-template'  => 'terms-masonry-default.tmpl',
-			'list-template'     => 'terms-list-default.tmpl',
-			'echo'              => true,
+			'term-type'               => 'category',
+			'listing-layout'          => 'grid-layout',
+			'loading-animation'       => 'loading-animation-fade',
+			'column-number'           => 3,
+			'post-per-page'           => 6,
+			'item-margin'             => 10,
+			'grid-template'           => 'terms-grid-default.tmpl',
+			'masonry-template'        => 'terms-masonry-default.tmpl',
+			'list-template'           => 'terms-list-default.tmpl',
+			'cascading-grid-template' => 'terms-cascading-grid-default.tmpl',
+			'echo'                    => true,
 		);
 
 		/**
@@ -95,6 +96,9 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 				break;
 			case 'list-layout':
 				$this->template = $this->options['list-template'];
+				break;
+			case 'cascading-grid-layout':
+				$this->template = $this->options['cascading-grid-template'];
 				break;
 		}
 
@@ -228,6 +232,14 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 		wp_enqueue_script( 'imagesloaded', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 		wp_enqueue_script( 'magnific-popup', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), '1.1.0', true );
 		wp_enqueue_script( 'cherry-projects-scripts', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-scripts.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
+
+		$cascading_list_map = apply_filters( 'cherry_projects_terms_cascading_list_map', array( 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ) );
+
+		wp_localize_script( 'cherry-projects-scripts', 'cherryProjectsTermObjects',
+			array(
+				'cascadingListMap' => $cascading_list_map,
+			)
+		);
 	}
 
 }

@@ -69,10 +69,13 @@
 						case 'masonry-layout':
 							self.masonryLayoutRender( $instance, columnNumber, instanceSettings['item-margin'] );
 						break;
+						case 'cascading-grid-layout':
+							self.cascadingGridLayoutRender( $instance, instanceSettings['item-margin'] );
+						break;
 					}
 
 					jQuery( window ).on( 'resize.projects_layout_resize', function() {
-						var columnNumber     = self.getResponsiveColumn( +instanceSettings['column-number'] );
+						var columnNumber = self.getResponsiveColumn( +instanceSettings['column-number'] );
 
 						switch ( instanceSettings['list-layout'] ) {
 							case 'grid-layout':
@@ -120,6 +123,45 @@
 			$( '.inner-wrapper', $itemlist ).css( {
 				'margin-bottom': +margin
 			} );
+		},
+
+		cascadingGridLayoutRender: function( instance, marginItem ) {
+			var $itemlist = $( '.projects-terms-item', instance );
+
+			$itemlist.each( function( index ) {
+					var $this    = $( this ),
+						newWidth = ( 100 / getCascadingIndex( index ) ).toFixed( 2 ),
+						margin   = Math.ceil( +marginItem / 2 );
+
+					$this.css( {
+						'width': +newWidth + '%',
+						'max-width': +newWidth + '%'
+					} );
+
+					$('.inner-wrapper', $this ).css( {
+						'margin': margin + 'px'
+					} );
+				}
+			);
+
+			function getCascadingIndex ( index ) {
+				var index = index || 0,
+					map = cherryProjectsTermObjects.cascadingListMap || [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ],
+					counter = 0,
+					mapIndex = 0;
+
+					for ( var i = 0; i < index; i++ ) {
+						counter++;
+
+						if ( counter === map.length ) {
+							counter = 0;
+						}
+
+						mapIndex = counter;
+					};
+
+					return map[ mapIndex ];
+			}
 		},
 
 		showAnimation: function( itemlist, startIndex, delta ) {
