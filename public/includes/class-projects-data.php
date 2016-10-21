@@ -130,12 +130,13 @@ class Cherry_Project_Data {
 
 		$this->options = wp_parse_args( $options, $this->default_options );
 		// The Query.
+		$filter_type = CHERRY_PROJECTS_NAME . '_' . $this->options['filter-type'];
 		$posts_query = $this->get_query_projects_items(
 			array(
-				CHERRY_PROJECTS_NAME . '_' . $this->options['filter-type'] => '',
-				'posts_per_page'                                           => $this->options['post-per-page'],
-				'order'                                                    => $this->options['order-filter-default-value'],
-				'orderby'                                                  => $this->options['orderby-filter-default-value'],
+				$filter_type     => '',
+				'posts_per_page' => $this->options['post-per-page'],
+				'order'          => $this->options['order-filter-default-value'],
+				'orderby'        => $this->options['orderby-filter-default-value'],
 			)
 		);
 
@@ -184,8 +185,24 @@ class Cherry_Project_Data {
 				$html .= sprintf( '<div class="%1$s" data-settings=\'%2$s\'>', $container_class, $settings );
 					$html .= '<div class="projects-list cherry-animation-list" data-all-posts-count="' . $this->posts_query->found_posts . '"></div>';
 				$html .= '</div>';
-				$html .= '<div class="projects-end-line-spinner"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>';
-				$html .= '<div class="cherry-projects-ajax-loader"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>';
+
+				/**
+				 * End line spinner html filter
+				 *
+				 * @since 1.1.0
+				 */
+				$line_spinner_html = apply_filters( 'cherry-projects-end-line-spinner-html', '<div class="projects-end-line-spinner"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>' );
+
+				$html .= $line_spinner_html;
+
+				/**
+				 * Ajax loader html filter
+				 *
+				 * @since 1.1.0
+				 */
+				$ajax_loader_html = apply_filters( 'cherry-projects-ajax-loader-html', '<div class="cherry-projects-ajax-loader"><div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div></div>' );
+
+				$html .= $ajax_loader_html;
 			// Close wrapper.
 			$html .= '</div>';
 
@@ -229,10 +246,10 @@ class Cherry_Project_Data {
 
 				$query_args['tax_query'] = array(
 					array(
-						'taxonomy'	=> 'post_format',
-						'field'		=> 'slug',
-						'terms'		=> $terms,
-						'operator'	=> $operator,
+						'taxonomy' => 'post_format',
+						'field'    => 'slug',
+						'terms'    => $terms,
+						'operator' => $operator,
 					),
 				);
 			}
@@ -339,12 +356,12 @@ class Cherry_Project_Data {
 
 		$defaults_query_args = apply_filters( 'cherry_projects_default_query_args',
 			array(
-				'post_type'							=> CHERRY_PROJECTS_NAME,
-				'order'								=> 'DESC',
-				'orderby'							=> 'date',
-				'posts_per_page'					=> 9,
-				'paged'								=> $paged,
-				'post_status'						=> 'publish',
+				'post_type'      => CHERRY_PROJECTS_NAME,
+				'order'          => 'DESC',
+				'orderby'        => 'date',
+				'posts_per_page' => 9,
+				'paged'          => $paged,
+				'post_status'    => 'publish',
 			)
 		);
 
@@ -641,6 +658,7 @@ class Cherry_Project_Data {
 			'termname'        => array( $callbacks, 'get_term_name' ),
 			'termdescription' => array( $callbacks, 'get_term_description' ),
 			'termpermalink'   => array( $callbacks, 'get_term_permalink' ),
+			'termattachments' => array( $callbacks, 'get_term_attachments' ),
 		);
 
 		/**
@@ -784,8 +802,15 @@ class Cherry_Project_Data {
 		wp_enqueue_script( 'cherry-projects-plugin', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-plugin.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 		wp_enqueue_script( 'cherry-projects-scripts', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-scripts.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 
+		$cascading_list_map = apply_filters( 'cherry_projects_cascading_list_map', array( 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ) );
+
 		// Ajax js object portfolio_type_ajax.
-		wp_localize_script( 'cherry-projects-scripts', 'cherryProjectsObjects', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+		wp_localize_script( 'cherry-projects-scripts', 'cherryProjectsObjects',
+			array(
+				'ajax_url'         => admin_url( 'admin-ajax.php' ),
+				'cascadingListMap' => $cascading_list_map,
+			)
+		);
 	}
 
 }

@@ -271,6 +271,9 @@
 								case 'cascading-grid-layout':
 									cascadingGridLayoutRender();
 								break;
+								case 'list-layout':
+									listLayoutRender();
+								break;
 							}
 
 							$projectsContainer.imagesLoaded( function() {
@@ -338,6 +341,9 @@
 								break;
 								case 'cascading-grid-layout':
 									cascadingGridLayoutRender();
+								break;
+								case 'list-layout':
+									listLayoutRender();
 								break;
 							}
 
@@ -455,14 +461,27 @@
 								'margin-left': -margin + 'px',
 								'margin-right': -margin + 'px',
 							} );
-
-
 						} );
 				}
 
+				/*
+				 * Render list layout
+				 */
+				function listLayoutRender() {
+					var projectsListWrap = $('.projects-list', $projectsContainer ),
+						projectsList = $('.projects-item', $projectsContainer );
+
+						projectsList.css( {
+							'margin-bottom': +projectsSettings['item-margin']
+						} );
+				}
+
+				/**
+				 * GetCascadingIndex
+				 */
 				function getCascadingIndex( index ) {
 					var index = index || 0,
-						map = [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ],
+						map = cherryProjectsObjects.cascadingListMap || [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ],
 						counter = 0,
 						mapIndex = 0;
 

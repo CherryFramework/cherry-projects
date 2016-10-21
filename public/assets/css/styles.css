@@ -625,6 +625,27 @@ ul.order-filters {
         -ms-flex: 0 1 auto;
             flex: 0 1 auto;
     min-width: 70%; }
+  .projects-terms-container.cascading-grid-layout .projects-terms-list {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+    -webkit-align-content: stretch;
+        -ms-flex-line-pack: stretch;
+            align-content: stretch; }
+    .projects-terms-container.cascading-grid-layout .projects-terms-list .projects-terms-item {
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 1 auto;
+          -ms-flex: 0 1 auto;
+              flex: 0 1 auto;
+      height: auto; }
   .projects-terms-container .term-permalink span:before {
     content: "\f103"; }
 
