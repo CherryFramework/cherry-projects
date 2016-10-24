@@ -124,3 +124,11 @@ Standard templates can be rewritten in the theme. For that you need to create ch
 = 1.0.0 =
 
 * Initial release
+
+= 1.1.0 =
+
+* Updated editing interface types of projects
+* Fixed archive template
+* Fixed bugs
+* Added new filters
+* Add new macros "termattachments" for projects_terms shortcode
