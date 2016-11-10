@@ -625,7 +625,7 @@ class Cherry_Projects_Template_Callbacks {
 
 					$html .= '<li class="image-item"><div class="inner-wrapper">' . cherry_projects()->projects_data->cherry_utility->media->get_image( $settings, 'attachment', $attachment_id ) . '</div></li>';
 				}
-				$html .= '<ul>';
+				$html .= '</ul>';
 			}
 		$html .= '</div>';
 

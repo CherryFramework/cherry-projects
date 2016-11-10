@@ -1,4 +1,4 @@
-=== Cherry Team Members ===
+=== Cherry Projects ===
 
 Contributors: TemplateMonster 2002
 Tags: custom post type, projects, portfolio

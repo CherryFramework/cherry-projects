@@ -3,7 +3,7 @@
  * Plugin Name: Cherry Projects
  * Plugin URI:  http://www.cherryframework.com/
  * Description: A projects plugin for WordPress.
- * Version:     1.1.0
+ * Version:     1.1.1
  * Author:      Cherry Team
  * Author URI:  http://www.cherryframework.com/
  * Text Domain: cherry-projects
