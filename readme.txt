@@ -1,7 +1,7 @@
 === Cherry Projects ===
 
 Contributors: TemplateMonster 2002
-Tags: custom post type, projects, portfolio
+Tags: custom post type, projects, portfolio, cherry framework
 Requires at least: 4.5
 Tested up to: 4.5.3
 Stable tag: 1.1.0
