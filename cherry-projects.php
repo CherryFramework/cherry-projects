@@ -136,7 +136,7 @@ if ( ! class_exists( 'Cherry_Projects' ) ) {
 			 *
 			 * @since 1.0.0
 			 */
-			define( 'CHERRY_PROJECTS_VERSION', '1.0.0' );
+			define( 'CHERRY_PROJECTS_VERSION', '1.1.1' );
 
 			/**
 			 * Set the slug of the plugin.
@@ -272,10 +272,46 @@ if ( ! class_exists( 'Cherry_Projects' ) ) {
 					'cherry-interface-builder' => array(
 						'autoload' => false,
 					),
+					'cherry-db-updater' => array(
+						'autoload' => true,
+						'args'     => array(
+							'slug'      => 'cherry-projects',
+							'version'   => CHERRY_PROJECTS_VERSION,
+							'callbacks' => array(
+								CHERRY_PROJECTS_VERSION => array(
+									array( $this, 'update_thumbs' ),
+								),
+							),
+						),
+					),
 				),
 			) );
 
 			return $this->core;
+		}
+
+		/**
+		 * Update thumbnail keys
+		 *
+		 * @return void
+		 */
+		public function update_thumbs() {
+
+			$terms = get_terms( 'projects_category', array(
+				'hide_empty' => false,
+			) );
+
+			if ( empty( $terms ) ) {
+				return;
+			}
+
+			foreach ( $terms as $term ) {
+				$thumb = get_term_meta( $term->term_id, 'cherry_terms_thumbnails', true );
+				if ( $thumb ) {
+					update_term_meta( $term->term_id, 'cherry_thumb', $thumb );
+				}
+			}
+
 		}
 
 		/**
