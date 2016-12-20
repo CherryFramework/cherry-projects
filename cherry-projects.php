@@ -3,7 +3,7 @@
  * Plugin Name: Cherry Projects
  * Plugin URI:  http://www.cherryframework.com/
  * Description: A projects plugin for WordPress.
- * Version:     1.1.1
+ * Version:     1.2.0
  * Author:      Cherry Team
  * Author URI:  http://www.cherryframework.com/
  * Text Domain: cherry-projects
@@ -13,7 +13,7 @@
  */
 
 // If this file is called directly, abort.
-if ( !defined( 'WPINC' ) ) {
+if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
@@ -82,8 +82,10 @@ if ( ! class_exists( 'Cherry_Projects' ) ) {
 		 * @since 1.0.0
 		 */
 		public function __construct() {
+
 			// Set the constants needed by the plugin.
 			$this->constants();
+
 			// Load the functions files.
 			$this->includes();
 
@@ -136,7 +138,7 @@ if ( ! class_exists( 'Cherry_Projects' ) ) {
 			 *
 			 * @since 1.0.0
 			 */
-			define( 'CHERRY_PROJECTS_VERSION', '1.1.1' );
+			define( 'CHERRY_PROJECTS_VERSION', '1.2.0' );
 
 			/**
 			 * Set the slug of the plugin.
@@ -293,6 +295,7 @@ if ( ! class_exists( 'Cherry_Projects' ) ) {
 		/**
 		 * Update thumbnail keys
 		 *
+		 * @since 1.2.0
 		 * @return void
 		 */
 		public function update_thumbs() {
@@ -307,6 +310,7 @@ if ( ! class_exists( 'Cherry_Projects' ) ) {
 
 			foreach ( $terms as $term ) {
 				$thumb = get_term_meta( $term->term_id, 'cherry_terms_thumbnails', true );
+
 				if ( $thumb ) {
 					update_term_meta( $term->term_id, 'cherry_thumb', $thumb );
 				}
