@@ -274,6 +274,12 @@ if ( ! class_exists( 'Cherry_Projects' ) ) {
 					'cherry-interface-builder' => array(
 						'autoload' => false,
 					),
+					'cherry-handler' => array(
+						'autoload' => false,
+					),
+					'cherry5-insert-shortcode' => array(
+						'autoload' => false,
+					),
 					'cherry-db-updater' => array(
 						'autoload' => true,
 						'args'     => array(

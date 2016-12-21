@@ -41,7 +41,8 @@ class Cherry_Projects_Options_Page {
 	public $projects_options = array();
 
 	/**
-	 * [$utility description]
+	 * Cherry utility instance
+	 *
 	 * @var null
 	 */
 	public $utility = null;

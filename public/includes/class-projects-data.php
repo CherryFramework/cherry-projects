@@ -129,6 +129,7 @@ class Cherry_Project_Data {
 		$this->enqueue_scripts();
 
 		$this->options = wp_parse_args( $options, $this->default_options );
+
 		// The Query.
 		$filter_type = CHERRY_PROJECTS_NAME . '_' . $this->options['filter-type'];
 		$posts_query = $this->get_query_projects_items(
@@ -456,22 +457,29 @@ class Cherry_Project_Data {
 
 		$tax_list = ( 'category' === $this->options['filter-type'] ) ? $this->options['category-list'] : $this->options['tags-list'];
 
+		// $tax_list is array checking or convert to array.
+		if ( ! is_array( $tax_list ) && is_string( $tax_list ) ) {
+			$tax_list = explode( ',', $tax_list );
+		}
+
 		$args = array(
-			'type'			=> CHERRY_PROJECTS_NAME,
-			'orderby'		=> 'name',
-			'order'			=> 'ASC',
-			'taxonomy'		=> CHERRY_PROJECTS_NAME . '_' . $this->options['filter-type'],
-			'pad_counts'	=> false,
+			'type'       => CHERRY_PROJECTS_NAME,
+			'orderby'    => 'name',
+			'order'      => 'ASC',
+			'taxonomy'   => CHERRY_PROJECTS_NAME . '_' . $this->options['filter-type'],
+			'pad_counts' => false,
 		);
+
 		$order_array = array(
-			'desc'			=> esc_html__( 'Desc', 'cherry-projects' ),
-			'asc'			=> esc_html__( 'Asc', 'cherry-projects' ),
+			'desc' => esc_html__( 'Desc', 'cherry-projects' ),
+			'asc'  => esc_html__( 'Asc', 'cherry-projects' ),
 		);
+
 		$order_by_array = array(
-			'date'			=> esc_html__( 'Date', 'cherry-projects' ),
-			'name'			=> esc_html__( 'Name', 'cherry-projects' ),
-			'modified'		=> esc_html__( 'Modified', 'cherry-projects' ),
-			'comment_count'	=> esc_html__( 'Comments', 'cherry-projects' ),
+			'date'          => esc_html__( 'Date', 'cherry-projects' ),
+			'name'          => esc_html__( 'Name', 'cherry-projects' ),
+			'modified'      => esc_html__( 'Modified', 'cherry-projects' ),
+			'comment_count' => esc_html__( 'Comments', 'cherry-projects' ),
 		);
 
 		$terms = get_categories( $args );
@@ -494,6 +502,7 @@ class Cherry_Project_Data {
 					$html .= '<li class="active"><span data-cat-id="" data-slug="">'. $show_all_text .'</span></li>';
 
 					foreach ( $terms as $term ) {
+
 						if ( in_array( $term->slug, $tax_list ) || empty( $tax_list ) ) {
 							$html .= '<li><span data-cat-id="' .  $term->cat_ID . '" data-slug="' .  $term->slug . '">'. $term->name .'</span></li>';
 						}
