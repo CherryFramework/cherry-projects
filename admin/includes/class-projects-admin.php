@@ -190,7 +190,7 @@ class Cherry_Projects_Admin {
 				array(
 					'title'       => esc_html__( 'Projects', 'cherry-projects' ),
 					'description' => esc_html__( 'Showcase your projects using a variety of layouts with Cherry Projects plugin', 'cherry-projects' ),
-					'icon'        => '<span class="dashicons dashicons-grid-view"></span>',
+					'icon'        => '<span class="dashicons dashicons-layout"></span>',
 					'slug'        => 'cherry-prijects-plugin',
 					'shortcodes'  => array(
 						array(
@@ -199,6 +199,7 @@ class Cherry_Projects_Admin {
 							'icon'        => '<span class="dashicons dashicons-layout"></span>',
 							'slug'        => 'cherry_projects',
 							'options'     => array(
+
 								'listing_layout' => array(
 									'type'          => 'radio',
 									'title'         => esc_html__( 'Projects listing layout', 'cherry-projects' ),
@@ -233,6 +234,7 @@ class Cherry_Projects_Admin {
 										),
 									),
 								),
+
 								'loading_mode' => array(
 									'type'          => 'radio',
 									'title'         => esc_html__( 'Pagination mode', 'cherry-projects' ),
@@ -259,6 +261,7 @@ class Cherry_Projects_Admin {
 										),
 									),
 								),
+
 								'load_animation' => array(
 									'type'          => 'radio',
 									'title'         => esc_html__( 'Loading animation', 'cherry-projects' ),
@@ -293,6 +296,7 @@ class Cherry_Projects_Admin {
 										),
 									),
 								),
+
 								'hover_animation' => array(
 									'type'          => 'radio',
 									'title'         => esc_html__( 'Hover animation', 'cherry-projects' ),
@@ -315,6 +319,7 @@ class Cherry_Projects_Admin {
 										),
 									),
 								),
+
 								'filter_visible' => array(
 									'type'        => 'switcher',
 									'title'       => esc_html__( 'Filters', 'cherry-projects' ),
@@ -325,6 +330,7 @@ class Cherry_Projects_Admin {
 										'false_toggle' => esc_html__( 'Hide', 'cherry-projects' ),
 									),
 								),
+
 								'filter_type' => array(
 									'type'          => 'radio',
 									'title'         => esc_html__( 'Filter type', 'cherry-projects' ),
@@ -342,6 +348,7 @@ class Cherry_Projects_Admin {
 										),
 									),
 								),
+
 								'category_list' => array(
 									'type'     => 'select',
 									'title'    => esc_html__( 'Projects filter categories list', 'cherry-projects' ),
@@ -351,6 +358,7 @@ class Cherry_Projects_Admin {
 									'options'  => $category_list,
 									'master'   => 'projects-filter-type-category',
 								),
+
 								'tags_list' => array(
 									'type'             => 'select',
 									'title'            => esc_html__( 'Projects filter tags list', 'cherry-projects' ),
@@ -360,6 +368,7 @@ class Cherry_Projects_Admin {
 									'options'          => $tag_list,
 									'master'           => 'projects-filter-type-tag',
 								),
+
 								'order_filter_visible' => array(
 									'type'        => 'switcher',
 									'title'       => esc_html__( 'Order filters', 'cherry-projects' ),
@@ -372,6 +381,7 @@ class Cherry_Projects_Admin {
 										'false_slave'  => 'projects-order-filter-visible-false',
 									),
 								),
+
 								'order_filter_default_value' => array(
 									'type'          => 'radio',
 									'title'         => esc_html__( 'Order filter default value', 'cherry-projects' ),
@@ -387,6 +397,7 @@ class Cherry_Projects_Admin {
 									),
 									'master'		=> 'projects-order-filter-visible-true',
 								),
+
 								'orderby_filter_default_value' => array(
 									'type'          => 'radio',
 									'title'         => esc_html__( 'Order by filter default value', 'cherry-projects' ),
@@ -408,6 +419,7 @@ class Cherry_Projects_Admin {
 									),
 									'master'		=> 'projects-order-filter-visible-true',
 								),
+
 								'posts_format' => array(
 									'type'          => 'radio',
 									'title'         => esc_html__( 'Post Format', 'cherry-projects' ),
@@ -434,11 +446,13 @@ class Cherry_Projects_Admin {
 										),
 									),
 								),
+
 								'single_term' => array(
 									'type'            => 'text',
 									'title'           => esc_html__( 'Single term slug', 'cherry-projects' ),
 									'value'           => '',
 								),
+
 								'column_number' => array(
 									'type'        => 'slider',
 									'title'       => esc_html__( 'Column number', 'cherry-projects' ),
@@ -447,6 +461,7 @@ class Cherry_Projects_Admin {
 									'min_value'   => 2,
 									'value'       => 3,
 								),
+
 								'post_per_page' => array(
 									'type'        => 'slider',
 									'title'       => esc_html__( 'Posts per page', 'cherry-projects' ),
@@ -455,6 +470,7 @@ class Cherry_Projects_Admin {
 									'min_value'   => -1,
 									'value'       => 9,
 								),
+
 								'item_margin' => array(
 									'type'        => 'slider',
 									'title'       => esc_html__( 'Item margin', 'cherry-projects' ),
@@ -463,6 +479,7 @@ class Cherry_Projects_Admin {
 									'min_value'   => 0,
 									'value'       => 4,
 								),
+
 								'justified_fixed_height' => array(
 									'type'        => 'slider',
 									'title'       => esc_html__( 'Justified fixed height', 'cherry-projects' ),
@@ -472,6 +489,7 @@ class Cherry_Projects_Admin {
 									'value'       => 300,
 									'master'      => 'projects-listing-layout-justified-layout',
 								),
+
 								'grid_template' => array(
 									'type'        => 'text',
 									'title'       => esc_html__( 'Grid template', 'cherry-projects' ),
@@ -479,6 +497,7 @@ class Cherry_Projects_Admin {
 									'value'       => 'grid-default.tmpl',
 									'master'      => 'projects-listing-layout-grid-layout',
 								),
+
 								'masonry_template' => array(
 									'type'        => 'text',
 									'title'       => esc_html__( 'Masonry template', 'cherry-projects' ),
@@ -486,6 +505,7 @@ class Cherry_Projects_Admin {
 									'value'       => 'masonry-default.tmpl',
 									'master'      => 'projects-listing-layout-masonry-layout',
 								),
+
 								'justified_template' => array(
 									'type'        => 'text',
 									'title'       => esc_html__( 'Justified template', 'cherry-projects' ),
@@ -493,6 +513,7 @@ class Cherry_Projects_Admin {
 									'value'       => 'justified-default.tmpl',
 									'master'      => 'projects-listing-layout-justified-layout',
 								),
+
 								'cascading_grid_template' => array(
 									'type'        => 'text',
 									'title'       => esc_html__( 'Cascading grid template', 'cherry-projects' ),
@@ -500,6 +521,7 @@ class Cherry_Projects_Admin {
 									'value'       => 'cascading-grid-default.tmpl',
 									'master'      => 'projects-listing-layout-cascading-grid-layout',
 								),
+
 								'list_template' => array(
 									'type'        => 'text',
 									'title'       => esc_html__( 'List template', 'cherry-projects' ),
@@ -516,7 +538,7 @@ class Cherry_Projects_Admin {
 							'slug'        => 'cherry_projects_terms',
 							'options'     => array(
 
-								'filter_type' => array(
+								'term_type' => array(
 									'type'          => 'radio',
 									'title'         => esc_html__( 'Filter type', 'cherry-projects' ),
 									'description'   => esc_html__( 'Select if you want to filter posts by tag or by category.', 'cherry-projects' ),
@@ -628,28 +650,28 @@ class Cherry_Projects_Admin {
 									'type'        => 'text',
 									'title'       => esc_html__( 'Grid template', 'cherry-projects' ),
 									'description' => esc_html__( 'Grid content template', 'cherry-projects' ),
-									'value'       => 'grid-default.tmpl',
+									'value'       => 'terms-grid-default.tmpl',
 								),
 
 								'masonry_template' => array(
 									'type'        => 'text',
 									'title'       => esc_html__( 'Masonry template', 'cherry-projects' ),
 									'description' => esc_html__( 'Masonry content template', 'cherry-projects' ),
-									'value'       => 'masonry-default.tmpl',
+									'value'       => 'terms-masonry-default.tmpl',
 								),
 
 								'cascading_grid_template' => array(
 									'type'        => 'text',
 									'title'       => esc_html__( 'Cascading grid template', 'cherry-projects' ),
 									'description' => esc_html__( 'Cascading grid template', 'cherry-projects' ),
-									'value'       => 'cascading-grid-default.tmpl',
+									'value'       => 'terms-cascading-grid-default.tmpl',
 								),
 
 								'list_template' => array(
 									'type'        => 'text',
 									'title'       => esc_html__( 'List template', 'cherry-projects' ),
 									'description' => esc_html__( 'List content template', 'cherry-projects' ),
-									'value'       => 'list-default.tmpl',
+									'value'       => 'terms-list-default.tmpl',
 								),
 							),
 						),
