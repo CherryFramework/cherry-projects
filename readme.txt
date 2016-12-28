@@ -4,7 +4,7 @@ Contributors: TemplateMonster 2002
 Tags: custom post type, projects, portfolio, cherry framework
 Requires at least: 4.5
 Tested up to: 4.5.3
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -132,3 +132,9 @@ Standard templates can be rewritten in the theme. For that you need to create ch
 * Fixed bugs
 * Added new filters
 * Add new macros "termattachments" for projects_terms shortcode
+
+= 1.2.0 =
+
+* Added shortcodes generator
+* Added new filters
+* Fixed bugs

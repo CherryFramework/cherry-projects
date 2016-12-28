@@ -910,7 +910,7 @@ class Cherry_Projects_Template_Callbacks {
 	 */
 	public function get_term_description( $attr = array() ) {
 		$default_attr = array(
-			'number_of_words' => '',
+			'number_of_words' => '15',
 			'ending'          => '&hellip;'
 		);
 

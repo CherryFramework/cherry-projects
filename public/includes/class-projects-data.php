@@ -493,24 +493,26 @@ class Cherry_Project_Data {
 			 */
 			$html .= apply_filters( 'cherry-projects-before-filters-html', '' );
 
-			$html .= '<div class="projects-filters-list-wrapper">';
+			if ( empty( $this->options['single-term'] ) ) {
+				$html .= '<div class="projects-filters-list-wrapper">';
 
-				$html .= '<ul class="projects-filters-list filter-' . $this->options['filter-type'] . '">';
+					$html .= '<ul class="projects-filters-list filter-' . $this->options['filter-type'] . '">';
 
-				if ( $terms ) {
-					$show_all_text = apply_filters( 'cherry_projects_show_all_text', esc_html__( 'Show all', 'cherry-projects' ) );
-					$html .= '<li class="active"><span data-cat-id="" data-slug="">'. $show_all_text .'</span></li>';
+					if ( $terms ) {
+						$show_all_text = apply_filters( 'cherry_projects_show_all_text', esc_html__( 'Show all', 'cherry-projects' ) );
+						$html .= '<li class="active"><span data-cat-id="" data-slug="">'. $show_all_text .'</span></li>';
 
-					foreach ( $terms as $term ) {
+						foreach ( $terms as $term ) {
 
-						if ( in_array( $term->slug, $tax_list ) || empty( $tax_list ) ) {
-							$html .= '<li><span data-cat-id="' .  $term->cat_ID . '" data-slug="' .  $term->slug . '">'. $term->name .'</span></li>';
+							if ( in_array( $term->slug, $tax_list ) || empty( $tax_list ) ) {
+								$html .= '<li><span data-cat-id="' .  $term->cat_ID . '" data-slug="' .  $term->slug . '">'. $term->name .'</span></li>';
+							}
 						}
 					}
-				}
-				$html .= '</ul>';
+					$html .= '</ul>';
 
-			$html .= '</div>';
+				$html .= '</div>';
+			}
 
 			/**
 			 * Filtered after terms list render
