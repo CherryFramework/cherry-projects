@@ -54,7 +54,7 @@ class Cherry_Projects_Meta_Boxes {
 			'cherry_projects_metabox_fields_settings',
 			array(
 				'id'            => 'projects-settings',
-				'title'         => esc_html__( 'Popup settings', 'cherry-projects' ),
+				'title'         => esc_html__( 'Projects settings', 'cherry-projects' ),
 				'page'          => array( CHERRY_PROJECTS_NAME ),
 				'context'       => 'normal',
 				'priority'      => 'high',
