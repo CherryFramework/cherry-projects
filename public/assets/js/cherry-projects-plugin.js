@@ -423,8 +423,7 @@
 
 							$this.css( {
 								'flex-grow': flexValue,
-								'flex-basis': newWidth,
-								'max-width': +imageWidth
+								'flex-basis': newWidth
 							} );
 
 							$('.inner-wrapper', $this ).css( {
