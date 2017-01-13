@@ -138,3 +138,8 @@ Standard templates can be rewritten in the theme. For that you need to create ch
 * Added shortcodes generator
 * Added new filters
 * Fixed bugs
+
+= 1.2.1 =
+
+* Fixed justified layout listing
+* Fixed bugs
