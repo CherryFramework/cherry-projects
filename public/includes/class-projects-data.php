@@ -502,9 +502,12 @@ class Cherry_Project_Data {
 						$show_all_text = apply_filters( 'cherry_projects_show_all_text', esc_html__( 'Show all', 'cherry-projects' ) );
 						$html .= '<li class="active"><span data-cat-id="" data-slug="">'. $show_all_text .'</span></li>';
 
+						$_tax_list = $this->prepare_to_wpml( $tax_list );
+
 						foreach ( $terms as $term ) {
 
-							if ( in_array( $term->slug, $tax_list ) || empty( $tax_list ) ) {
+							if ( in_array( $term->slug, $_tax_list ) || empty( $_tax_list ) ) {
+
 								$html .= '<li><span data-cat-id="' .  $term->cat_ID . '" data-slug="' .  $term->slug . '">'. $term->name .'</span></li>';
 							}
 						}
@@ -822,6 +825,33 @@ class Cherry_Project_Data {
 				'cascadingListMap' => $cascading_list_map,
 			)
 		);
+	}
+
+	/**
+	 * Prepare taxonomy terms list for if WPML-plugin are used.
+	 *
+	 * @since  1.2.2
+	 * @param  array $tax_list
+	 * @return arrat
+	 */
+	public function prepare_to_wpml( $tax_list ) {
+
+		if ( ! defined( 'ICL_SITEPRESS_VERSION' ) ) {
+			return $tax_list;
+		}
+
+		if ( empty( $tax_list ) ) {
+			return $tax_list;
+		}
+
+		$translated_tax_list = array();
+
+		foreach ( $tax_list as $slug ) {
+			$term_obj = get_term_by( 'slug', $slug, 'projects_category' );
+			$translated_tax_list[] = $term_obj->slug;
+		}
+
+		return $translated_tax_list;
 	}
 
 }

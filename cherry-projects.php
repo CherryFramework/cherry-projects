@@ -345,8 +345,8 @@ if ( ! class_exists( 'Cherry_Projects' ) ) {
 						'value'              => '',
 						'multi_upload'       => false,
 						'library_type'       => 'image',
-						'upload_button_text' => esc_html__( 'Set thumbnail', 'cherry_projects' ),
-						'label'              => esc_html__( 'Category thumbnail', 'cherry_projects' ),
+						'upload_button_text' => esc_html__( 'Set thumbnail', 'cherry-projects' ),
+						'label'              => esc_html__( 'Category thumbnail', 'cherry-projects' ),
 					),
 				),
 			) );
@@ -360,8 +360,8 @@ if ( ! class_exists( 'Cherry_Projects' ) ) {
 						'value'              => '',
 						'multi_upload'       => false,
 						'library_type'       => 'image',
-						'upload_button_text' => esc_html__( 'Set thumbnail', 'cherry_projects' ),
-						'label'              => esc_html__( 'Tag thumbnail', 'cherry_projects' ),
+						'upload_button_text' => esc_html__( 'Set thumbnail', 'cherry-projects' ),
+						'label'              => esc_html__( 'Tag thumbnail', 'cherry-projects' ),
 					),
 				),
 			) );
