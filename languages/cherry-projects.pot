@@ -1,0 +1,1042 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: blank\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-02 11:48+0200\n"
+"PO-Revision-Date: 2017-03-02 11:48+0200\n"
+"Last-Translator: Vladimir Anokhin <ano.vladimir@gmail.com>\n"
+"Language-Team: Cherry Team <support@cherryframework.com>\n"
+"Language: su\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _e;__;__;_x;esc_html_e;esc_html__;esc_attr_e;"
+"esc_attr__;_x:1,2c;_n:1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.7.6\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/includes/class-projects-admin.php:83
+msgid "Title"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:84
+msgid "Projects category"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:85
+msgid "Projects tag"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:86
+#: admin/includes/class-projects-admin.php:408
+#: admin/includes/class-projects-options-page.php:277
+#: public/includes/class-projects-data.php:479
+msgid "Date"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:87
+msgid "Preview"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:118
+msgid "Project has no categories"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:136
+msgid "Project has no tags"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:191
+#: admin/includes/class-projects-admin.php:197
+#: public/includes/class-projects-page-template.php:53
+#: public/includes/class-projects-registration.php:58
+msgid "Projects"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:192
+msgid ""
+"Showcase your projects using a variety of layouts with Cherry Projects plugin"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:198
+msgid "Shortcode is used to display the projects list with set parameters."
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:205
+#: admin/includes/class-projects-options-page.php:81
+msgid "Projects listing layout"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:206
+#: admin/includes/class-projects-options-page.php:82
+msgid "Choose projects listing view layout."
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:211
+#: admin/includes/class-projects-admin.php:565
+#: admin/includes/class-projects-meta-boxes.php:200
+#: admin/includes/class-projects-options-page.php:88
+msgid "Grid"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:216
+#: admin/includes/class-projects-admin.php:570
+#: admin/includes/class-projects-meta-boxes.php:205
+#: admin/includes/class-projects-options-page.php:93
+msgid "Masonry"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:221
+#: admin/includes/class-projects-options-page.php:98
+msgid "Justified"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:226
+#: admin/includes/class-projects-admin.php:575
+#: admin/includes/class-projects-options-page.php:103
+msgid "Cascading grid"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:231
+#: admin/includes/class-projects-admin.php:580
+#: admin/includes/class-projects-options-page.php:108
+msgid "List"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:240
+#: admin/includes/class-projects-options-page.php:116
+msgid "Pagination mode"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:241
+#: admin/includes/class-projects-options-page.php:117
+msgid "Choose projects pagination mode"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:247
+#: admin/includes/class-projects-options-page.php:123
+msgid "Ajax pagination"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:251
+#: admin/includes/class-projects-options-page.php:127
+msgid "More button"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:255
+#: admin/includes/class-projects-options-page.php:131
+msgid "Lazy loading"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:259
+#: admin/includes/class-projects-options-page.php:135
+msgid "None"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:267
+#: admin/includes/class-projects-admin.php:589
+#: admin/includes/class-projects-options-page.php:142
+msgid "Loading animation"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:268
+#: admin/includes/class-projects-options-page.php:143
+msgid "Choose posts loading animation"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:274
+#: admin/includes/class-projects-admin.php:596
+#: admin/includes/class-projects-options-page.php:149
+msgid "Fade animation"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:278
+#: admin/includes/class-projects-admin.php:600
+#: admin/includes/class-projects-options-page.php:153
+msgid "Scale animation"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:282
+#: admin/includes/class-projects-admin.php:604
+#: admin/includes/class-projects-options-page.php:157
+msgid "Move Up animation"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:286
+#: admin/includes/class-projects-admin.php:608
+#: admin/includes/class-projects-options-page.php:161
+msgid "Flip animation"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:290
+#: admin/includes/class-projects-admin.php:612
+#: admin/includes/class-projects-options-page.php:165
+msgid "Helix animation"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:294
+#: admin/includes/class-projects-admin.php:616
+#: admin/includes/class-projects-options-page.php:169
+msgid "Fall perspective animation"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:302
+#: admin/includes/class-projects-options-page.php:176
+msgid "Hover animation"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:303
+#: admin/includes/class-projects-options-page.php:177
+msgid "Choose posts images hover animation"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:309
+#: admin/includes/class-projects-options-page.php:183
+msgid "Fade"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:313
+#: admin/includes/class-projects-options-page.php:187
+msgid "Scale"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:317
+#: admin/includes/class-projects-options-page.php:191
+msgid "Custom"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:325
+#: admin/includes/class-projects-options-page.php:198
+msgid "Filters"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:326
+#: admin/includes/class-projects-options-page.php:199
+msgid "Enable/disable listing filters"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:329
+msgid "Show"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:330
+msgid "Hide"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:336
+#: admin/includes/class-projects-admin.php:543
+#: admin/includes/class-projects-options-page.php:204
+msgid "Filter type"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:337
+#: admin/includes/class-projects-admin.php:544
+#: admin/includes/class-projects-options-page.php:205
+msgid "Select if you want to filter posts by tag or by category."
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:342
+#: admin/includes/class-projects-admin.php:549
+#: admin/includes/class-projects-options-page.php:210
+#: public/includes/class-projects-registration.php:132
+msgid "Category"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:346
+#: admin/includes/class-projects-admin.php:552
+#: admin/includes/class-projects-options-page.php:214
+#: public/includes/class-projects-registration.php:146
+msgid "Tag"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:354
+#: admin/includes/class-projects-options-page.php:221
+msgid "Projects filter categories list"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:364
+#: admin/includes/class-projects-options-page.php:233
+msgid "Projects filter tags list"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:374
+#: admin/includes/class-projects-options-page.php:245
+msgid "Order filters"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:375
+#: admin/includes/class-projects-options-page.php:246
+msgid "Enable/disable order filters"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:387
+#: admin/includes/class-projects-options-page.php:257
+msgid "Order filter default value"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:392
+#: admin/includes/class-projects-options-page.php:262
+msgid "DESC"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:395
+#: admin/includes/class-projects-options-page.php:265
+msgid "ASC"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:403
+#: admin/includes/class-projects-options-page.php:272
+msgid "Order by filter default value"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:411
+#: admin/includes/class-projects-options-page.php:280
+#: public/includes/class-projects-data.php:480
+msgid "Name"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:414
+#: admin/includes/class-projects-options-page.php:283
+#: public/includes/class-projects-data.php:481
+msgid "Modified"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:417
+#: admin/includes/class-projects-options-page.php:286
+#: public/includes/class-projects-data.php:482
+msgid "Comments"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:425
+#: admin/includes/class-projects-options-page.php:293
+msgid "Post Format"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:430
+#: admin/includes/class-projects-options-page.php:298
+msgid "All formats"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:433
+#: admin/includes/class-projects-options-page.php:301
+msgid "Standard"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:436
+#: admin/includes/class-projects-options-page.php:304
+msgid "Image"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:439
+#: admin/includes/class-projects-options-page.php:307
+msgid "Gallery"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:442
+#: admin/includes/class-projects-options-page.php:310
+msgid "Audio"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:445
+#: admin/includes/class-projects-options-page.php:313
+msgid "Video"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:452
+msgid "Single term slug"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:458
+#: admin/includes/class-projects-admin.php:624
+#: admin/includes/class-projects-meta-boxes.php:214
+#: admin/includes/class-projects-options-page.php:319
+msgid "Column number"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:459
+#: admin/includes/class-projects-admin.php:625
+#: admin/includes/class-projects-options-page.php:320
+msgid ""
+"Select number of columns for masonry and grid projects layouts. (Min 2, max "
+"6)"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:467
+#: admin/includes/class-projects-admin.php:633
+#: admin/includes/class-projects-options-page.php:327
+msgid "Posts per page"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:468
+#: admin/includes/class-projects-admin.php:634
+#: admin/includes/class-projects-options-page.php:328
+msgid ""
+"Select how many posts per page do you want to display(-1 means that will "
+"show all projects)"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:476
+#: admin/includes/class-projects-admin.php:642
+#: admin/includes/class-projects-options-page.php:335
+msgid "Item margin"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:477
+#: admin/includes/class-projects-admin.php:643
+#: admin/includes/class-projects-options-page.php:336
+msgid "Select projects item margin (outer indent) value."
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:485
+#: admin/includes/class-projects-options-page.php:343
+msgid "Justified fixed height"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:486
+#: admin/includes/class-projects-options-page.php:344
+msgid "Select projects item justified height value."
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:495
+#: admin/includes/class-projects-admin.php:651
+#: admin/includes/class-projects-options-page.php:352
+msgid "Grid template"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:496
+#: admin/includes/class-projects-admin.php:652
+#: admin/includes/class-projects-options-page.php:353
+msgid "Grid content template"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:503
+#: admin/includes/class-projects-admin.php:658
+#: admin/includes/class-projects-options-page.php:359
+msgid "Masonry template"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:504
+#: admin/includes/class-projects-admin.php:659
+#: admin/includes/class-projects-options-page.php:360
+msgid "Masonry content template"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:511
+#: admin/includes/class-projects-options-page.php:366
+msgid "Justified template"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:512
+#: admin/includes/class-projects-options-page.php:367
+msgid "Justified content template"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:519
+#: admin/includes/class-projects-admin.php:520
+#: admin/includes/class-projects-admin.php:665
+#: admin/includes/class-projects-admin.php:666
+#: admin/includes/class-projects-options-page.php:373
+#: admin/includes/class-projects-options-page.php:374
+msgid "Cascading grid template"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:527
+#: admin/includes/class-projects-admin.php:672
+#: admin/includes/class-projects-options-page.php:380
+msgid "List template"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:528
+#: admin/includes/class-projects-admin.php:673
+#: admin/includes/class-projects-options-page.php:381
+msgid "List content template"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:535
+msgid "Projects Terms"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:536
+msgid ""
+"The shortcode displays Category and Tag sections content listing with set "
+"parameters."
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:559
+msgid "Terms listing layout"
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:560
+msgid "Choose terms listing view layout."
+msgstr ""
+
+#: admin/includes/class-projects-admin.php:590
+msgid "Choose terms loading animation"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:57
+msgid "Projects settings"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:76
+msgid "General"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:77
+msgid "General project settings"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:82
+msgid "Image Format"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:83
+msgid "Project options for Image format"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:88
+msgid "Gallery Format"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:89
+msgid "Project options for Gallery format"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:94
+msgid "Audio Format"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:95
+msgid "Project options for Audio format"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:100
+msgid "Video Format"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:101
+msgid "Project options for Video format"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:106
+msgid "External link"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:107
+msgid "Input external link address"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:113
+msgid "External link text"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:114
+msgid "Text for external link"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:120
+msgid "External link target"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:121
+msgid "Target for external link"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:126
+msgid "Blank"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:129
+msgid "Self"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:136
+msgid "Projects Details"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:137
+msgid "Here you can create a list of project details"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:138
+msgid "Add Projects Details"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:145
+msgid "Enter label"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:146
+msgid "Detail Label"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:152
+msgid "Enter info"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:153
+msgid "Detail Info"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:160
+msgid "Projects skills"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:161
+msgid ""
+"Here you can create a list of participants in the creation of the project"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:162
+msgid "Add Skill"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:169
+msgid "Skill label"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:170
+msgid "Skill Label"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:176
+msgid "Skill Value"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:183
+msgid "Additional images"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:184
+msgid "Select attachments images"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:187
+#: admin/includes/class-projects-meta-boxes.php:236
+msgid "Add images"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:193
+msgid "Image listing layout"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:194
+msgid "Select listing layout"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:215
+msgid "Select number of columns for masonry and grid projects layouts."
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:223
+msgid "Image margin"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:224
+msgid "Select projects item margin (outer indent) value.(px)"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:232
+msgid "Gallery images"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:233
+msgid "Select gallery images"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:243
+msgid "Use navigation?"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:244
+msgid "Set the value to true if you want to use navigation"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:250
+msgid "Use infinite scrolling?"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:251
+msgid "Set the value to true if you want to use infinite scrolling"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:256
+msgid "Thumbnails position"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:257
+msgid "Select position for Thumbnails list"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:262
+msgid "Top"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:265
+msgid "Bottom"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:268
+msgid "Right"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:271
+msgid "Left"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:278
+msgid "Audio source"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:279
+msgid "Select audio source( mp3, m4a, ogg, wav, wma )"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:282
+msgid "Add sound"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:288
+msgid "Video list"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:289
+msgid "Select video source"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:290
+msgid "Add New Video"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:295
+msgid "Video source type"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:301
+msgid "Embed video type"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:304
+msgid "HTML5 video type"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:312
+msgid "Select embed url"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:313
+msgid "Video embed url"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:319
+msgid "HTML5 Video source"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:322
+msgid "Add Video"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:329
+msgid "HTML5 video poster"
+msgstr ""
+
+#: admin/includes/class-projects-meta-boxes.php:332
+msgid "Add Poster"
+msgstr ""
+
+#: admin/includes/class-projects-options-page.php:387
+#: admin/includes/class-projects-options-page.php:388
+msgid "Standard post template"
+msgstr ""
+
+#: admin/includes/class-projects-options-page.php:393
+#: admin/includes/class-projects-options-page.php:394
+msgid "Image post template"
+msgstr ""
+
+#: admin/includes/class-projects-options-page.php:399
+#: admin/includes/class-projects-options-page.php:400
+msgid "Gallery post template"
+msgstr ""
+
+#: admin/includes/class-projects-options-page.php:405
+#: admin/includes/class-projects-options-page.php:406
+msgid "Audio post template"
+msgstr ""
+
+#: admin/includes/class-projects-options-page.php:411
+#: admin/includes/class-projects-options-page.php:412
+msgid "Video post template"
+msgstr ""
+
+#: admin/includes/class-projects-options-page.php:458
+msgid "Projects Options"
+msgstr ""
+
+#: admin/includes/class-projects-options-page.php:459
+msgid "Settings"
+msgstr ""
+
+#: admin/includes/class-projects-options-page.php:502
+msgid "Save"
+msgstr ""
+
+#: admin/includes/class-projects-options-page.php:503
+msgid "Define as default"
+msgstr ""
+
+#: admin/includes/class-projects-options-page.php:504
+msgid "Restore"
+msgstr ""
+
+#: admin/includes/class-projects-options-page.php:608
+msgid "No right to preserve options"
+msgstr ""
+
+#: admin/includes/class-projects-options-page.php:621
+msgid "Options have been saved"
+msgstr ""
+
+#: admin/includes/class-projects-options-page.php:629
+msgid "Settings have been define as default"
+msgstr ""
+
+#: admin/includes/class-projects-options-page.php:639
+msgid "Settings have been restored"
+msgstr ""
+
+#: admin/includes/class-projects-options-page.php:676
+msgid "Please wait, processing the previous request"
+msgstr ""
+
+#: cherry-framework/modules/cherry-breadcrumbs/cherry-breadcrumbs.php:346
+msgid "Home"
+msgstr ""
+
+#: cherry-framework/modules/cherry-breadcrumbs/cherry-breadcrumbs.php:352
+msgid "Browse:"
+msgstr ""
+
+#: cherry-framework/modules/cherry-breadcrumbs/cherry-breadcrumbs.php:354
+msgid "404 Not Found"
+msgstr ""
+
+#: cherry-framework/modules/cherry-breadcrumbs/cherry-breadcrumbs.php:355
+msgid "Archives"
+msgstr ""
+
+#: cherry-framework/modules/cherry-breadcrumbs/cherry-breadcrumbs.php:356
+#, php-format
+msgid "Search results for &#8220;%s&#8221;"
+msgstr ""
+
+#: cherry-framework/modules/cherry-breadcrumbs/cherry-breadcrumbs.php:357
+#, php-format
+msgid "Page %s"
+msgstr ""
+
+#: cherry-framework/modules/cherry-breadcrumbs/cherry-breadcrumbs.php:358
+#, php-format
+msgid "Minute %s"
+msgstr ""
+
+#: cherry-framework/modules/cherry-breadcrumbs/cherry-breadcrumbs.php:359
+#, php-format
+msgid "Week %s"
+msgstr ""
+
+#: cherry-framework/modules/cherry-customizer/cherry-customizer.php:269
+msgid "Untitled Panel"
+msgstr ""
+
+#: cherry-framework/modules/cherry-customizer/cherry-customizer.php:305
+msgid "Untitled Section"
+msgstr ""
+
+#: cherry-framework/modules/cherry-customizer/cherry-customizer.php:338
+msgid "Untitled Control"
+msgstr ""
+
+#: cherry-framework/modules/cherry-db-updater/cherry-db-updater.php:105
+#, php-format
+msgid ""
+"Module DB Updater init error in %s - version and slug is required arguments"
+msgstr ""
+
+#: cherry-framework/modules/cherry-db-updater/cherry-db-updater.php:106
+msgid "We need to update your database to the latest version."
+msgstr ""
+
+#: cherry-framework/modules/cherry-db-updater/cherry-db-updater.php:107
+msgid "Update complete, thank you for updating to the latest version!"
+msgstr ""
+
+#: cherry-framework/modules/cherry-db-updater/cherry-db-updater.php:331
+msgid "Start Update"
+msgstr ""
+
+#: cherry-framework/modules/cherry-db-updater/cherry-db-updater.php:368
+msgid "Data Update"
+msgstr ""
+
+#: cherry-framework/modules/cherry5-insert-shortcode/inc/class-cherry5-insertion-button.php:63
+msgid "Cherry shortcodes"
+msgstr ""
+
+#: cherry-framework/modules/cherry5-insert-shortcode/inc/class-cherry5-insertion-popup.php:128
+msgid "insert shortcode"
+msgstr ""
+
+#: cherry-framework/modules/cherry5-insert-shortcode/inc/class-cherry5-insertion-popup.php:148
+msgid "Shortcode List"
+msgstr ""
+
+#: cherry-framework/modules/cherry5-insert-shortcode/inc/class-cherry5-insertion-popup.php:206
+msgid "Shortcode not found."
+msgstr ""
+
+#: cherry-framework/modules/cherry5-insert-shortcode/inc/class-cherry5-insertion-popup.php:261
+msgid "Shortcode content."
+msgstr ""
+
+#: cherry-framework/modules/cherry5-insert-shortcode/inc/class-cherry5-insertion-popup.php:262
+msgid "Input shortcode content."
+msgstr ""
+
+#: cherry-framework/modules/cherry5-insert-shortcode/inc/class-cherry5-insertion-popup.php:277
+msgid "Shortcode not a have options."
+msgstr ""
+
+#: cherry-projects.php:348 cherry-projects.php:363
+msgid "Set thumbnail"
+msgstr ""
+
+#: cherry-projects.php:349
+msgid "Category thumbnail"
+msgstr ""
+
+#: cherry-projects.php:364
+msgid "Tag thumbnail"
+msgstr ""
+
+#: public/includes/class-cherry-projects-template-callbacks.php:245
+#: public/includes/class-cherry-projects-template-callbacks.php:894
+msgid "More"
+msgstr ""
+
+#: public/includes/class-cherry-projects-template-callbacks.php:309
+#: public/includes/class-cherry-projects-template-callbacks.php:343
+#: public/includes/class-cherry-projects-template-callbacks.php:938
+msgid "Posted by "
+msgstr ""
+
+#: public/includes/class-cherry-projects-template-callbacks.php:387
+msgid "Zoom"
+msgstr ""
+
+#: public/includes/class-cherry-projects-template-callbacks.php:448
+msgid "Permalink"
+msgstr ""
+
+#: public/includes/class-cherry-projects-template-callbacks.php:520
+msgid "Project details"
+msgstr ""
+
+#: public/includes/class-projects-data.php:277
+msgid "Load more"
+msgstr ""
+
+#: public/includes/class-projects-data.php:440
+msgid "Posts not found"
+msgstr ""
+
+#: public/includes/class-projects-data.php:474
+#: public/includes/class-projects-data.php:527
+msgid "Desc"
+msgstr ""
+
+#: public/includes/class-projects-data.php:475
+#: public/includes/class-projects-data.php:527
+msgid "Asc"
+msgstr ""
+
+#: public/includes/class-projects-data.php:502
+msgid "Show all"
+msgstr ""
+
+#: public/includes/class-projects-data.php:534
+msgid "Order:"
+msgstr ""
+
+#: public/includes/class-projects-data.php:546
+msgid "Order by:"
+msgstr ""
+
+#: public/includes/class-projects-data.php:615
+msgid "Prev"
+msgstr ""
+
+#: public/includes/class-projects-data.php:623
+msgid "Next"
+msgstr ""
+
+#: public/includes/class-projects-registration.php:59
+msgid "Projects list"
+msgstr ""
+
+#: public/includes/class-projects-registration.php:60
+msgid "Add Project"
+msgstr ""
+
+#: public/includes/class-projects-registration.php:61
+msgid "Add Project Item"
+msgstr ""
+
+#: public/includes/class-projects-registration.php:62
+msgid "Edit Project Item"
+msgstr ""
+
+#: public/includes/class-projects-registration.php:63
+msgid "New Project Item"
+msgstr ""
+
+#: public/includes/class-projects-registration.php:64
+msgid "View Project Item"
+msgstr ""
+
+#: public/includes/class-projects-registration.php:65
+msgid "Search Project Items"
+msgstr ""
+
+#: public/includes/class-projects-registration.php:66
+msgid "No Project Items found"
+msgstr ""
+
+#: public/includes/class-projects-registration.php:67
+msgid "No Project Items found in trash"
+msgstr ""
+
+#: public/includes/class-projects-registration.php:130
+msgid "Projects Categories"
+msgstr ""
+
+#: public/includes/class-projects-registration.php:131
+#: public/includes/class-projects-registration.php:133
+msgid "Categories"
+msgstr ""
+
+#: public/includes/class-projects-registration.php:144
+msgid "Projects Tags"
+msgstr ""
+
+#: public/includes/class-projects-registration.php:145
+#: public/includes/class-projects-registration.php:147
+msgid "Tags"
+msgstr ""
+
+#: public/includes/class-projects-term-data.php:209
+msgid "Terms not found"
+msgstr ""

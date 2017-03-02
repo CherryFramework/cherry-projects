@@ -3,8 +3,8 @@
 Contributors: TemplateMonster 2002
 Tags: custom post type, projects, portfolio, cherry framework
 Requires at least: 4.5
-Tested up to: 4.5.3
-Stable tag: 1.2.1
+Tested up to: 4.7.2
+Stable tag: 1.2.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
