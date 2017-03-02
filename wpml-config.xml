@@ -1,7 +1,4 @@
 <wpml-config>
-	<custom-fields>
-		<custom-field action="copy">_cherry_projects</custom-field>
-	</custom-fields>
 	<custom-types>
 		<custom-type translate="1">projects</custom-type>
 	</custom-types>
@@ -9,4 +6,21 @@
 		<taxonomy translate="1">projects_category</taxonomy>
 		<taxonomy translate="1">projects_tag</taxonomy>
 	</taxonomies>
+	<custom-fields>
+		<custom-field action="translate">cherry_projects_external_link</custom-field>
+		<custom-field action="translate">cherry_projects_external_link_text</custom-field>
+		<custom-field action="copy">cherry_projects_external_link_target</custom-field>
+		<custom-field action="translate">cherry_projects_details</custom-field>
+		<custom-field action="translate">cherry_projects_skills</custom-field>
+		<custom-field action="copy">cherry_projects_image_attachments_ids</custom-field>
+		<custom-field action="copy">cherry_projects_listing_layout</custom-field>
+		<custom-field action="copy">cherry_projects_column_number</custom-field>
+		<custom-field action="copy">cherry_projects_image_margin</custom-field>
+		<custom-field action="copy">cherry_projects_slider_attachments_ids</custom-field>
+		<custom-field action="copy">cherry_projects_slider_navigation</custom-field>
+		<custom-field action="copy">cherry_projects_slider_loop</custom-field>
+		<custom-field action="copy">cherry_projects_slider_thumbnails_position</custom-field>
+		<custom-field action="copy">cherry_projects_audio_attachments_ids</custom-field>
+		<custom-field action="copy">cherry_projects_video_list</custom-field>
+	</custom-fields>
 </wpml-config>
