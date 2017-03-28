@@ -143,3 +143,9 @@ Standard templates can be rewritten in the theme. For that you need to create ch
 
 * Fixed justified layout listing
 * Fixed bugs
+
+= 1.2.2 =
+
+* Add responsive layouts for cascading grid layout
+* Add projects items ajax success loading callback
+* Fixed bugs

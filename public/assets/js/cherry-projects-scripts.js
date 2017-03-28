@@ -84,6 +84,9 @@
 							case 'masonry-layout':
 								self.masonryLayoutRender( $instance, columnNumber, instanceSettings['item-margin'] );
 							break;
+							case 'cascading-grid-layout':
+								self.cascadingGridLayoutRender( $instance, instanceSettings['item-margin'] );
+							break;
 						}
 					} );
 			} );
@@ -126,11 +129,12 @@
 		},
 
 		cascadingGridLayoutRender: function( instance, marginItem ) {
-			var $itemlist = $( '.projects-terms-item', instance );
+			var $itemlist = $( '.projects-terms-item', instance ),
+				self = this;
 
 			$itemlist.each( function( index ) {
 					var $this    = $( this ),
-						newWidth = ( 100 / getCascadingIndex( index ) ).toFixed( 2 ),
+						newWidth = ( 100 / getCascadingIndex( index, self ) ).toFixed( 2 ),
 						margin   = Math.ceil( +marginItem / 2 );
 
 					$this.css( {
@@ -144,11 +148,29 @@
 				}
 			);
 
-			function getCascadingIndex ( index ) {
+			function getCascadingIndex ( index, self ) {
 				var index = index || 0,
-					map = cherryProjectsTermObjects.cascadingListMap || [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ],
+					map = [],
 					counter = 0,
 					mapIndex = 0;
+
+					switch ( self.getResponsiveLayout() ) {
+						case 'xl':
+							map = cherryProjectsTermObjects.cascadingListMap || [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ];
+							break
+						case 'lg':
+							map = [ 1, 2, 2, 3, 3, 3 ];
+							break
+						case 'md':
+							map = [ 1, 2, 2 ];
+							break
+						case 'sm':
+							map = [ 1, 2, 2 ];
+							break
+						case 'xs':
+							map = [ 1 ];
+							break
+					}
 
 					for ( var i = 0; i < index; i++ ) {
 						counter++;
@@ -208,19 +230,19 @@
 			var windowWidth   = $( window ).width(),
 				widthLayout   = 'xs';
 
-			if ( windowWidth >= 544 ) {
+			if ( windowWidth >= 600 ) {
 				widthLayout = 'sm';
 			}
 
-			if ( windowWidth >= 768 ) {
+			if ( windowWidth >= 900 ) {
 				widthLayout = 'md';
 			}
 
-			if ( windowWidth >= 992 ) {
+			if ( windowWidth >= 1200 ) {
 				widthLayout = 'lg';
 			}
 
-			if ( windowWidth >= 1200 ) {
+			if ( windowWidth >= 1600 ) {
 				widthLayout = 'xl';
 			}
 

@@ -198,7 +198,6 @@
 							getMoreProjects( currentTermSlug, currentPage, orderSetting );
 						}
 					});
-
 					jQuery( window ).on( 'resize.projects_layout_resize', function() {
 						switch ( projectsSettings['list-layout'] ) {
 							case 'grid-layout':
@@ -206,6 +205,9 @@
 							break;
 							case 'masonry-layout':
 								masonryLayoutRender( getResponsiveColumn() );
+							break;
+							case 'cascading-grid-layout':
+								cascadingGridLayoutRender();
 							break;
 						}
 					} );
@@ -284,6 +286,7 @@
 								Waypoint.refreshAll();
 
 								CherryJsCore.cherryProjectsFrontScripts.magnificIconInit();
+								CherryJsCore.variable.$document.trigger( 'getNewProjectsListAjaxSuccess' );
 							} );
 
 						}
@@ -355,6 +358,8 @@
 								Waypoint.refreshAll();
 
 								CherryJsCore.cherryProjectsFrontScripts.magnificIconInit();
+
+								CherryJsCore.variable.$document.trigger( 'getMoreProjectsAjaxSuccess' );
 							} );
 
 						}
@@ -436,7 +441,7 @@
 				/*
 				 * Cascading grid layout
 				 */
-				function cascadingGridLayoutRender() {
+				function cascadingGridLayoutRender( columnNumber ) {
 					var projectsListWrap = $('.projects-list', $projectsContainer ),
 						projectsList = $('.projects-item', $projectsContainer );
 
@@ -480,9 +485,27 @@
 				 */
 				function getCascadingIndex( index ) {
 					var index = index || 0,
-						map = cherryProjectsObjects.cascadingListMap || [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ],
+						map = [],
 						counter = 0,
 						mapIndex = 0;
+
+						switch ( getResponsiveLayout() ) {
+							case 'xl':
+								map = cherryProjectsObjects.cascadingListMap || [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ];
+								break
+							case 'lg':
+								map = [ 1, 2, 2, 3, 3, 3 ];
+								break
+							case 'md':
+								map = [ 1, 2, 2 ];
+								break
+							case 'sm':
+								map = [ 1, 2, 2 ];
+								break
+							case 'xs':
+								map = [ 1 ];
+								break
+						}
 
 						for ( var i = 0; i < index; i++ ) {
 							counter++;
@@ -554,6 +577,7 @@
 							columnPerView = 1;
 							break
 					}
+
 					return columnPerView;
 				}
 
@@ -561,19 +585,19 @@
 					var windowWidth   = $( window ).width(),
 						widthLayout   = 'xs';
 
-					if ( windowWidth >= 544 ) {
+					if ( windowWidth >= 600 ) {
 						widthLayout = 'sm';
 					}
 
-					if ( windowWidth >= 768 ) {
+					if ( windowWidth >= 900 ) {
 						widthLayout = 'md';
 					}
 
-					if ( windowWidth >= 992 ) {
+					if ( windowWidth >= 1200 ) {
 						widthLayout = 'lg';
 					}
 
-					if ( windowWidth >= 1200 ) {
+					if ( windowWidth >= 1600 ) {
 						widthLayout = 'xl';
 					}
 
