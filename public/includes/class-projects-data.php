@@ -82,7 +82,10 @@ class Cherry_Project_Data {
 			'orderby-filter-default-value' => cherry_projects()->get_option( 'orderby-filter-default-value', 'date' ),
 			'posts-format'                 => cherry_projects()->get_option( 'posts-format', 'post-format-all' ),
 			'single-term'                  => cherry_projects()->get_option( 'single-term', '' ),
-			'column-number'                => cherry_projects()->get_option( 'column-number', 3 ),
+			'column-number'                => cherry_projects()->get_option( 'column-number', 4 ),
+			'column-number-laptop'         => 3,
+			'column-number-tablet'         => 2,
+			'column-number-mobile'         => 1,
 			'post-per-page'                => cherry_projects()->get_option( 'post-per-page', 9 ),
 			'item-margin'                  => cherry_projects()->get_option( 'item-margin', 4 ),
 			'justified-fixed-height'       => cherry_projects()->get_option( 'justified-fixed-height', 300 ),
@@ -161,16 +164,19 @@ class Cherry_Project_Data {
 			}
 
 			$settings = array(
-				'list-layout'   => $this->options['listing-layout'],
-				'loading-mode'  => $this->options['loading-mode'],
-				'post-per-page' => $this->options['post-per-page'],
-				'column-number' => $this->options['column-number'],
-				'item-margin'   => $this->options['item-margin'],
-				'fixed-height'  => $this->options['justified-fixed-height'],
-				'posts-format'  => $this->options['posts-format'],
-				'single-term'   => $this->options['single-term'],
-				'filter-type'   => $this->options['filter-type'],
-				'template'      => $template,
+				'list-layout'          => $this->options['listing-layout'],
+				'loading-mode'         => $this->options['loading-mode'],
+				'post-per-page'        => $this->options['post-per-page'],
+				'column-number'        => $this->options['column-number'],
+				'column-number-laptop' => $this->options['column-number-laptop'],
+				'column-number-tablet' => $this->options['column-number-tablet'],
+				'column-number-mobile' => $this->options['column-number-mobile'],
+				'item-margin'          => $this->options['item-margin'],
+				'fixed-height'         => $this->options['justified-fixed-height'],
+				'posts-format'         => $this->options['posts-format'],
+				'single-term'          => $this->options['single-term'],
+				'filter-type'          => $this->options['filter-type'],
+				'template'             => $template,
 			);
 
 			$settings = json_encode( $settings );

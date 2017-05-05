@@ -453,13 +453,76 @@ class Cherry_Projects_Admin {
 									'value'           => '',
 								),
 
+								'device_layout_column_number' => array(
+									'type'        => 'component-tab-horizontal',
+								),
+
+								'column_number_desktop_layout' => array(
+									'type'        => 'settings',
+									'parent'      => 'device_layout_column_number',
+									'title'       => esc_html__( 'Desktop', 'cherry-projects' ),
+									'description' => esc_html__( 'Define column number for desktop layout', 'cherry-projects' ),
+								),
+
+								'column_number_laptop_layout' => array(
+									'type'        => 'settings',
+									'parent'      => 'device_layout_column_number',
+									'title'       => esc_html__( 'Laptop', 'cherry-projects' ),
+									'description' => esc_html__( 'Define column number for laptop layout', 'cherry-projects' ),
+								),
+
+								'column_number_tablet_layout' => array(
+									'type'        => 'settings',
+									'parent'      => 'device_layout_column_number',
+									'title'       => esc_html__( 'Tablet', 'cherry-projects' ),
+									'description' => esc_html__( 'Define column number for tablet layout', 'cherry-projects' ),
+								),
+
+								'column_number_mobile_layout' => array(
+									'type'        => 'settings',
+									'parent'      => 'device_layout_column_number',
+									'title'       => esc_html__( 'Mobile', 'cherry-projects' ),
+									'description' => esc_html__( 'Define column number for mobile layout', 'cherry-projects' ),
+								),
+
 								'column_number' => array(
 									'type'        => 'slider',
+									'parent'      => 'column_number_desktop_layout',
 									'title'       => esc_html__( 'Column number', 'cherry-projects' ),
 									'description' => esc_html__( 'Select number of columns for masonry and grid projects layouts. (Min 2, max 6)', 'cherry-projects' ),
-									'max_value'   => 6,
-									'min_value'   => 2,
+									'max_value'   => 9,
+									'min_value'   => 1,
+									'value'       => 4,
+								),
+
+								'column_number_laptop' => array(
+									'type'        => 'slider',
+									'parent'      => 'column_number_laptop_layout',
+									'title'       => esc_html__( 'Labtop column number', 'cherry-projects' ),
+									'description' => esc_html__( 'Select laptop number of columns for masonry and grid projects layouts. (Min 2, max 6)', 'cherry-projects' ),
+									'max_value'   => 9,
+									'min_value'   => 1,
 									'value'       => 3,
+								),
+
+								'column_number_tablet' => array(
+									'type'        => 'slider',
+									'parent'      => 'column_number_tablet_layout',
+									'title'       => esc_html__( 'Tablet column number', 'cherry-projects' ),
+									'description' => esc_html__( 'Select tablet number of columns for masonry and grid projects layouts. (Min 2, max 6)', 'cherry-projects' ),
+									'max_value'   => 9,
+									'min_value'   => 1,
+									'value'       => 2,
+								),
+
+								'column_number_mobile' => array(
+									'type'        => 'slider',
+									'parent'      => 'column_number_mobile_layout',
+									'title'       => esc_html__( 'Tablet column number', 'cherry-projects' ),
+									'description' => esc_html__( 'Select mobile number of columns for masonry and grid projects layouts. (Min 2, max 6)', 'cherry-projects' ),
+									'max_value'   => 9,
+									'min_value'   => 1,
+									'value'       => 1,
 								),
 
 								'post_per_page' => array(
