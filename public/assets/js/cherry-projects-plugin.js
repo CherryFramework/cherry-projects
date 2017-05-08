@@ -557,24 +557,28 @@
 				}
 
 				function getResponsiveColumn() {
-					var columnPerView = +projectsSettings['column-number'],
-						widthLayout   = getResponsiveLayout();
+					var columnPerView              = +projectsSettings['column-number'],
+						widthLayout                = getResponsiveLayout(),
+						columnNumberLaptop         = +projectsSettings['column-number-laptop'] || 4,
+						columnNumberAlbumTablet    = +projectsSettings['column-number-album-tablet'] || 3,
+						columnNumberPortraitTablet = +projectsSettings['column-number-portrait-tablet'] || 2,
+						columnNumberMobile         = +projectsSettings['column-number-mobile'] || 1;
 
 					switch ( widthLayout ) {
 						case 'xl':
 							columnPerView = +projectsSettings['column-number'];
 							break
 						case 'lg':
-							columnPerView = Math.ceil( +projectsSettings['column-number'] / 2 );
+							columnPerView = columnNumberLaptop;
 							break
 						case 'md':
-							columnPerView = Math.ceil( +projectsSettings['column-number'] / 3 );
+							columnPerView = columnNumberAlbumTablet;
 							break
 						case 'sm':
-							columnPerView = Math.ceil( +projectsSettings['column-number'] / 4 );
+							columnPerView = columnNumberPortraitTablet;
 							break
 						case 'xs':
-							columnPerView = 1;
+							columnPerView = columnNumberMobile;
 							break
 					}
 

@@ -111,6 +111,7 @@ class Cherry_Projects_Options_Page {
 					),
 				),
 			),
+
 			'loading-mode' => array(
 				'type'			=> 'radio',
 				'title'			=> esc_html__( 'Pagination mode', 'cherry-projects' ),
@@ -137,6 +138,7 @@ class Cherry_Projects_Options_Page {
 					),
 				),
 			),
+
 			'loading-animation' => array(
 				'type'			=> 'radio',
 				'title'			=> esc_html__( 'Loading animation', 'cherry-projects' ),
@@ -171,6 +173,7 @@ class Cherry_Projects_Options_Page {
 					),
 				),
 			),
+
 			'hover-animation' => array(
 				'type'			=> 'radio',
 				'title'			=> esc_html__( 'Hover animation', 'cherry-projects' ),
@@ -193,12 +196,14 @@ class Cherry_Projects_Options_Page {
 					),
 				),
 			),
+
 			'filter-visible' => array(
 				'type'			=> 'switcher',
 				'title'			=> esc_html__( 'Filters', 'cherry-projects' ),
 				'description'	=> esc_html__( 'Enable/disable listing filters', 'cherry-projects' ),
 				'value'			=> 'true',
 			),
+
 			'filter-type' => array(
 				'type'			=> 'radio',
 				'title'			=> esc_html__( 'Filter type', 'cherry-projects' ),
@@ -216,6 +221,7 @@ class Cherry_Projects_Options_Page {
 					),
 				),
 			),
+
 			'category-list' => array(
 				'type'             => 'select',
 				'title'            => esc_html__( 'Projects filter categories list', 'cherry-projects' ),
@@ -228,6 +234,7 @@ class Cherry_Projects_Options_Page {
 				'options_callback' => array( $this->utility->satellite, 'get_terms_array', array( CHERRY_PROJECTS_NAME . '_category', 'slug' ) ),
 				'master'           => 'projects-filter-type-category',
 			),
+
 			'tags-list' => array(
 				'type'             => 'select',
 				'title'            => esc_html__( 'Projects filter tags list', 'cherry-projects' ),
@@ -240,6 +247,7 @@ class Cherry_Projects_Options_Page {
 				'options_callback' => array( $this->utility->satellite, 'get_terms_array', array( CHERRY_PROJECTS_NAME . '_tag', 'slug' ) ),
 				'master'           => 'projects-filter-type-tag',
 			),
+
 			'order-filter-visible' => array(
 				'type'			=> 'switcher',
 				'title'			=> esc_html__( 'Order filters', 'cherry-projects' ),
@@ -252,6 +260,7 @@ class Cherry_Projects_Options_Page {
 					'false_slave'	=> 'projects-order-filter-visible-false',
 				),
 			),
+
 			'order-filter-default-value' => array(
 				'type'			=> 'radio',
 				'title'			=> esc_html__( 'Order filter default value', 'cherry-projects' ),
@@ -267,6 +276,7 @@ class Cherry_Projects_Options_Page {
 				),
 				'master'		=> 'projects-order-filter-visible-true',
 			),
+
 			'orderby-filter-default-value' => array(
 				'type'			=> 'radio',
 				'title'			=> esc_html__( 'Order by filter default value', 'cherry-projects' ),
@@ -288,6 +298,7 @@ class Cherry_Projects_Options_Page {
 				),
 				'master'		=> 'projects-order-filter-visible-true',
 			),
+
 			'posts-format' => array(
 				'type'			=> 'radio',
 				'title'			=> esc_html__( 'Post Format', 'cherry-projects' ),
@@ -314,14 +325,52 @@ class Cherry_Projects_Options_Page {
 					),
 				),
 			),
+
 			'column-number' => array(
-				'type'			=> 'slider',
-				'title'			=> esc_html__( 'Column number', 'cherry-projects' ),
-				'description'	=> esc_html__( 'Select number of columns for masonry and grid projects layouts. (Min 2, max 6)', 'cherry-projects' ),
-				'max_value'		=> 6,
-				'min_value'		=> 2,
-				'value'			=> 3,
+				'type'        => 'slider',
+				'title'       => esc_html__( 'Column number', 'cherry-projects' ),
+				'description' => esc_html__( 'Select number of columns for masonry and grid projects layouts. (Min 1, max 9)', 'cherry-projects' ),
+				'max_value'   => 9,
+				'min_value'   => 1,
+				'value'       => 4,
 			),
+
+			'column-number-laptop' => array(
+				'type'        => 'slider',
+				'title'       => esc_html__( 'Labtop column number', 'cherry-projects' ),
+				'description' => esc_html__( 'Select laptop number of columns for masonry and grid projects layouts. (Min 1, max 9)', 'cherry-projects' ),
+				'max_value'   => 9,
+				'min_value'   => 1,
+				'value'       => 3,
+			),
+
+			'column-number-album-tablet' => array(
+				'type'        => 'slider',
+				'title'       => esc_html__( 'Album Tablet column number', 'cherry-projects' ),
+				'description' => esc_html__( 'Select album tablet number of columns for masonry and grid projects layouts. (Min 1, max 9)', 'cherry-projects' ),
+				'max_value'   => 9,
+				'min_value'   => 1,
+				'value'       => 2,
+			),
+
+			'column-number-portrait-tablet' => array(
+				'type'        => 'slider',
+				'title'       => esc_html__( 'Portrait Tablet column number', 'cherry-projects' ),
+				'description' => esc_html__( 'Select portrait tablet number of columns for masonry and grid projects layouts. (Min 1, max 9)', 'cherry-projects' ),
+				'max_value'   => 9,
+				'min_value'   => 1,
+				'value'       => 2,
+			),
+
+			'column-number-mobile' => array(
+				'type'        => 'slider',
+				'title'       => esc_html__( 'Tablet column number', 'cherry-projects' ),
+				'description' => esc_html__( 'Select mobile number of columns for masonry and grid projects layouts. (Min 1, max 9)', 'cherry-projects' ),
+				'max_value'   => 9,
+				'min_value'   => 1,
+				'value'       => 1,
+			),
+
 			'post-per-page' => array(
 				'type'			=> 'slider',
 				'title'			=> esc_html__( 'Posts per page', 'cherry-projects' ),
@@ -330,6 +379,7 @@ class Cherry_Projects_Options_Page {
 				'min_value'		=> -1,
 				'value'			=> 9,
 			),
+
 			'item-margin' => array(
 				'type'			=> 'slider',
 				'title'			=> esc_html__( 'Item margin', 'cherry-projects' ),
@@ -338,6 +388,7 @@ class Cherry_Projects_Options_Page {
 				'min_value'		=> 0,
 				'value'			=> 4,
 			),
+
 			'justified-fixed-height' => array(
 				'type'			=> 'slider',
 				'title'			=> esc_html__( 'Justified fixed height', 'cherry-projects' ),
@@ -347,6 +398,7 @@ class Cherry_Projects_Options_Page {
 				'value'			=> 300,
 				'master'		=> 'projects-listing-layout-justified-layout',
 			),
+
 			'grid-template' => array(
 				'type'			=> 'text',
 				'title'			=> esc_html__( 'Grid template', 'cherry-projects' ),
@@ -354,6 +406,7 @@ class Cherry_Projects_Options_Page {
 				'value'			=> 'grid-default.tmpl',
 				'master'		=> 'projects-listing-layout-grid-layout',
 			),
+
 			'masonry-template' => array(
 				'type'			=> 'text',
 				'title'			=> esc_html__( 'Masonry template', 'cherry-projects' ),
@@ -361,6 +414,7 @@ class Cherry_Projects_Options_Page {
 				'value'			=> 'masonry-default.tmpl',
 				'master'		=> 'projects-listing-layout-masonry-layout',
 			),
+
 			'justified-template' => array(
 				'type'			=> 'text',
 				'title'			=> esc_html__( 'Justified template', 'cherry-projects' ),
@@ -368,6 +422,7 @@ class Cherry_Projects_Options_Page {
 				'value'			=> 'justified-default.tmpl',
 				'master'		=> 'projects-listing-layout-justified-layout',
 			),
+
 			'cascading-grid-template' => array(
 				'type'			=> 'text',
 				'title'			=> esc_html__( 'Cascading grid template', 'cherry-projects' ),
@@ -375,6 +430,7 @@ class Cherry_Projects_Options_Page {
 				'value'			=> 'cascading-grid-default.tmpl',
 				'master'		=> 'projects-listing-layout-cascading-grid-layout',
 			),
+
 			'list-template' => array(
 				'type'			=> 'text',
 				'title'			=> esc_html__( 'List template', 'cherry-projects' ),
@@ -382,30 +438,35 @@ class Cherry_Projects_Options_Page {
 				'value'			=> 'list-default.tmpl',
 				'master'		=> 'projects-listing-layout-list-layout',
 			),
+
 			'standard-post-template' => array(
 				'type'			=> 'text',
 				'title'			=> esc_html__( 'Standard post template', 'cherry-projects' ),
 				'description'	=> esc_html__( 'Standard post template', 'cherry-projects' ),
 				'value'			=> 'standard-post-template.tmpl',
 			),
+
 			'image-post-template' => array(
 				'type'			=> 'text',
 				'title'			=> esc_html__( 'Image post template', 'cherry-projects' ),
 				'description'	=> esc_html__( 'Image post template', 'cherry-projects' ),
 				'value'			=> 'image-post-template.tmpl',
 			),
+
 			'gallery-post-template' => array(
 				'type'			=> 'text',
 				'title'			=> esc_html__( 'Gallery post template', 'cherry-projects' ),
 				'description'	=> esc_html__( 'Gallery post template', 'cherry-projects' ),
 				'value'			=> 'gallery-post-template.tmpl',
 			),
+
 			'audio-post-template' => array(
 				'type'			=> 'text',
 				'title'			=> esc_html__( 'Audio post template', 'cherry-projects' ),
 				'description'	=> esc_html__( 'Audio post template', 'cherry-projects' ),
 				'value'			=> 'audio-post-template.tmpl',
 			),
+
 			'video-post-template' => array(
 				'type'			=> 'text',
 				'title'			=> esc_html__( 'Video post template', 'cherry-projects' ),

@@ -471,10 +471,17 @@ class Cherry_Projects_Admin {
 									'description' => esc_html__( 'Define column number for laptop layout', 'cherry-projects' ),
 								),
 
-								'column_number_tablet_layout' => array(
+								'column_number_album_tablet_layout' => array(
 									'type'        => 'settings',
 									'parent'      => 'device_layout_column_number',
-									'title'       => esc_html__( 'Tablet', 'cherry-projects' ),
+									'title'       => esc_html__( 'Album Tablet', 'cherry-projects' ),
+									'description' => esc_html__( 'Define column number for tablet layout', 'cherry-projects' ),
+								),
+
+								'column_number_portrait_tablet_layout' => array(
+									'type'        => 'settings',
+									'parent'      => 'device_layout_column_number',
+									'title'       => esc_html__( 'Portrait Tablet', 'cherry-projects' ),
 									'description' => esc_html__( 'Define column number for tablet layout', 'cherry-projects' ),
 								),
 
@@ -489,7 +496,7 @@ class Cherry_Projects_Admin {
 									'type'        => 'slider',
 									'parent'      => 'column_number_desktop_layout',
 									'title'       => esc_html__( 'Column number', 'cherry-projects' ),
-									'description' => esc_html__( 'Select number of columns for masonry and grid projects layouts. (Min 2, max 6)', 'cherry-projects' ),
+									'description' => esc_html__( 'Select number of columns for masonry and grid projects layouts. (Min 1, max 9)', 'cherry-projects' ),
 									'max_value'   => 9,
 									'min_value'   => 1,
 									'value'       => 4,
@@ -499,17 +506,27 @@ class Cherry_Projects_Admin {
 									'type'        => 'slider',
 									'parent'      => 'column_number_laptop_layout',
 									'title'       => esc_html__( 'Labtop column number', 'cherry-projects' ),
-									'description' => esc_html__( 'Select laptop number of columns for masonry and grid projects layouts. (Min 2, max 6)', 'cherry-projects' ),
+									'description' => esc_html__( 'Select laptop number of columns for masonry and grid projects layouts. (Min 1, max 9)', 'cherry-projects' ),
 									'max_value'   => 9,
 									'min_value'   => 1,
 									'value'       => 3,
 								),
 
-								'column_number_tablet' => array(
+								'column_number_album_tablet' => array(
 									'type'        => 'slider',
-									'parent'      => 'column_number_tablet_layout',
-									'title'       => esc_html__( 'Tablet column number', 'cherry-projects' ),
-									'description' => esc_html__( 'Select tablet number of columns for masonry and grid projects layouts. (Min 2, max 6)', 'cherry-projects' ),
+									'parent'      => 'column_number_album_tablet_layout',
+									'title'       => esc_html__( 'Album Tablet column number', 'cherry-projects' ),
+									'description' => esc_html__( 'Select album tablet number of columns for masonry and grid projects layouts. (Min 1, max 9)', 'cherry-projects' ),
+									'max_value'   => 9,
+									'min_value'   => 1,
+									'value'       => 2,
+								),
+
+								'column_number_portrait_tablet' => array(
+									'type'        => 'slider',
+									'parent'      => 'column_number_portrait_tablet_layout',
+									'title'       => esc_html__( 'Portrait Tablet column number', 'cherry-projects' ),
+									'description' => esc_html__( 'Select portrait tablet number of columns for masonry and grid projects layouts. (Min 1, max 9)', 'cherry-projects' ),
 									'max_value'   => 9,
 									'min_value'   => 1,
 									'value'       => 2,
@@ -519,7 +536,7 @@ class Cherry_Projects_Admin {
 									'type'        => 'slider',
 									'parent'      => 'column_number_mobile_layout',
 									'title'       => esc_html__( 'Tablet column number', 'cherry-projects' ),
-									'description' => esc_html__( 'Select mobile number of columns for masonry and grid projects layouts. (Min 2, max 6)', 'cherry-projects' ),
+									'description' => esc_html__( 'Select mobile number of columns for masonry and grid projects layouts. (Min 1, max 9)', 'cherry-projects' ),
 									'max_value'   => 9,
 									'min_value'   => 1,
 									'value'       => 1,
