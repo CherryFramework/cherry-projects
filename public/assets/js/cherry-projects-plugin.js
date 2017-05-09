@@ -238,7 +238,7 @@
 
 					ajaxRequestObject = $.ajax( {
 						type: 'POST',
-						url: cherryProjectsObjects.ajax_url,
+						url: window.cherryProjectsObjects.ajax_url,
 						data: data,
 						cache: false,
 						beforeSend: function() {
@@ -318,7 +318,7 @@
 
 					ajaxRequestObject = $.ajax( {
 						type: 'POST',
-						url: cherryProjectsObjects.ajax_url,
+						url: window.cherryProjectsObjects.ajax_url,
 						data: data,
 						cache: false,
 						beforeSend: function() {
@@ -491,19 +491,19 @@
 
 						switch ( getResponsiveLayout() ) {
 							case 'xl':
-								map = cherryProjectsObjects.cascadingListMap || [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ];
+								map = window.cherryProjectsObjects.cascadingListMap || [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ];
 								break
 							case 'lg':
-								map = [ 1, 2, 2, 3, 3, 3 ];
+								map = window.cherryProjectsObjects.cascadingListMapDevice.laptop || [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ];
 								break
 							case 'md':
-								map = [ 1, 2, 2 ];
+								map = window.cherryProjectsObjects.cascadingListMapDevice.album_tablet || [ 1, 2, 2, 3, 3, 3 ];
 								break
 							case 'sm':
-								map = [ 1, 2, 2 ];
+								map = window.cherryProjectsObjects.cascadingListMapDevice.portrait_tablet || [ 1, 2, 2 ];
 								break
 							case 'xs':
-								map = [ 1 ];
+								map = window.cherryProjectsObjects.cascadingListMapDevice.mobile || [ 1 ];
 								break
 						}
 

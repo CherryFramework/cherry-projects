@@ -826,11 +826,19 @@ class Cherry_Project_Data {
 
 		$cascading_list_map = apply_filters( 'cherry_projects_cascading_list_map', array( 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ) );
 
+		$cascading_list_map_device = apply_filters( 'cherry_projects_cascading_list_map_device', array(
+			'laptop'          => array( 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ),
+			'album_tablet'    => array( 1, 2, 2, 3, 3, 3 ),
+			'portrait_tablet' => array( 1, 2, 2 ),
+			'mobile'          => array( 1 ),
+		) );
+
 		// Ajax js object portfolio_type_ajax.
 		wp_localize_script( 'cherry-projects-scripts', 'cherryProjectsObjects',
 			array(
-				'ajax_url'         => admin_url( 'admin-ajax.php' ),
-				'cascadingListMap' => $cascading_list_map,
+				'ajax_url'               => admin_url( 'admin-ajax.php' ),
+				'cascadingListMap'       => $cascading_list_map,
+				'cascadingListMapDevice' => $cascading_list_map_device,
 			)
 		);
 	}

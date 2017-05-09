@@ -14,17 +14,7 @@
 <form id="cherry-projects-options-form" method="post">
 	<div class="cherry-projects-options-page-wrapper">
 		<div class="cherry-projects-options-list-wrapper">
-		<?php foreach ( $__data['settings']['ui-settings'] as $key => $settings ) { ?>
-				<div class="option-section <?php echo $settings['master']; ?>">
-					<div class="option-info-wrapper">
-						<h3 class="option-title"><?php echo $settings['title']; ?></h3>
-						<span class="option-description"><?php echo $settings['description']; ?></span>
-					</div>
-					<div class="option-ui-element-wrapper">
-						<?php echo $settings['ui-html']; ?>
-					</div>
-				</div>
-			<?php } ?>
+			<?php echo $__data['settings']['ui-settings']; ?>
 		</div>
 		<div class="cherry-projects-options-control-wrapper">
 			<div id="cherry-projects-save-options" class="custom-button save-button">
