@@ -818,7 +818,7 @@ class Cherry_Project_Data {
 	 * @since 1.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( 'waypoints', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.waypoints.min.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
+		wp_enqueue_script( 'jquery-waypoints', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.waypoints.min.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 		wp_enqueue_script( 'imagesloaded', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 		wp_enqueue_script( 'magnific-popup', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), '1.1.0', true );
 		wp_enqueue_script( 'cherry-projects-plugin', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-plugin.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );

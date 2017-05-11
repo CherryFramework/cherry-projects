@@ -4,7 +4,7 @@ Contributors: TemplateMonster 2002
 Tags: custom post type, projects, portfolio, cherry framework
 Requires at least: 4.5
 Tested up to: 4.7.2
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -148,4 +148,9 @@ Standard templates can be rewritten in the theme. For that you need to create ch
 
 * Add responsive layouts for cascading grid layout
 * Add projects items ajax success loading callback
+* Fixed bugs
+
+= 1.2.3 =
+
+* Add responsive layouts for masonry and grid layout
 * Fixed bugs
