@@ -13,7 +13,7 @@ __Сompatibility: *Cherry Framewokr v.5+*__
 ## How to use
 
 #### In a post/page
-Insert a shortcode `[cherry_rojects]` to the post/page content.
+Insert a shortcode `[cherry_projects]` to the post/page content.
 
 
 ## Help

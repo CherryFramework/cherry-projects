@@ -55,7 +55,7 @@
 			$projectsTermInstance.each( function( index ) {
 				var $instance        = $( this ),
 					instanceSettings = $instance.data( 'settings' ),
-					columnNumber     = self.getResponsiveColumn( +instanceSettings['column-number'] );
+					columnNumber     = self.getResponsiveColumn( instanceSettings );
 
 					$instance.imagesLoaded( function() {
 						$loader.fadeTo( 500, 0, function() { $( this ).css( { 'display': 'none' } ); } );
@@ -75,7 +75,7 @@
 					}
 
 					jQuery( window ).on( 'resize.projects_layout_resize', function() {
-						var columnNumber = self.getResponsiveColumn( +instanceSettings['column-number'] );
+						var columnNumber = self.getResponsiveColumn( instanceSettings );
 
 						switch ( instanceSettings['list-layout'] ) {
 							case 'grid-layout':
@@ -202,27 +202,32 @@
 
 		},
 
-		getResponsiveColumn: function( columns ) {
-			var columnPerView = +columns,
-				widthLayout   = this.getResponsiveLayout();
+		getResponsiveColumn: function( settings ) {
+			var columnPerView              = +settings['column-number'] || 4,
+				widthLayout                = this.getResponsiveLayout(),
+				columnNumberLaptop         = +settings['column-number-laptop'] || 3,
+				columnNumberAlbumTablet    = +settings['column-number-album-tablet'] || 3,
+				columnNumberPortraitTablet = +settings['column-number-portrait-tablet'] || 2,
+				columnNumberMobile         = +settings['column-number-mobile'] || 1;
 
 			switch ( widthLayout ) {
 				case 'xl':
-					columnPerView = +columns;
+					columnPerView = +columnPerView;
 					break
 				case 'lg':
-					columnPerView = Math.ceil( columnPerView / 2 );
+					columnPerView = columnNumberLaptop;
 					break
 				case 'md':
-					columnPerView = Math.ceil( columnPerView / 3 );
+					columnPerView = columnNumberAlbumTablet;
 					break
 				case 'sm':
-					columnPerView = Math.ceil( columnPerView / 4 );
+					columnPerView = columnNumberPortraitTablet;
 					break
 				case 'xs':
-					columnPerView = 1;
+					columnPerView = columnNumberMobile;
 					break
 			}
+
 			return columnPerView;
 		},
 

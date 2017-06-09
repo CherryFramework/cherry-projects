@@ -53,17 +53,21 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 	 */
 	public function set_default_options() {
 		$this->default_options = array(
-			'term-type'               => 'category',
-			'listing-layout'          => 'grid-layout',
-			'loading-animation'       => 'loading-animation-fade',
-			'column-number'           => 3,
-			'post-per-page'           => 6,
-			'item-margin'             => 10,
-			'grid-template'           => 'terms-grid-default.tmpl',
-			'masonry-template'        => 'terms-masonry-default.tmpl',
-			'list-template'           => 'terms-list-default.tmpl',
-			'cascading-grid-template' => 'terms-cascading-grid-default.tmpl',
-			'echo'                    => true,
+			'term-type'                     => 'category',
+			'listing-layout'                => 'grid-layout',
+			'loading-animation'             => 'loading-animation-fade',
+			'column-number'                 => 3,
+			'column-number-laptop'          => 3,
+			'column-number-album-tablet'    => 2,
+			'column-number-portrait-tablet' => 2,
+			'column-number-mobile'          => 1,
+			'post-per-page'                 => 6,
+			'item-margin'                   => 10,
+			'grid-template'                 => 'terms-grid-default.tmpl',
+			'masonry-template'              => 'terms-masonry-default.tmpl',
+			'list-template'                 => 'terms-list-default.tmpl',
+			'cascading-grid-template'       => 'terms-cascading-grid-default.tmpl',
+			'echo'                          => true,
 		);
 
 		/**
@@ -103,10 +107,14 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 		}
 
 		$settings = array(
-			'list-layout'   => $this->options['listing-layout'],
-			'post-per-page' => $this->options['post-per-page'],
-			'column-number' => $this->options['column-number'],
-			'item-margin'   => $this->options['item-margin'],
+			'list-layout'                   => $this->options['listing-layout'],
+			'post-per-page'                 => $this->options['post-per-page'],
+			'column-number'                 => $this->options['column-number'],
+			'column-number-laptop'          => $this->options['column-number-laptop'],
+			'column-number-album-tablet'    => $this->options['column-number-album-tablet'],
+			'column-number-portrait-tablet' => $this->options['column-number-portrait-tablet'],
+			'column-number-mobile'          => $this->options['column-number-mobile'],
+			'item-margin'                   => $this->options['item-margin'],
 		);
 
 		$settings = json_encode( $settings );
