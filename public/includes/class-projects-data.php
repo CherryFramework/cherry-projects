@@ -129,11 +129,12 @@ class Cherry_Project_Data {
 	 * @return string html string
 	 */
 	public function render_projects( $options = array() ) {
+		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
 		$this->enqueue_styles();
 		$this->enqueue_scripts();
 
 		$this->options = wp_parse_args( $options, $this->default_options );
-
 		// The Query.
 		$filter_type = CHERRY_PROJECTS_NAME . '_' . $this->options['filter-type'];
 		$posts_query = $this->get_query_projects_items(
@@ -185,7 +186,7 @@ class Cherry_Project_Data {
 
 			$html = '<div class="cherry-projects-wrapper">';
 
-				if ( 'true' == $this->options['filter-visible'] && $posts_query->have_posts() ) {
+				if ( filter_var( $this->options['filter-visible'], FILTER_VALIDATE_BOOLEAN ) && $posts_query->have_posts() ) {
 					$html .= $this->render_ajax_filter( array() );
 				}
 
@@ -466,7 +467,7 @@ class Cherry_Project_Data {
 		$tax_list = ( 'category' === $this->options['filter-type'] ) ? $this->options['category-list'] : $this->options['tags-list'];
 
 		// $tax_list is array checking or convert to array.
-		if ( ! is_array( $tax_list ) && is_string( $tax_list ) ) {
+		if ( is_string( $tax_list ) && ! empty( $tax_list ) ) {
 			$tax_list = explode( ',', $tax_list );
 		}
 
@@ -513,8 +514,7 @@ class Cherry_Project_Data {
 						$_tax_list = $this->prepare_to_wpml( $tax_list );
 
 						foreach ( $terms as $term ) {
-
-							if ( in_array( $term->slug, $_tax_list ) || empty( $_tax_list ) ) {
+							if ( ( is_array( $_tax_list ) && in_array( $term->slug, $_tax_list ) ) || empty( $_tax_list ) ) {
 
 								$html .= '<li><span data-cat-id="' .  $term->cat_ID . '" data-slug="' .  $term->slug . '">'. $term->name .'</span></li>';
 							}
@@ -532,7 +532,7 @@ class Cherry_Project_Data {
 			 */
 			$html .= apply_filters( 'cherry-projects-after-filters-html', '' );
 
-			if ( 'true' == $this->options['order-filter-visible'] ) {
+			if ( filter_var( $this->options['order-filter-visible'], FILTER_VALIDATE_BOOLEAN ) ) {
 				$html .= '<div class="projects-order-filters-wrapper">';
 					$html .= '<ul class="order-filters">';
 						$html .= '<li data-filter-type="order" data-desc-label="' . esc_html__( 'Desc', 'cherry-projects' ) . '" data-asc-label="' . esc_html__( 'Asc', 'cherry-projects' ) . '">';
@@ -866,7 +866,6 @@ class Cherry_Project_Data {
 			$term_obj = get_term_by( 'slug', $slug, 'projects_category' );
 			$translated_tax_list[] = $term_obj->slug;
 		}
-
 		return $translated_tax_list;
 	}
 

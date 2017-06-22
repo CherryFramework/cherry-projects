@@ -285,8 +285,8 @@
 
 								Waypoint.refreshAll();
 
-								CherryJsCore.cherryProjectsFrontScripts.magnificIconInit();
-								CherryJsCore.variable.$document.trigger( 'getNewProjectsListAjaxSuccess' );
+								window.cherryProjectsFrontScripts.magnificIconInit();
+								$( document ).trigger( 'getNewProjectsListAjaxSuccess' );
 							} );
 
 						}
@@ -357,9 +357,9 @@
 
 								Waypoint.refreshAll();
 
-								CherryJsCore.cherryProjectsFrontScripts.magnificIconInit();
+								window.cherryProjectsFrontScripts.magnificIconInit();
 
-								CherryJsCore.variable.$document.trigger( 'getMoreProjectsAjaxSuccess' );
+								$( document ).trigger( 'getMoreProjectsAjaxSuccess' );
 							} );
 
 						}

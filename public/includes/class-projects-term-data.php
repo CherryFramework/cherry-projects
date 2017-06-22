@@ -127,7 +127,6 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 		);
 
 		$html = '<div class="cherry-projects-terms-wrapper">';
-
 			$container_class = 'projects-terms-container cherry-animation-container ' . $this->options['listing-layout'] . ' ' . $this->options['loading-animation'];
 
 			$html .= sprintf( '<div class="%1$s" data-settings=\'%2$s\'>', $container_class, $settings );

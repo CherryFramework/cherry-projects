@@ -1,10 +1,11 @@
-(function($){
+var cherryProjectsFrontScripts = null;
+
+(function($, elementor){
 	"use strict";
 
-	CherryJsCore.utilites.namespace('cherryProjectsFrontScripts');
-	CherryJsCore.cherryProjectsFrontScripts = {
+	cherryProjectsFrontScripts = {
 		init: function () {
-			CherryJsCore.variable.$document.on( 'ready', this.readyRender.bind( this ) );
+			$( document ).on( 'ready', this.readyRender.bind( this ) );
 		},
 
 		readyRender: function () {
@@ -44,14 +45,14 @@
 			});
 		},
 
-		projectsTermsInit: function() {
-			var self                  = this,
-				$projectsTermWrapper  = $( '.cherry-projects-terms-wrapper' ),
+		projectsTermsInit: function( selector ) {
+			var self                  = cherryProjectsFrontScripts,
+				$projectsTermWrapper  = selector || $( '.cherry-projects-terms-wrapper' ),
 				$projectsTermInstance = $( '.projects-terms-container', $projectsTermWrapper ),
 				$loader               = $( '.cherry-projects-ajax-loader' , $projectsTermWrapper );
 
 			$loader.css( { 'display': 'block' } ).fadeTo( 500, 1 );
-
+			console.log($projectsTermInstance);
 			$projectsTermInstance.each( function( index ) {
 				var $instance        = $( this ),
 					instanceSettings = $instance.data( 'settings' ),
@@ -253,9 +254,26 @@
 
 			return widthLayout;
 		},
-
-
 	}
-	CherryJsCore.cherryProjectsFrontScripts.init();
-}(jQuery));
+
+	cherryProjectsFrontScripts.init();
+
+	if ( elementor ) {
+		elementor.hooks.addAction(
+			'frontend/element_ready/cherry_projects.default',
+			function( $scope ) {
+				$( '.cherry-projects-wrapper', $scope ).cherryProjectsPlugin();
+			}
+		);
+
+
+		elementor.hooks.addAction(
+			'frontend/element_ready/cherry_projects_terms.default',
+			function( $scope ) {
+				cherryProjectsFrontScripts.projectsTermsInit( $( '.cherry-projects-terms-wrapper', $scope ) );
+			}
+		);
+	}
+
+}(jQuery, window.elementorFrontend ));
 
