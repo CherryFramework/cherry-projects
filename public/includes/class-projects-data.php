@@ -60,6 +60,9 @@ class Cherry_Project_Data {
 		$this->set_default_options();
 
 		$this->set_cherry_utility();
+
+		// Elementor compatibility editor enqueue scripts
+		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
 	/**
@@ -129,7 +132,6 @@ class Cherry_Project_Data {
 	 * @return string html string
 	 */
 	public function render_projects( $options = array() ) {
-		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 		$this->enqueue_styles();
 		$this->enqueue_scripts();

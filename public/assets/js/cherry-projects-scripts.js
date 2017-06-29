@@ -8,6 +8,25 @@ var cherryProjectsFrontScripts = null;
 			$( document ).on( 'ready', this.readyRender.bind( this ) );
 		},
 
+		elementorInit: function () {
+			// Elementor compatibility hooks init
+			if ( elementor ) {
+				elementor.hooks.addAction(
+					'frontend/element_ready/cherry_projects.default',
+					function( $scope ) {
+						$( '.cherry-projects-wrapper', $scope ).cherryProjectsPlugin();
+					}
+				);
+
+				elementor.hooks.addAction(
+					'frontend/element_ready/cherry_projects_terms.default',
+					function( $scope ) {
+						cherryProjectsFrontScripts.projectsTermsInit( $( '.cherry-projects-terms-wrapper', $scope ) );
+					}
+				);
+			}
+		},
+
 		readyRender: function () {
 			this.projectsPluginInit( this );
 			this.magnificInit( this );
@@ -258,22 +277,8 @@ var cherryProjectsFrontScripts = null;
 
 	cherryProjectsFrontScripts.init();
 
-	if ( elementor ) {
-		elementor.hooks.addAction(
-			'frontend/element_ready/cherry_projects.default',
-			function( $scope ) {
-				$( '.cherry-projects-wrapper', $scope ).cherryProjectsPlugin();
-			}
-		);
+	$( window ).on( 'elementor/frontend/init', cherryProjectsFrontScripts.elementorInit );
 
-
-		elementor.hooks.addAction(
-			'frontend/element_ready/cherry_projects_terms.default',
-			function( $scope ) {
-				cherryProjectsFrontScripts.projectsTermsInit( $( '.cherry-projects-terms-wrapper', $scope ) );
-			}
-		);
-	}
 
 }(jQuery, window.elementorFrontend ));
 
