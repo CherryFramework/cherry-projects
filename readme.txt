@@ -1,10 +1,10 @@
 === Cherry Projects ===
 
 Contributors: TemplateMonster 2002
-Tags: custom post type, projects, portfolio, cherry framework
+Tags: custom post type, projects, portfolio, cherry framework, elementor, elementor page builder
 Requires at least: 4.5
 Tested up to: 4.8.0
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -158,4 +158,9 @@ Standard templates can be rewritten in the theme. For that you need to create ch
 = 1.2.4 =
 
 * Add responsive layouts for masonry and grid layout for terms shortcode
+* Fixed bugs
+
+= 1.2.5 =
+
+* Elementor page builder compatibility
 * Fixed bugs
