@@ -3,13 +3,19 @@
  * Plugin Name: Cherry Projects
  * Plugin URI:  http://www.cherryframework.com/
  * Description: A projects plugin for WordPress.
- * Version:     1.2.5
+ * Version:     1.2.6
  * Author:      Cherry Team
  * Author URI:  http://www.cherryframework.com/
  * Text Domain: cherry-projects
  * License:     GPL-3.0+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  * Domain Path: /languages
+ *
+ * @package Cherry_Projects
+ * @author  Cherry Team
+ * @version 1.2.6
+ * @license GPL-3.0+
+ * @copyright  2002-2016, Cherry Team
  */
 
 // If this file is called directly, abort.
@@ -138,7 +144,7 @@ if ( ! class_exists( 'Cherry_Projects' ) ) {
 			 *
 			 * @since 1.0.0
 			 */
-			define( 'CHERRY_PROJECTS_VERSION', '1.2.5' );
+			define( 'CHERRY_PROJECTS_VERSION', '1.2.6' );
 
 			/**
 			 * Set the slug of the plugin.

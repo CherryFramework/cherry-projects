@@ -83,7 +83,7 @@ class Cherry_Projects_Options_Page {
 	public function init() {
 		cherry_projects()->get_core()->init_module( 'cherry5-insert-shortcode', array() );
 		$this->utility = cherry_projects()->get_core()->modules['cherry-utility']->utility;
-		$this->builder = cherry_projects()->get_core()->modules['cherry-interface-builder'];
+		$this->builder = cherry_projects()->get_core()->init_module( 'cherry-interface-builder', array() );
 	}
 
 	/**
