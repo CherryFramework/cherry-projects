@@ -4,7 +4,7 @@ Contributors: TemplateMonster 2002
 Tags: custom post type, projects, portfolio, cherry framework, elementor, elementor page builder
 Requires at least: 4.5
 Tested up to: 4.8.0
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -169,3 +169,6 @@ Standard templates can be rewritten in the theme. For that you need to create ch
 
 * Hot Fix
 
+= 1.2.7 =
+
+* Fixed bugs
