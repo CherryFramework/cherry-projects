@@ -71,7 +71,7 @@ var cherryProjectsFrontScripts = null;
 				$loader               = $( '.cherry-projects-ajax-loader' , $projectsTermWrapper );
 
 			$loader.css( { 'display': 'block' } ).fadeTo( 500, 1 );
-			console.log($projectsTermInstance);
+
 			$projectsTermInstance.each( function( index ) {
 				var $instance        = $( this ),
 					instanceSettings = $instance.data( 'settings' ),
