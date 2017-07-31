@@ -436,8 +436,8 @@ class Cherry_Project_Data {
 					'item-' . $count,
 					( ( $count++ % 2 ) ? 'odd' : 'even' ),
 					'animate-cycle-show',
-					$this->default_options['listing-layout'] . '-item',
-					$this->default_options['hover-animation'] . '-hover',
+					$this->options['listing-layout'] . '-item',
+					$this->options['hover-animation'] . '-hover',
 					$data_attrs
 				);
 					$html .= '<div class="inner-wrapper">';
