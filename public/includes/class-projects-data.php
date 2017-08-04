@@ -317,6 +317,11 @@ class Cherry_Project_Data {
 			$settings = $_POST['settings'];
 
 			$term_type = ( 'category' == $this->default_options['filter-type'] ) ? CHERRY_PROJECTS_NAME . '_category' : CHERRY_PROJECTS_NAME . '_tag';
+			
+			if( isset($settings['filter_type']) ){
+				$term_type = ( 'category' == $settings['filter_type'] ) ? CHERRY_PROJECTS_NAME . '_category' : CHERRY_PROJECTS_NAME . '_tag';
+			}
+			
 			$query_args = array(
 				$term_type       => $settings['slug'],
 				'posts_per_page' => $settings['post_per_page'],
