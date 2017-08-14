@@ -40,6 +40,11 @@ var cherryProjectsFrontScripts = null;
 		},
 
 		magnificIconInit: function() {
+
+			if ( window.elementorFrontend ) {
+				return false;
+			}
+
 			if ( $( '.zoom-link' )[0] ){
 				$( '.zoom-link' ).magnificPopup({type: 'image'});
 			}
