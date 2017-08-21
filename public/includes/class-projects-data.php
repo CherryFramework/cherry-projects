@@ -195,7 +195,7 @@ class Cherry_Project_Data {
 				$container_class = 'projects-container cherry-animation-container ' . $this->options['listing-layout'] . ' ' . $this->options['loading-mode'] . ' ' . $this->options['loading-animation'];
 
 				$html .= sprintf( '<div class="%1$s" data-settings=\'%2$s\'>', $container_class, $settings );
-					$html .= '<div class="projects-list cherry-animation-list" data-all-posts-count="' . $this->posts_query->found_posts . '"></div>';
+					$html .= '<div class="projects-list cherry-animation-list column-desktop-4 column-tablet-2 column-mobile-1" data-all-posts-count="' . $this->posts_query->found_posts . '" data-columns></div>';
 				$html .= '</div>';
 
 				/**
@@ -269,7 +269,7 @@ class Cherry_Project_Data {
 			// The Query.
 			$posts_query = $this->get_query_projects_items( $query_args );
 
-			$html = '<div class="projects-list cherry-animation-list" data-all-posts-count="' . $posts_query->found_posts . '">';
+			$html = '<div class="projects-list cherry-animation-list column-desktop-4 column-tablet-2 column-mobile-1" data-all-posts-count="' . $posts_query->found_posts . '" data-columns>';
 				$html .= $this->render_projects_items( $posts_query, $settings );
 			$html .= '</div>';
 
@@ -823,6 +823,7 @@ class Cherry_Project_Data {
 		wp_enqueue_script( 'jquery-waypoints', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.waypoints.min.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 		wp_enqueue_script( 'imagesloaded', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 		wp_enqueue_script( 'magnific-popup', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), '1.1.0', true );
+		wp_enqueue_script( 'cherry-projects-salvattore', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/salvattore.min.js', array( 'jquery' ), '1.0.9', true );
 		wp_enqueue_script( 'cherry-projects-plugin', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-plugin.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 		wp_enqueue_script( 'cherry-projects-scripts', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-scripts.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 

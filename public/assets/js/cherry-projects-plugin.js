@@ -398,15 +398,12 @@
 					var projectsListWrap = $('.projects-list', $projectsContainer ),
 						projectsList = $('.projects-item', $projectsContainer );
 
-					projectsListWrap.css( {
-						'-webkit-column-count': columnNumber,
-						'column-count': columnNumber,
-						'-webkit-column-gap': +projectsSettings['item-margin'],
-						'column-gap': +projectsSettings['item-margin'],
-					} );
+						console.log(13);
+
+					salvattore.init();
 
 					$( '.inner-wrapper', projectsList ).css( {
-						'margin-bottom': +projectsSettings['item-margin']
+						'margin': +projectsSettings['item-margin']
 					} );
 				}
 
