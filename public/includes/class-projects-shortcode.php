@@ -473,7 +473,7 @@ class Cherry_Projects_Shortcode {
 			'column_number_mobile' => array(
 				'type'        => 'slider',
 				'parent'      => 'column_number_mobile_layout',
-				'title'       => esc_html__( 'Tablet column number', 'cherry-projects' ),
+				'title'       => esc_html__( 'Mobile column number', 'cherry-projects' ),
 				'description' => esc_html__( 'Select mobile number of columns for masonry and grid projects layouts. (Min 1, max 6)', 'cherry-projects' ),
 				'max_value'   => 6,
 				'min_value'   => 1,

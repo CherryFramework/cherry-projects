@@ -159,7 +159,58 @@
 				}
 			}
 
-			@media ( min-width: 1024px ) {
+			@media screen and (min-width: 1200px) and (max-width: 1599px){
+				&.column-laptop-1 {
+					&[data-columns]::before {
+						content: '1 .salvattore-column';
+					}
+					.salvattore-column {
+						width: 100%;
+					}
+				}
+				&.column-laptop-2 {
+					&[data-columns]::before {
+						content: '2 .salvattore-column';
+					}
+					.salvattore-column {
+						width: 50%;
+					}
+				}
+				&.column-laptop-3 {
+					&[data-columns]::before {
+						content: '3 .salvattore-column';
+					}
+					.salvattore-column {
+						width: 33.33333%;
+					}
+				}
+				&.column-laptop-4 {
+					&[data-columns]::before {
+						content: '4 .salvattore-column';
+					}
+					.salvattore-column {
+						width: 25%;
+					}
+				}
+				&.column-laptop-5 {
+					&[data-columns]::before {
+						content: '5 .salvattore-column';
+					}
+					.salvattore-column {
+						width: 20%;
+					}
+				}
+				&.column-laptop-6 {
+					&[data-columns]::before {
+						content: '6 .salvattore-column';
+					}
+					.salvattore-column {
+						width: 16.66666%;
+					}
+				}
+			}
+
+			@media ( min-width: 1600px ) {
 				&.column-desktop-1 {
 					&[data-columns]::before {
 						content: '1 .salvattore-column';

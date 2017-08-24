@@ -170,6 +170,7 @@ class Cherry_Project_Data {
 			$settings = array(
 				'list-layout'                   => $this->options['listing-layout'],
 				'loading-mode'                  => $this->options['loading-mode'],
+				'hover-animation'               => $this->options['hover-animation'],
 				'post-per-page'                 => $this->options['post-per-page'],
 				'column-number'                 => $this->options['column-number'],
 				'column-number-laptop'          => $this->options['column-number-laptop'],
@@ -269,7 +270,31 @@ class Cherry_Project_Data {
 			// The Query.
 			$posts_query = $this->get_query_projects_items( $query_args );
 
-			$html = '<div class="projects-list cherry-animation-list column-desktop-4 column-tablet-2 column-mobile-1" data-all-posts-count="' . $posts_query->found_posts . '" data-columns>';
+			$list_classes = array( 'projects-list', 'cherry-animation-list' );
+
+			if ( isset( $settings['column'] ) ) {
+				$list_classes[] = 'column-desktop-' . $settings['column'];
+			}
+
+			if ( isset( $settings['column_laptop'] ) ) {
+				$list_classes[] = 'column-laptop-' . $settings['column_laptop'];
+			}
+
+			if ( isset( $settings['column_album_tablet'] ) ) {
+				$list_classes[] = 'column-album-tablet-' . $settings['column_album_tablet'];
+			}
+
+			if ( isset( $settings['column_portrait_tablet'] ) ) {
+				$list_classes[] = 'column-portrait-tablet-' . $settings['column_portrait_tablet'];
+			}
+
+			if ( isset( $settings['column_mobile'] ) ) {
+				$list_classes[] = 'column-mobile-' . $settings['column_mobile'];
+			}
+
+			$classes = implode( ' ', $list_classes );
+
+			$html = '<div class="' . $classes . '" data-all-posts-count="' . $posts_query->found_posts . '" data-columns>';
 				$html .= $this->render_projects_items( $posts_query, $settings );
 			$html .= '</div>';
 
@@ -436,8 +461,8 @@ class Cherry_Project_Data {
 					'item-' . $count,
 					( ( $count++ % 2 ) ? 'odd' : 'even' ),
 					'animate-cycle-show',
-					$this->options['listing-layout'] . '-item',
-					$this->options['hover-animation'] . '-hover',
+					$settings['list_layout'] . '-item',
+					$settings['hover'] . '-hover',
 					$data_attrs
 				);
 					$html .= '<div class="inner-wrapper">';

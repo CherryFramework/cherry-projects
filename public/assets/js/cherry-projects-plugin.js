@@ -217,6 +217,7 @@
 				 * Get new projects list
 				 */
 				function getNewProjectsList( slug, page, order ) {
+
 					var data = {
 						action: 'get_new_projects',
 						settings: {
@@ -224,11 +225,17 @@
 							page: page,
 							list_layout: projectsSettings['list-layout'],
 							loading_mode: projectsSettings['loading-mode'],
+							hover: projectsSettings['hover-animation'],
 							order_settings: order,
 							template: projectsSettings['template'],
 							posts_format: projectsSettings['posts-format'],
 							filter_type: projectsSettings['filter-type'],
-							post_per_page: projectsSettings['post-per-page']
+							post_per_page: projectsSettings['post-per-page'],
+							column: projectsSettings['column-number'],
+							column_laptop: projectsSettings['column-number-laptop'],
+							column_album_tablet: projectsSettings['column-number-album-tablet'],
+							column_portrait_tablet: projectsSettings['column-number-portrait-tablet'],
+							column_mobile: projectsSettings['column-number-mobile'],
 						}
 					}
 
@@ -304,6 +311,7 @@
 							page: page,
 							list_layout: projectsSettings['list-layout'],
 							loading_mode: projectsSettings['loading-mode'],
+							hover: projectsSettings['hover-animation'],
 							order_settings: order,
 							template: projectsSettings['template'],
 							posts_format: projectsSettings['posts-format'],
