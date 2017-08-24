@@ -406,8 +406,6 @@
 					var projectsListWrap = $('.projects-list', $projectsContainer ),
 						projectsList = $('.projects-item', $projectsContainer );
 
-						console.log(13);
-
 					salvattore.init();
 
 					$( '.inner-wrapper', projectsList ).css( {
