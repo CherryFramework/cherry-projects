@@ -166,7 +166,7 @@ class Cherry_Projects_Template_Callbacks {
 		$settings = array(
 			'visible'                => true,
 			'size'                   => $attr['size'],
-			'mobile_size'            => apply_filters( 'cherry_mobile_image_size', 'post-thumbnail' ),
+			'mobile_size'            => apply_filters( 'cherry_projects_featured_image_mobile_size', 'large' ),
 			'html'                   => $image_html,
 			'class'                  => 'wp-image',
 			'placeholder'            => true,
@@ -613,6 +613,7 @@ class Cherry_Projects_Template_Callbacks {
 					$settings = array(
 						'visible'                => true,
 						'size'                   => $attr['size'],
+						'mobile_size'            => apply_filters( 'cherry_project_image_list_mobile_size', $attr['size'] ),
 						'html'                   => $image_html,
 						'class'                  => 'wp-image',
 						'placeholder'            => true,
@@ -667,7 +668,7 @@ class Cherry_Projects_Template_Callbacks {
 			'height'              => $attr['height'],
 			'navigation'          => filter_var( $slider_navigation, FILTER_VALIDATE_BOOLEAN ),
 			'loop'                => filter_var( $slider_loop, FILTER_VALIDATE_BOOLEAN ),
-			'thumbnails-position' => !empty( $slider_thumbnails_position ) ? $slider_thumbnails_position : 'bottom',
+			'thumbnails-position' => ! empty( $slider_thumbnails_position ) ? $slider_thumbnails_position : 'bottom',
 			'thumbnails-width'    => $attr['thumbnails-width'],
 			'thumbnails-height'   => $attr['thumbnails-height'],
 			'distance'            => $attr['distance'],
@@ -689,6 +690,7 @@ class Cherry_Projects_Template_Callbacks {
 								$settings = array(
 									'visible'                => true,
 									'size'                   => $attr['size'],
+									'mobile_size'            => apply_filters( 'cherry_project_slider_mobile_size', $attr['size'] ),
 									'html'                   => '<img %2$s src="%3$s" alt="%4$s" %5$s >',
 									'class'                  => 'sp-image',
 									'placeholder'            => true,
@@ -714,7 +716,7 @@ class Cherry_Projects_Template_Callbacks {
 								$html .= '<div class="sp-thumbnail">';
 									$settings = array(
 										'visible'                => true,
-										'size'                   => 'post-thumbnail',
+										'size'                   => apply_filters( 'cherry_project_slider_thumbnails_size', 'post-thumbnail' ),
 										'html'                   => $image_html,
 										'placeholder'            => true,
 										'placeholder_background' => '000',
