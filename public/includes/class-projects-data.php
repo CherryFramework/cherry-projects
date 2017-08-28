@@ -62,7 +62,7 @@ class Cherry_Project_Data {
 		$this->set_cherry_utility();
 
 		// Elementor compatibility editor enqueue scripts
-		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'elementor/frontend/before_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
 	/**

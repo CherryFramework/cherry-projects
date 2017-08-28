@@ -117,8 +117,6 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 			'item-margin'                   => $this->options['item-margin'],
 		);
 
-		$settings = json_encode( $settings );
-
 		$terms = $this->get_projects_terms(
 			array(
 				'taxonomy' => CHERRY_PROJECTS_NAME . '_' . $this->options['term-type'],
@@ -126,11 +124,37 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 			)
 		);
 
+		$list_classes = array( 'projects-terms-list', 'cherry-animation-list' );
+
+		if ( isset( $settings['column-number'] ) ) {
+			$list_classes[] = 'column-desktop-' . $settings['column-number'];
+		}
+
+		if ( isset( $settings['column-number-laptop'] ) ) {
+			$list_classes[] = 'column-laptop-' . $settings['column-number-laptop'];
+		}
+
+		if ( isset( $settings['column-number-album-tablet'] ) ) {
+			$list_classes[] = 'column-album-tablet-' . $settings['column-number-album-tablet'];
+		}
+
+		if ( isset( $settings['column-number-portrait-tablet'] ) ) {
+			$list_classes[] = 'column-portrait-tablet-' . $settings['column-number-portrait-tablet'];
+		}
+
+		if ( isset( $settings['column-number-mobile'] ) ) {
+			$list_classes[] = 'column-mobile-' . $settings['column-number-mobile'];
+		}
+
+		$classes = implode( ' ', $list_classes );
+
+		$settings = json_encode( $settings );
+
 		$html = '<div class="cherry-projects-terms-wrapper">';
 			$container_class = 'projects-terms-container cherry-animation-container ' . $this->options['listing-layout'] . ' ' . $this->options['loading-animation'];
 
 			$html .= sprintf( '<div class="%1$s" data-settings=\'%2$s\'>', $container_class, $settings );
-				$html .= '<div class="projects-terms-list cherry-animation-list">';
+				$html .= '<div class="' . $classes . '" data-columns>';
 					$html .= $this->render_projects_term_items( $terms );
 				$html .= '</div>';
 			$html .= '</div>';
@@ -238,6 +262,7 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 	public function enqueue_scripts() {
 		wp_enqueue_script( 'imagesloaded', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 		wp_enqueue_script( 'magnific-popup', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), '1.1.0', true );
+		wp_enqueue_script( 'cherry-projects-salvattore', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/salvattore.min.js', array( 'jquery' ), '1.0.9', true );
 		wp_enqueue_script( 'cherry-projects-scripts', trailingslashit( CHERRY_PROJECTS_URI ) . 'public/assets/js/cherry-projects-scripts.js', array( 'jquery' ), CHERRY_PROJECTS_VERSION, true );
 
 		$cascading_list_map = apply_filters( 'cherry_projects_terms_cascading_list_map', array( 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 ) );

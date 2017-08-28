@@ -1,6 +1,6 @@
 var cherryProjectsFrontScripts = null;
 
-(function($, elementor){
+( function( $, elementor ) {
 	"use strict";
 
 	cherryProjectsFrontScripts = {
@@ -10,6 +10,7 @@ var cherryProjectsFrontScripts = null;
 
 		elementorInit: function () {
 			// Elementor compatibility hooks init
+			console.log(2);
 			if ( elementor ) {
 				elementor.hooks.addAction(
 					'frontend/element_ready/cherry_projects.default',
@@ -106,9 +107,6 @@ var cherryProjectsFrontScripts = null;
 							case 'grid-layout':
 								self.gridLayoutRender( $instance, columnNumber, instanceSettings['item-margin'] );
 							break;
-							case 'masonry-layout':
-								self.masonryLayoutRender( $instance, columnNumber, instanceSettings['item-margin'] );
-							break;
 							case 'cascading-grid-layout':
 								self.cascadingGridLayoutRender( $instance, instanceSettings['item-margin'] );
 							break;
@@ -141,15 +139,10 @@ var cherryProjectsFrontScripts = null;
 		masonryLayoutRender: function( instance, columnNumber, margin ) {
 			var $itemlist = $( '.projects-terms-item', instance );
 
-			$( '.projects-terms-list', instance ).css( {
-				'-webkit-column-count': columnNumber,
-				'column-count': columnNumber,
-				'-webkit-column-gap': +margin,
-				'column-gap': +margin,
-			} );
+			salvattore.init();
 
 			$( '.inner-wrapper', $itemlist ).css( {
-				'margin-bottom': +margin
+				'margin': +margin
 			} );
 		},
 
@@ -282,8 +275,8 @@ var cherryProjectsFrontScripts = null;
 
 	cherryProjectsFrontScripts.init();
 
+	console.log(1);
 	$( window ).on( 'elementor/frontend/init', cherryProjectsFrontScripts.elementorInit );
 
-
-}(jQuery, window.elementorFrontend ));
+}( jQuery, window.elementorFrontend ) );
 
