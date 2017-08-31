@@ -3,7 +3,7 @@
  * Plugin Name: Cherry Projects
  * Plugin URI:  http://www.cherryframework.com/
  * Description: A projects plugin for WordPress.
- * Version:     1.2.9
+ * Version:     1.3.0
  * Author:      Cherry Team
  * Author URI:  http://www.cherryframework.com/
  * Text Domain: cherry-projects
@@ -13,7 +13,7 @@
  *
  * @package Cherry_Projects
  * @author  Cherry Team
- * @version 1.2.9
+ * @version 1.3.0
  * @license GPL-3.0+
  * @copyright  2002-2016, Cherry Team
  */
@@ -83,6 +83,13 @@ if ( ! class_exists( 'Cherry_Projects' ) ) {
 		public $projects_term_data = null;
 
 		/**
+		 * Cherry_Project_Carousel_Data instance
+		 *
+		 * @var null
+		 */
+		public $projects_carousel_data = null;
+
+		/**
 		 * Sets up needed actions/filters for the plugin to initialize.
 		 *
 		 * @since 1.0.0
@@ -144,7 +151,7 @@ if ( ! class_exists( 'Cherry_Projects' ) ) {
 			 *
 			 * @since 1.0.0
 			 */
-			define( 'CHERRY_PROJECTS_VERSION', '1.2.9' );
+			define( 'CHERRY_PROJECTS_VERSION', '1.3.0' );
 
 			/**
 			 * Set the slug of the plugin.
@@ -194,9 +201,11 @@ if ( ! class_exists( 'Cherry_Projects' ) ) {
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-page-template.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-data.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-term-data.php' );
+			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-carousel-data.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-single-data.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-shortcode.php' );
 			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-term-shortcode.php' );
+			require_once( trailingslashit( CHERRY_PROJECTS_DIR ) . 'public/includes/class-projects-carousel-shortcode.php' );
 		}
 
 		/**
@@ -375,6 +384,7 @@ if ( ! class_exists( 'Cherry_Projects' ) ) {
 			$this->projects_data = new Cherry_Project_Data();
 			$this->projects_single_data = new Cherry_Project_Single_Data();
 			$this->projects_term_data = new Cherry_Project_Term_Data();
+			$this->projects_carousel_data = new Cherry_Project_Carousel_Data();
 		}
 
 		/**

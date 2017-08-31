@@ -24,6 +24,13 @@
 		}
 }
 
+.cherry-projects-carousel-wrapper {
+	.swiper-button-prev,
+	.swiper-button-next {
+		display: none;
+	}
+}
+
 .projects-item-instance{
 	.inner-wrapper{
 		position: relative;
@@ -54,19 +61,23 @@
 		color: $grey_color_3;
 		margin: 5px;
 		border-radius: 30px;
-			span{
+
+			span {
 				margin: 5px;
 			}
-			&:hover{
+
+			&:hover {
 				background-color: $blue_color_h;
 			}
 	}
+
 	.simple-button{
 		display: inline-block;
 		padding: 10px;
 		background-color: $blue_color;
 		color: $grey_color_3;
 	}
+
 	.hover-content{
 		display: flex;
 		flex-flow: column nowrap;
@@ -214,6 +225,7 @@
 .cherry-spinner-double-bounce .cherry-double-bounce2 {
 	animation-delay: -1s;
 }
+
 @-webkit-keyframes cherry-doubleBounce {
 	0%, 100% {
 		transform: scale(0);
@@ -222,6 +234,7 @@
 		transform: scale(1);
 	}
 }
+
 @keyframes cherry-doubleBounce {
 	0%, 100% {
 		transform: scale(0);

@@ -10,7 +10,6 @@ var cherryProjectsFrontScripts = null;
 
 		elementorInit: function () {
 			// Elementor compatibility hooks init
-			console.log(2);
 			if ( elementor ) {
 				elementor.hooks.addAction(
 					'frontend/element_ready/cherry_projects.default',
@@ -25,6 +24,15 @@ var cherryProjectsFrontScripts = null;
 						cherryProjectsFrontScripts.projectsTermsInit( $( '.cherry-projects-terms-wrapper', $scope ) );
 					}
 				);
+
+				elementor.hooks.addAction(
+					'frontend/element_ready/cherry_projects_carousel.default',
+					function( $scope ) {
+						cherryProjectsFrontScripts.projectsCarouselInit( $( '.cherry-projects-carousel-wrapper', $scope ) );
+					}
+				);
+
+
 			}
 		},
 
@@ -32,6 +40,7 @@ var cherryProjectsFrontScripts = null;
 			this.projectsPluginInit( this );
 			this.magnificInit( this );
 			this.projectsTermsInit();
+			this.projectsCarouselInit();
 		},
 
 		projectsPluginInit: function() {
@@ -271,11 +280,122 @@ var cherryProjectsFrontScripts = null;
 
 			return widthLayout;
 		},
+
+		projectsCarouselInit: function( selector ) {
+			var self                      = cherryProjectsFrontScripts,
+				$projectsCarouselInstance = selector || $( '.cherry-projects-carousel-wrapper' ),
+				$loader                   = $( '.cherry-projects-ajax-loader' , $projectsCarouselInstance );
+
+			$loader.css( { 'display': 'block' } ).fadeTo( 500, 1 );
+
+			$projectsCarouselInstance.each( function( index ) {
+				var $instance          = $( '.cherry-projects-carousel-container', this ),
+					$listContainer     = $( '.cherry-projects-carousel-list', $instance ),
+					$filtersList       = $( '.projects-filters-list', this ),
+					instanceSettings   = $instance.data( 'settings' ),
+					ajaxRequestSuccess = true,
+					ajaxRequestObject  = null;
+
+					$instance.imagesLoaded( function() {
+						$loader.fadeTo( 500, 0, function() { $( this ).css( { 'display': 'none' } ); } );
+					} );
+
+					$( 'li span', $filtersList ).on( 'click', function() {
+						var $parent = $( this ).parent(),
+							slug = '';
+
+						if ( ! $( this ).parent().hasClass( 'active' ) ) {
+							$( 'li' , $filtersList ).removeClass( 'active' );
+							$parent.addClass( 'active' );
+
+							slug = $( this ).data( 'slug' );
+
+							getCarouselPostList( slug );
+						}
+					});
+
+					function getCarouselPostList( slug ) {
+						var slug     = slug || instanceSettings['single-term'],
+							settings = instanceSettings;
+
+						settings.slug = slug;
+						console.log(settings);
+						if ( ! ajaxRequestSuccess ) {
+							ajaxRequestObject.abort();
+						}
+
+						var swiper = new Swiper(
+							'#cherry-projects-carousel-' + instanceSettings['id'],
+							{
+								slidesPerView: +instanceSettings['slides-per-view'],
+								slidesPerGroup: 1,
+								spaceBetween: +instanceSettings['space-between-slides'],
+								speed: +instanceSettings['speed'],
+								loop: instanceSettings['loop'],
+								freeMode: false,
+								grabCursor: true,
+								mousewheelControl: false,
+								nextButton: '#cherry-projects-carousel-button-next-' + instanceSettings['id'],
+								prevButton: '#cherry-projects-carousel-button-prev-' + instanceSettings['id'],
+								onInit: function() {
+									$( '#cherry-projects-carousel-button-next-' + instanceSettings['id'] ).css({ 'display': 'block' });
+									$( '#cherry-projects-carousel-button-prev-' + instanceSettings['id'] ).css({ 'display': 'block' });
+								},
+								breakpoints: {
+									1600: {
+										slidesPerView: instanceSettings['slides-per-view-laptop']
+									},
+									1200: {
+										slidesPerView: instanceSettings['slides-per-view-album-tablet']
+									},
+									900: {
+										slidesPerView: instanceSettings['slides-per-view-portrait-tablet']
+									},
+									600: {
+										slidesPerView: instanceSettings['slides-per-view-mobile']
+									}
+								}
+							}
+						);
+
+						ajaxRequestObject = $.ajax( {
+							type: 'POST',
+							url: window.cherryProjectsObjects.ajax_url,
+							data: {
+								action: 'get_new_projects_carousel_items',
+								settings: settings
+							},
+							cache: false,
+							beforeSend: function() {
+								ajaxRequestSuccess = false;
+								$loader.css( { 'display': 'block' } ).fadeTo( 500, 1 );
+							},
+							success: function( response ) {
+								ajaxRequestSuccess = true;
+
+								swiper.removeAllSlides();
+								$listContainer.html( response );
+
+								$listContainer.imagesLoaded( function() {
+									$loader.fadeTo( 500, 0, function() { $( this ).css( { 'display': 'none' } ); } );
+
+									swiper.update( true );
+
+									window.cherryProjectsFrontScripts.magnificIconInit();
+									$( window ).trigger( 'getProjectsCarouselListAjaxSuccess' );
+								} );
+
+							}
+						});
+					}
+
+					getCarouselPostList();
+			} );
+		},
 	}
 
 	cherryProjectsFrontScripts.init();
 
-	console.log(1);
 	$( window ).on( 'elementor/frontend/init', cherryProjectsFrontScripts.elementorInit );
 
 }( jQuery, window.elementorFrontend ) );
