@@ -146,6 +146,12 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 			$list_classes[] = 'column-mobile-' . $settings['column-number-mobile'];
 		}
 
+		$data_attr = '';
+
+		if ( 'masonry-layout' === $this->options['listing-layout'] ) {
+			$data_attr = 'data-columns';
+		}
+
 		$classes = implode( ' ', $list_classes );
 
 		$settings = json_encode( $settings );
@@ -154,7 +160,7 @@ class Cherry_Project_Term_Data extends Cherry_Project_Data {
 			$container_class = 'projects-terms-container cherry-animation-container ' . $this->options['listing-layout'] . ' ' . $this->options['loading-animation'];
 
 			$html .= sprintf( '<div class="%1$s" data-settings=\'%2$s\'>', $container_class, $settings );
-				$html .= '<div class="' . $classes . '" data-columns>';
+				$html .= '<div class="' . $classes . '" ' . $data_attr . '>';
 					$html .= $this->render_projects_term_items( $terms );
 				$html .= '</div>';
 			$html .= '</div>';

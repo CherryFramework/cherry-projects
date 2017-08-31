@@ -10,7 +10,6 @@ var cherryProjectsFrontScripts = null;
 
 		elementorInit: function () {
 			// Elementor compatibility hooks init
-			console.log(2);
 			if ( elementor ) {
 				elementor.hooks.addAction(
 					'frontend/element_ready/cherry_projects.default',
@@ -275,7 +274,6 @@ var cherryProjectsFrontScripts = null;
 
 	cherryProjectsFrontScripts.init();
 
-	console.log(1);
 	$( window ).on( 'elementor/frontend/init', cherryProjectsFrontScripts.elementorInit );
 
 }( jQuery, window.elementorFrontend ) );
