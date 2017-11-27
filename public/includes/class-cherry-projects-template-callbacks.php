@@ -885,7 +885,11 @@ class Cherry_Projects_Template_Callbacks {
 
 		$attr = wp_parse_args( $attr, $default_attr );
 
-		$permalink = cherry_projects()->projects_data->cherry_utility->attributes->get_term_permalink( $this->term_data->term_id );
+		$permalink = get_term_link( (int) $this->term_data->term_id, $this->term_data->taxonomy );
+
+		if ( is_wp_error( $permalink ) ) {
+			$permalink = '';
+		}
 
 		/**
 		 * Filter permalink text.
