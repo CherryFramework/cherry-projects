@@ -857,18 +857,28 @@ class Cherry_Projects_Template_Callbacks {
 	 * @since 1.0.0
 	 */
 	public function get_term_name( $attr = array() ) {
-		$default_attr = array( 'number_of_words' => 10 );
+		$default_attr = array(
+			'number_of_words' => 10,
+			'ending'          => '...',
+		);
 
 		$attr = wp_parse_args( $attr, $default_attr );
+		$object = get_term( $this->term_data->term_id );
 
-		$html = cherry_projects()->projects_data->cherry_utility->attributes->get_title(
-			array(
-				'html'   => '<h5 %1$s><a href="%2$s" %3$s>%4$s</a></h5>',
-				'length' => $attr['number_of_words'],
-			),
-			'term',
-			$this->term_data->term_id
-		);
+		if ( empty( $object->term_id ) ) {
+			return '';
+		}
+
+		$permalink = get_term_link( (int) $this->term_data->term_id, $this->term_data->taxonomy );
+
+		if ( is_wp_error( $permalink ) ) {
+			$permalink = '#';
+		}
+
+		$title = $object->name;
+		$title_cut = cherry_projects()->projects_data->cherry_utility->satellite->cut_text( $title, $attr['number_of_words'], 'word', $attr['ending'] );
+
+		$html = sprintf( '<h5><a href="%1$s">%2$s</a></h5>', $permalink, $title_cut );
 
 		return $html;
 	}
