@@ -861,10 +861,16 @@ class Cherry_Project_Data {
 			'mobile'          => array( 1 ),
 		) );
 
+		$ajaxurl = admin_url( 'admin-ajax.php' );
+
+		if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
+			$ajaxurl = add_query_arg( array( 'lang' => ICL_LANGUAGE_CODE ), $ajaxurl );
+		}
+
 		// Ajax js object portfolio_type_ajax.
 		wp_localize_script( 'cherry-projects-scripts', 'cherryProjectsObjects',
 			array(
-				'ajax_url'               => admin_url( 'admin-ajax.php' ),
+				'ajax_url'               => $ajaxurl,
 				'cascadingListMap'       => $cascading_list_map,
 				'cascadingListMapDevice' => $cascading_list_map_device,
 			)
