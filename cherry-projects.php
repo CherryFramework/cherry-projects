@@ -3,7 +3,7 @@
  * Plugin Name: Cherry Projects
  * Plugin URI:  http://www.cherryframework.com/
  * Description: A projects plugin for WordPress.
- * Version:     1.2.10
+ * Version:     1.2.11
  * Author:      Cherry Team
  * Author URI:  http://www.cherryframework.com/
  * Text Domain: cherry-projects
@@ -13,7 +13,7 @@
  *
  * @package Cherry_Projects
  * @author  Cherry Team
- * @version 1.2.10
+ * @version 1.2.11
  * @license GPL-3.0+
  * @copyright  2002-2016, Cherry Team
  */
@@ -144,7 +144,7 @@ if ( ! class_exists( 'Cherry_Projects' ) ) {
 			 *
 			 * @since 1.0.0
 			 */
-			define( 'CHERRY_PROJECTS_VERSION', '1.2.10' );
+			define( 'CHERRY_PROJECTS_VERSION', '1.2.11' );
 
 			/**
 			 * Set the slug of the plugin.
