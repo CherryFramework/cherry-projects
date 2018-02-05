@@ -24,6 +24,11 @@ if ( ! did_action( 'get_header' ) ) {
 
 	while ( have_posts() ) : the_post();
 		cherry_projects()->projects_single_data->render_projects_single();
+
+		// If comments are open or we have at least one comment, load up the comment template.
+		if ( comments_open() || get_comments_number() ) :
+			comments_template();
+		endif;
 	endwhile;
 
 	 do_action( 'cherry_projects_after_main_content' );
