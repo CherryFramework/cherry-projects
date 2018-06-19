@@ -511,13 +511,15 @@ class Cherry_Projects_Template_Callbacks {
 		$details_list = get_post_meta( get_the_ID(), 'cherry_projects_details', true );
 
 		$html = '<div class="cherry-projects-single-details-list">';
+
+
 			/**
 			 * Filter post terms list settings.
 			 *
 			 * @since 1.0.0
 			 * @var array
 			 */
-			$details_list_text = apply_filters( 'cherry-projects-details-list-text', esc_html__( 'Project details', 'cherry-projects' ) );
+			$details_list_text = esc_html__( 'Project details', 'cherry-projects' );
 
 			if ( is_array( $details_list ) && !empty( $details_list ) ) {
 				if ( ! empty( $details_list_text ) ) {
