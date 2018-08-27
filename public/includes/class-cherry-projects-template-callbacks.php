@@ -222,7 +222,9 @@ class Cherry_Projects_Template_Callbacks {
 		$settings = apply_filters( 'cherry-projects-content-settings', $settings );
 
 		if ( ! is_single() ) {
-			$content = cherry_projects()->projects_data->cherry_utility->attributes->get_content( $settings );
+			$text = get_the_content();
+
+			$content = $this->cut_text( $text, $settings['length'], 'word', $settings['ending'], true );
 		} else {
 			ob_start();
 			the_content( '' );
@@ -231,6 +233,32 @@ class Cherry_Projects_Template_Callbacks {
 		}
 
 		return $content;
+	}
+
+	/**
+	 * Cut text
+	 *
+	 * @since  1.0.0
+	 * @return string
+	 */
+	public function cut_text( $text = '', $length = -1, $trimmed_type = 'word', $after, $content = false ) {
+
+		if ( -1 !== $length ) {
+
+			if ( $content ) {
+				$text = strip_shortcodes( $text );
+				$text = apply_filters( 'the_content', $text );
+				$text = str_replace( ']]>', ']]&gt;', $text );
+			}
+
+			if ( 'word' === $trimmed_type ) {
+				$text = wp_trim_words( $text, $length, $after );
+			} else {
+				$text = wp_html_excerpt( $text, $length, $after );
+			}
+		}
+
+		return $text;
 	}
 
 	/**
