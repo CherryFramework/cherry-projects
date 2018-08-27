@@ -222,9 +222,17 @@ class Cherry_Projects_Template_Callbacks {
 		$settings = apply_filters( 'cherry-projects-content-settings', $settings );
 
 		if ( ! is_single() ) {
+
 			$text = get_the_content();
 
 			$content = $this->cut_text( $text, $settings['length'], 'word', $settings['ending'], true );
+
+			if ( $content ) {
+				$html_class = ( $settings['class'] ) ? 'class="' . $settings['class'] . '"' : '' ;
+
+				$content = sprintf( $settings['html'], $html_class, $content );
+			}
+
 		} else {
 			ob_start();
 			the_content( '' );
