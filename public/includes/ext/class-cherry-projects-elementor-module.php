@@ -218,11 +218,20 @@ class Cherry_Projects_Elementor_Widget extends Elementor\Widget_Base {
 				} else {
 					$val = $settings[ $name ][0];
 				}
+
+				if ( 'select' === $arg['type'] ) {
+					$val = $settings[ $name ];
+				}
+			}
+
+			if ( $this->empty_recursive( $val ) ) {
+				$val = '';
 			}
 
 			if ( is_array( $val ) ) {
 				$val = implode( ',', $val );
 			}
+
 			$shortcode_atts .= sprintf( ' %1$s="%2$s"', $name, $val );
 		}
 
@@ -231,6 +240,26 @@ class Cherry_Projects_Elementor_Widget extends Elementor\Widget_Base {
 			echo do_shortcode( sprintf( $shortcode, $this->tag, $shortcode_atts ) );
 		?></div>
 		<?php
+	}
+
+	/**
+	 * [empty_recursive description]
+	 * @param  [type] $value [description]
+	 * @return [type]        [description]
+	 */
+	public function empty_recursive( $value ) {
+
+		if ( is_array( $value ) ) {
+			$empty = TRUE;
+
+			array_walk_recursive( $value, function( $item ) use ( &$empty ) {
+				$empty = $empty && empty($item);
+			} );
+		} else {
+			$empty = empty( $value );
+		}
+
+		return $empty;
 	}
 
 	protected function _content_template() {}

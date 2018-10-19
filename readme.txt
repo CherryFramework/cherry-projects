@@ -192,3 +192,7 @@ Standard templates can be rewritten in the theme. For that you need to create ch
 = 1.2.13 =
 
 * Fixed bugs
+
+= 1.2.14 =
+
+* Fixed bugs
